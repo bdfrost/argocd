@@ -9,6 +9,10 @@ namespace: argocd
 # - base/argo-cd-ui-ingress.yaml
 # - base/rollouts-extension.yaml
 # - https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
+# More examples
+# - github.com/argoproj/argo-cd//manifests/cluster-install?ref=stable
+# - clusters-secrets.yaml
+# - repos-secrets.yaml
 
 # components:
 # - https://github.com/argoproj-labs/argocd-extensions/manifests
@@ -21,6 +25,8 @@ namespace: argocd
 # - path: overlays/production/argocd-cmd-params-cm.yaml
 # - path: overlays/production/argocd-rbac-cm.yaml
 # - path: https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
+# More examples
+# - path: overlays/argo-cd-cm.yaml
 
 # images:
 # - name: quay.io/argoproj/argocd
