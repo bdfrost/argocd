@@ -15,12 +15,12 @@ data:
   # Redis database
   redis.db:
 
-  ## Server properties
-  # Listen on given address for incoming connections (default "0.0.0.0")
-  server.listen.address: "0.0.0.0"
-  # Listen on given address for metrics (default "0.0.0.0")
-  server.metrics.listen.address: "0.0.0.0"
-  # Set the logging format. One of: text|json (default "text")
-  server.log.format: "text"
-  # Set the logging level. One of: debug|info|warn|error (default "info")
-  server.log.level: "info"
+  # ## Server properties
+  # # Listen on given address for incoming connections (default "0.0.0.0")
+  # server.listen.address: "0.0.0.0"
+  # # Listen on given address for metrics (default "0.0.0.0")
+  # server.metrics.listen.address: "0.0.0.0"
+  # # Set the logging format. One of: text|json (default "text")
+  # server.log.format: "text"
+  # # Set the logging level. One of: debug|info|warn|error (default "info")
+  # server.log.level: "info"
