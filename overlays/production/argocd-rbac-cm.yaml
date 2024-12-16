@@ -2,9 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-rbac-cm
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  namespace: argocd
 data:
   policy.csv: |
     g, argoproj:argo-rollouts-approvers, role:admin
     g, argoproj:argo-workflows-approvers, role:admin
     g, argoproj:argocd-approvers, role:admin
   policy.default: role:readonly
+
+

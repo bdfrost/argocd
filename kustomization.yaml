@@ -17,18 +17,16 @@ namespace: argocd
 # components:
 # - https://github.com/argoproj-labs/argocd-extensions/manifests
 
-# patches:
-# - path: overlays/production/argo-cd-cm.yaml
+patches:
+- path: overlays/production/argo-cd-cm.yaml
+- path: overlays/production/argocd-cmd-params-cm.yaml
 # - path: overlays/production/argocd-server-service.yaml
 # - path: overlays/production/argocd-notifications-controller-deploy.yaml
 # - path: overlays/production/argocd-notifications-cm.yaml
-# - path: overlays/production/argocd-cmd-params-cm.yaml
 # - path: overlays/production/argocd-rbac-cm.yaml
 # - path: https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
-# More examples
-# - path: overlays/argo-cd-cm.yaml
 
-# images:
-# - name: quay.io/argoproj/argocd
-#   newName: ghcr.io/argoproj/argo-cd/argocd
-#   newTag: 2.14.0-87c853e8
+images:
+- name: quay.io/argoproj/argocd
+  newName: ghcr.io/argoproj/argo-cd/argocd
+  newTag: 2.14.0-87c853e8
