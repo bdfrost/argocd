@@ -3,7 +3,7 @@ data:
   application.resourceTrackingMethod: annotation
   admin.enabled: 'true'
   statusbadge.enabled: 'true'
-  # url: https://cd.apps.argoproj.io
+  url: https://argocd.frost.haus
   configManagementPlugins: |
     - name: flux
       generate:

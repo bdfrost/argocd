@@ -6,7 +6,7 @@ metadata:
 spec:
   source:
     path: external-dns
-    repoURL: https://github.com/argoproj/argoproj-deployments
+    repoURL: https://github.com/bdfrost/argocd/charts/external-dns/
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
