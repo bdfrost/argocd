@@ -8,11 +8,11 @@ spec:
   destination:
     name: ''
     namespace: argocd
-    server: {{ .Values.spec.destination.server }}
+    server: https://kubernetes.default.svc
   source:
     path: apps
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: https://github.com/bdfrost/argocd.git
+    targetRevision: HEAD
   sources: []
   project: default
   syncPolicy:
