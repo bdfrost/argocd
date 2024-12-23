@@ -5,11 +5,11 @@ metadata:
   namespace: argocd
 spec:
   source:
-    path: external-dns
-    repoURL: https://github.com/bdfrost/argocd/charts/external-dns/
-    targetRevision: HEAD
+    path: charts/external-dns
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision:  {{ .Values.spec.source.targetRevision }}
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: {{ .Values.spec.destination.server }}
     namespace: external-dns
   project: default
   syncPolicy:

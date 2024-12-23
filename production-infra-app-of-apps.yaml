@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-a-of-a
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: ''
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  source:
+    path: apps
+    repoURL: https://github.com/bdfrost/argocd.git
+    targetRevision: HEAD
+  sources: []
+  project: production-infra
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

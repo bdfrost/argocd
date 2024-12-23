@@ -6,12 +6,12 @@ metadata:
 spec:
   destination:
     namespace: cert-manager
-    server: https://kubernetes.default.svc
+    server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: cert-manager
-    repoURL: https://github.com/argoproj/argoproj-deployments
-    targetRevision: HEAD
+    path: charts/cert-manager
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision:  {{ .Values.spec.source.targetRevision }}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
