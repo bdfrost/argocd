@@ -1,0 +1,62 @@
+{
+  "apiVersion": "v1",
+  "kind": "Namespace",
+  "metadata": {
+    "annotations": {
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"labels\":{\"k8s-app\":\"flannel\",\"pod-security.kubernetes.io/enforce\":\"privileged\"},\"name\":\"kube-flannel\"}}\n"
+    },
+    "creationTimestamp": "2024-12-13T04:14:25Z",
+    "deletionTimestamp": "2025-01-03T00:09:04Z",
+    "labels": {
+      "k8s-app": "flannel",
+      "kubernetes.io/metadata.name": "kube-flannel",
+      "pod-security.kubernetes.io/enforce": "privileged"
+    },
+    "name": "kube-flannel",
+    "resourceVersion": "1532856",
+    "uid": "5fcfbdd8-3f40-4d38-8acb-8a3d37453ad4"
+  },
+  "spec": {
+    "finalizers": []
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2025-01-03T00:09:09Z",
+        "message": "Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: stale GroupVersion discovery: metrics.k8s.io/v1beta1",
+        "reason": "DiscoveryFailed",
+        "status": "True",
+        "type": "NamespaceDeletionDiscoveryFailure"
+      },
+      {
+        "lastTransitionTime": "2025-01-03T00:09:10Z",
+        "message": "All legacy kube types successfully parsed",
+        "reason": "ParsedGroupVersions",
+        "status": "False",
+        "type": "NamespaceDeletionGroupVersionParsingFailure"
+      },
+      {
+        "lastTransitionTime": "2025-01-03T00:09:52Z",
+        "message": "Failed to delete all resource types, 1 remaining: unexpected items still remain in namespace: kube-flannel for gvr: /v1, Resource=pods",
+        "reason": "ContentDeletionFailed",
+        "status": "True",
+        "type": "NamespaceDeletionContentFailure"
+      },
+      {
+        "lastTransitionTime": "2025-01-03T00:09:10Z",
+        "message": "Some resources are remaining: pods. has 1 resource instances",
+        "reason": "SomeResourcesRemain",
+        "status": "True",
+        "type": "NamespaceContentRemaining"
+      },
+      {
+        "lastTransitionTime": "2025-01-03T00:09:10Z",
+        "message": "All content-preserving finalizers finished",
+        "reason": "ContentHasNoFinalizers",
+        "status": "False",
+        "type": "NamespaceFinalizersRemaining"
+      }
+    ],
+    "phase": "Terminating"
+  }
+}
