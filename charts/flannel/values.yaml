@@ -14,7 +14,7 @@ flannel:
   args:
   - "--ip-masq"
   - "--kube-subnet-mgr"
-  - "-v=10"
+  # - "-v=10"
   backend: "vxlan"
   tolerations:
   - effect: NoExecute
