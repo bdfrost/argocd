@@ -18,7 +18,7 @@ data:
       generate:
         command: ["/bin/sh", "-c"]
         args: ["helm template /templates --name-template $ARGOCD_APP_NAME --include-crds > /templates/*.yml && kustomize build"]        
-  # dex.config: |
+   # dex.config: |
   #   connectors:
   #   - type: github
   #     id: github
