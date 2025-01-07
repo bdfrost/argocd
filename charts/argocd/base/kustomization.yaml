@@ -11,7 +11,7 @@ resources:
 # - path: overlays/argocd-notifications-controller-deploy.yaml
 # - path: overlays/argocd-notifications-cm.yaml
 # - path: overlays/argocd-rbac-cm.yaml
-- https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
+# - https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
 # - base/argo-cd-issuer.yaml
 # - base/argo-cd-certificate.yaml
 # - base/argo-cd-ui-ingress.yaml
