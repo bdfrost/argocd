@@ -3,7 +3,7 @@ kind: Kustomization
 
 namespace: argocd
 
-bases:
+resources:
   - base/
 
 images:
