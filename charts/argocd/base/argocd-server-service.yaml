@@ -18,3 +18,12 @@ spec:
   sessionAffinity: None
   type: LoadBalancer
   external-dns.alpha.kubernetes.io/hostname: argocd
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8080
