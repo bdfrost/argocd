@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-- argo-cd-cm.yaml
+- argocd-cm.yaml
 - argocd-server-service.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
 # - path: overlays/argocd-cmd-params-cm.yaml
