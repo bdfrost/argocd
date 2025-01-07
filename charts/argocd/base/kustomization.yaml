@@ -19,13 +19,3 @@ resources:
 # - https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
 # More examples
 # - github.com/argoproj/argo-cd/manifests/
-
-images:
-- name: quay.io/argoproj/argocd
-  newName: ghcr.io/argoproj/argo-cd/argocd
-  newTag: latest
-
-
-
-
-
