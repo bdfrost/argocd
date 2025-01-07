@@ -4,10 +4,18 @@ kind: Kustomization
 namespace: argocd
 
 resources:
+# - path: overlays/argo-cd-cm.yaml
+# - path: overlays/argocd-cmd-params-cm.yaml
+- argocd-server-service.yaml
+# - path: overlays/argocd-server-service.yaml
+# - path: overlays/argocd-notifications-controller-deploy.yaml
+# - path: overlays/argocd-notifications-cm.yaml
+# - path: overlays/argocd-rbac-cm.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
 # - base/argo-cd-issuer.yaml
 # - base/argo-cd-certificate.yaml
 # - base/argo-cd-ui-ingress.yaml
-- rollouts-extension.yaml
+# - base/rollouts-extension.yaml
 # - https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
 # More examples
 # - github.com/argoproj/argo-cd/manifests/
@@ -16,4 +24,8 @@ images:
 - name: quay.io/argoproj/argocd
   newName: ghcr.io/argoproj/argo-cd/argocd
   newTag: latest
+
+
+
+
 
