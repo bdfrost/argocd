@@ -1,5 +1,5 @@
 external-dns:
-  provider: pi-hole
+  provider: pihole
   policy: sync
   sources:
     - ingress
