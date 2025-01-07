@@ -17,4 +17,4 @@ spec:
     app.kubernetes.io/name: argocd-server
   sessionAffinity: None
   type: LoadBalancer
-  external-dns.alpha.kubernetes.io/hostname: argo-cd
+  external-dns.alpha.kubernetes.io/hostname: argocd

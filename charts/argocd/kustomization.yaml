@@ -16,7 +16,7 @@ resources:
 patches:
 # - path: overlays/argo-cd-cm.yaml
 # - path: overlays/argocd-cmd-params-cm.yaml
-- path: overlays/argocd-server-service.yaml
+# - path: overlays/argocd-server-service.yaml
 # - path: overlays/argocd-notifications-controller-deploy.yaml
 # - path: overlays/argocd-notifications-cm.yaml
 # - path: overlays/argocd-rbac-cm.yaml
