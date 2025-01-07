@@ -382,6 +382,7 @@ kong:
     enabled: false
   dblessConfig:
     configMap: kong-dbless-config
+    namespace: kubernetes-dashboard
   proxy:
     type: ClusterIP
     http:
