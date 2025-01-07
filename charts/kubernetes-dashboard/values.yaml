@@ -1,19 +1,5 @@
 kong:
-  namespace: kubernetes-dashboard
   env:
     database: "off"
-    # the chart uses the traditional router (for Kong 3.x+) because the ingress
-    # controller generates traditional routes. if you do not use the controller,
-    # you may set this to "traditional_compatible" or "expressions" to use the new
-    # DSL-based router
-    router_flavor: "traditional"
-    nginx_worker_processes: "2"
-    proxy_access_log: /dev/stdout
-    admin_access_log: /dev/stdout
-    admin_gui_access_log: /dev/stdout
-    portal_api_access_log: /dev/stdout
-    proxy_error_log: /dev/stderr
-    admin_error_log: /dev/stderr
-    admin_gui_error_log: /dev/stderr
-    portal_api_error_log: /dev/stderr
-    prefix: /kong_prefix/
+    ingressController:
+      enabled: false 
