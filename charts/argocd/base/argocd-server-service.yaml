@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/component: server
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
+    external-dns.alpha.kubernetes.io/hostname: argocd
 spec:
   allocateLoadBalancerNodePorts: true
   externalTrafficPolicy: Cluster
@@ -17,7 +18,6 @@ spec:
     app.kubernetes.io/name: argocd-server
   sessionAffinity: None
   type: LoadBalancer
-  # external-dns.alpha.kubernetes.io/hostname: argocd
   ports:
   - name: http
     port: 80
