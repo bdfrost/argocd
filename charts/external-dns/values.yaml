@@ -5,7 +5,7 @@ external-dns:
   sources:
     - ingress
     - service
-  registry: "txt"
+  # registry: "txt"
   txtOwnerId: frost-haus
   domainFilters:
     # - ".k8s.brainboy.local.lan"
