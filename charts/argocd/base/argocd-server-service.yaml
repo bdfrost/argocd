@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/component: server
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    external-dns.alpha.kubernetes.io/hostname: argocd.brainboy.local.lan
+    external-dns.alpha.kubernetes.io/hostname: argocd.k8s.brainboy.local.lan
 spec:
   allocateLoadBalancerNodePorts: true
   externalTrafficPolicy: Cluster

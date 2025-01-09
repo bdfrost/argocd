@@ -1,16 +1,17 @@
 external-dns:
   provider: pihole
   policy: sync
+  # policy: upsert-only
   sources:
     - ingress
+    - service
   txtOwnerId: frost-haus
   domainFilters:
-    - argo-demo-apps.cluster
-    - apps.argoproj.io
+    - "k8s.brainboy.local.lan"
+    # - "frost.haus"
   extraArgs:
     - --google-project=argo-demo-apps
   logFormat: json
-  logLevel: info
   serviceMonitor:
     enabled: false
   serviceAccount: 
@@ -24,3 +25,16 @@ external-dns:
     - name: EXTERNAL_DNS_PIHOLE_SERVER
       # make sure NOT to put a trailing slash, as external-dns adds its own
       value: http://192.168.100.20
+    ## Limit external-dns resources
+  resources:
+    limits:
+      memory: 50Mi
+    requests:
+      memory: 50Mi
+      cpu: 10m
+  ## ensure RBAC is enabled
+  rbac:
+    create: true
+    apiVersion: v1
+  logLevel: debug
+  # logLevel: info
