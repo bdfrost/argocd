@@ -1,13 +1,7 @@
 kubernetes-dashboard:
   app:
-    # Mode determines if chart should deploy a full Dashboard with all containers or just the API.
-    # - dashboard - deploys all the containers
-    # - api - deploys just the API
     mode: 'dashboard'
-    enabled: true
-app:
-  # Mode determines if chart should deploy a full Dashboard with all containers or just the API.
-  # - dashboard - deploys all the containers
-  # - api - deploys just the API
-  mode: 'dashboard'
-  enabled: true
+  labels:
+    app.kubernetes.io/name: kubernetes-dashboard
+    app.kubernetes.io/part-of: kubernetes-dashboard
+    temp: bdf
