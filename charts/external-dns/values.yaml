@@ -1,13 +1,13 @@
 external-dns:
   provider: pihole
-  policy: sync
-  # policy: upsert-only
+  # policy: sync
+  policy: upsert-only
   sources:
     - ingress
     - service
   txtOwnerId: frost-haus
   domainFilters:
-    - "k8s.brainboy.local.lan"
+    - ".k8s.brainboy.local.lan"
     # - "frost.haus"
   extraArgs:
     - --google-project=argo-demo-apps
