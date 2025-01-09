@@ -5,3 +5,9 @@ kubernetes-dashboard:
     # - api - deploys just the API
     mode: 'dashboard'
     enabled: true
+app:
+  # Mode determines if chart should deploy a full Dashboard with all containers or just the API.
+  # - dashboard - deploys all the containers
+  # - api - deploys just the API
+  mode: 'dashboard'
+  enabled: true
