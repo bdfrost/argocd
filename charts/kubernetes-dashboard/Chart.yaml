@@ -13,6 +13,9 @@ version: 0.1.0 # version: 7.10.0
 # sources:
 #   - https://github.com/kubernetes/dashboard
 dependencies:
+  - name: kubernetes-dashboard
+    version: 4.10.1
+    repository: https://kubernetes.github.io/dashboard
   # - name: ingress-nginx
   #   alias: nginx
   #   version: 4.10.1
@@ -22,10 +25,10 @@ dependencies:
   #   version: v1.14.5
   #   repository: https://charts.jetstack.io
   #   condition: cert-manager.enabled
-  - name: metrics-server
-    version: 3.12.1
-    repository: https://kubernetes-sigs.github.io/metrics-server/
-    condition: metrics-server.enabled
+  # - name: metrics-server
+  #   version: 3.12.1
+  #   repository: https://kubernetes-sigs.github.io/metrics-server/
+  #   condition: metrics-server.enabled
   # - name: kong
   #   version: 2.38.0
   #   repository: https://charts.konghq.com
