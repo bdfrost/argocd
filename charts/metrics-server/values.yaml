@@ -2,5 +2,11 @@ metrics-server:
   enabled: true
   service:
     type: LoadBalancer
-  extraArgs:
-    - --kubelet-insecure-tls
+  args:
+    - '--secure-port=10250'
+    - '--cert-dir=/tmp'
+    - '--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname'
+    - '--kubelet-use-node-status-port'
+    - '--metric-resolution=15s'
+    - '--kubelet-use-node-status-port'  
+    - '--kubelet-insecure-tls'
