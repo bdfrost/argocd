@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: kong-dbless-config
+    namespace: kong
+data:
+    kong.yml: |
+    _format_version: "1.1"
+    services:
+    - name: demo-service
+        url: http://demo-service.demo-ns.svc.cluster.local
+        routes:
+        - name: demo-service-route
+            paths:
+            - /demo
+        plugins:
+        - name: key-auth
+            config:
+            hide_credentials: true
+            key_names:
+            - apiKey
+    Keyauth_credentials:
+    - consumer: demo
+        key: BA46-9E88C74170E5
+    plugins:
+    - name: prometheus
+        config:
+            per_consumer: false
