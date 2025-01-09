@@ -1,8 +1,9 @@
 kubernetes-dashboard:
-  enabled: true
-  service:
-    type: LoadBalancer
-  cert-manager:
-    enabled: false
-  nginx:
-    enabled: false
+  kubernetes-dashboard:
+    enabled: true
+    service:
+      type: LoadBalancer
+    cert-manager:
+      enabled: false
+    nginx:
+      enabled: false
