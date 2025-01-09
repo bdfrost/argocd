@@ -5,10 +5,11 @@ external-dns:
   sources:
     - ingress
     - service
+  registry: "txt"
   txtOwnerId: frost-haus
   domainFilters:
     # - ".k8s.brainboy.local.lan"
-    - "frost.haus"
+    - frost.haus
   extraArgs:
     - --google-project=argo-demo-apps
   logFormat: json
