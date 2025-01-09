@@ -1,5 +1,17 @@
 metrics-server:
-  extraArgs:
+  enabled: true
+  image:
+    repository: k8s.gcr.io/metrics-server/metrics-server
+    tag: v0.5.0
+    pullPolicy: IfNotPresent
+  service:
+    type: LoadBalancer
+  args:
     - --kubelet-insecure-tls
-    # - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-    # - --metric-resolution=15s
+    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+    - --metric-resolution=15s
+    - '--secure-port=10250'
+    - '--cert-dir=/tmp'
+    - '--kubelet-use-node-status-port'  
+  # extraArgs:
+  #   - --kubelet-insecure-tls
