@@ -7,8 +7,8 @@ external-dns:
     - service
   txtOwnerId: frost-haus
   domainFilters:
-    - ".k8s.brainboy.local.lan"
-    # - "frost.haus"
+    # - ".k8s.brainboy.local.lan"
+    - "frost.haus"
   extraArgs:
     - --google-project=argo-demo-apps
   logFormat: json
