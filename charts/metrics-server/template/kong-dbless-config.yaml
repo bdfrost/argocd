@@ -4,25 +4,45 @@ metadata:
     name: kong-dbless-config
     namespace: kong
 data:
-    kong.yml: |
-    _format_version: "1.1"
+  kong.yml: |
+    _format_version: "3.0"
     services:
-    - name: demo-service
-        url: http://demo-service.demo-ns.svc.cluster.local
+      - name: auth
+        host: kubernetes-dashboard-auth
+        port: 8000
+        protocol: http
         routes:
-        - name: demo-service-route
+          - name: authLogin
             paths:
-            - /demo
-        plugins:
-        - name: key-auth
-            config:
-            hide_credentials: true
-            key_names:
-            - apiKey
-    Keyauth_credentials:
-    - consumer: demo
-        key: BA46-9E88C74170E5
-    plugins:
-    - name: prometheus
-        config:
-            per_consumer: false
+              - /api/v1/login
+            strip_path: false
+          - name: authCsrf
+            paths:
+              - /api/v1/csrftoken/login
+            strip_path: false
+          - name: authMe
+            paths:
+              - /api/v1/me
+            strip_path: false
+      - name: api
+        host: kubernetes-dashboard-api
+        port: 8000
+        protocol: http
+        routes:
+          - name: api
+            paths:
+              - /api
+            strip_path: false
+          - name: metrics
+            paths:
+              - /metrics
+            strip_path: false
+      - name: web
+        host: kubernetes-dashboard-web
+        port: 8000
+        protocol: http
+        routes:
+          - name: root
+            paths:
+              - /
+            strip_path: false
