@@ -1,9 +1,7 @@
 kubernetes-dashboard:
-  kubernetes-dashboard:
+  app:
+    # Mode determines if chart should deploy a full Dashboard with all containers or just the API.
+    # - dashboard - deploys all the containers
+    # - api - deploys just the API
+    mode: 'dashboard'
     enabled: true
-    service:
-      type: LoadBalancer
-    cert-manager:
-      enabled: false
-    nginx:
-      enabled: false
