@@ -1,9 +1,6 @@
 kubernetes-dashboard:
   app:
     mode: 'dashboard'
-    labels:
-      app.kubernetes.io/name: kubernetes-dashboard
-      app.kubernetes.io/part-of: kubernetes-dashboard
     nginx:
       enabled: false
     cert-manager:
