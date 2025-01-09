@@ -4,4 +4,7 @@ kubernetes-dashboard:
     labels:
       app.kubernetes.io/name: kubernetes-dashboard
       app.kubernetes.io/part-of: kubernetes-dashboard
-      temp: bdf
+    nginx:
+      enabled: false
+    cert-manager:
+      enabled: false
