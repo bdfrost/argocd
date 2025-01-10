@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
   annotations:
     external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
-    cert-manager.io/cluster-issuer: letsencrypt
+    # cert-manager.io/cluster-issuer: letsencrypt
 spec:
   allocateLoadBalancerNodePorts: true
   externalTrafficPolicy: Cluster
@@ -29,7 +29,31 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 8080
+  # tls:
+  #   - secretName: argocd-cert
+  #     hosts:
+  #       - argocd.frost.haus
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: argocd-server
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
   tls:
     - secretName: argocd-cert
       hosts:
         - argocd.frost.haus
+  rules:
+    - host: argocd.frost.haus
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 443
