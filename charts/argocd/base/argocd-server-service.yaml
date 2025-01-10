@@ -29,7 +29,7 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 8080
-  tls:
-    - secretName: argocd-cert
-      hosts:
-        - argocd.frost.haus
+  # tls:
+  #   - secretName: argocd-cert
+  #     hosts:
+  #       - argocd.frost.haus
