@@ -28,6 +28,10 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 8080
+  tls:
+    - secretName: argocd-cert
+      hosts:
+        - argocd.frost.haus
 ---
 kind: Ingress
 apiVersion: networking.k8s.io/v1
@@ -37,10 +41,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: nginx
-  tls:
-    - secretName: argocd-cert
-      hosts:
-        - argocd.frost.haus
+  # tls:
+  #   - secretName: argocd-cert
+  #     hosts:
+  #       - argocd.frost.haus
   # rules:
   #   - host: argocd.frost.haus
   #     http:
