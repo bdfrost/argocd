@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
   annotations:
     external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   allocateLoadBalancerNodePorts: true
   externalTrafficPolicy: Cluster
@@ -28,3 +29,7 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 8080
+  tls:
+    - secretName: argocd-cert
+      hosts:
+        - argocd.frost.haus
