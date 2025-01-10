@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.14.2/cert-manager.yaml
   - cluster-issuer.yaml
+  - cloudflare-api-token-secret-sealed-secret.json
 
 patches:
   - path: overlays/cert-manager-namespace.yaml
