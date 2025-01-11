@@ -25,7 +25,7 @@ external-dns:
           key: EXTERNAL_DNS_PIHOLE_PASSWORD
     - name: EXTERNAL_DNS_PIHOLE_SERVER
       # make sure NOT to put a trailing slash, as external-dns adds its own
-      value: http://192.168.100.20
+      value: http://192.168.100.21
     ## Limit external-dns resources
   resources:
     limits:
