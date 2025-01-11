@@ -6,8 +6,6 @@ metadata:
     app.kubernetes.io/component: server
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
 spec:
   allocateLoadBalancerNodePorts: true
   externalTrafficPolicy: Cluster
@@ -35,6 +33,7 @@ metadata:
   name: argocd-server
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
 spec:
   ingressClassName: nginx
   tls:
