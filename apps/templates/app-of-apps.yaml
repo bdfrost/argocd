@@ -25,4 +25,4 @@ spec:
     - PruneLast=true
     managedNamespaceMetadata:
       labels:
-        argocd-managed: true
+        argocd-managed: yes
