@@ -24,5 +24,3 @@ spec:
     - PrunePropagationPolicy=foreground
     - PruneLast=true
     managedNamespaceMetadata:
-      labels:
-        argocd-managed: yes
