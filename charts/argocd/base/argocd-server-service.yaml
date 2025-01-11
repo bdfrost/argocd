@@ -41,19 +41,8 @@ spec:
     - secretName: argocd-cert
       hosts:
         - argocd.frost.haus
-  # rules:
-  #   - host: argocd.frost.haus
-  #     http:
-  #       paths:
-  #         - path: /
-  #           pathType: Prefix
-  #           backend:
-  #             service:
-  #               name: argocd-server
-  #               port:
-  #                 number: 443
-  defaultBackend:
-    service:
-      name: argocd-server
-      port:
-        number: 443
+  # defaultBackend:
+  #   service:
+  #     name: argocd-server
+  #     port:
+  #       number: 443
