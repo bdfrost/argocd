@@ -39,7 +39,7 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-    - secretName: argocd/argocd-cert
+    - secretName: argocd-cert
       hosts:
         - argocd.frost.haus
   defaultBackend:
