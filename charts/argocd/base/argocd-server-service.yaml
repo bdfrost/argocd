@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/part-of: argocd
 spec:
   allocateLoadBalancerNodePorts: true
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
+  # externalTrafficPolicy: Cluster
+  # internalTrafficPolicy: Cluster
   ipFamilies:
   - IPv4
   ipFamilyPolicy: SingleStack
