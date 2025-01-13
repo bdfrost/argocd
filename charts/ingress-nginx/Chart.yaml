@@ -23,7 +23,7 @@ version: 0.1.0
 appVersion: "1.0"
 
 
-# dependencies:
-# - name: ingress-nginx
-#   version: v4.12.0
-#   repository: https://kubernetes.github.io/ingress-nginx
+dependencies:
+- name: ingress-nginx
+  version: v4.12.0
+  repository: https://kubernetes.github.io/ingress-nginx
