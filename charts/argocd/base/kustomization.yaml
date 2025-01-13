@@ -12,9 +12,6 @@ resources:
 # - argocd-notifications-controller-deploy.yaml
 # - argocd-notifications-cm.yaml
 # - argocd-rbac-cm.yaml
-# - argocd-issuer.yaml
-# - argocd-certificate.yaml
-# - argocd-ui-ingress.yaml
 # - rollouts-extension.yaml
 # More examples
 # - github.com/argoproj/argo-cd/manifests/
