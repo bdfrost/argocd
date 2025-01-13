@@ -1,11 +1,11 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: argo-cd-issuer
+  name: argocd-issuer
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: argoproj@gmail.com
+    email: bfrost@brainboy.com
     privateKeySecretRef:
       name: letsencrypt
     solvers:
