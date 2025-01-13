@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: argo-cd-cert
+  name: argocd-cert
 spec:
   secretName: argocd-secret
   issuerRef:
-    name: argo-cd-issuer
+    name: letsencrypt
     kind: Issuer
-  commonName: cd.apps.argoproj.io
+  commonName: argocd.frost.haus
   dnsNames:
-  - cd.apps.argoproj.io
+  - argocd.frost.haus
