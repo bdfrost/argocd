@@ -32,7 +32,7 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: argocd-server
   annotations:
-    # cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
     ingress.kubernetes.io/proxy-body-size: 100M
     ingress.kubernetes.io/app-root: "/"
