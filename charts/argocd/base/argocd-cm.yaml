@@ -6,6 +6,7 @@ data:
   application.resourceTrackingMethod: annotation
   admin.enabled: 'true'
   statusbadge.enabled: 'true'
+  server.insecure: "true"
   url: https://argocd.frost.haus
   configManagementPlugins: |
     - name: flux
