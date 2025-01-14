@@ -1,4 +1,24 @@
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    name: http
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: helloworld
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,19 +48,3 @@ spec:
           limits:
             cpu: 250m
             memory: 256Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: helloworld
-  labels:
-    app: helloworld
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-    name: http
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: helloworld
