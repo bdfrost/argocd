@@ -1,54 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+spec:
+  selector:
+    matchLabels:
+      app: helloworld
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: mcr.microsoft.com/azuredocs/aks-helloworld:v1
+        ports:
+        - containerPort: 80
+        env:
+        - name: TITLE
+          value: "Welcome to..."
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: argocd-server
-  labels:
-    app.kubernetes.io/component: server
-    app.kubernetes.io/name: argocd-server
-    app.kubernetes.io/part-of: argocd
+  name: helloworld
 spec:
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
-  selector:
-    app.kubernetes.io/name: argocd-server
-  sessionAffinity: None
   type: ClusterIP
   ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 8080
----
-kind: Ingress
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: argocd-server
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    # nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
-spec:
-  ingressClassName: nginx
-  tls:
-    - secretName: argocd-cert
-      hosts:
-        - argocd.frost.haus
-  rules:
-  - host: "argocd.frost.haus"
-    http:
-      paths:
-      # - path: /
-      #   pathType: ImplementationSpecific
-      #   backend:
-      #     service:
-      #       name: argocd-server
-      #       port:
-      #         name: http
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: helloworld
-            port:
-              name: http
+  - port: 80
+  selector:
+    app: helloworld
