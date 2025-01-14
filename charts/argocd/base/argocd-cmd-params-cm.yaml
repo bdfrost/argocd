@@ -13,7 +13,7 @@ data:
   # Enable compression for data sent to Redis with the required compression algorithm. (default 'gzip')
   redis.compression: gzip
   # Redis database
-  redis.db:
+  # redis.db:
 
   # ## Server properties
   # # Listen on given address for incoming connections (default "0.0.0.0")
