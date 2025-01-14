@@ -7,7 +7,7 @@ metadata:
   name: argocd-cmd-params-cm
   namespace: argocd
 data:
-  server.insecure: "true"
+  # server.insecure: "true"
   # Redis server hostname and port (e.g. argocd-redis:6379)
   redis.server: "argocd-redis:6379"
   # Enable compression for data sent to Redis with the required compression algorithm. (default 'gzip')
