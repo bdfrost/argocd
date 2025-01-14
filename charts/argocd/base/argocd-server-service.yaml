@@ -38,7 +38,7 @@ spec:
   - host: "argocd.frost.haus"
     http:
       paths:
-      - path: /applications
+      - path: /
         pathType: ImplementationSpecific
         backend:
           service:
