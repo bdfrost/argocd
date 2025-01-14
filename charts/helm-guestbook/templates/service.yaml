@@ -7,6 +7,8 @@ metadata:
     chart: {{ template "helm-guestbook.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: helm-guestbook.frost.haus
 spec:
   type: {{ .Values.service.type }}
   ports:
