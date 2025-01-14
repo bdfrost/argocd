@@ -36,7 +36,7 @@ spec:
       hosts:
         - argocd.frost.haus
   rules:
-  - host: "argocd.frost.haus"
+  - host: argocd.frost.haus
     http:
       paths:
       - path: /
@@ -46,10 +46,13 @@ spec:
             name: argocd-server
             port:
               name: http
-      # - path: /h/
-      #   pathType: ImplementationSpecific
-      #   backend:
-      #     service:
-      #       name: helloworld
-      #       port:
-      #         name: http
+    # - host: argocd.frost.haus
+    #   http:
+    #     paths:
+    #     - backend:
+    #         service:
+    #           name: helloworld
+    #           port:
+    #             name: http
+    #       path: /
+    #       pathType: ImplementationSpecific
