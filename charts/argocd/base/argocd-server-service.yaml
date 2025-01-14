@@ -14,7 +14,7 @@ spec:
   selector:
     app.kubernetes.io/name: argocd-server
   sessionAffinity: None
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - name: http
     port: 80
@@ -39,17 +39,17 @@ spec:
   - host: argocd.frost.haus
     http:
       paths:
-      # - path: /
-      #   pathType: ImplementationSpecific
-      #   backend:
-      #     service:
-      #       name: argocd-server
-      #       port:
-      #         name: http
-      - backend:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
           service:
-            name: helloworld
+            name: argocd-server
             port:
               name: http
-        path: /
-        pathType: ImplementationSpecific
+      # - backend:
+      #     service:
+      #       name: helloworld
+      #       port:
+      #         name: http
+      #   path: /
+      #   pathType: ImplementationSpecific
