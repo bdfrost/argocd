@@ -39,14 +39,14 @@ spec:
   - host: "argocd.frost.haus"
     http:
       paths:
-      # - path: /
-      #   pathType: ImplementationSpecific
-      #   backend:
-      #     service:
-      #       name: argocd-server
-      #       port:
-      #         name: http
       - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: http
+      - path: /h/
         pathType: ImplementationSpecific
         backend:
           service:
