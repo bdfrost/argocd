@@ -50,7 +50,7 @@ spec:
   #       number: 443
   rules:
   - host: argocd.frost.haus
-    https:
+    http:
       paths:
       - path: /
         pathType: ImplementationSpecific
@@ -58,6 +58,6 @@ spec:
           service:
             name: argocd-server
             port:
-              name: https
+              name: http
   
   
