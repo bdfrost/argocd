@@ -45,3 +45,10 @@ spec:
             name: argocd-server
             port:
               name: http
+      - path: /helloworld
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: helloworld
+            port:
+              name: http
