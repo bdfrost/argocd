@@ -8,6 +8,7 @@ resources:
 - argocd-server-service.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
 - argocd-cmd-params-cm.yaml
+- argocd-server-ingress.yaml
 # - argocd-server-service.yaml
 # - argocd-notifications-controller-deploy.yaml
 # - argocd-notifications-cm.yaml
