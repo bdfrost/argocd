@@ -33,7 +33,8 @@ metadata:
   name: argocd-server
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
+    # external-dns.alpha.kubernetes.io/hostname: argocd.frost.haus
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
     ingress.kubernetes.io/proxy-body-size: 100M
     ingress.kubernetes.io/app-root: "/"
 spec:
