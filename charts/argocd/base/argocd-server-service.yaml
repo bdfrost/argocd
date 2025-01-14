@@ -31,6 +31,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    nginx.ingress.kubernetes.io/preserve-trailing-slash: "true"
 spec:
   ingressClassName: nginx
   tls:
