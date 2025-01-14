@@ -6,6 +6,28 @@ namespace: argocd
 resources:
   - base/
 
+patches:
+  - path: patch/argocd-server-deployment.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: argocd-server
+      namespace: argocd 
+  - path: patch/argocd-notifications-controller-deploy.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: argocd-notifications-controller
+      namespace: argocd
+  - path: patch/argocd-notifications-cm.yaml
+    target:
+      group: apps
+      version: v1
+      kind: ConfigMap
+      name: argocd-notifications-cm
+      namespace: argocd
 images:
 - name: quay.io/argoproj/argocd
   newName: ghcr.io/argoproj/argo-cd/argocd
