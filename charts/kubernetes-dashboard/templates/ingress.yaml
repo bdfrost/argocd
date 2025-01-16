@@ -7,8 +7,8 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
     # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   labels:
     app.kubernetes.io/instance: kubernetes-dashboard
     app.kubernetes.io/part-of: kubernetes-dashboard
@@ -27,9 +27,9 @@ spec:
       paths:
       - backend:
           service:
-            name: kubernetes-dashboard-web # name: kubernetes-dashboard-kong-proxy
+            name: kubernetes-dashboard-kong-proxy
             port:
-              name: web #number: 80
+              number: 80
         path: /
         pathType: ImplementationSpecific
   tls:
