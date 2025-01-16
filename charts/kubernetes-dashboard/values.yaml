@@ -17,10 +17,10 @@ kubernetes-dashboard:
         scope: default
       tls:
         enabled: true
-        secretName: "kubernetes-dashboard-tls"
+        secretName: "kubernetes-dashboard"
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/hostname: dashboard.frost.haus
+        external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         nginx.ingress.kubernetes.io/ssl-passthrough: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
