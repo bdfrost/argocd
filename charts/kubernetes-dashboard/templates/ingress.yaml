@@ -1,0 +1,41 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/issuer: cluster
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    # nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    app.kubernetes.io/instance: kubernetes-dashboard
+    app.kubernetes.io/part-of: kubernetes-dashboard
+    helm.sh/chart: kubernetes-dashboard-7.10.0
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: argocd-cert
+      hosts:
+        - dashboard.frost.haus
+  rules:
+  - host: dashboard.frost.haus
+    http:
+      paths:
+      - backend:
+          service:
+            name: kubernetes-dashboard-kong-proxy
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - dashboard.frost.haus
+    secretName: kubernetes-dashboard

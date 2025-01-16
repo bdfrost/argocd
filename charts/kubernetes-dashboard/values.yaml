@@ -5,22 +5,22 @@ kubernetes-dashboard:
       enabled: false
     cert-manager:
       enabled: true
-    ingress:
-      enabled: true
-      hosts:
-      - dashboard.frost.haus
-      ingressClassName: nginx
-      useDefaultAnnotations: true
-      pathType: ImplementationSpecific
-      issuer:
-        name: cluster
-        scope: default
-      tls:
-        enabled: true
-        secretName: "kubernetes-dashboard"
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    # ingress:
+    #   enabled: true
+    #   hosts:
+    #   - dashboard.frost.haus
+    #   ingressClassName: nginx
+    #   useDefaultAnnotations: true
+    #   pathType: ImplementationSpecific
+    #   issuer:
+    #     name: cluster
+    #     scope: default
+    #   tls:
+    #     enabled: true
+    #     secretName: "kubernetes-dashboard"
+    #   annotations:
+    #     cert-manager.io/cluster-issuer: letsencrypt
+    #     external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
         # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
         # nginx.ingress.kubernetes.io/ssl-redirect: "true"
