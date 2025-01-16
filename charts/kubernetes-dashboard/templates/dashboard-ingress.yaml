@@ -14,7 +14,7 @@ spec:
         - dashboard.frost.haus
   rules:
   - host: dashboard.frost.haus
-    http:
+    https:
       paths:
       - path: /
         pathType: ImplementationSpecific
