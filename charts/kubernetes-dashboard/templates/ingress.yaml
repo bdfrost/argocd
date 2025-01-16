@@ -27,9 +27,11 @@ spec:
       paths:
       - backend:
           service:
-            name: kubernetes-dashboard-kong-proxy
+            name: kubernetes-dashboard-web
+            # name: kubernetes-dashboard-kong-proxy
             port:
-              number: 80
+            #   number: 80
+              number: web
         path: /
         pathType: ImplementationSpecific
   tls:
