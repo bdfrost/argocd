@@ -20,7 +20,7 @@ kubernetes-dashboard:
         secretName: "kubernetes-dashboard-tls"
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+        external-dns.alpha.kubernetes.io/hostname: dashboard.frost.haus
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         nginx.ingress.kubernetes.io/ssl-passthrough: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
