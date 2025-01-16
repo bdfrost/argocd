@@ -11,7 +11,7 @@ spec:
   tls:
     - secretName: kubernetes-dashboard
       hosts:
-        - guestbook.frost.haus
+        - dashboard.frost.haus
   rules:
   - host: dashboard.frost.haus
     http:
