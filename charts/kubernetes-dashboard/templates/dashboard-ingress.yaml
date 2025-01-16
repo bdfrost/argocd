@@ -1,0 +1,25 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: kubernetes-dashboard
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: kubernetes-dashboard
+      hosts:
+        - guestbook.frost.haus
+  rules:
+  - host: dashboard.frost.haus
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: kubernetes-dashboard-web
+            port:
+              name: web

@@ -2,6 +2,6 @@ kubernetes-dashboard:
   app:
     mode: 'dashboard'
     nginx:
-      enabled: true
+      enabled: false
     cert-manager:
-      enabled: true
+      enabled: false
