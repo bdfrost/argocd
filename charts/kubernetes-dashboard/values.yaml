@@ -5,6 +5,9 @@ kubernetes-dashboard:
       enabled: false
     cert-manager:
       enabled: true
+    tls:
+      enabled: true
+      secretName: kubernetes-dashboard-tls
   kong:
     proxy:
       type: LoadBalancer
