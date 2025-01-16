@@ -27,3 +27,5 @@ kubernetes-dashboard:
   kong:
     proxy:
       type: LoadBalancer
+      http:
+        enabled: true
