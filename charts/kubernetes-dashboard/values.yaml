@@ -5,3 +5,8 @@ kubernetes-dashboard:
       enabled: false
     cert-manager:
       enabled: true
+  kong:
+    # ingressController:
+    #   enabled: false
+    proxy:
+      type: LoadBalancer
