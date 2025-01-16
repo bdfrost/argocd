@@ -8,3 +8,10 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/hostname: dashboard.frost.haus
     argocd.argoproj.io/tracking-id: kubernetes-dashboard:/Service:kubernetes-dashboard/kubernetes-dashboard-kong-proxy
+spec:
+  ports:
+  - name: kong-proxy-tls
+    nodePort: 31045
+    port: 443
+    protocol: TCP
+    targetPort: 8443
