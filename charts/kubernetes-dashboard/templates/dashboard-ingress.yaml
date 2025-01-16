@@ -14,7 +14,7 @@ spec:
         - dashboard.frost.haus
   rules:
   - host: dashboard.frost.haus
-    https:
+    http:
       paths:
       - path: /
         pathType: ImplementationSpecific
@@ -22,4 +22,4 @@ spec:
           service:
             name: kubernetes-dashboard-kong-proxy
             port:
-              name: kong-proxy-tls
+              number: 443
