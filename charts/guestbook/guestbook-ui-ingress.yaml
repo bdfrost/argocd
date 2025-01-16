@@ -22,4 +22,4 @@ spec:
           service:
             name: guestbook-ui
             port:
-              name: http
+              name: https
