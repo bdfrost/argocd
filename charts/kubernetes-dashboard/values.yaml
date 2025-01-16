@@ -4,4 +4,4 @@ kubernetes-dashboard:
     nginx:
       enabled: false
     cert-manager:
-      enabled: false
+      enabled: true

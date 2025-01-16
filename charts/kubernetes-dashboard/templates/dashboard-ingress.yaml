@@ -20,6 +20,6 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: kubernetes-dashboard-web
+            name: kubernetes-dashboard-kong-proxy
             port:
-              name: web
+              name: kong-proxy-tls
