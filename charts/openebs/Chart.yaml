@@ -1,5 +1,5 @@
 apiVersion: v2
-name: flannel
+name: openebs
 description: A Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
@@ -24,6 +24,6 @@ appVersion: "1.0"
 
 
 dependencies:
-- name: flannel
-  version: v0.26.3
-  repository: https://flannel-io.github.io/flannel/
+- name: openebs
+  version: v4.1.2
+  repository: https://github.com/openebs/
