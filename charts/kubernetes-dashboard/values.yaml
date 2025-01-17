@@ -9,6 +9,9 @@ kubernetes-dashboard:
         external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
       tls:
         secretName: kubernetes-dashboard
+      issuer:
+        name: letsencrypt
+        scope: cluster
       hosts:
         - dashboard.frost.haus
   kong:
