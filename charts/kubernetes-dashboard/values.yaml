@@ -1,10 +1,6 @@
 kubernetes-dashboard:
   app:
     mode: 'dashboard'
-    nginx:
-      enabled: false
-    cert-manager:
-      enabled: true
     ingress:
       enabled: true
       ingressClassName: nginx
