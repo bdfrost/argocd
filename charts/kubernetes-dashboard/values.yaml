@@ -9,3 +9,11 @@ kubernetes-dashboard:
     proxy:
       http:
         enabled: true
+        # service:
+        #   type: LoadBalancer
+        #   port: 80
+      https:
+        enabled: true
+        service:
+          type: LoadBalancer
+          port: 443
