@@ -26,4 +26,4 @@ appVersion: "1.0"
 dependencies:
 - name: openebs
   version: v4.1.2
-  repository: https://github.com/openebs/openebs  
+  repository: https://openebs.github.io/openebs
