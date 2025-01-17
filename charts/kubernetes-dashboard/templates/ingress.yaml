@@ -11,6 +11,7 @@ metadata:
     app.kubernetes.io/part-of: kubernetes-dashboard
     helm.sh/chart: kubernetes-dashboard-7.10.0
   name: kubernetes-dashboard
+  
   namespace: kubernetes-dashboard
 spec:
   ingressClassName: nginx
@@ -26,7 +27,7 @@ spec:
           service:
             name: kubernetes-dashboard-kong-proxy
             port:
-              number: 80
+              number: 8443 # or 8000 
         path: /
         pathType: Prefix
   tls:
