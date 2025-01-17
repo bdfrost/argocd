@@ -3,6 +3,7 @@ kubernetes-dashboard:
     mode: 'dashboard'
     ingress:
       enabled: true
+      useDefaultAnnotations: false
       ingressClassName: nginx
       annotations:
         # cert-manager.io/cluster-issuer: letsencrypt
