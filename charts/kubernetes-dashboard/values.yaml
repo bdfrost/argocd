@@ -14,9 +14,8 @@ kubernetes-dashboard:
         scope: cluster
       hosts:
         - dashboard.frost.haus
-  # kong:
-  #   proxy:
-  #     http:
-  #       enabled: true
-
+  kong:
+    proxy:
+      http:
+        enabled: true
 
