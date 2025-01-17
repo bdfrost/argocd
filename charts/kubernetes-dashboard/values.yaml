@@ -7,7 +7,7 @@ kubernetes-dashboard:
       ingressClassName: nginx
       annotations:
         # cert-manager.io/cluster-issuer: letsencrypt
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
       tls:
         secretName: kubernetes-dashboard
