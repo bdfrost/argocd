@@ -5,22 +5,23 @@ kubernetes-dashboard:
       enabled: false
     cert-manager:
       enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+      tls:
+        - secretName: argocd-cert
+          hosts:
+            - dashboard.frost.haus
+      hosts:
+        - host: dashboard.frost.haus
+          path: 
+          - dashboard.frost.haus
   kong:
     proxy:
       http:
         enabled: true
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    tls:
-      - secretName: argocd-cert
-        hosts:
-          - dashboard.frost.haus
-    hosts:
-      - host: dashboard.frost.haus
-        path: 
-        - dashboard.frost.haus
+
 
