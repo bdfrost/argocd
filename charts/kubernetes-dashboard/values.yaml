@@ -9,11 +9,17 @@ kubernetes-dashboard:
     proxy:
       http:
         enabled: true
-        # service:
-        #   type: LoadBalancer
-        #   port: 80
-      https:
-        enabled: true
-        service:
-          type: LoadBalancer
-          port: 443
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    tls:
+      - secretName: argocd-cert
+        hosts:
+          - dashboard.frost.haus
+    hosts:
+      - host: dashboard.frost.haus
+        path: 
+        - dashboard.frost.haus
+
