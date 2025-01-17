@@ -1,0 +1,10 @@
+openebs:
+  engines:
+    local:
+      lvm:
+        enabled: true
+      zfs:
+        enabled: false
+    replicated:
+      mayastor:
+        enabled: false
