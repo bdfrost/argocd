@@ -5,7 +5,8 @@ kubernetes-dashboard:
       enabled: true
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
+        # cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
         external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
       tls:
         secretName: kubernetes-dashboard
@@ -14,8 +15,8 @@ kubernetes-dashboard:
         scope: cluster
       hosts:
         - dashboard.frost.haus
-  kong:
-    proxy:
-      http:
-        enabled: true
+  # kong:
+  #   proxy:
+  #     http:
+  #       enabled: true
 
