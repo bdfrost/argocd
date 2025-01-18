@@ -15,10 +15,10 @@ spec:
   - host: {{ .Values.name }}.frost.haus
     http:
       paths:
-      - path: /
-        pathType: ImplementationSpecific
+      - pathType: Prefix
+        path: "/"
         backend:
           service:
-            name: {{ .Values.name }}-frontend 
+            name: longhorn-frontend
             port:
-              name: http
+              number: 80
