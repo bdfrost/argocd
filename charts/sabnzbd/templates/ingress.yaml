@@ -1,20 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: sabnzbd
+  name: {{ .Values.spec.name }}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: sabnzbd.frost.haus
+    external-dns.alpha.kubernetes.io/host: {{ .Values.spec.name }}.frost.haus
 spec:
   tls:
   - hosts:
-    - sabnzbd.frost.haus
-    secretName: sabnzbd-cert
+    - {{ .Values.spec.name }}.frost.haus
+    secretName: {{ .Values.spec.name }}-cert
   rules:
-  - host: sabnzbd.frost.haus
+  - host: {{ .Values.spec.name }}.frost.haus
     http:
       paths:
       - path: /
         backend:
-          serviceName: sabnzbd
+          serviceName: {{ .Values.spec.name }}
           servicePort: 80

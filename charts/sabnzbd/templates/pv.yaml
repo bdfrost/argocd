@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-    name: sabnzbd
+    name: {{ .Values.spec.name }}
 spec:
     capacity:
         storage: 500Mi
     accessModes:
         - ReadWriteOnce
     nfs:
-        path: /mnt/fileserv/kubernetes/sabnzbd
+        path: /mnt/fileserv/kubernetes/{{ .Values.spec.name }}
         server: 10.0.1.14
