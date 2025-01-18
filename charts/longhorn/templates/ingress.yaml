@@ -19,6 +19,6 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: longhorn
+            name: {{ .Values.name }}-frontend 
             port:
               name: http
