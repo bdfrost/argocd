@@ -1,2 +1,5 @@
 replicaCount: 1
 name: longhorn
+longhorn:
+  helmPreUpgradeCheckerJob:
+    enabled: false
