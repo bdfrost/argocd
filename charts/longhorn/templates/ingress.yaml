@@ -12,7 +12,7 @@ spec:
     secretName: {{ .Values.name }}-cert
   rules:
   - host: {{ .Values.name }}.frost.haus
-    ingressClassName: nginx
+    # ingressClassName: nginx
     http:
       paths:
       - path: /
