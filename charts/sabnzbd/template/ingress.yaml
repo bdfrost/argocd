@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   name: sabnzbd
   annotations:
-    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: sabnzbd.frost.haus
 spec:
   tls:
   - hosts:
