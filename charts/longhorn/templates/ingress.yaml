@@ -6,13 +6,13 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
 spec:
+  ingressClassName: nginx
   tls:
   - hosts:
     - {{ .Values.name }}.frost.haus
     secretName: {{ .Values.name }}-cert
   rules:
   - host: {{ .Values.name }}.frost.haus
-    # ingressClassName: nginx
     http:
       paths:
       - path: /
