@@ -1,4 +1,4 @@
-apiVersion: extensions/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.name }}
@@ -12,9 +12,13 @@ spec:
     secretName: {{ .Values.name }}-cert
   rules:
   - host: {{ .Values.name }}.frost.haus
+    ingressClassName: nginx
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: {{ .Values.name }}
-          servicePort: 80
+          service:
+            name: longhorn
+            port:
+              name: http
