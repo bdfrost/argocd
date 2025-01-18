@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.name }}
 spec:
-  replicas: {{ .Values.spec.replicas }}
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
