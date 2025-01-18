@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Values.spec.name }}
+  name: {{ .Values.name }}
 spec:
   replicas: {{ .Values.spec.replicas }}
   template:
     metadata:
       labels:
-        app: {{ .Values.spec.name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: {{ .Values.spec.name }}
-        image: {{ .Values.spec.name }}/{{ .Values.spec.name }}
+      - name: {{ .Values.name }}
+        image: {{ .Values.name }}/{{ .Values.name }}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -21,7 +21,7 @@ spec:
         - name: SABNZBD_GID
           value: "1000"
         volumeMounts:
-        - name: {{ .Values.spec.name }}
+        - name: {{ .Values.name }}
           mountPath: /datadir
         - name: sabnzbd-downloads
           mountPath: /download
@@ -33,9 +33,9 @@ spec:
             memory: 50Mi
             cpu: 10m
       volumes:
-      - name: {{ .Values.spec.name }}
+      - name: {{ .Values.name }}
         persistentVolumeClaim:
-          claimName: {{ .Values.spec.name }}
+          claimName: {{ .Values.name }}
       - name: sabnzbd-downloads
         hostPath:
           path: /mnt/fileserv/Library
