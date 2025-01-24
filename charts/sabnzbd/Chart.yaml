@@ -5,6 +5,6 @@ version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
-  - name: truecharts/sabnzbd
-    version: 10.0.13
-    repository: https://charts.truecharts.org/
+  - name: sabnzbd
+    version: 21.5.0
+    repository: oci://tccr.io/truecharts/
