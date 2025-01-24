@@ -3,3 +3,8 @@ name: sabnzbd
 type: application
 version: 0.1.0
 appVersion: "1.0"
+
+dependencies:
+  - name: sabnzbd
+    version: 10.0.13
+    repository: https://charts.truecharts.org/
