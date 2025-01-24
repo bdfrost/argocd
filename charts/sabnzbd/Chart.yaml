@@ -6,5 +6,5 @@ appVersion: "1.0"
 
 dependencies:
   - name: sabnzbd
-    repository: oci://tccr.io/truecharts/sabnzbd
-    version: 4.4.1
+    repository: oci://tccr.io/truecharts/
+    version: 21.5.0
