@@ -19,6 +19,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: sonarr
+            name: {{ .Values.name }}
             port:
-              number: 80
+              number: {{ .Values.name }}
