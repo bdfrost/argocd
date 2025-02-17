@@ -14,7 +14,7 @@ spec:
   selector:
     app: {{ .Values.name }}
   ports:
-  - name: {{ .Values.name }}
+  - name: https
     port: 443
     targetPort: {{ .Values.targetPort }}
     protocol: TCP
