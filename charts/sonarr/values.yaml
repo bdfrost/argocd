@@ -1,5 +1,5 @@
 replicaCount: 1
 name: sonarr
-targetPort: 8080
+targetPort: 8989
 pgid: 1000
 puid: 1000
