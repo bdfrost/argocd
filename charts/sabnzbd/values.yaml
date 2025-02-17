@@ -1,5 +1,5 @@
 replicaCount: 1
-name: sabnzbd
+name: sonarr
 targetPort: 8080
 pgid: 1000
 puid: 1000
