@@ -15,6 +15,6 @@ spec:
     app: {{ .Values.name }}
   ports:
   - name: {{ .Values.name }}
-    port: 80
-    targetPort: {{ .Values.targetPort }}
+    port: 443
+    targetPort: 80
     protocol: TCP
