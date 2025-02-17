@@ -1,19 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: openebs
+  name: sabnzbd
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: openebs
-    server: {{ .Values.spec.destination.server }}
-  project: default
   source:
-    path: charts/openebs
+    path: charts/sabnzbd
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: sabnzbd
+  project: default
   syncPolicy:
     automated:
       prune: true

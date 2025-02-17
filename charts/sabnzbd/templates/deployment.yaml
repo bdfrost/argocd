@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+    #   nodeSelector:
+    #     fileserv: "true"
+      containers:
+      - name: {{ .Values.name }}
+        image: linuxserver/sonarr
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        - name: PGID
+          value: "1000"
+        - name: PUID
+          value: "1000"
+        - name: HAS_IPV6
+          value: false
+        volumeMounts:
+        - name: sonarr-config
+          mountPath: /config
+        - name: sonarr-downloads
+          mountPath: /download
+      volumes:
+        - name: sonarr-config
+            persistentVolumeClaim:
+            claimName: sonarr-config-pvc
+        - name: sonarr-downloads
+            persistentVolumeClaim:
+            claimName: sonarr-downloads-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-downloads-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
