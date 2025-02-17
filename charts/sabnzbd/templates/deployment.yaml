@@ -31,10 +31,10 @@ spec:
           mountPath: /download
       volumes:
         - name: sonarr-config
-            persistentVolumeClaim:
+          persistentVolumeClaim:
             claimName: sonarr-config-pvc
         - name: sonarr-downloads
-            persistentVolumeClaim:
+          persistentVolumeClaim:
             claimName: sonarr-downloads-pvc
 ---
 apiVersion: v1
