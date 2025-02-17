@@ -9,8 +9,6 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
-    #   nodeSelector:
-    #     fileserv: "true"
       containers:
       - name: {{ .Values.name }}
         image: linuxserver/sonarr
