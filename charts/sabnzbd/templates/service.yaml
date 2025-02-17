@@ -6,9 +6,18 @@ metadata:
     app: {{ .Values.name }}
     kubernetes.io/name: {{ .Values.name }}
 spec:
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  type: ClusterIP
   selector:
     app: {{ .Values.name }}
   ports:
-  - name: {{ .Values.name }}
-    port: 80
-    targetPort: {{ .Values.targetPort }}
+#   - name: {{ .Values.name }}
+#     port: 80
+#     targetPort: {{ .Values.targetPort }}
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8080
