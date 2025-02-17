@@ -17,7 +17,4 @@ spec:
   - name: {{ .Values.name }}
     port: 80
     targetPort: {{ .Values.targetPort }}
-  # - name: https
-  #   port: 443
-  #   protocol: TCP
-  #   targetPort: 8080
+    protocol: TCP

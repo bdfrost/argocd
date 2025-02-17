@@ -15,7 +15,7 @@ spec:
   - host: {{ .Values.name }}.frost.haus
     http:
       paths:
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/"
         backend:
           service:
