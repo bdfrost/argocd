@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sabnzbd
+  name: sonarr
   namespace: argocd
 spec:
   source:
-    path: charts/sabnzbd
+    path: charts/sonarr
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: sabnzbd
+    namespace: sonarr
   project: default
   syncPolicy:
     automated:
