@@ -15,7 +15,7 @@ kube-prometheus-stack:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ .Values.name }}
+            name: kube-prometheus-stack
             port:
               name: https
     tls:   
@@ -37,7 +37,7 @@ kube-prometheus-stack:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: {{ .Values.name }}
+            name: kube-prometheus-stack
             port:
               name: https
     tls:   
