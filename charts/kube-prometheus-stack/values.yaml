@@ -6,7 +6,6 @@ kube-prometheus-stack:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
-    labels: {}
     # servicePort: 8081
     hosts:
       - kube-prometheus-stack.k8s.frost.haus
@@ -25,13 +24,12 @@ kube-prometheus-stack:
   thanosIngress:
     enabled: true
     ingressClassName: nginx
-    servicePort: 10901
+    servicePort: "10901"
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
-    labels: {}
+      external-dns.alpha.kubernetes.io/host: thanos.k8s.frost.haus
     hosts:
-      - kube-prometheus-stack.k8s.frost.haus
+      - thanos.k8s.frost.haus
     paths:
       - path: "/"
         pathType: ImplementationSpecific
@@ -42,5 +40,5 @@ kube-prometheus-stack:
               name: https
     tls:   
     - hosts:
-      - kube-prometheus-stack.k8s.frost.haus
-      secretName: kube-prometheus-stack-cert
+      - thanos.k8s.frost.haus
+      secretName: thanos-stack-cert
