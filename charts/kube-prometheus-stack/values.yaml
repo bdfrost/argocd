@@ -1,44 +1,44 @@
 name: kube-prometheus-stack
-kube-prometheus-stack:
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
-    # servicePort: 8081
-    hosts:
-      - kube-prometheus-stack.k8s.frost.haus
-    paths:
-      - path: "/"
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: kube-prometheus-stack
-            port:
-              name: https
-    tls:   
-    - hosts:
-      - kube-prometheus-stack.k8s.frost.haus
-      secretName: kube-prometheus-stack-cert
-  thanosIngress:
-    enabled: true
-    ingressClassName: nginx
-    servicePort: "10901"
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/host: thanos.k8s.frost.haus
-    hosts:
-      - thanos.k8s.frost.haus
-    paths:
-      - path: "/"
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: kube-prometheus-stack
-            port:
-              name: https
-    tls:   
-    - hosts:
-      - thanos.k8s.frost.haus
-      secretName: thanos-stack-cert
+# kube-prometheus-stack:
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
+  # servicePort: 8081
+  hosts:
+    - kube-prometheus-stack.k8s.frost.haus
+  paths:
+    - path: "/"
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: kube-prometheus-stack
+          port:
+            name: https
+  tls:   
+  - hosts:
+    - kube-prometheus-stack.k8s.frost.haus
+    secretName: kube-prometheus-stack-cert
+thanosIngress:
+  enabled: true
+  ingressClassName: nginx
+  servicePort: "10901"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: thanos.k8s.frost.haus
+  hosts:
+    - thanos.k8s.frost.haus
+  paths:
+    - path: "/"
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: kube-prometheus-stack
+          port:
+            name: https
+  tls:   
+  - hosts:
+    - thanos.k8s.frost.haus
+    secretName: thanos-stack-cert
