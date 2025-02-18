@@ -1,5 +1,46 @@
-# replicaCount: 1
 name: kube-prometheus-stack
-# targetPort: 8989
-# pgid: 1000
-# puid: 1000
+kube-prometheus-stack:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
+    labels: {}
+    # servicePort: 8081
+    hosts:
+      - kube-prometheus-stack.k8s.frost.haus
+    paths:
+      - path: "/"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ .Values.name }}
+            port:
+              name: https
+    tls:   
+    - hosts:
+      - kube-prometheus-stack.k8s.frost.haus
+      secretName: kube-prometheus-stack-cert
+  thanosIngress:
+    enabled: true
+    ingressClassName: nginx
+    servicePort: 10901
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
+    labels: {}
+    hosts:
+      - kube-prometheus-stack.k8s.frost.haus
+    paths:
+      - path: "/"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: {{ .Values.name }}
+            port:
+              name: https
+    tls:   
+    - hosts:
+      - kube-prometheus-stack.k8s.frost.haus
+      secretName: kube-prometheus-stack-cert
