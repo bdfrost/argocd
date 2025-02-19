@@ -101,3 +101,18 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
+---
+kind: SealedSecret
+apiVersion: bitnami.com/v1alpha1
+metadata:
+  name: sonarr-exporter
+  namespace: sonarr-exporter
+  creationTimestamp: null
+spec:
+  template:
+    metadata:
+      name: sonarr-exporter
+      namespace: kube-prometheus-stack
+      creationTimestamp: null
+  encryptedData:
+    api-key: AgBeAq8lbz4e2xH9Yt3VKA91YW866OPhfdwzdtqqqIyGDzecS7faH+MNLxHSmmYtDj2rL6KFNhtb3d1NRDuOg8EV4BuAYQL8S6mrVhkwtqN0T7b4uN5aqOS9yA+pfOCeRy2UBD9InrqSUNjQZG8c1atRXaAnyujA/WwypPXJzt8xV65v3gmxZ8LvGxhpEPfaVUoy0IQcM9irFTucMW3oHei3W4eA82dPvCRS6vZlpwHZs4te20Ix4QlxBCt3DZzJvm9AdTIkUZ5anY99d4eyvmF4X2sgT4HtvfrMZvRWPii2rR+CSBmA5zdXmqibbfsei2h+N9lkpd1xduNKw9UJEGL7utSKex/MubPAPMAwcxMiGkAbjc68vcldSxZ6cg0Lmdc1HevzcTCGM37W5sg2KJ9izI5vPHqTBdBAHtHE6Ycz738nRPvUGtPgWPEwU/bxtFJ74ioM7nVqnUHzay61DRbBaN9jl0647jGPWVowZVNdRxMBLybTOq9saegbLtGtGJWc5qFm7qgqlz+OHfcvBAsZsZWd+zsAqvXguSGV/bZn+9oQm3CWZ4xMlQKjueN6KyNR00AaiuB2LFbeYkkGH5SE89fWQYTeNo3iucEtcm9CQIiKCnccrdSIclLS9PUTPCwILAcy3wsVtFC7pm1O2Y+vZP6FZ0pc2sbkSUKrSR/9uJW/OplDWU/4bYX3x7KwPSpnOA2b+78KzXM01O+h8bJVqGOBN38dtzaHi6EniGuvrQ==
