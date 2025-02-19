@@ -7,17 +7,8 @@ kube-prometheus-stack:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
-      # servicePort: 8081
       hosts:
         - grafana.k8s.frost.haus
-      # paths:
-      #   - path: "/"
-      #     pathType: ImplementationSpecific
-      #     backend:
-      #       service:
-      #         name: kube-prometheus-stack
-      #         port:
-      #           name: https
       tls:   
       - hosts:
         - grafana.k8s.frost.haus
@@ -26,20 +17,11 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: nginx
-      # servicePort: "10901"
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/host: prometheus.k8s.frost.haus
       hosts:
         - prometheus.k8s.frost.haus
-      # paths:
-      #   - path: "/"
-      #     pathType: ImplementationSpecific
-      #     backend:
-      #       service:
-      #         name: kube-prometheus-stack
-      #         port:
-      #           name: https
       tls:   
       - hosts:
         - prometheus.k8s.frost.haus
