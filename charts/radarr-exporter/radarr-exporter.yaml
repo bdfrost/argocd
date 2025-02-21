@@ -97,3 +97,25 @@ spec:
             limits:
               cpu: 500m
               memory: 256Mi
+---
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "radarr-exporter",
+    "namespace": "kube-prometheus-stack",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "radarr-exporter",
+        "namespace": "kube-prometheus-stack",
+        "creationTimestamp": null
+      }
+    },
+    "encryptedData": {
+      "api-key": "AgBc2EpV4nmNwzh5PnOc8PltMT+WLamQKrxpFaLycYnYcwIMmfZkX8T3uIPGIIyLUDqdL3KAoZtsVHn1d24rypCmNHYc7hchwl9sckuwFcFkr45s8LoUBTmQ1A43OWAw+ssFM4iKO3wgD+Ok+fN+WFyYZZcpT99W96J1yHxPxVwSo0vpXcWaBzN6L9nDYWApUyk1ZOKQCmewOG0IbD5YKVN8VIw1BdAsqOw0e3jyITxesIAaq82/K1bdVbA/PUq71bLSHQOkB91AInxEYEiE7IoNh0MEVJNJwoXzmpW92wta4R5jZnt8sDIRUByVi3E4XyzN3+CuA+4lnAJt0YF9iORBFJrNpo5rWaoffbWcHft3JBYhhqhVkXE5URQW21d1XRSGX5OM5z3ZV3c7xgfDN6wybkUti48WqIcRxrlW/pflEjXugPxNPcxp1hklPPEMf3k1uf2UWhbXpkLYB5X/j5OQpEBmfxyAPYjS97XfoSShCibwy+5EU/owWfwFNL4DexkJQx0O7x9aoYtaKFOiSRZ5mwkK+ZlOevYOS34Db5aZyFUda63iw/NYzNCcBOSBguckvazMeapDR+FoX8qGgPXFobxI7u4PR7+Pty1HRWpgEKHVz7a3gJ3oFs1k8VB5znY9UF8zhat4LPF3n617aAnB5n7mP4hBMwqkLuUUcPcmncjKT3C7zDFO6iRkh0AHv0WKYAcHTizHSrY2DwvXIkgMg2i0ntWuWSYd3d1cwjWxgQ=="
+    }
+  }
+}
