@@ -103,14 +103,14 @@ spec:
   "apiVersion": "bitnami.com/v1alpha1",
   "metadata": {
     "name": "radarr-exporter",
-    "namespace": "kube-prometheus-stack",
+    "namespace": "radarr-exporter",
     "creationTimestamp": null
   },
   "spec": {
     "template": {
       "metadata": {
         "name": "radarr-exporter",
-        "namespace": "kube-prometheus-stack",
+        "namespace": "radarr-exporter",
         "creationTimestamp": null
       }
     },
