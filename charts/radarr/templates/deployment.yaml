@@ -30,38 +30,17 @@ spec:
         volumeMounts:
         - name: {{ .Values.name }}-config
           mountPath: /config
-        - name: radarr-downloads
-          mountPath: /download
-        - name: nfs-data-vol
-          mountPath: /download2
+        - name: arr-media
+          mountPath: /data
       volumes:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
-        - name: radarr-downloads
-          persistentVolumeClaim:
-            claimName: radarr-downloads-pvc
-        - name: nfs-data-vol
-          nfs:
-          server: 192.168.100.250
-          path: /mnt/media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.name }}-config-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 2Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: radarr-downloads-pvc
 spec:
   accessModes:
     - ReadWriteOnce

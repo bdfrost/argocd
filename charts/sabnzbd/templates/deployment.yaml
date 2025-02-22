@@ -16,11 +16,13 @@ spec:
     spec:
       containers:
       - name: {{ .Values.name }}
-        image: linuxserver/sonarr
+        image: linuxserver/sabnzbd
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
+        - name: TZ
+          value: "{{ .Values.timezone }}"
         - name: PGID
           value: "{{ .Values.pgid }}"
         - name: PUID
@@ -32,10 +34,15 @@ spec:
           mountPath: /config
         - name: arr-media
           mountPath: /data
+        - name: nfs-data-vol
+          mountPath: /download2
       volumes:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
+        - name: arr-media
+          persistentVolumeClaim:
+            claimName: arr-media-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -48,3 +55,15 @@ spec:
   resources:
     requests:
       storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: arr-media-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 100Gi
