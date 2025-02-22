@@ -21,6 +21,8 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
+        - name: HOSTNAME
+          value: "{{ .Values.name }}"
         - name: TZ
           value: "{{ .Values.timezone }}"
         - name: PGID
