@@ -21,8 +21,8 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
-        - name: HOSTNAME
-          value: "{{ .Values.name }}"
+        - name: HOST_WHITELIST_ENTRIES
+          value: "{{ .Values.name }}.k8s.frost.haus"
         - name: TZ
           value: "{{ .Values.timezone }}"
         - name: PGID
