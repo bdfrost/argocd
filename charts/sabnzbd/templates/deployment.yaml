@@ -34,8 +34,6 @@ spec:
           mountPath: /config
         - name: arr-media
           mountPath: /data
-        - name: nfs-data-vol
-          mountPath: /download2
       volumes:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
