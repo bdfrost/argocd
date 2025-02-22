@@ -39,7 +39,7 @@ spec:
         - name: arr-media
           nfs:
             server: pvc-7aebc320-3005-48a3-b126-cc94138696cb
-            path: /arr-media
+            path: /mnt/user/arr-media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
