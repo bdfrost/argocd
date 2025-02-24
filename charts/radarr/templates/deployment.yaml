@@ -39,6 +39,8 @@ spec:
         - name: arr-media
           persistentVolumeClaim:
             claimName: arr-media-pvc
+            dataSourceRef:
+              name: sabnzbd
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
