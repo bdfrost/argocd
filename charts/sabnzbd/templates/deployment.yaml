@@ -41,8 +41,9 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
         - name: arr-media
-          persistentVolumeClaim:
-            claimName: arr-media-pvc
+          nfs:
+            server: 192.168.100.250
+            directory: /mnt/media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -55,15 +56,3 @@ spec:
   resources:
     requests:
       storage: 2Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: arr-media-pvc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 100Gi
