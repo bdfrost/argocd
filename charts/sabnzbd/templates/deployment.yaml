@@ -41,8 +41,9 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
         - name: arr-media
-          persistentVolumeClaim:
-            claimName: arr-media-pvc
+          nfs:
+            server: pvc-7aebc320-3005-48a3-b126-cc94138696cb
+            path: /export/pvc-7aebc320-3005-48a3-b126-cc94138696cb
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
