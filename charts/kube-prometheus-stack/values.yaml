@@ -46,6 +46,12 @@ kube-prometheus-stack:
         - job_name: "lidarr-exporter"
           static_configs:
             - targets: ["lidarr-exporter:9711"]
-        - job_name: "proxmox"
+        - job_name: 'pve'
           static_configs:
-            - targets: ["prometheus-pve-exporter.brainboy.local.lan:9221"]
+            - targets:
+              - prometheus-pve-exporter.brainboy.local.lan:9221
+          metrics_path: /pve
+          params:
+            module: [default]
+            cluster: ['1']
+            node: ['1']
