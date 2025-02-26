@@ -33,16 +33,16 @@ kube-prometheus-stack:
             - targets: ["localhost:9090"]
         - job_name: "sonarr-exporter"
           static_configs:
-            - targets: ["sonarr-exporter:9707"]
+            - targets: ["sonarr-exporter.sonarr-exporter.svc.cluster.local:9707"]
         - job_name: "radarr-exporter"
           static_configs:
-            - targets: ["radarr-exporter:9708"]
+            - targets: ["radarr-exporter.radarr-exporter.svc.cluster.local:9708"]
         - job_name: "prowlarr-exporter"
           static_configs:
             - targets: ["prowlarr-exporter:9709"]
         - job_name: "sabnzbd-exporter"
           static_configs:
-            - targets: ["sabnzbd-exporter:9710"]
+            - targets: ["sabnzbd-exporter.sabnzbd-exporter.svc.cluster.local:9710"]
         - job_name: "lidarr-exporter"
           static_configs:
             - targets: ["lidarr-exporter:9711"]
