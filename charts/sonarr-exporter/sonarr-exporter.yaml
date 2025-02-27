@@ -8,13 +8,19 @@ metadata:
     app.kubernetes.io/name: sonarr-exporter
     app.kubernetes.io/instance: sonarr-exporter
 spec:
-  clusterIP: None
   selector:
     app.kubernetes.io/name: sonarr-exporter
     app.kubernetes.io/instance: sonarr-exporter
   ports:
     - name: monitoring
       port: 9707
+      protocol: TCP
+      targetPort: 9707
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  type: ClusterIP
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
