@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/name: radarr-exporter
     app.kubernetes.io/instance: radarr-exporter
 spec:
-  clusterIP: 
   selector:
     app.kubernetes.io/name: radarr-exporter
     app.kubernetes.io/instance: radarr-exporter
