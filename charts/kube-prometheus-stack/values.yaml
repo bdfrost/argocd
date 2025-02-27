@@ -7,6 +7,8 @@ kube-prometheus-stack:
         http: 10257
       targetPorts:
         http: 10257
+        port: 10257
+        targetPort: 10257
     serviceMonitor:
       https: true
       insecureSkipVerify: "true"
@@ -18,6 +20,8 @@ kube-prometheus-stack:
   kubeScheduler:
     service:
       enabled: true
+      port: 10259
+      targetPort: 10259
       ports:
         http: 10259
       targetPorts:
