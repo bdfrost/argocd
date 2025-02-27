@@ -75,7 +75,7 @@ spec:
             - name: PORT
               value: "9707"
             - name: URL
-              value: "http://radarr.radarr.svc.cluster.local:443"
+              value: "http://radarr.radarr.svc.cluster.local"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:
