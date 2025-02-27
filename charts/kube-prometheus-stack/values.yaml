@@ -49,7 +49,7 @@ kube-prometheus-stack:
               - prometheus-pve-exporter.brainboy.local.lan:9221
           metrics_path: /pve
           params:
-            module: [pve1.brainboy.local.lan]
+            module: [default]
             cluster: ['1']
             node: ['1']
         - job_name: 'pve2'
@@ -58,15 +58,15 @@ kube-prometheus-stack:
               - prometheus-pve-exporter.brainboy.local.lan:9221
           metrics_path: /pve
           params:
-            module: [pve2.brainboy.local.lan]
+            module: [default]
             cluster: ['1']
-            node: ['1']
+            node: ['2']
         - job_name: 'pve3'
           static_configs:
             - targets:
               - prometheus-pve-exporter.brainboy.local.lan:9221
           metrics_path: /pve
           params:
-            module: [pve3.brainboy.local.lan]
+            module: [default]
             cluster: ['1']
-            node: ['1']
+            node: ['3']
