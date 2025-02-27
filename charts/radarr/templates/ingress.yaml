@@ -21,4 +21,4 @@ spec:
           service:
             name: {{ .Values.name }}
             port:
-              name: https
+              name: http
