@@ -21,22 +21,6 @@ spec:
   ipFamilyPolicy: SingleStack
   sessionAffinity: None
   type: ClusterIP
-
-spec:
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
-  selector:
-    app.kubernetes.io/name: argocd-server
-  sessionAffinity: None
-  type: ClusterIP
-  ports:
-  - name: https
-    port: 443
-    protocol: TCP
-    targetPort: 8080
-
-
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
