@@ -43,12 +43,30 @@ kube-prometheus-stack:
         - job_name: "sabnzbd-exporter"
           static_configs:
             - targets: ["sabnzbd-exporter.sabnzbd-exporter.svc.cluster.local:9707"]
-        - job_name: 'pve'
+        - job_name: 'pve1'
           static_configs:
             - targets:
               - prometheus-pve-exporter.brainboy.local.lan:9221
           metrics_path: /pve
           params:
-            module: [default]
+            module: [pve1.brainboy.local.lan]
+            cluster: ['1']
+            node: ['1']
+        - job_name: 'pve2'
+          static_configs:
+            - targets:
+              - prometheus-pve-exporter.brainboy.local.lan:9221
+          metrics_path: /pve
+          params:
+            module: [pve2.brainboy.local.lan]
+            cluster: ['1']
+            node: ['1']
+        - job_name: 'pve3'
+          static_configs:
+            - targets:
+              - prometheus-pve-exporter.brainboy.local.lan:9221
+          metrics_path: /pve
+          params:
+            module: [pve3.brainboy.local.lan]
             cluster: ['1']
             node: ['1']
