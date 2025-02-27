@@ -3,12 +3,8 @@ kube-prometheus-stack:
   kubeControllerManager:
     service:
       enabled: true
-      ports:
-        http: 10257
-      targetPorts:
-        http: 10257
-        port: 10257
-        targetPort: 10257
+      port: 10257
+      targetPort: 10257
     serviceMonitor:
       https: true
       insecureSkipVerify: "true"
@@ -22,10 +18,6 @@ kube-prometheus-stack:
       enabled: true
       port: 10259
       targetPort: 10259
-      ports:
-        http: 10259
-      targetPorts:
-        http: 10259
     serviceMonitor:
       https: true
       insecureSkipVerify: "true"
