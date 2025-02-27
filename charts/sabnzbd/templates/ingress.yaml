@@ -22,9 +22,6 @@ spec:
             name: {{ .Values.name }}
             port:
               name: http
-  - host: {{ .Values.name }}.k8s.frost.haus
-    http:
-      paths:
       - pathType: ImplementationSpecific
         path: "/sabnzbd"
         backend:
