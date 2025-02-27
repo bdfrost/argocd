@@ -79,7 +79,7 @@ spec:
             - name: PORT
               value: "9707"
             - name: URL
-              value: "http://sonarr.default.svc.cluster.local"
+              value: "http://sonarr.sonarr.svc.cluster.local"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:
