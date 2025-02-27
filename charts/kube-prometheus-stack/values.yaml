@@ -1,5 +1,30 @@
 name: kube-prometheus-stack
 kube-prometheus-stack:
+  kubeControllerManager:
+    service:
+      enabled: true
+      ports:
+        http: 10257
+      targetPorts:
+        http: 10257
+    serviceMonitor:
+      https: true
+      insecureSkipVerify: "true"
+  kubeProxy:
+    service:
+      enabled: true
+      port: 10249
+      targetPort: 10249
+  kubeScheduler:
+    service:
+      enabled: true
+      ports:
+        http: 10259
+      targetPorts:
+        http: 10259
+    serviceMonitor:
+      https: true
+      insecureSkipVerify: "true"
   grafana:
     ingress:
       enabled: true
