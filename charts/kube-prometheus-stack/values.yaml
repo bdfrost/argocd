@@ -47,8 +47,8 @@ kube-prometheus-stack:
           static_configs:
             - targets:
               - pve1.brainboy.local.lan
-              - pve2.brainboy.local.lan
-              - pve3.brainboy.local.lan          
+              # - pve2.brainboy.local.lan
+              # - pve3.brainboy.local.lan          
           metrics_path: /pve
           params:
             module: [default]
