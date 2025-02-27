@@ -52,4 +52,10 @@ kube-prometheus-stack:
           metrics_path: /pve
           params:
             module: [default]
-
+          relabel_configs:
+            - source_labels: [__address__]
+              target_label: __param_target
+            - source_labels: [__param_target]
+              target_label: instance
+            - target_label: __address__
+              replacement: prometheus-pve-exporter.brainboy.local.lan:9221  # PVE exporter.
