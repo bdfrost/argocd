@@ -8,13 +8,18 @@ metadata:
     app.kubernetes.io/name: radarr-exporter
     app.kubernetes.io/instance: radarr-exporter
 spec:
-  clusterIP: None
+  clusterIP: 
   selector:
     app.kubernetes.io/name: radarr-exporter
     app.kubernetes.io/instance: radarr-exporter
   ports:
     - name: monitoring
       port: 9707
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  type: ClusterIP
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -119,28 +124,3 @@ spec:
     }
   }
 }
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: radarr-exporter
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: radarr-exporter.k8s.frost.haus
-spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - radarr-exporter.k8s.frost.haus
-    secretName: radarr-exporter-cert
-  rules:
-  - host: radarr-exporter.k8s.frost.haus
-    http:
-      paths:
-      - pathType: ImplementationSpecific
-        path: "/"
-        backend:
-          service:
-            name: radarr-exporter
-            port:
-              name: https
