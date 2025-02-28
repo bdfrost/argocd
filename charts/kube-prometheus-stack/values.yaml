@@ -14,25 +14,18 @@ kube-prometheus-stack:
         - alertmanager.k8s.frost.haus
         secretName: alertmanager-cert
     alertmanagerSpec:
-      volumes:
-        - name: secret-kube-prometheus-stack
-          secret:
-            secretName: alertmanager-secrets
-            defaultMode: 420
-      volumeMounts:
-        - name: secret-kube-prometheus-stack
-          mountPath: /etc/alertmanager/secrets/alertmanager-secrets/
-          readOnly: true      
+      configSecret: alertmanager-secrets     
       additionalConfig:
-        route:
-          receiver: 'slack-alerts'
-          group_by: [alertname, datacenter, app]
-        receivers:
-          - name: 'slack'
-            slack_configs:
-            - channel: '#general'
-              slack_api_url_file: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
-              send_resolved: true
+        config:
+          route:
+            receiver: 'slack-alerts'
+            group_by: [alertname, datacenter, app]
+          receivers:
+            - name: 'slack'
+              slack_configs:
+              - channel: '#general'
+                slack_api_url_file: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
+                send_resolved: true
   grafana:
     ingress:
       enabled: true
