@@ -10,8 +10,8 @@ kube-prometheus-stack:
       volumeMounts:
         - name: secret-kube-prometheus-stack
           mountPath: /etc/alertmanager/secrets/alertmanager-secrets/
-          readOnly: true
-    config:      
+          readOnly: true      
+    config:
       route:
         receiver: 'slack-alerts'
         group_by: [alertname, datacenter, app]
