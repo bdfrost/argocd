@@ -9,10 +9,12 @@ spec:
   route:
     receiver: 'slack-notifications'
   receivers:
-    - name: 'slack'
-      slackConfigs:
-      - channel: '#general'
-        slackApiUrlFile: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
-        sendResolved: true
-        title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
-        text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+  - name: 'slack'
+    slackConfigs:
+    - channel: '#general'
+      apiURL:
+        name: alertmanager-secrets
+        key: slack_api_url
+      sendResolved: true
+      title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
+      text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
