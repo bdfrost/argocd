@@ -3,3 +3,6 @@ name: longhorn
 longhorn:
   preUpgradeChecker:
     jobEnabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
