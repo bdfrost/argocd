@@ -18,3 +18,26 @@ spec:
       sendResolved: true
       title: "{{`{{ range .Alerts }}`}}{{`{{ .Annotations.summary }}`}}\n{{`{{ end }}`}}"
       text: "{{`{{ range .Alerts }}`}}{{`{{ .Annotations.description }}`}}\n{{`{{ end }}`}}"
+#   inhibit_rules:
+#   - target_matchers:
+#     - severity =~ warning|info
+#     source_matchers:
+#     - severity = critical
+#     equal:
+#     - namespace
+#     - alertname
+#   - target_matchers:
+#     - severity = info
+#     source_matchers:
+#     - severity = warning
+#     equal:
+#     - namespace
+#     - alertname
+#   - target_matchers:
+#     - severity = info
+#     source_matchers:
+#     - alertname = InfoInhibitor
+#     equal:
+#     - namespace
+#   - target_matchers:
+#       - alertname = InfoInhibitor
