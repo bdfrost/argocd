@@ -32,11 +32,11 @@ spec:
   alerting:
     alertmanagers:
       - namespace: kube-prometheus-stack
-        name: alertmanager-longhorn
+        name: alertmanager
         port: web
   serviceMonitorSelector:
     matchLabels:
-      name: longhorn-prometheus-servicemonitor
+      name: prometheus-servicemonitor
   ruleSelector:
     matchLabels:
       prometheus: longhorn
