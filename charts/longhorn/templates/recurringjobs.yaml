@@ -6,9 +6,10 @@ metadata:
   namespace: longhorn
 spec:
   concurrency: 1
-  cron: 0 5 * * ?
+  cron: 0 * * * *
   groups:
   - default
+  - arr
   labels: {}
   name: daily-snapshots
   parameters: {}
@@ -22,11 +23,13 @@ metadata:
   namespace: longhorn
 spec:
   concurrency: 1
-  cron: 0 2 ? * SUN
+  cron: 0 2 * * ?
   groups:
   - default
+  - arr
   labels: {}
   name: sunday-backups
-  parameters: {}
-  retain: 5
+  parameters:
+    full-backup-interval: "7"
+  retain: 14
   task: backup
