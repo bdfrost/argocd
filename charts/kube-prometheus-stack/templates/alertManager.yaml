@@ -11,7 +11,7 @@ spec:
   receivers:
   - name: slack
     slackConfigs:
-    - channel: \#general
+    - channel: general
       apiURL:
         name: alertmanager-secrets
         key: slack_api_url
