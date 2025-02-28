@@ -19,7 +19,7 @@ spec:
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: sunday-backups
+  name: daily-backups
   namespace: longhorn
 spec:
   concurrency: 1
@@ -28,7 +28,7 @@ spec:
   - default
   - arr
   labels: {}
-  name: sunday-backups
+  name: daily-backups
   parameters:
     full-backup-interval: "7"
   retain: 28
