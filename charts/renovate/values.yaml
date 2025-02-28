@@ -1,0 +1,34 @@
+# https://github.com/renovatebot/helm-charts/tree/main/charts/renovate
+renovate:
+  fullnameOverride: renovate
+  image:
+    # https://docs.renovatebot.com/getting-started/running/#the-full-image
+    useFull: true
+  serviceAccount:
+    create: true
+  renovate:
+    # See https://docs.renovatebot.com/self-hosted-configuration
+    existingConfigFile: "/usr/src/app/config.js"
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+          drop:
+          - all
+      readOnlyRootFilesystem: true
+      # runAsUser: 9901
+      seccompProfile:
+          type: RuntimeDefault
+  existingSecret: "renovate-creds"
+  extraVolumes:
+  - name: tmp-dir
+    emptyDir: {}
+  - name: renovate-config
+    configMap:
+      name: renovate-config
+  extraVolumeMounts:
+  - name: tmp-dir
+    mountPath: /tmp
+  - name: renovate-config
+    mountPath: "/usr/src/app/config.js"
+    readOnly: true
+    subPath: config.js
