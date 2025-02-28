@@ -2,18 +2,18 @@
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: daily-snapshots
+  name: hourly-snapshots
   namespace: longhorn
 spec:
   concurrency: 1
-  cron: 0 * * * *
+  cron: */4 * * * *
   groups:
   - default
   - arr
   labels: {}
-  name: daily-snapshots
+  name: hourly-snapshots
   parameters: {}
-  retain: 14
+  retain: 120
   task: snapshot
 ---    
 apiVersion: longhorn.io/v1beta2
@@ -31,5 +31,5 @@ spec:
   name: sunday-backups
   parameters:
     full-backup-interval: "7"
-  retain: 14
+  retain: 28
   task: backup
