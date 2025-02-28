@@ -15,7 +15,7 @@ kube-prometheus-stack:
         - name: 'slack'
           slack_configs:
           - channel: '#general'
-            slack_api_url_file: /etc/secrets/slack-api-url
+            slack_api_url_file: /etc/alertmanager/slack-api-url
             send_resolved: true
     ingress:
       enabled: true
