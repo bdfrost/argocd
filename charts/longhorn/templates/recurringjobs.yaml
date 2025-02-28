@@ -13,7 +13,7 @@ spec:
   labels: {}
   name: hourly-snapshots
   parameters: {}
-  retain: 120
+  retain: 60
   task: snapshot
 ---    
 apiVersion: longhorn.io/v1beta2
