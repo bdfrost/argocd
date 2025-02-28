@@ -1,5 +1,18 @@
 name: kube-prometheus-stack
 kube-prometheus-stack:
+  alertmanager:
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/host: alertmanager.k8s.frost.haus
+      hosts:
+        - alertmanager.k8s.frost.haus
+      tls:   
+      - hosts:
+        - alertmanager.k8s.frost.haus
+        secretName: alertmanager-cert
   grafana:
     ingress:
       enabled: true
