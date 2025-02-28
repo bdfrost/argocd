@@ -1,6 +1,22 @@
 name: kube-prometheus-stack
 kube-prometheus-stack:
   alertmanager:
+    extraSecretMounts:
+    - name: secret-files
+      mountPath: /etc/secrets
+      subPath: ""
+      secretName: alertmanager-secrets
+      readOnly: true
+    config:      
+      route:
+        receiver: 'slack-alerts'
+        group_by: [alertname, datacenter, app]
+      receivers:
+        - name: 'slack'
+          slack_configs:
+          - channel: '#general'
+            slack_api_url_file: /etc/secrets/slack-api-url
+            send_resolved: true
     ingress:
       enabled: true
       ingressClassName: nginx
