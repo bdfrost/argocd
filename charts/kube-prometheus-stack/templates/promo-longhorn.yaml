@@ -28,7 +28,7 @@ metadata:
   namespace: kube-prometheus-stack
 spec:
   replicas: 2
-  serviceAccountName: prometheus
+#   serviceAccountName: prometheus
   alerting:
     alertmanagers:
       - namespace: kube-prometheus-stack
