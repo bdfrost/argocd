@@ -6,7 +6,7 @@ metadata:
   namespace: longhorn
 spec:
   concurrency: 1
-  cron: '*/4 * * * *'
+  cron: '* */4 * * *'
   groups:
   - default
   - arr
