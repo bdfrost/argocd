@@ -16,15 +16,16 @@ kube-prometheus-stack:
     alertmanagerSpec:
       configSecret: alertmanager-secrets
       alertmanagerConfiguration:
-        route:
-          receiver: 'slack-alerts'
-          group_by: [alertname, datacenter, app]
-        receivers:
-          - name: 'slack'
-            slack_configs:
-            - channel: '#general'
-              slack_api_url_file: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
-              send_resolved: true
+        spec:
+          route:
+            receiver: 'slack-alerts'
+            group_by: [alertname, datacenter, app]
+          receivers:
+            - name: 'slack'
+              slack_configs:
+              - channel: '#general'
+                slack_api_url_file: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
+                send_resolved: true
   grafana:
     ingress:
       enabled: true
