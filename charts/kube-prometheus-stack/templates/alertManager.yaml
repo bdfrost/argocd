@@ -1,18 +1,18 @@
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: AlertmanagerConfig
-metadata:
-  name: alertmanagerconfig
-  namespace: monitoring
-  labels:
-    alertmanagerConfig: global
-spec:
-  route:
-    receiver: 'slack-notifications'
-  receivers:
-  - name: 'slack'
-    slackConfigs:
-    - channel: '#general'
-    slackApiUrlFile: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
-    sendResolved: true
-    title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
-    text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+# apiVersion: monitoring.coreos.com/v1alpha1
+# kind: AlertmanagerConfig
+# metadata:
+#   name: alertmanagerconfig
+#   namespace: monitoring
+#   labels:
+#     alertmanagerConfig: global
+# spec:
+#   route:
+#     receiver: 'slack-notifications'
+#   receivers:
+#     - name: 'slack'
+#         slackConfigs:
+#         - channel: '#general'
+#         slackApiUrlFile: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
+#         sendResolved: true
+#         title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
+#         text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
