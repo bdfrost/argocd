@@ -1,26 +1,6 @@
 name: kube-prometheus-stack
 kube-prometheus-stack:
   alertmanager:
-    alertmanagerSpec:
-      volumes:
-        - name: secret-kube-prometheus-stack
-          secret:
-            secretName: alertmanager-secrets
-            defaultMode: 420
-      volumeMounts:
-        - name: secret-kube-prometheus-stack
-          mountPath: /etc/alertmanager/secrets/alertmanager-secrets/
-          readOnly: true      
-    config:
-      route:
-        receiver: 'slack-alerts'
-        group_by: [alertname, datacenter, app]
-      receivers:
-        - name: 'slack'
-          slack_configs:
-          - channel: '#general'
-            slack_api_url_file: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
-            send_resolved: true
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -33,6 +13,26 @@ kube-prometheus-stack:
       - hosts:
         - alertmanager.k8s.frost.haus
         secretName: alertmanager-cert
+    alertmanagerSpec:
+      volumes:
+        - name: secret-kube-prometheus-stack
+          secret:
+            secretName: alertmanager-secrets
+            defaultMode: 420
+      volumeMounts:
+        - name: secret-kube-prometheus-stack
+          mountPath: /etc/alertmanager/secrets/alertmanager-secrets/
+          readOnly: true      
+      alertmanagerConfiguration:
+        route:
+          receiver: 'slack-alerts'
+          group_by: [alertname, datacenter, app]
+        receivers:
+          - name: 'slack'
+            slack_configs:
+            - channel: '#general'
+              slack_api_url_file: /etc/alertmanager/secrets/alertmanager-secrets/slack_api_url
+              send_resolved: true
   grafana:
     ingress:
       enabled: true
