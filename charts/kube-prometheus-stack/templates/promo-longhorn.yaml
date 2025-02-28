@@ -20,24 +20,3 @@ spec:
       labels:
         issue: Longhorn volume {{`{{$labels.volume}}`}} usage on {{`{{$labels.node}}`}} is critical.
         severity: critical
----
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
-metadata:
-  name: longhorn
-  namespace: kube-prometheus-stack
-spec:
-  replicas: 2
-#   serviceAccountName: prometheus
-  alerting:
-    alertmanagers:
-      - namespace: kube-prometheus-stack
-        name: alertmanager
-        port: web
-  serviceMonitorSelector:
-    matchLabels:
-      name: prometheus-servicemonitor
-  ruleSelector:
-    matchLabels:
-      prometheus: longhorn
-      role: alert-rules
