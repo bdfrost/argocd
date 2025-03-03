@@ -9,7 +9,6 @@ spec:
   cron: '0 */4 * * *'
   groups:
   - default
-  - arr
   labels: {}
   name: hourly-snapshots
   parameters: {}
@@ -26,7 +25,6 @@ spec:
   cron: 0 2 * * ?
   groups:
   - default
-  - arr
   labels: {}
   name: daily-backups
   parameters:
