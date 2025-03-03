@@ -33,3 +33,21 @@ spec:
     full-backup-interval: "7"
   retain: 28
   task: backup
+---    
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: daily-gcp-backups
+  namespace: longhorn
+spec:
+  concurrency: 1
+  cron: 0 5 * * ?
+  groups:
+  - remote
+  labels: {}
+  name: daily-gcp-backups
+  parameters:
+    full-backup-interval: "7"
+  retain: 28
+  task: backup
+  target: gcp-backups
