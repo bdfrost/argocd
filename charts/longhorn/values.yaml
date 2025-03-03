@@ -8,4 +8,4 @@ longhorn:
       enabled: true
   persistence:
     defaultClassReplicaCount: 2
-    dataEngine: v2
+    dataEngine: v1
