@@ -50,4 +50,3 @@ spec:
     full-backup-interval: "7"
   retain: 28
   task: backup
-  target: gcp-backups
