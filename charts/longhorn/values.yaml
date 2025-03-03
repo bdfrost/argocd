@@ -6,3 +6,6 @@ longhorn:
   metrics:
     serviceMonitor:
       enabled: true
+  persistence:
+    defaultClassReplicaCount: 2
+    dataEngine: v2
