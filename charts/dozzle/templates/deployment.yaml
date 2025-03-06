@@ -27,8 +27,8 @@ spec:
           value: "300"
         - name: DOZZLE_FILTER
           value: "status=running"
-        - name: DOCKER_HOST
-          value: tcp://socket-proxy:2375
+        - name: DOZZLE_MODE
+          value: "k8s"
         - name: PGID
           value: "{{ .Values.pgid }}"
         - name: PUID
@@ -57,3 +57,33 @@ spec:
   resources:
     requests:
       storage: 2Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pod-viewer
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pod-viewer-role
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log", "nodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: pod-viewer-binding
+subjects:
+  - kind: ServiceAccount
+    name: pod-viewer
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: pod-viewer-role
+  apiGroup: rbac.authorization.k8s.io
