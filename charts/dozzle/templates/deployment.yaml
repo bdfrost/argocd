@@ -23,7 +23,7 @@ spec:
         - containerPort: {{ .Values.targetPort }}
         env:
         - name: DOZZLE_LEVEL
-          value: debug
+          value: info
         - name: DOZZLE_FILTER
           value: "status=running"
         - name: DOZZLE_MODE
