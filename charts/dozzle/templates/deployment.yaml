@@ -14,6 +14,7 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
+      serviceAccountName: pod-viewer
       containers:
       - name: {{ .Values.name }}
         image: amir20/dozzle:latest
@@ -22,7 +23,7 @@ spec:
         - containerPort: {{ .Values.targetPort }}
         env:
         - name: DOZZLE_LEVEL
-          value: info
+          value: debug
         - name: DOZZLE_FILTER
           value: "status=running"
         - name: DOZZLE_MODE
