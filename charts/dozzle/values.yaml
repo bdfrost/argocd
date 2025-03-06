@@ -1,0 +1,5 @@
+replicaCount: 1
+name: dozzle
+targetPort: 8080
+pgid: 1000
+puid: 1000

@@ -1,0 +1,5 @@
+replicaCount: 1
+name: boilerplate
+targetPort: 8989
+pgid: 1000
+puid: 1000
