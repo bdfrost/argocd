@@ -1,0 +1,3 @@
+replicaCount: 1
+name: prowlarr
+targetPort: 9696
