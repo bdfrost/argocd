@@ -1,0 +1,127 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr-exporter
+  namespace: prowlarr-exporter
+  labels:
+    app.kubernetes.io/name: prowlarr-exporter
+    app.kubernetes.io/instance: prowlarr-exporter
+spec:
+  selector:
+    app.kubernetes.io/name: prowlarr-exporter
+    app.kubernetes.io/instance: prowlarr-exporter
+  ports:
+    - name: monitoring
+      port: 9707
+      protocol: TCP
+      targetPort: 9707
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prowlarr-exporter
+  namespace: prowlarr-exporter
+  labels:
+    app.kubernetes.io/name: prowlarr-exporter
+    app.kubernetes.io/instance: prowlarr-exporter
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prowlarr-exporter
+      app.kubernetes.io/instance: prowlarr-exporter
+  endpoints:
+    - port: monitoring
+      interval: 4m
+      scrapeTimeout: 90s
+      path: /metrics
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: prowlarr-exporter
+  namespace: prowlarr-exporter
+  labels:
+    app.kubernetes.io/name: prowlarr-exporter
+    app.kubernetes.io/instance: prowlarr-exporter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prowlarr-exporter
+      app.kubernetes.io/instance: prowlarr-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: prowlarr-exporter
+        app.kubernetes.io/instance: prowlarr-exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "monitoring"
+    spec:
+      containers:
+        - name: prowlarr-exporter
+          image: ghcr.io/onedr0p/exportarr:v2.0.1
+          imagePullPolicy: IfNotPresent
+          args:
+            - prowlarr
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: "http://prowlarr.prowlarr.svc.cluster.local"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: prowlarr-exporter
+                  key: api-key
+          ports:
+            - name: monitoring
+              containerPort: 9707
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "prowlarr-exporter",
+    "namespace": "prowlarr-exporter",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "prowlarr-exporter",
+        "namespace": "prowlarr-exporter",
+        "creationTimestamp": null
+      }
+    },
+    "encryptedData": {
+      "api-key": "AgCh8ai4GgFj+zk7mkVAb5DdW+z6bepHgvgjaRvw1R3u7Y7HCDBJeBeea2DkDNxLPW3V50vaF/TR32Mo4m0jv0BAdW4v8sd1AM1XH3rtub50SRaln4vHI366Y6f4G6mDhKQiqOdB5JSm4g+pn8T8NGDZs0cKYkzE9QqeKb2tJQ3EEok9DxgXZsGe4v8d/II1Qa8f5tNxHIcuo+bysK0KUpfAjj9LoDidH0ou3MEgTNgekJQ8CKEnLDSnhV/w6wM/6NMoZDZjVLZ40O1hFiWQGrIfOpNos7vB8qdwTwRqcxwTCpV+U4xi4avI3/EWRswxFD+mzfQMCmMaPdTx1mpUFqkdm8PX9plRJPZ8pcFddlszTzwy92kNWFrdPt+P0JJEJjtWr3+IAAM0suUll11qScWIYfDhz2x9yldjGhGwQitq1eTBwgQCebBUL3yC8GSS19+imV+oO3xP0D5wYGvI59mCne+8+rlOq5dBBkoXo/YmkQN3CnwcmqLVBG11K4/mRxpUrZ+S7amK77JnYsjMtrGl0fkbxRDVGWinm7HvSMo1QWWP3WPjV1quPle+2KqAAv6SzNButBBrndGekrpgcb2I9fSNqRur2qu5ziJZ7hKCvSKOXheHoiHGm95mzEzQn9OO0EDE83/Oc6EG99vX34zFaLMS2VvKpnL/75BI2SKIwetxNQakiZsRzqGLnDu/kI4tfx+fpbR4YgiCejFecAWnwdNeQ4BU7sqLMW1fWg+Miw=="
+    }
+  }
+}
