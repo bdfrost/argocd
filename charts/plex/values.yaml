@@ -1,11 +1,11 @@
 plex-media-server:
   ingress:
     enabled: true
-    
-    url: https://pepper.k8s.frost.haus
+
+    url: https://peppers.k8s.frost.haus
     ingressClassName: ingress-nginx
     annotations:
-      external-dns.alpha.kubernetes.io/host: pepper.k8s.frost.haus
+      external-dns.alpha.kubernetes.io/host: peppers.k8s.frost.haus
   pms:
     configExistingClaim: plex-config-pvc
     configStorage: 10Gi
@@ -14,7 +14,7 @@ plex-media-server:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
       PLEX_CLAIM: "claim"
-      HOSTNAME: "pepper"
+      HOSTNAME: "peppers"
       TZ: "America/Chicago"
   #   PLEX_UPDATE_CHANNEL: "5"
   #   PLEX_UID: "uid of plex user"
