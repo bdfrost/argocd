@@ -1,15 +1,11 @@
-replicaCount: 1
 name: plex
-targetPort: 32400
-pgid: 1000
-puid: 1000
 plex:
-  image:
-    registry: index.docker.io
-    repository: plexinc/pms-docker
-    tag: "latest"
-    sha: ""
-    pullPolicy: IfNotPresent
+  # image:
+  #   registry: index.docker.io
+  #   repository: plexinc/pms-docker
+  #   tag: "latest"
+  #   sha: ""
+  #   pullPolicy: IfNotPresent
   ingress:
     enabled: true
     url: https://pepper.k8s.frost.haus
