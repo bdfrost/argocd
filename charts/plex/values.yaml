@@ -1,6 +1,6 @@
 replicaCount: 1
 name: plex
-targetPort: 8989
+targetPort: 32400
 pgid: 1000
 puid: 1000
 plex:
