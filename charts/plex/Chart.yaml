@@ -25,4 +25,4 @@ appVersion: "1.4.3"
 dependencies:
 - name: plex
   version: 1.41.3
-  repository: https://raw.githubusercontent.com/plexinc/pms-docker/
+  repository: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
