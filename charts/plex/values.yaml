@@ -1,4 +1,4 @@
-name: plex
+# name: plex
 plex-media-server:
   # image:
   #   registry: index.docker.io
