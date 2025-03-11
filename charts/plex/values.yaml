@@ -1,0 +1,55 @@
+replicaCount: 1
+name: plex
+targetPort: 8989
+pgid: 1000
+puid: 1000
+plex:
+  image:
+    registry: index.docker.io
+    repository: plexinc/pms-docker
+    tag: "latest"
+    sha: ""
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    url: https://pepper.k8s.frost.haus
+    ingressClassName: ingress-nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: pepper.k8s.frost.haus
+  pms:
+    configExistingClaim: plex-config-pvc
+    configStorage: 10Gi
+    storageClassName: null
+  extraEnv:
+      # This claim is optional, and is only used for the first startup of PMS
+      # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
+      PLEX_CLAIM: "claim"
+      HOSTNAME: "pepper"
+  #   TZ: "Etc/UTC"
+  #   PLEX_UPDATE_CHANNEL: "5"
+  #   PLEX_UID: "uid of plex user"
+  #   PLEX_GID: "group id of plex user"
+    # a list of CIDRs that can use the server without authentication
+    # this is only used for the first startup of PMS
+  #   ALLOWED_NETWORKS: "0.0.0.0/0"
+  extraVolumeMounts: []
+  # extraVolumeMounts:
+  #   - name: dev-dri
+  #     mountPath: /dev/dri
+  #
+    # - /mnt/ramdisk:/transcode
+    # - $DOCKERDIR/appdata/plex:/config
+    # - "$DOCKERDIR/appdata/plex/Library/Application Support/Plex Media Server/Plug-ins/Trakttv.bundle:/usr/lib/plexmediaserver/Resources/Plug-ins-f05b712b6/Trakttv.bundle"
+    # - /mnt/media/tv:/data/tvshows
+    # - /mnt/media/tvdvr:/data/tvdvr
+    # - /mnt/media/gphotos/photos:/data/photos
+    # - /mnt/media/movies:/data/movies
+    # - /mnt/media/filler:/data/filler
+  extraVolumes: []
+  # extraVolumes:
+  #   - name: dev-dri
+  #     hostPath:
+  #       path: /dev/dri
+  #       type: Directory
+
