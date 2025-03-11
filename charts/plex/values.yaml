@@ -1,5 +1,5 @@
 name: plex
-plex:
+plex-media-server:
   # image:
   #   registry: index.docker.io
   #   repository: plexinc/pms-docker
