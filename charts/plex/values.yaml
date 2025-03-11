@@ -21,7 +21,7 @@ plex-media-server:
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
       PLEX_CLAIM: "claim"
       HOSTNAME: "pepper"
-  #   TZ: "Etc/UTC"
+      TZ: "America/Chicago"
   #   PLEX_UPDATE_CHANNEL: "5"
   #   PLEX_UID: "uid of plex user"
   #   PLEX_GID: "group id of plex user"
