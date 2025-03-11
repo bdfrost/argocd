@@ -23,6 +23,6 @@ version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
-- name: dynatrace-operator
+- name: plex
   version: 1.4.0
   repository: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
