@@ -1,0 +1,100 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kometa
+  namespace: kometa
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kometa
+              image: kometateam/kometa:latest
+              imagePullPolicy: IfNotPresent
+              args: [ "--run", "--read-only-config" ]
+              env:
+                - name: PLEX-TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: plex_token
+                - name: TMDB-TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: tmdb_token
+                - name: TAUTULLI-TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: tautulli_token
+                - name: RADARR-TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: radarr_token
+                - name: SONARR-TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: sonarr_token
+                - name: TRAKT-CLIENT-ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: trakt_client_id
+                - name: TRAKT-CLIENT-SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: trakt_client_secret
+                - name: TRAKT-PIN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: trakt_pin
+                - name: TRAKT-ACCESS
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: trakt_access
+                - name: TRAKT-REFRESH-TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: kometa-secret
+                      key: trakt_refresh_token                                         
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 125Mi
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+                - name: kometa-config
+                  mountPath: /config/config.yml
+                  subPath: config.yml
+                - name: movie-config
+                  mountPath: /config/movies.yaml
+                  subPath: movies.yaml
+                - name: tv-config
+                  mountPath: /config/tv.yaml
+                  subPath: tv.yaml
+          volumes:
+            - name: config
+              persistentVolumeClaim:
+                claimName: kometa
+            - configMap:
+                name: kometa-config
+              name: kometa-config
+            - configMap:
+                name: movie-config
+              name: movie-config
+            - configMap:
+                name: tv-config
+              name: tv-config
+          restartPolicy: OnFailure

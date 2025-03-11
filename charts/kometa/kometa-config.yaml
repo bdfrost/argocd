@@ -1,0 +1,178 @@
+apiVersion: v1
+data:
+  config.yml: |
+    libraries:                           # This is called out once within the config.yml file
+      Movies:                            # These are names of libraries in your Plex
+        remove_overlays: false           # Set this to true to remove all overlays
+        collection_files:
+        - file: /config/movies-cm.yaml
+        - default: basic                 # This is a file within Kometa's defaults folder
+        - default: imdb                  # This is a file within Kometa's defaults folder
+        overlay_files:
+        - default: ribbon                # This is a file within Kometa's defaults folder
+        - default: commonsense  
+        - default: ratings
+          template_variables:
+            rating1: critic
+            rating1_image: imdb
+            rating1_font_size: 70
+            rating2: audience
+            rating2_image: rt_popcorn
+            rating2_font_size: 63
+            rating3: user
+            rating3_image: tmdb
+            rating3_font_size: 70
+            horizontal_position: right
+        operations:
+          mass_critic_rating_update: imdb
+          mass_audience_rating_update: mdb_tomatoesaudience
+          mass_user_rating_update: tmdb
+      TV Shows:
+        remove_overlays: false           # Set this to true to remove all overlays
+        collection_files:
+        - file: /config/tv_cm.yaml
+        - default: basic                 # This is a file within Kometa's defaults folder
+        - default: imdb                  # This is a file within Kometa's defaults folder
+        overlay_files:
+        - default: ribbon                # This is a file within Kometa's defaults folder
+        - default: status
+        - default: ratings
+          template_variables:
+            rating1: critic
+            rating1_image: imdb
+            rating1_font_size: 70
+            rating2: audience
+            rating2_image: rt_popcorn
+            rating2_font_size: 63
+            rating3: user
+            rating3_image: tmdb
+            rating3_font_size: 70
+            horizontal_position: right
+        operations:
+          mass_critic_rating_update: imdb
+          mass_audience_rating_update: mdb_tomatoesaudience
+          mass_user_rating_update: tmdb
+    playlist_files:
+    - default: playlist                  # This is a file within Kometa's defaults folder
+      template_variables:
+        libraries: Movies, TV Shows      # list of libraries that you want the Kometa Defaults playlists to look at
+      # see the wiki for how to use local files, folders, URLs, or files from git
+    settings:
+      run_order:
+      - operations
+      - metadata
+      - collections
+      - overlays
+      cache: true
+      cache_expiration: 60
+      asset_directory: config/assets
+      asset_folders: true
+      asset_depth: 0
+      create_asset_folders: false
+      prioritize_assets: false
+      dimensional_asset_rename: false
+      download_url_assets: false
+      show_missing_season_assets: false
+      show_missing_episode_assets: false
+      show_asset_not_needed: true
+      sync_mode: append
+      minimum_items: 1
+      default_collection_order:
+      delete_below_minimum: true
+      delete_not_scheduled: false
+      run_again_delay: 2
+      missing_only_released: false
+      only_filter_missing: false
+      show_unmanaged: true
+      show_unconfigured: true
+      show_filtered: false
+      show_options: true
+      show_missing: true
+      show_missing_assets: true
+      save_report: false
+      tvdb_language: eng
+      ignore_ids:
+      ignore_imdb_ids:
+      item_refresh_delay: 0
+      playlist_sync_to_users: all
+      playlist_exclude_users:
+      playlist_report: false
+      verify_ssl: true
+      custom_repo:
+      overlay_artwork_filetype: jpg
+      overlay_artwork_quality: 75
+    webhooks:                            # Can be individually specified per library as well
+      error:
+      version:
+      run_start:
+      run_end:
+      changes:
+      delete:
+    plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
+      url: http://pepper.k8s.brainboy.local.lan:32400
+      token: ${PLEX-TOKEN}
+      timeout: 60
+      db_cache:
+      clean_bundles: false
+      empty_trash: false
+      optimize: false
+      verify_ssl:
+    tmdb:                                # REQUIRED for the script to run
+      apikey: ${TMDB-TOKEN}
+      language: en
+      cache_expiration: 60
+      region:
+    tautulli:                            # Can be individually specified per library as well
+      url: https://tautulli.frost.haus
+      apikey: ${TAUTULLI-TOKEN}
+    radarr:                              # Can be individually specified per library as well
+      url: https://radarr.frost.haus
+      token: ${RADARR-TOKEN}
+      add_missing: false
+      add_existing: false
+      upgrade_existing: false
+      monitor_existing: false
+      root_folder_path: /data/movies
+      monitor: true
+      availability: announced
+      quality_profile: Up to HD
+      tag: kometa
+      search: false
+      ignore_cache: false
+      radarr_path:
+      plex_path:
+    sonarr:                              # Can be individually specified per library as well
+      url: https://sonarr.frost.haus
+      token: ${SONARR-TOKEN}
+      add_missing: false
+      add_existing: false
+      upgrade_existing: false
+      monitor_existing: false
+      root_folder_path: /data/tv
+      monitor: all
+      quality_profile: Up to 1080p
+      language_profile: English
+      series_type: standard
+      season_folder: true
+      tag: kometa
+      search: false
+      cutoff_search: false
+      ignore_cache: false
+      sonarr_path:
+      plex_path:
+    trakt:
+      client_id: ${TRAKT-CLIENT-ID}
+      client_secret: ${TRAKT-CLIENT-SECRET}
+      pin: ${TRAKT-PIN}
+      authorization:
+        # everything below is autofilled by the script
+        access_token: ${TRAKT-ACCESS}
+        token_type: Bearer
+        expires_in: 7889237
+        refresh_token: ${TRAKT-REFRESH-TOKEN}
+        scope: public
+        created_at: 1735541649
+kind: ConfigMap
+metadata:
+  name: kometa-config
+  namespace: kometa
