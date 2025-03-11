@@ -109,7 +109,7 @@ data:
       changes:
       delete:
     plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
-      url: http://pepper.k8s.brainboy.local.lan:32400
+      url: http://peppers.k8s.brainboy.local.lan:32400
       token: ${PLEX-TOKEN}
       timeout: 60
       db_cache:
