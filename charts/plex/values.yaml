@@ -1,11 +1,4 @@
-# name: plex
 plex-media-server:
-  # image:
-  #   registry: index.docker.io
-  #   repository: plexinc/pms-docker
-  #   tag: "latest"
-  #   sha: ""
-  #   pullPolicy: IfNotPresent
   ingress:
     enabled: true
     url: https://pepper.k8s.frost.haus
