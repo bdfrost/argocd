@@ -9,11 +9,12 @@ spec:
     spec:
       template:
         spec:
-          containers:
-            - name: kometa
-              image: kometateam/kometa:latest
-              imagePullPolicy: IfNotPresent
-              args: [ "--run", "--read-only-config" ]
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          initContainers:
+            - name: render-dynamic-config
+              image: chrisjohnson00/jinja-init:v1.0.0
               env:
                 - name: PLEX-TOKEN
                   valueFrom:
@@ -64,7 +65,27 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
-                      key: trakt_refresh_token                                         
+                      key: trakt_refresh_token   
+                # source and destination files
+                - name: JINJA_SRC_FILE
+                  value: /config_src/config.yaml
+                - name: JINJA_DEST_FILE
+                  value: /config/config.yaml
+                # let's be verbose
+                - name: VERBOSE
+                  value: "1"
+              volumeMounts:
+                # configMap mount point
+                - name: kometa-config
+                  mountPath: /config_src
+                # target directory mount point; the final config file will be created here
+                - name: config
+                  mountPath: /config
+          containers:
+            - name: kometa
+              image: kometateam/kometa:latest
+              imagePullPolicy: IfNotPresent
+              args: [ "--run", "--read-only-config" ]                                      
               resources:
                 limits:
                   cpu: 100m
@@ -75,9 +96,6 @@ spec:
               volumeMounts:
                 - name: config
                   mountPath: /config
-                - name: kometa-config
-                  mountPath: /config/config.yml
-                  subPath: config.yml
                 - name: movie-config
                   mountPath: /config/movies.yaml
                   subPath: movies.yaml
