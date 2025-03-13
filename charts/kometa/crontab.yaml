@@ -105,10 +105,13 @@ spec:
             - configMap:
                 name: kometa-config
               name: kometa-config
+              default_mode: "0777"
             - configMap:
                 name: movie-config
               name: movie-config
+              default_mode: "0777"
             - configMap:
                 name: tv-config
               name: tv-config
+              default_mode: "0777"
           restartPolicy: OnFailure
