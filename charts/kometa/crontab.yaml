@@ -67,9 +67,9 @@ spec:
                       name: kometa-secret
                       key: trakt_refresh_token   
                 - name: JINJA_SRC_FILE
-                  value: /config_src/config.yaml
+                  value: /config_src/config.yml
                 - name: JINJA_DEST_FILE
-                  value: /config/config.yaml
+                  value: /config/config.yml
                 - name: VERBOSE
                   value: "1"
               volumeMounts:
