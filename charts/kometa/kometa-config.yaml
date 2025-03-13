@@ -110,7 +110,7 @@ data:
       delete:
     plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
       url: http://peppers.k8s.brainboy.local.lan:32400
-      token: ${PLEX-TOKEN}
+      token: ${{PLEX-TOKEN}}
       timeout: 60
       db_cache:
       clean_bundles: false
@@ -118,7 +118,7 @@ data:
       optimize: false
       verify_ssl:
     tmdb:                                # REQUIRED for the script to run
-      apikey: ${TMDB-TOKEN}
+      apikey: "${TMDB-TOKEN}"
       language: en
       cache_expiration: 60
       region:
