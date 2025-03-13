@@ -118,13 +118,13 @@ data:
       optimize: false
       verify_ssl:
     tmdb:                                # REQUIRED for the script to run
-      apikey: "${TMDB-TOKEN}"
+      apikey: '${TMDB-TOKEN}'
       language: en
       cache_expiration: 60
       region:
     tautulli:                            # Can be individually specified per library as well
       url: https://tautulli.frost.haus
-      apikey: ${TAUTULLI-TOKEN}
+      apikey: "${TAUTULLI-TOKEN}"
     radarr:                              # Can be individually specified per library as well
       url: https://radarr.frost.haus
       token: ${RADARR-TOKEN}
