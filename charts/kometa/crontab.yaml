@@ -9,9 +9,9 @@ spec:
     spec:
       template:
         spec:
-          # securityContext:
-          #   runAsUser: 1000
-          #   runAsGroup: 1000
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           initContainers:
             - name: render-dynamic-config
               image: chrisjohnson00/jinja-init:v1.0.0
@@ -105,13 +105,10 @@ spec:
             - configMap:
                 name: kometa-config
               name: kometa-config
-              default_mode: "0777"
             - configMap:
                 name: movie-config
               name: movie-config
-              default_mode: "0777"
             - configMap:
                 name: tv-config
               name: tv-config
-              default_mode: "0777"
           restartPolicy: OnFailure
