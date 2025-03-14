@@ -1,9 +1,8 @@
 plex-media-server:
   ingress:
     enabled: true
-
     url: https://peppers.k8s.frost.haus
-    ingressClassName: ingress-nginx
+    ingressClassName: nginx
     annotations:
       external-dns.alpha.kubernetes.io/host: peppers.k8s.frost.haus
   pms:
