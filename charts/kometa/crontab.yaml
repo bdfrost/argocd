@@ -10,11 +10,12 @@ spec:
       template:
         spec:
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsgroup: 1000
+            fsGroup: 1001
+            runAsUser: 1001
+            runAsGroup: 1001
           initContainers:
             - name: render-dynamic-config
+              command: ['sh', '-c', 'chown -R 1001:1001 /config']
               image: chrisjohnson00/jinja-init:v1.0.0
               env:
                 - name: PLEX-TOKEN
