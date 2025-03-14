@@ -7,8 +7,6 @@ plex-media-server:
       external-dns.alpha.kubernetes.io/host: peppers.k8s.frost.haus
   pms:
     configExistingClaim: plex-config-pvc
-    configStorage: 10Gi
-    storageClassName: null
   extraEnv:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
@@ -29,7 +27,6 @@ plex-media-server:
       nfs:
         server: 192.168.100.250
         path: /mnt/media
-
 
 
 
