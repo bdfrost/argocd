@@ -12,7 +12,7 @@ plex-media-server:
   extraEnv:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
-      PLEX_CLAIM: "claim"
+      PLEX_CLAIM: "claim-TPmFffFTSTTpzpPgPbUj"
       HOSTNAME: "peppers"
       TZ: "America/Chicago"
   #   PLEX_UPDATE_CHANNEL: "5"
@@ -24,14 +24,6 @@ plex-media-server:
   extraVolumeMounts:
   - name: arr-media
     mountPath: /data
-    # - /mnt/ramdisk:/transcode
-    # - $DOCKERDIR/appdata/plex:/config
-    # - "$DOCKERDIR/appdata/plex/Library/Application Support/Plex Media Server/Plug-ins/Trakttv.bundle:/usr/lib/plexmediaserver/Resources/Plug-ins-f05b712b6/Trakttv.bundle"
-    # - /mnt/media/tv:/data/tvshows
-    # - /mnt/media/tvdvr:/data/tvdvr
-    # - /mnt/media/gphotos/photos:/data/photos
-    # - /mnt/media/movies:/data/movies
-    # - /mnt/media/filler:/data/filler
   extraVolumes:
     - name: arr-media
       nfs:
