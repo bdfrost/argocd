@@ -110,7 +110,7 @@ data:
       delete:
     plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
       url: http://peppers.k8s.brainboy.local.lan:32400
-      token: {{ getenv("PLEX-TOKEN") }}
+      token: {{ env("PLEX-TOKEN") }}
       timeout: 60
       db_cache:
       clean_bundles: false
@@ -118,16 +118,16 @@ data:
       optimize: false
       verify_ssl:
     tmdb:                                # REQUIRED for the script to run
-      apikey: {{ getenv("TMDB-TOKEN") }}
+      apikey: {{ env("TMDB-TOKEN") }}
       language: en
       cache_expiration: 60
       region:
     tautulli:                            # Can be individually specified per library as well
       url: https://tautulli.frost.haus
-      apikey: {{ getenv("TAUTULLI-TOKEN") }}
+      apikey: {{ env("TAUTULLI-TOKEN") }}
     radarr:                              # Can be individually specified per library as well
       url: https://radarr.frost.haus
-      token: {{ getenv("RADARR-TOKEN") }}
+      token: {{ env("RADARR-TOKEN") }}
       add_missing: false
       add_existing: false
       upgrade_existing: false
@@ -143,7 +143,7 @@ data:
       plex_path:
     sonarr:                              # Can be individually specified per library as well
       url: https://sonarr.frost.haus
-      token: { getenv("SONARR-TOKEN") }}
+      token: { env("SONARR-TOKEN") }}
       add_missing: false
       add_existing: false
       upgrade_existing: false
@@ -161,15 +161,15 @@ data:
       sonarr_path:
       plex_path:
     trakt:
-      client_id: { getenv("TRAKT-CLIENT-ID") }}
-      client_secret: { getenv("TRAKT-CLIENT-SECRET") }}
-      pin: { getenv("TRAKT-PIN") }}
+      client_id: { env("TRAKT-CLIENT-ID") }}
+      client_secret: { env("TRAKT-CLIENT-SECRET") }}
+      pin: { env("TRAKT-PIN") }}
       authorization:
         # everything below is autofilled by the script
-        access_token: { getenv("TRAKT-ACCESS") }}
+        access_token: { env("TRAKT-ACCESS") }}
         token_type: Bearer
         expires_in: 7889237
-        refresh_token: { getenv("TRAKT-REFRESH-TOKEN") }}
+        refresh_token: { env("TRAKT-REFRESH-TOKEN") }}
         scope: public
         created_at: 1735541649
 kind: ConfigMap
