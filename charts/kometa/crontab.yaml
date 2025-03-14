@@ -18,52 +18,52 @@ spec:
               # command: ['sh', '-c', 'chown -R 1001:1001 /config']
               image: chrisjohnson00/jinja-init:v1.0.0
               env:
-                - name: JINJA_VAR_PLEX-TOKEN
+                - name: JINJA_VAR_PLEX_TOKEN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: plex_token
-                - name: JINJA_VAR_TMDB-TOKEN
+                - name: JINJA_VAR_TMDB_TOKEN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: tmdb_token
-                - name: JINJA_VAR_TAUTULLI-TOKEN
+                - name: JINJA_VAR_TAUTULLI_TOKEN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: tautulli_token
-                - name: JINJA_VAR_RADARR-TOKEN
+                - name: JINJA_VAR_RADARR_TOKEN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: radarr_token
-                - name: JINJA_VAR_SONARR-TOKEN
+                - name: JINJA_VAR_SONARR_TOKEN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: sonarr_token
-                - name: JINJA_VAR_TRAKT-CLIENT-ID
+                - name: JINJA_VAR_TRAKT_CLIENT_ID
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: trakt_client_id
-                - name: JINJA_VAR_TRAKT-CLIENT-SECRET
+                - name: JINJA_VAR_TRAKT_CLIENT_SECRET
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: trakt_client_secret
-                - name: JINJA_VAR_TRAKT-PIN
+                - name: JINJA_VAR_TRAKT_PIN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: trakt_pin
-                - name: JINJA_VAR_TRAKT-ACCESS
+                - name: JINJA_VAR_TRAKT_ACCESS
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
                       key: trakt_access
-                - name: JINJA_VAR_TRAKT-REFRESH-TOKEN
+                - name: JINJA_VAR_TRAKT_REFRESH_TOKEN
                   valueFrom:
                     secretKeyRef:
                       name: kometa-secret
