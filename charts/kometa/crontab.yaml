@@ -16,6 +16,7 @@ spec:
           initContainers:
             - name: render-dynamic-config
               # command: ['sh', '-c', 'chown -R 1001:1001 /config']
+              command: ['sh', '-c', 'ls -la /config']              
               image: chrisjohnson00/jinja-init:v1.0.0
               env:
                 - name: JINJA_VAR_PLEX_TOKEN
