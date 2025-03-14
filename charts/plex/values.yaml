@@ -21,11 +21,9 @@ plex-media-server:
     # a list of CIDRs that can use the server without authentication
     # this is only used for the first startup of PMS
   #   ALLOWED_NETWORKS: "0.0.0.0/0"
-  extraVolumeMounts: []
-  # extraVolumeMounts:
-  #   - name: dev-dri
-  #     mountPath: /dev/dri
-  #
+  extraVolumeMounts:
+  - name: arr-media
+    mountPath: /data
     # - /mnt/ramdisk:/transcode
     # - $DOCKERDIR/appdata/plex:/config
     # - "$DOCKERDIR/appdata/plex/Library/Application Support/Plex Media Server/Plug-ins/Trakttv.bundle:/usr/lib/plexmediaserver/Resources/Plug-ins-f05b712b6/Trakttv.bundle"
@@ -34,10 +32,13 @@ plex-media-server:
     # - /mnt/media/gphotos/photos:/data/photos
     # - /mnt/media/movies:/data/movies
     # - /mnt/media/filler:/data/filler
-  extraVolumes: []
-  # extraVolumes:
-  #   - name: dev-dri
-  #     hostPath:
-  #       path: /dev/dri
-  #       type: Directory
+  extraVolumes:
+    - name: arr-media
+      nfs:
+        server: 192.168.100.250
+        path: /mnt/media
+
+
+
+
 
