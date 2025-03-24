@@ -13,12 +13,10 @@ plex-media-server:
       PLEX_CLAIM: "claim-TPmFffFTSTTpzpPgPbUj"
       HOSTNAME: "peppers"
       TZ: "America/Chicago"
-  #   PLEX_UPDATE_CHANNEL: "5"
-  #   PLEX_UID: "uid of plex user"
-  #   PLEX_GID: "group id of plex user"
-    # a list of CIDRs that can use the server without authentication
-    # this is only used for the first startup of PMS
-  #   ALLOWED_NETWORKS: "0.0.0.0/0"
+      PLEX_UPDATE_CHANNEL: "5"
+      PLEX_UID: "1001"
+      PLEX_GID: "1001"
+      ALLOWED_NETWORKS: "0.0.0.0/0"
   extraVolumeMounts:
   - name: arr-media
     mountPath: /data
