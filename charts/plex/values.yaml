@@ -3,9 +3,10 @@ plex-media-server:
     enabled: true
     url: https://peppers.k8s.frost.haus
     ingressClassName: nginx
-    # certificateSecret: "plex-plex-media-server-ingress-lets-encrypt"
+    certificateSecret: "plex-plex-media-server-ingress-lets-encrypt"
     annotations:
       external-dns.alpha.kubernetes.io/host: peppers.k8s.frost.haus
+      cert-manager.io/cluster-issuer: letsencrypt
   pms:
     configExistingClaim: plex-config-pvc
   extraEnv:
