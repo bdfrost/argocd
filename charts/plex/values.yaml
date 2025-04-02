@@ -18,7 +18,7 @@ plex-media-server:
       PLEX_UPDATE_CHANNEL: "5"
       PLEX_UID: "1001"
       PLEX_GID: "1001"
-      # ALLOWED_NETWORKS: "0.0.0.0/0"
+      ALLOWED_NETWORKS: "0.0.0.0/0"
   extraVolumeMounts:
   - name: arr-media
     mountPath: /data
