@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f /Users/bfrost/tempo.yaml
+    kompose.version: 1.35.0 (HEAD)
+  labels:
+    io.kompose.service: recommendarr
+  name: recommendarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: recommendarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f /Users/bfrost/tempo.yaml
+        kompose.version: 1.35.0 (HEAD)
+      labels:
+        io.kompose.service: recommendarr
+    spec:
+      containers:
+        - env:
+            - name: DOCKER_ENV
+              value: "false"
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3000"
+            - name: PUBLIC_URL
+              value: http://localhost:3000
+          image: tannermiddleton/recommendarr:latest
+          name: recommendarr
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/server/data
+              name: recommendarr-data
+      restartPolicy: Always
+      volumes:
+        - name: recommendarr-data
+          persistentVolumeClaim:
+            claimName: recommendarr-data
