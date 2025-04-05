@@ -5,12 +5,13 @@ metadata:
     io.kompose.service: overseerr
   name: overseerr
 spec:
-  ports:
-    - name: "5055"
-      port: 5055
-      targetPort: 5055
   selector:
     io.kompose.service: overseerr
+  type: ClusterIP
+  ports:	
+  - port: 443
+    name: https
+    targetPort: 5055
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
