@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
         - name: rollout-extension
-          image: quay.io/argoprojlabs/argocd-extension-installer:v0.0.1
+          image: quay.io/argoprojlabs/argocd-extension-installer:v0.0.8
           env:
           - name: EXTENSION_URL
             value: https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.4/extension.tar
