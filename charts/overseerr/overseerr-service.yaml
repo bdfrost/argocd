@@ -30,10 +30,10 @@ spec:
   - host: overseerr.k8s.frost.haus
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: /
+        pathType: ImplementationSpecific
         backend:
           service:
             name: overseerr
             port:
-              number: 80
+              name: https
