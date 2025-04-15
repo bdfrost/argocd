@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: linuxserver/boilerplate
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        - name: PGID
+          value: "{{ .Values.pgid }}"
+        - name: PUID
+          value: "{{ .Values.puid }}"
+        - name: HAS_IPV6
+          value: "false"
+        volumeMounts:
+        - name: {{ .Values.name }}-config
+          mountPath: /config
+        - name: arr-media
+          mountPath: /data
+      volumes:
+        - name: {{ .Values.name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-config-pvc
+        - name: arr-media
+          nfs:
+            server: 192.168.100.250
+            path: /mnt/media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+  labels: 
+    recurring-job.longhorn.io/default: enabled
+    recurring-job.longhorn.io/remote: enabled
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi

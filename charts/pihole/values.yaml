@@ -1,0 +1,27 @@
+replicaCount: 1
+name: pihole
+targetPort: 8989
+pgid: 1000
+puid: 1000
+
+dnsmasq:
+  customDnsEntries:
+    - address=/dns1/192.168.100.20
+ 
+  customCnameEntries:
+    - cname=dns1.brainboy.local.lan
+
+persistentVolumeClaim:
+  enabled: true
+
+serviceWeb:
+  loadBalancerIP: 192.168.100.20
+  annotations:
+     metallb.universe.tf/allow-shared-ip: pihole-svc
+  type: ClusterIP
+
+serviceDns:
+  loadBalancerIP: 192.168.100.20
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  type: LoadBalancer
