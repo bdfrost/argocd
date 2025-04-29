@@ -29,7 +29,7 @@ serviceDns:
 ingress:
   enabled: true
   hosts:
-  - pihole-k3s.mylocaldomain.org
+  - dns1.k8s.frost.haus
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.k8s.frost.haus
+    external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
