@@ -25,3 +25,11 @@ serviceDns:
   annotations:
     metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
+
+ingress:
+  enabled: true
+  hosts:
+  - pihole-k3s.mylocaldomain.org
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.k8s.frost.haus

@@ -43,7 +43,7 @@ spec:
         - name: arr-media
           nfs:
             server: 192.168.100.250
-            path: /mnt/media
+            path: /volume1/media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
