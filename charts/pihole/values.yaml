@@ -13,8 +13,48 @@ ingress:
 pihole:
   dnsmasq:
     customSettings:
-      - name: DNSMASQ_LISTENING=
+      - name: DNSMASQ_LISTENING
         value: all
+      - name: DHCP_START
+        value: 192.168.100.100
+      - name: DHCP_END
+        value: 192.168.100.200
+      - name: DHCP_ROUTER  
+        value: 192.168.100.1
+      - name: DHCP_LEASETIME
+        value: 24
+      - name: PIHOLE_DOMAIN
+        value: frost.haus
+      - name: DHCP_IPv6
+        value: false
+      - name: DHCP_ACTIVE
+        value: true
+      - name: DHCP_NAME_SERVERS
+        value: 192.168.100.20, 192.168.100.21
+      - name: DHCP_rapid_commit
+        value: false
+      - name: BLOCKING_ENABLED
+        value: false
+      - name: ADMIN_EMAIL
+        value: "bfrost@brainboy.com"
+      - name: WEBUIBOXEDLAYOUT
+        value: "boxed"
+      - name: WEBTHEME
+        value: "default-light"
+      - name: QUERY_LOGGING
+        value: false
+      - name: DNS_BOGUS_PRIV
+        value: true
+      - name: REV_SERVER_CIDR
+        value: 192.168.100.0/16
+      - name: REV_SERVER_TARGET
+        value: 192.168.100.21
+      - name: REV_SERVER_DOMAIN
+        value: frost.haus
+      - name: TEMPERATUREUNIT
+        value: F
+      - name: PIHOLE_DNS_1
+        value: 127.0.0.1#5335
     customDnsEntries:
       - address=/dns1/192.168.100.20
     customCnameEntries:
