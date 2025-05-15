@@ -1,30 +1,6 @@
-replicaCount: 1
-name: pihole
-targetPort: 8989
-pgid: 1000
-puid: 1000
 
-dnsmasq:
-  customDnsEntries:
-    - address=/dns1/192.168.100.20
- 
-  customCnameEntries:
-    - cname=dns1.brainboy.local.lan
 
-persistentVolumeClaim:
-  enabled: true
 
-serviceWeb:
-  loadBalancerIP: 192.168.100.20
-  annotations:
-     metallb.universe.tf/allow-shared-ip: pihole-svc
-  type: ClusterIP
-
-serviceDns:
-  loadBalancerIP: 192.168.100.20
-  annotations:
-    metallb.universe.tf/allow-shared-ip: pihole-svc
-  type: LoadBalancer
 
 ingress:
   enabled: true
@@ -33,3 +9,42 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
+
+pi-hole:
+  replicaCount: 3
+  name: pihole
+  targetPort: 8989
+  pgid: 1000
+  puid: 1000
+
+  dnsmasq:
+    customDnsEntries:
+      - address=/dns1/192.168.100.20
+  
+    customCnameEntries:
+      - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
+      - cname=dns1.brainboy.local.lan,dns1
+
+  persistentVolumeClaim:
+    enabled: true
+
+  serviceWeb:
+    loadBalancerIP: 192.168.100.20
+    annotations:
+      metallb.universe.tf/allow-shared-ip: pihole-svc
+    type: LoadBalancer
+
+  serviceDns:
+    loadBalancerIP: 192.168.100.20
+    annotations:
+      metallb.universe.tf/allow-shared-ip: pihole-svc
+    type: LoadBalancer
+
+  podDnsConfig:
+    enabled: false
+  
+  serviceDhcp:
+    loadBalancerIP: 192.168.100.20
+    annotations:
+      metallb.universe.tf/allow-shared-ip: pihole-svc
+    type: LoadBalancer
