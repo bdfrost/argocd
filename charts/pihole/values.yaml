@@ -44,5 +44,5 @@ pihole:
     annotations:
       metallb.universe.tf/allow-shared-ip: "key-192.168.100.20"
     loadBalancerIP: 192.168.100.20
-    externalTrafficPolicy: Local
+    externalTrafficPolicy: Cluster
     port: 67
