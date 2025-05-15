@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 name: pihole
 targetPort: 8989
 pgid: 1000
