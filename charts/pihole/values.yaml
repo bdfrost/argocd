@@ -24,12 +24,16 @@ pihole:
   serviceWeb:
     type: LoadBalancer
     loadBalancerIP: 192.168.100.20
+    annotations:
+      metallb.universe.tf/allow-shared-ip: "key-192.168.100.20"
     externalTrafficPolicy: Cluster
     https:
       enabled: true
       port: 443
   serviceDns:
     type: LoadBalancer
+    annotations:
+      metallb.universe.tf/allow-shared-ip: "key-192.168.100.20"
     loadBalancerIP: 192.168.100.20
     externalTrafficPolicy: Cluster
     https:
@@ -37,6 +41,8 @@ pihole:
       port: 443
   serviceDhcp:
     type: LoadBalancer
+    annotations:
+      metallb.universe.tf/allow-shared-ip: "key-192.168.100.20"
     loadBalancerIP: 192.168.100.20
     externalTrafficPolicy: Local
     port: 67
