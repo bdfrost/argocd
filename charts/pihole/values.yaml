@@ -10,7 +10,7 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
-pi-hole:
+pihole:
   dnsmasq:
     customDnsEntries:
       - address=/dns1/192.168.100.20
