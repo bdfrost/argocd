@@ -11,13 +11,20 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
 pihole:
+  adlist:
+    enabled: true
+    list:
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
+      - https://small.oisd.nl
+      - https://nsfw.oisd.nl
   monitoring:
     podMonitor:
       enabled: true
   dnsmasq:
-    customSettings:
-      otherSettings: |-
-        DNSMASQ_LISTENING=all
+    # customSettings:
+    #   otherSettings: |-
+    #     DNSMASQ_LISTENING=all
       # DHCP_START=/192.168.100.100/
       # DHCP_END=192.168.100.200
       # DHCP_ROUTER=192.168.100.1
@@ -49,7 +56,37 @@ pihole:
       # PIHOLE_DNS_1=127.0.0.1#5335
       # PIHOLE_DNS_2=""
     customDnsEntries:
-      - address=/dns1/192.168.100.20
+      - address=/super-duke.brainboy.local.lan/192.168.100.250 
+    additionalHostsEntries:
+      - 192.168.100.20 dns1.brainboy.local.lan
+      - 192.168.100.21 dns2.brainboy.local.lan
+      - 192.168.100.114 birdnet.frost.haus
+      - 192.168.100.1 router.brainboy.local.lan
+      - 192.168.100.134 pepper.brainboy.local.lan
+# 192.168.100.173 homeassistant.brainboy.local.lan
+# 192.168.100.50 argocd.frost.haus
+# 192.168.100.50 guestbook.frost.haus
+# 192.168.100.50 dashboard.frost.haus
+# 192.168.100.50 longhorn.frost.haus
+# 192.168.100.50 sonarr.k8s.frost.haus
+# 192.168.100.50 kube-prometheus-stack.k8s.frost.haus
+# 192.168.100.50 prometheus.k8s.frost.haus
+# 192.168.100.50 grafana.k8s.frost.haus
+# 192.168.100.50 radarr.k8s.frost.haus
+# 192.168.100.50 sabnzbd.k8s.frost.haus
+# 192.168.100.50 radarr-exporter.k8s.frost.haus
+# 192.168.100.50 alertmanager.k8s.frost.haus
+# 192.168.100.50 dozzle.k8s.frost.haus
+# 192.168.100.50 boilerplate.k8s.frost.haus
+# 192.168.100.50 prowlarr.k8s.frost.haus
+# 192.168.100.50 peppers.k8s.frost.haus
+# 192.168.100.50 overseerr.k8s.frost.haus
+# 192.168.100.50 pihole.k8s.frost.haus
+# 192.168.100.2 switch.frost.haus
+# 192.168.100.221 pve1.frost.haus
+# 192.168.100.222 pve2.frost.haus
+# 192.168.100.223 pve3.frost.haus
+# 192.168.100.249 pbs.frost.haus
     customCnameEntries:
       - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
   persistentVolumeClaim:
