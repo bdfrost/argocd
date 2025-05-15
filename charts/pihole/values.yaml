@@ -21,16 +21,12 @@ pihole:
     enabled: true
   serviceWeb:
     loadBalancerIP: 192.168.100.20
-    annotations:
-      metallb.io/ip-allocated-from-pool: first-pool
     externalTrafficPolicy: Cluster
     https:
       enabled: true
       port: 443
   serviceDns:
     loadBalancerIP: 192.168.100.20
-    annotations:
-      metallb.io/ip-allocated-from-pool: first-pool
     externalTrafficPolicy: Cluster
     https:
       enabled: true
@@ -39,7 +35,5 @@ pihole:
     enabled: false
   serviceDhcp:
     loadBalancerIP: 192.168.100.20
-    annotations:
-      metallb.io/ip-allocated-from-pool: first-pool
     externalTrafficPolicy: Local
     port: 67
