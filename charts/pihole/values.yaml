@@ -19,6 +19,8 @@ pihole:
       - cname=dns1.brainboy.local.lan,dns1
   persistentVolumeClaim:
     enabled: true
+  podDnsConfig:
+    enabled: false
   serviceWeb:
     type: LoadBalancer
     loadBalancerIP: 192.168.100.20
@@ -27,14 +29,14 @@ pihole:
       enabled: true
       port: 443
   serviceDns:
+    type: LoadBalancer
     loadBalancerIP: 192.168.100.20
     externalTrafficPolicy: Cluster
     https:
       enabled: true
       port: 443
-  podDnsConfig:
-    enabled: false
   serviceDhcp:
+    type: LoadBalancer
     loadBalancerIP: 192.168.100.20
     externalTrafficPolicy: Local
     port: 67
