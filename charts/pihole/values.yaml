@@ -13,34 +13,6 @@ ingress:
 pihole:
   dnsmasq:
     customSettings: "DNSMASQ_LISTENING: all, DHCP_START: 192.168.100.100, DHCP_END: 192.168.100.200"
-      # DHCP_ROUTER: 192.168.100.1
-      # DHCP_LEASETIME: 24
-      # PIHOLE_DOMAIN: brainboy.local.lan
-      # DHCP_IPv6: false
-      # DHCP_rapid_commit: false
-      # DHCP_ACTIVE: true
-      # BLOCKING_ENABLED: false
-      # ADMIN_EMAIL: bfrost@brainboy.com
-      # WEBUIBOXEDLAYOUT: boxed
-      # WEBTHEME: default-light
-      # PIHOLE_INTERFACE: wlan0
-      # IPV4_ADDRESS: 192.168.100.21/24
-      # IPV6_ADDRESS: 
-      # QUERY_LOGGING: false
-      # INSTALL_WEB_SERVER: false
-      # INSTALL_WEB_INTERFACE: true
-      # LIGHTTPD_ENABLED: true
-      # CACHE_SIZE: "10000"
-      # DNS_FQDN_REQUIRED: true
-      # DNS_BOGUS_PRIV: true
-      # DNSSEC: false
-      # REV_SERVER: false
-      # REV_SERVER_CIDR: 192.168.100.0/16
-      # REV_SERVER_TARGET: 192.168.100.21
-      # REV_SERVER_DOMAIN: brainboy.local.lan
-      # TEMPERATUREUNIT: C
-      # PIHOLE_DNS_1: 127.0.0.1#5335
-      # PIHOLE_DNS_2: 
     customDnsEntries:
       address: /dns1/192.168.100.20
     customCnameEntries:
