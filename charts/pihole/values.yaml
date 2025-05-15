@@ -22,7 +22,6 @@ pihole:
   serviceWeb:
     loadBalancerIP: 192.168.100.20
     annotations:
-      metallb.universe.tf/allow-shared-ip: pihole-svc
       metallb.io/ip-allocated-from-pool: first-pool
     externalTrafficPolicy: Cluster
     https:
@@ -31,7 +30,6 @@ pihole:
   serviceDns:
     loadBalancerIP: 192.168.100.20
     annotations:
-      metallb.universe.tf/allow-shared-ip: pihole-svc
       metallb.io/ip-allocated-from-pool: first-pool
     externalTrafficPolicy: Cluster
     https:
@@ -42,7 +40,6 @@ pihole:
   serviceDhcp:
     loadBalancerIP: 192.168.100.20
     annotations:
-      metallb.universe.tf/allow-shared-ip: pihole-svc
       metallb.io/ip-allocated-from-pool: first-pool
     externalTrafficPolicy: Local
     port: 67
