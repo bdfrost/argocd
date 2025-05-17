@@ -67,6 +67,9 @@ cloudflare-tunnel:
   podSecurityContext:
     runAsNonRoot: true
     runAsUser: 65532
+    sysctls:
+    - name: net.ipv4.ping_group_range
+      value: "0           200000000"
 
   securityContext:
     allowPrivilegeEscalation: false
