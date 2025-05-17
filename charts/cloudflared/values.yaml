@@ -19,7 +19,7 @@ cloudflare-tunnel:
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
       # - service: http_status:404
       - hostname: overseerr2.frost.haus
-        service: https://overseerr.k8s.frost.haus/
+        service: https://overseerr.k8s.frost.haus
       - service: http_status:404
         hostname: "*.frost.haus"
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 200.
