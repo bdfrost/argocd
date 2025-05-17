@@ -70,10 +70,10 @@ cloudflare-tunnel:
     sysctls:
     - name: net.ipv4.ping_group_range
       value: "0           200000000"
-    - name: net.core.rmem_max
-      value: "7500000"
-    - name: net.core.wmem_max
-      value: "7500000"
+    # - name: net.core.rmem_max
+    #   value: "7500000"
+    # - name: net.core.wmem_max
+    #   value: "7500000"
 
   securityContext:
     allowPrivilegeEscalation: false
