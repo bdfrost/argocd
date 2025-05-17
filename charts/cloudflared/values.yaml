@@ -4,7 +4,7 @@ puid: 1000
 cloudflare-tunnel:
   cloudflare:
     tunnelName: "k8s"
-    secretName: cloudflared
+    secretName: cloudflared-cloudflare-tunnel
     # If true, turn on WARP routing for TCP
     enableWarp: false
     # Define ingress rules for the tunnel. See
