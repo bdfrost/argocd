@@ -3,6 +3,7 @@ pgid: 1000
 puid: 1000
 cloudflare-tunnel:
   cloudflare:
+    protocol: https # or quic
     tunnelName: "k8s"
     secretName: cloudflared-cloudflare-tunnel
     # If true, turn on WARP routing for TCP
