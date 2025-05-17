@@ -1,7 +1,7 @@
 name: cloudflared
 pgid: 1000
 puid: 1000
-cloudflared:
+cloudflare-tunnel:
   cloudflare:
     account: "e389e69d2d04c5adeee066b2192f79d3"
     tunnelName: "argocd"

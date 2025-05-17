@@ -22,6 +22,6 @@ appVersion: "2024.8.3"
 icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
 
 dependencies:
-  - name: cloudflared
+  - name: cloudflare-tunnel
     version: 2024.8.3
     repository: https://cloudflare.github.io/helm-charts
