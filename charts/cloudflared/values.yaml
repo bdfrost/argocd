@@ -3,7 +3,6 @@ pgid: 1000
 puid: 1000
 cloudflare-tunnel:
   cloudflare:
-    protocol: http2 # or quic
     tunnelName: "k8s"
     secretName: cloudflared-cloudflare-tunnel
     # If true, turn on WARP routing for TCP
@@ -29,7 +28,7 @@ cloudflare-tunnel:
   replicaCount: 2
 
   metrics: 0.0.0.0:2000
-
+  protocol: http2 # or quic
 
   imagePullSecrets: []
   nameOverride: ""
