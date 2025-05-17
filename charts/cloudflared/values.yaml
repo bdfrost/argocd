@@ -24,7 +24,7 @@ cloudflare-tunnel:
     repository: cloudflare/cloudflared
     pullPolicy: IfNotPresent
     # If supplied, this overrides "appVersion"
-    tag: ""
+    tag: "2025.5.0"
 
   replicaCount: 2
 
