@@ -9,8 +9,6 @@ cloudflare-tunnel:
     ingress:
       - hostname: argocd.frost.haus
         service: https://argocd.frost.haus:443
-      - hostname: overseerr2.frost.haus
-        service: https://overseerr.frost.haus
       - service: http_status:404
         hostname: "*.frost.haus"
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 200.
