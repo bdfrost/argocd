@@ -24,4 +24,4 @@ icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
 dependencies:
   - name: cloudflared
     version: 2022.1.3
-    repository: https://github.com/cloudflare/argo-tunnel-examples/helm/cloudflare-tunnel/
+    repository: https://cloudflare.github.io/helm-charts
