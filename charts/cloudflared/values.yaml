@@ -5,63 +5,40 @@ cloudflare-tunnel:
   cloudflare:
     tunnelName: "k8s"
     secretName: cloudflared-cloudflare-tunnel
-    # If true, turn on WARP routing for TCP
     enableWarp: false
-    # Define ingress rules for the tunnel. See
-    # https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/configuration/configuration-file/ingress
     ingress:
-      # The first rule proxies traffic to the httpbin sample service named web-server at port 80
-      # - hostname: tunnel.example.com
-      #  service: http://web-service:80
       - hostname: argocd.frost.haus
         service: https://argocd.frost.haus:443
-        # service: argocd-server
-      # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
-      # - service: http_status:404
       - hostname: overseerr2.frost.haus
         service: https://overseerr.frost.haus
       - service: http_status:404
         hostname: "*.frost.haus"
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 200.
-
   image:
     repository: cloudflare/cloudflared
     pullPolicy: IfNotPresent
-    # If supplied, this overrides "appVersion"
     tag: "2025.5.0"
-
   replicaCount: 2
-
   metrics: 0.0.0.0:2000
-
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
-
   serviceAccount:
     annotations: {}
     name: ""
-
   podAnnotations: {}
-
   podSecurityContext:
     runAsNonRoot: true
     runAsUser: 65532
     sysctls:
     - name: net.ipv4.ping_group_range
       value: "0           200000000"
-    # - name: net.core.rmem_max
-    #   value: "7500000"
-    # - name: net.core.wmem_max
-    #   value: "7500000"
-
   securityContext:
     allowPrivilegeEscalation: false
     capabilities:
       drop:
       - ALL
     readOnlyRootFilesystem: true
-
   resources: 
     limits:
       cpu: 100m
