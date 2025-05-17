@@ -16,6 +16,8 @@ cloudflare-tunnel:
       - hostname: argocd.frost.haus
         # or service: https://argocd.frost.haus
         service: argocd-server
+      # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
+      - service: http_status:404
 
   image:
     repository: cloudflare/cloudflared
@@ -24,6 +26,9 @@ cloudflare-tunnel:
     tag: ""
 
   replicaCount: 2
+
+  metrics: 0.0.0.0:2000
+
 
   imagePullSecrets: []
   nameOverride: ""
