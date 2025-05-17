@@ -23,5 +23,5 @@ icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
 
 dependencies:
   - name: cloudflare-tunnel
-    version: 2024.8.3
+    version: 0.3.2
     repository: https://cloudflare.github.io/helm-charts
