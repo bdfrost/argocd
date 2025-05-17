@@ -18,6 +18,8 @@ cloudflare-tunnel:
         # service: argocd-server
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
       # - service: http_status:404
+      - hostname: argo.frost.haus
+        service: https://argocd.frost.haus:443
       - service: http_status:404
         hostname: "*.frost.haus"
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 200.
