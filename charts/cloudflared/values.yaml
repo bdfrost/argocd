@@ -9,9 +9,9 @@ cloudflare-tunnel:
     ingress:
       - hostname: argocd.frost.haus
         service: https://argocd.frost.haus:443
-      - hostname: overseer.k8s.frost.haus
+      - hostname: 1.frost.haus
         service: https://overseerr.k8s.frost.haus:443
-      - hostname: sonarr.frost.haus
+      - hostname: 2.frost.haus
         service: https://sonarr.k8s.frost.haus:443
       - service: http_status:404
         hostname: "*.frost.haus"
