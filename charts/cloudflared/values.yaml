@@ -10,9 +10,7 @@ cloudflare-tunnel:
       - hostname: argocd.frost.haus
         service: https://argocd.frost.haus:443
       - hostname: 1.frost.haus
-        service: https://overseerr.k8s.frost.haus:443
-      - hostname: 2.frost.haus
-        service: https://overseerr.overseerr.svc.cluster.local
+        service: https://guestbook.frost.haus/
       - service: http_status:404
         hostname: "*.frost.haus"
       # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 200.
