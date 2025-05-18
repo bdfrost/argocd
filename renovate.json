@@ -4,6 +4,9 @@
     "config:recommended"
   ],
   "kubernetes": {
-    "fileMatch": ["\\.yml$","\\.yaml$"]
+    "managerFilePatterns": [
+      "/\\.yml$/",
+      "/\\.yaml$/"
+    ]
   }
 }
