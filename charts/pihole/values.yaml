@@ -53,10 +53,6 @@ pihole:
       - dhcp-host=DC:A6:32:D5:5B:F0,192.168.100.195,octopi
       - dhcp-host=02:BE:CF:B7:C5:8D,192.168.100.173,homeassistant
       - dhcp-host=FC:E8:C0:F8:47:7F,192.168.100.121,SLZB-06P10
-    upstreamServers: []
-      # The format should be like:
-      # - server=/foo.bar/192.168.178.10
-      # - server=/bar.foo/192.168.178.11
     additionalHostsEntries:
       - 192.168.100.20 dns1.brainboy.local.lan
       - 192.168.100.21 dns2.brainboy.local.lan
@@ -89,44 +85,44 @@ pihole:
       - 192.168.100.249 pbs.frost.haus
     customCnameEntries:
       - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
-    # customSettings:
-    #   otherSettings: |-
-    #     DNSMASQ_LISTENING=all
-    #     DHCP_START=/192.168.100.100/
-    #     DHCP_END=192.168.100.200
-    #     DHCP_ROUTER=192.168.100.1
-    #     DHCP_LEASETIME=24
-    #     PIHOLE_DOMAIN=brainboy.local.lan
-    #     DHCP_IPv6=false
-    #     DHCP_rapid_commit=false
-    #     DHCP_ACTIVE=true
-    #     BLOCKING_ENABLED=false
-    #     ADMIN_EMAIL=bfrost@brainboy.com
-    #     WEBUIBOXEDLAYOUT=boxed
-    #     WEBTHEME=default-light
-    #     PIHOLE_INTERFACE=wlan0
-    #     IPV4_ADDRESS="192.168.100.21/24"
-    #     IPV6_ADDRESS=""
-    #     QUERY_LOGGING=false
-    #     INSTALL_WEB_SERVER=false
-    #     INSTALL_WEB_INTERFACE=true
-    #     LIGHTTPD_ENABLED=true
-    #     CACHE_SIZE="10000"
-    #     DNS_FQDN_REQUIRED=true
-    #     DNS_BOGUS_PRIV=true
-    #     DNSSEC=false
-    #     REV_SERVER=false
-    #     REV_SERVER_CIDR=192.168.100.0/16
-    #     REV_SERVER_TARGET=192.168.100.21
-    #     REV_SERVER_DOMAIN=brainboy.local.lan
-    #     TEMPERATUREUNIT=C
-    #     PIHOLE_DNS_1=127.0.0.1#5335
-    #     PIHOLE_DNS_2=""
     customDnsEntries:
       # The format should be like:
       # - address=/foo.bar/192.168.178.10
       # - address=/bar.foo/192.168.178.11
       - address=/super-duke.brainboy.local.lan/192.168.100.250 
+  customSettings:
+    otherSettings: |-
+      DNSMASQ_LISTENING=all
+      DHCP_START=/192.168.100.100/
+      DHCP_END=192.168.100.200
+      DHCP_ROUTER=192.168.100.1
+      DHCP_LEASETIME=24
+      PIHOLE_DOMAIN=brainboy.local.lan
+      DHCP_IPv6=false
+      DHCP_rapid_commit=false
+      DHCP_ACTIVE=true
+      BLOCKING_ENABLED=false
+      ADMIN_EMAIL=bfrost@brainboy.com
+      WEBUIBOXEDLAYOUT=boxed
+      WEBTHEME=default-light
+      PIHOLE_INTERFACE=wlan0
+      IPV4_ADDRESS="192.168.100.21/24"
+      IPV6_ADDRESS=""
+      QUERY_LOGGING=false
+      INSTALL_WEB_SERVER=false
+      INSTALL_WEB_INTERFACE=true
+      LIGHTTPD_ENABLED=true
+      CACHE_SIZE="10000"
+      DNS_FQDN_REQUIRED=true
+      DNS_BOGUS_PRIV=true
+      DNSSEC=false
+      REV_SERVER=false
+      REV_SERVER_CIDR=192.168.100.0/16
+      REV_SERVER_TARGET=192.168.100.21
+      REV_SERVER_DOMAIN=brainboy.local.lan
+      TEMPERATUREUNIT=C
+      PIHOLE_DNS_1=127.0.0.1#5335
+      PIHOLE_DNS_2=""
   whitelist: []
   capabilities:
     add:
@@ -175,3 +171,4 @@ pihole:
     envVars: {
       DOH_UPSTREAM: "https://1.1.1.1/dns-query"
     }
+
