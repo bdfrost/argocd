@@ -16,12 +16,10 @@ pihole:
     - SYS_TIME
     - SYS_NICE
   adlists:
-    enabled: true
-    list:
-      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-      - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
-      - https://small.oisd.nl
-      - https://nsfw.oisd.nl
+    - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
+    - https://small.oisd.nl
+    - https://nsfw.oisd.nl
   monitoring:
     podMonitor:
       enabled: true
