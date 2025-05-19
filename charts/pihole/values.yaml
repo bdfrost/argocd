@@ -20,8 +20,9 @@ dnsmasq:
   
 pihole:
   dnsmasq:
-    staticDhcpEntries:
-      7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
+    staticDhcpEntries: |-
+      dhcp-host=7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
+      dhcp-host=C8:2B:96:03:3E:A1,192.168.100.127,Inkbird
     upstreamServers: []
     additionalHostsEntries:
       - 192.168.100.20 dns1.brainboy.local.lan
