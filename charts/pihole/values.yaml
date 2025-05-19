@@ -51,13 +51,14 @@ dnsmasq:
     - dhcp-host=DC:A6:32:D5:5B:F0,192.168.100.195,octopi
     - dhcp-host=02:BE:CF:B7:C5:8D,192.168.100.173,homeassistant
     - dhcp-host=FC:E8:C0:F8:47:7F,192.168.100.121,SLZB-06P10
-adlists:
-  - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-  - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
-  - https://small.oisd.nl
-  - https://nsfw.oisd.nl
+
 whitelist: []
 pihole:
+  adlists:
+    - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
+    - https://small.oisd.nl
+    - https://nsfw.oisd.nl
   capabilities:
     add:
     - SYS_TIME
