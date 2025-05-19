@@ -21,9 +21,9 @@ dnsmasq:
 pihole:
   dnsmasq:
     staticDhcpEntries:
-      dhcp-host=7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
-      dhcp-host=C8:2B:96:03:3E:A1,192.168.100.127,Inkbird
-      dhcp-host=40:F5:20:28:84:BF,192.168.100.159,wled-eli
+      7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
+      # dhcp-host=C8:2B:96:03:3E:A1,192.168.100.127,Inkbird
+      # dhcp-host=40:F5:20:28:84:BF,192.168.100.159,wled-eli
       # - dhcp-host=34:94:54:25:1D:78,192.168.100.184,wled-square
       # - dhcp-host=CE:3A:1C:73:B7:0E,192.168.100.158,phrosty
       # - dhcp-host=E4:5F:01:00:2B:A5,192.168.100.114,birdnetpi1
