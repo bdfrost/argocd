@@ -13,8 +13,44 @@ ingress:
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
   - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
+  - https://small.oisd.nl
+  - https://nsfw.oisd.nl
+blacklist: []
+staticDhcpEntries:
+  - dhcp-host=7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
+  - dhcp-host=C8:2B:96:03:3E:A1,192.168.100.127,Inkbird
+  - dhcp-host=40:F5:20:28:84:BF,192.168.100.159,wled-eli
+  - dhcp-host=34:94:54:25:1D:78,192.168.100.184,wled-square
+  - dhcp-host=CE:3A:1C:73:B7:0E,192.168.100.158,phrosty
+  - dhcp-host=E4:5F:01:00:2B:A5,192.168.100.114,birdnetpi1
+  - dhcp-host=5C:A6:E6:95:DC:BE,192.168.100.101,LR-Switch
+  - dhcp-host=9C:8E:CD:2C:21:DD,192.168.100.170,front-door-camera
+  - dhcp-host=40:F5:20:27:8C:3A,192.168.100.113,wled-swizzle
+  - dhcp-host=D8:28:C9:51:30:AE,192.168.100.180,GEFridge
+  - dhcp-host=E8:DB:84:99:5F:36,192.168.100.196,wled-cr-10
+  - dhcp-host=4C:75:25:AF:2C:28,192.168.100.130,wled-matrix
+  - dhcp-host=BC:FF:4D:19:1D:8E,192.168.100.103,wled-bar
+  - dhcp-host=A0:B7:65:64:3A:50,192.168.100.125,esp32-bluetooth-relay
+  - dhcp-host=9C:8E:CD:1C:24:99,192.168.100.129,yard_cam
+  - dhcp-host=5C:C3:36:56:6D:46,192.168.100.162,BnB-living-room-cam
+  - dhcp-host=44:A5:6E:4D:3B:91,192.168.100.100,orbi-upstairs
+  - dhcp-host=94:83:C4:18:4A:9D,192.168.100.199,MT1300
+  - dhcp-host=9C:8E:CD:1C:22:11,192.168.100.193,door-camera
+  - dhcp-host=BC:FF:4D:19:25:32,192.168.100.104,wled-cr
+  - dhcp-host=48:E7:29:C8:F6:A8,192.168.100.133,wled-eg-table
+  - dhcp-host=40:F5:20:27:08:71,192.168.100.135,wled-eg-desklamp2
+  - dhcp-host=84:CC:A8:9F:AD:76,192.168.100.117,wled-eg-desklamp1
+  - dhcp-host=BC:24:11:45:53:CF,192.168.100.137,k8s-n1
+  - dhcp-host=BC:24:11:A8:67:A8,192.168.100.175,k8s-c1
+  - dhcp-host=60:83:E7:43:3F:A4,192.168.100.99,UpstairsArcher
+  - dhcp-host=4C:75:25:AF:26:D4,192.168.100.105,wled-m5-ring
+  - dhcp-host=6C:4A:85:9C:92:92,192.168.100.187,BethIPAD
+  - dhcp-host=BC:24:11:31:F4:CD,192.168.100.139,k8s-n2
+  - dhcp-host=BC:24:11:0C:41:C2,192.168.100.145,k8s-n3
+  - dhcp-host=DC:A6:32:D5:5B:F0,192.168.100.195,octopi
+  - dhcp-host=02:BE:CF:B7:C5:8D,192.168.100.173,homeassistant
+  - dhcp-host=FC:E8:C0:F8:47:7F,192.168.100.121,SLZB-06P10
 pihole:
-  blacklist: []
   dnsmasq:
     upstreamServers: []
     additionalHostsEntries:
@@ -84,46 +120,7 @@ pihole:
     #     PIHOLE_DNS_2=""
     customDnsEntries:
       - address=/super-duke.brainboy.local.lan/192.168.100.250 
-    staticDhcpEntries:
-      - dhcp-host=7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
-      - dhcp-host=C8:2B:96:03:3E:A1,192.168.100.127,Inkbird
-      - dhcp-host=40:F5:20:28:84:BF,192.168.100.159,wled-eli
-      - dhcp-host=34:94:54:25:1D:78,192.168.100.184,wled-square
-      - dhcp-host=CE:3A:1C:73:B7:0E,192.168.100.158,phrosty
-      - dhcp-host=E4:5F:01:00:2B:A5,192.168.100.114,birdnetpi1
-      - dhcp-host=5C:A6:E6:95:DC:BE,192.168.100.101,LR-Switch
-      - dhcp-host=9C:8E:CD:2C:21:DD,192.168.100.170,front-door-camera
-      - dhcp-host=40:F5:20:27:8C:3A,192.168.100.113,wled-swizzle
-      - dhcp-host=D8:28:C9:51:30:AE,192.168.100.180,GEFridge
-      - dhcp-host=E8:DB:84:99:5F:36,192.168.100.196,wled-cr-10
-      - dhcp-host=4C:75:25:AF:2C:28,192.168.100.130,wled-matrix
-      - dhcp-host=BC:FF:4D:19:1D:8E,192.168.100.103,wled-bar
-      - dhcp-host=A0:B7:65:64:3A:50,192.168.100.125,esp32-bluetooth-relay
-      - dhcp-host=9C:8E:CD:1C:24:99,192.168.100.129,yard_cam
-      - dhcp-host=5C:C3:36:56:6D:46,192.168.100.162,BnB-living-room-cam
-      - dhcp-host=44:A5:6E:4D:3B:91,192.168.100.100,orbi-upstairs
-      - dhcp-host=94:83:C4:18:4A:9D,192.168.100.199,MT1300
-      - dhcp-host=9C:8E:CD:1C:22:11,192.168.100.193,door-camera
-      - dhcp-host=BC:FF:4D:19:25:32,192.168.100.104,wled-cr
-      - dhcp-host=48:E7:29:C8:F6:A8,192.168.100.133,wled-eg-table
-      - dhcp-host=40:F5:20:27:08:71,192.168.100.135,wled-eg-desklamp2
-      - dhcp-host=84:CC:A8:9F:AD:76,192.168.100.117,wled-eg-desklamp1
-      - dhcp-host=BC:24:11:45:53:CF,192.168.100.137,k8s-n1
-      - dhcp-host=BC:24:11:A8:67:A8,192.168.100.175,k8s-c1
-      - dhcp-host=60:83:E7:43:3F:A4,192.168.100.99,UpstairsArcher
-      - dhcp-host=4C:75:25:AF:26:D4,192.168.100.105,wled-m5-ring
-      - dhcp-host=6C:4A:85:9C:92:92,192.168.100.187,BethIPAD
-      - dhcp-host=BC:24:11:31:F4:CD,192.168.100.139,k8s-n2
-      - dhcp-host=BC:24:11:0C:41:C2,192.168.100.145,k8s-n3
-      - dhcp-host=DC:A6:32:D5:5B:F0,192.168.100.195,octopi
-      - dhcp-host=02:BE:CF:B7:C5:8D,192.168.100.173,homeassistant
-      - dhcp-host=FC:E8:C0:F8:47:7F,192.168.100.121,SLZB-06P10
   whitelist: []
-  adlists:
-    - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-    - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
-    - https://small.oisd.nl
-    - https://nsfw.oisd.nl
   capabilities:
     add:
     - SYS_TIME
