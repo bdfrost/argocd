@@ -57,12 +57,6 @@ adlists:
   - https://small.oisd.nl
   - https://nsfw.oisd.nl
 whitelist: []
-
-
- 
-
-
-
 pihole:
   capabilities:
     add:
@@ -113,30 +107,30 @@ pihole:
       - 192.168.100.114 birdnet.frost.haus
       - 192.168.100.1 router.brainboy.local.lan
       - 192.168.100.134 pepper.brainboy.local.lan
-      # 192.168.100.173 homeassistant.brainboy.local.lan
-      # 192.168.100.50 argocd.frost.haus
-      # 192.168.100.50 guestbook.frost.haus
-      # 192.168.100.50 dashboard.frost.haus
-      # 192.168.100.50 longhorn.frost.haus
-      # 192.168.100.50 sonarr.k8s.frost.haus
-      # 192.168.100.50 kube-prometheus-stack.k8s.frost.haus
-      # 192.168.100.50 prometheus.k8s.frost.haus
-      # 192.168.100.50 grafana.k8s.frost.haus
-      # 192.168.100.50 radarr.k8s.frost.haus
-      # 192.168.100.50 sabnzbd.k8s.frost.haus
-      # 192.168.100.50 radarr-exporter.k8s.frost.haus
-      # 192.168.100.50 alertmanager.k8s.frost.haus
-      # 192.168.100.50 dozzle.k8s.frost.haus
-      # 192.168.100.50 boilerplate.k8s.frost.haus
-      # 192.168.100.50 prowlarr.k8s.frost.haus
-      # 192.168.100.50 peppers.k8s.frost.haus
-      # 192.168.100.50 overseerr.k8s.frost.haus
-      # 192.168.100.50 pihole.k8s.frost.haus
-      # 192.168.100.2 switch.frost.haus
-      # 192.168.100.221 pve1.frost.haus
-      # 192.168.100.222 pve2.frost.haus
-      # 192.168.100.223 pve3.frost.haus
-      # 192.168.100.249 pbs.frost.haus
+      - 192.168.100.173 homeassistant.brainboy.local.lan
+      - 192.168.100.50 argocd.frost.haus
+      - 192.168.100.50 guestbook.frost.haus
+      - 192.168.100.50 dashboard.frost.haus
+      - 192.168.100.50 longhorn.frost.haus
+      - 192.168.100.50 sonarr.k8s.frost.haus
+      - 192.168.100.50 kube-prometheus-stack.k8s.frost.haus
+      - 192.168.100.50 prometheus.k8s.frost.haus
+      - 192.168.100.50 grafana.k8s.frost.haus
+      - 192.168.100.50 radarr.k8s.frost.haus
+      - 192.168.100.50 sabnzbd.k8s.frost.haus
+      - 192.168.100.50 radarr-exporter.k8s.frost.haus
+      - 192.168.100.50 alertmanager.k8s.frost.haus
+      - 192.168.100.50 dozzle.k8s.frost.haus
+      - 192.168.100.50 boilerplate.k8s.frost.haus
+      - 192.168.100.50 prowlarr.k8s.frost.haus
+      - 192.168.100.50 peppers.k8s.frost.haus
+      - 192.168.100.50 overseerr.k8s.frost.haus
+      - 192.168.100.50 pihole.k8s.frost.haus
+      - 192.168.100.2 switch.frost.haus
+      - 192.168.100.221 pve1.frost.haus
+      - 192.168.100.222 pve2.frost.haus
+      - 192.168.100.223 pve3.frost.haus
+      - 192.168.100.249 pbs.frost.haus
     customCnameEntries:
       - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
   persistentVolumeClaim:
