@@ -100,7 +100,8 @@ pihole:
   serviceWeb:
     adminPassword:
       useSecret: true # Enable using a secret
-      secretName: pihole
+      passwordKey: password
+      existingSecret: pihole
     type: LoadBalancer
     loadBalancerIP: 192.168.100.20
     annotations:
