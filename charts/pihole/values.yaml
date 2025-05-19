@@ -10,6 +10,9 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
+adlists:
+  - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+  - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
 pihole:
   blacklist: []
   dnsmasq:
