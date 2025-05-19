@@ -15,7 +15,7 @@ pihole:
     add:
     - SYS_TIME
     - SYS_NICE
-  adlist:
+  adlists:
     enabled: true
     list:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
@@ -59,8 +59,8 @@ pihole:
       # TEMPERATUREUNIT=C
       # PIHOLE_DNS_1=127.0.0.1#5335
       # PIHOLE_DNS_2=""
-    customDnsEntries:
-      - address=/super-duke.brainboy.local.lan/192.168.100.250 
+    # customDnsEntries:
+    #   - address=/super-duke.brainboy.local.lan/192.168.100.250 
     additionalHostsEntries:
       - 192.168.100.20 dns1.brainboy.local.lan
       - 192.168.100.21 dns2.brainboy.local.lan
