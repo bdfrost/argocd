@@ -98,6 +98,9 @@ pihole:
   podDnsConfig:
     enabled: false
   serviceWeb:
+    adminPassword:
+      useSecret: true # Enable using a secret
+      secretName: pihole
     type: LoadBalancer
     loadBalancerIP: 192.168.100.20
     annotations:
@@ -122,3 +125,9 @@ pihole:
     loadBalancerIP: 192.168.100.20
     externalTrafficPolicy: Cluster
     port: 67
+  doh:
+    enabled: true
+    pullPolicy: Always
+    envVars: {
+      DOH_UPSTREAM: "https://1.1.1.1/dns-query"
+    }
