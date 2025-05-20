@@ -10,14 +10,12 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
-adlists:
-  - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-  - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
-  - https://small.oisd.nl
-  - https://nsfw.oisd.nl
-blacklist: []
-  
 pihole:
+  adlists:
+    - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
+    - https://small.oisd.nl
+    - https://nsfw.oisd.nl
   dnsmasq:
     staticDhcpEntries:
       - dhcp-host=7C:78:B2:0D:E3:9A,192.168.100.109,front-door-wyze
@@ -53,43 +51,39 @@ pihole:
       - dhcp-host=DC:A6:32:D5:5B:F0,192.168.100.195,octopi
       - dhcp-host=02:BE:CF:B7:C5:8D,192.168.100.173,homeassistant
       - dhcp-host=FC:E8:C0:F8:47:7F,192.168.100.121,SLZB-06P10
-    additionalHostsEntries:
-      - 192.168.100.20 dns1.brainboy.local.lan
-      - 192.168.100.21 dns2.brainboy.local.lan
-      - 192.168.100.114 birdnet.frost.haus
-      - 192.168.100.1 router.brainboy.local.lan
-      - 192.168.100.134 pepper.brainboy.local.lan
-      - 192.168.100.173 homeassistant.brainboy.local.lan
-      - 192.168.100.50 argocd.frost.haus
-      - 192.168.100.50 guestbook.frost.haus
-      - 192.168.100.50 dashboard.frost.haus
-      - 192.168.100.50 longhorn.frost.haus
-      - 192.168.100.50 sonarr.k8s.frost.haus
-      - 192.168.100.50 kube-prometheus-stack.k8s.frost.haus
-      - 192.168.100.50 prometheus.k8s.frost.haus
-      - 192.168.100.50 grafana.k8s.frost.haus
-      - 192.168.100.50 radarr.k8s.frost.haus
-      - 192.168.100.50 sabnzbd.k8s.frost.haus
-      - 192.168.100.50 radarr-exporter.k8s.frost.haus
-      - 192.168.100.50 alertmanager.k8s.frost.haus
-      - 192.168.100.50 dozzle.k8s.frost.haus
-      - 192.168.100.50 boilerplate.k8s.frost.haus
-      - 192.168.100.50 prowlarr.k8s.frost.haus
-      - 192.168.100.50 peppers.k8s.frost.haus
-      - 192.168.100.50 overseerr.k8s.frost.haus
-      - 192.168.100.50 pihole.k8s.frost.haus
-      - 192.168.100.2 switch.frost.haus
-      - 192.168.100.221 pve1.frost.haus
-      - 192.168.100.222 pve2.frost.haus
-      - 192.168.100.223 pve3.frost.haus
-      - 192.168.100.249 pbs.frost.haus
     customCnameEntries:
       - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
     customDnsEntries:
-      # The format should be like:
-      # - address=/foo.bar/192.168.178.10
-      # - address=/bar.foo/192.168.178.11
       - address=/super-duke.brainboy.local.lan/192.168.100.250 
+      - address=/dns1.brainboy.local.lan/192.168.100.20
+      - address=/dns2.brainboy.local.lan/192.168.100.21
+      - address=/birdnet.frost.haus/192.168.100.114
+      - address=/router.brainboy.local.lan/192.168.100.1
+      - address=/pepper.brainboy.local.lan/192.168.100.134
+      - address=/homeassistant.brainboy.local.lan/192.168.100.173
+      - address=/argocd.frost.haus/192.168.100.50
+      - address=/guestbook.frost.haus/192.168.100.50
+      - address=/dashboard.frost.haus/192.168.100.50
+      - address=/longhorn.frost.haus/192.168.100.50
+      - address=/sonarr.k8s.frost.haus/192.168.100.50
+      - address=/kube-prometheus-stack.k8s.frost.haus/192.168.100.50
+      - address=/prometheus.k8s.frost.haus/192.168.100.50
+      - address=/grafana.k8s.frost.haus/192.168.100.50
+      - address=/radarr.k8s.frost.haus/192.168.100.50
+      - address=/sabnzbd.k8s.frost.haus/192.168.100.50
+      - address=/radarr-exporter.k8s.frost.haus/192.168.100.50
+      - address=/alertmanager.k8s.frost.haus/192.168.100.50
+      - address=/dozzle.k8s.frost.haus/192.168.100.50
+      - address=/boilerplate.k8s.frost.haus/192.168.100.50
+      - address=/prowlarr.k8s.frost.haus/192.168.100.50
+      - address=/peppers.k8s.frost.haus/192.168.100.50
+      - address=/overseerr.k8s.frost.haus/192.168.100.50
+      - address=/pihole.k8s.frost.haus/192.168.100.50
+      - address=/switch.frost.haus/192.168.100.2
+      - address=/pve1.frost.haus/192.168.100.221
+      - address=/pve2.frost.haus/192.168.100.222
+      - address=/pve3.frost.haus/192.168.100.223
+      - address=/pbs.frost.haus/192.168.100.249
   customSettings:
     otherSettings: |-
       DNSMASQ_LISTENING=all
