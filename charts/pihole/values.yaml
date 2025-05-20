@@ -51,39 +51,39 @@ pihole:
       - dhcp-host=DC:A6:32:D5:5B:F0,192.168.100.195,octopi
       - dhcp-host=02:BE:CF:B7:C5:8D,192.168.100.173,homeassistant
       - dhcp-host=FC:E8:C0:F8:47:7F,192.168.100.121,SLZB-06P10
-    customCnameEntries:
-      - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
-    customDnsEntries:
-      - address=/super-duke.brainboy.local.lan/192.168.100.250 
-      - address=/dns1.brainboy.local.lan/192.168.100.20
-      - address=/dns2.brainboy.local.lan/192.168.100.21
-      - address=/birdnet.frost.haus/192.168.100.114
-      - address=/router.brainboy.local.lan/192.168.100.1
-      - address=/pepper.brainboy.local.lan/192.168.100.134
-      - address=/homeassistant.brainboy.local.lan/192.168.100.173
-      - address=/argocd.frost.haus/192.168.100.50
-      - address=/guestbook.frost.haus/192.168.100.50
-      - address=/dashboard.frost.haus/192.168.100.50
-      - address=/longhorn.frost.haus/192.168.100.50
-      - address=/sonarr.k8s.frost.haus/192.168.100.50
-      - address=/kube-prometheus-stack.k8s.frost.haus/192.168.100.50
-      - address=/prometheus.k8s.frost.haus/192.168.100.50
-      - address=/grafana.k8s.frost.haus/192.168.100.50
-      - address=/radarr.k8s.frost.haus/192.168.100.50
-      - address=/sabnzbd.k8s.frost.haus/192.168.100.50
-      - address=/radarr-exporter.k8s.frost.haus/192.168.100.50
-      - address=/alertmanager.k8s.frost.haus/192.168.100.50
-      - address=/dozzle.k8s.frost.haus/192.168.100.50
-      - address=/boilerplate.k8s.frost.haus/192.168.100.50
-      - address=/prowlarr.k8s.frost.haus/192.168.100.50
-      - address=/peppers.k8s.frost.haus/192.168.100.50
-      - address=/overseerr.k8s.frost.haus/192.168.100.50
-      - address=/pihole.k8s.frost.haus/192.168.100.50
-      - address=/switch.frost.haus/192.168.100.2
-      - address=/pve1.frost.haus/192.168.100.221
-      - address=/pve2.frost.haus/192.168.100.222
-      - address=/pve3.frost.haus/192.168.100.223
-      - address=/pbs.frost.haus/192.168.100.249
+    customCnameEntries: []
+      # - cname=dns1.brainboy.local.lan,dns1.k8s.frost.haus
+    customDnsEntries: []
+      # - address=/super-duke.brainboy.local.lan/192.168.100.250 
+      # - address=/dns1.brainboy.local.lan/192.168.100.20
+      # - address=/dns2.brainboy.local.lan/192.168.100.21
+      # - address=/birdnet.frost.haus/192.168.100.114
+      # - address=/router.brainboy.local.lan/192.168.100.1
+      # - address=/pepper.brainboy.local.lan/192.168.100.134
+      # - address=/homeassistant.brainboy.local.lan/192.168.100.173
+      # - address=/argocd.frost.haus/192.168.100.50
+      # - address=/guestbook.frost.haus/192.168.100.50
+      # - address=/dashboard.frost.haus/192.168.100.50
+      # - address=/longhorn.frost.haus/192.168.100.50
+      # - address=/sonarr.k8s.frost.haus/192.168.100.50
+      # - address=/kube-prometheus-stack.k8s.frost.haus/192.168.100.50
+      # - address=/prometheus.k8s.frost.haus/192.168.100.50
+      # - address=/grafana.k8s.frost.haus/192.168.100.50
+      # - address=/radarr.k8s.frost.haus/192.168.100.50
+      # - address=/sabnzbd.k8s.frost.haus/192.168.100.50
+      # - address=/radarr-exporter.k8s.frost.haus/192.168.100.50
+      # - address=/alertmanager.k8s.frost.haus/192.168.100.50
+      # - address=/dozzle.k8s.frost.haus/192.168.100.50
+      # - address=/boilerplate.k8s.frost.haus/192.168.100.50
+      # - address=/prowlarr.k8s.frost.haus/192.168.100.50
+      # - address=/peppers.k8s.frost.haus/192.168.100.50
+      # - address=/overseerr.k8s.frost.haus/192.168.100.50
+      # - address=/pihole.k8s.frost.haus/192.168.100.50
+      # - address=/switch.frost.haus/192.168.100.2
+      # - address=/pve1.frost.haus/192.168.100.221
+      # - address=/pve2.frost.haus/192.168.100.222
+      # - address=/pve3.frost.haus/192.168.100.223
+      # - address=/pbs.frost.haus/192.168.100.249
   customSettings:
     otherSettings: |-
       DNSMASQ_LISTENING=all
@@ -117,7 +117,6 @@ pihole:
       TEMPERATUREUNIT=C
       PIHOLE_DNS_1=127.0.0.1#5335
       PIHOLE_DNS_2=""
-  whitelist: []
   capabilities:
     add:
     - SYS_TIME
@@ -131,7 +130,7 @@ pihole:
     enabled: false
   admin:
     adminPassword:
-    useSecret: true # Enable using a secret
+    useSecret: true
     passwordKey: password
     existingSecret: pihole
   serviceWeb:
