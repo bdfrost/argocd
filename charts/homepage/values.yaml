@@ -1,9 +1,7 @@
 replicaCount: 1
 name: homepage
-targetPort: 8989
 pgid: 1000
 puid: 1000
-ingress:
 
 homepage:
   env:
