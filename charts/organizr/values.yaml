@@ -11,8 +11,8 @@ organizr:
     PGID: 1000
     PUID: 1000
   image:
-    repository: ghcr.io/k8s-at-home/organizr
-    # tag: latest
+    repository: organizr/organizr
+    tag: latest
     pullPolicy: IfNotPresent
   ingress:
     main:
