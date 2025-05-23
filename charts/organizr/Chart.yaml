@@ -1,0 +1,14 @@
+apiVersion: v2
+name: organizr
+description: A Helm chart for Kubernetes
+
+type: application
+
+version: 7.4.2  
+
+appVersion: "latest"
+
+dependencies:
+- name: organizr
+  version: 7.4.2 
+  repository: https://k8s-at-home.com/charts/

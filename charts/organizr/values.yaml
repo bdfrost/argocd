@@ -1,0 +1,27 @@
+replicaCount: 1
+name: organizr
+targetPort: 8989
+pgid: 1000
+puid: 1000
+ingress:
+
+organizr:
+  env:
+    TZ: "America/Chicago"
+    PGID: 1000
+    PUID: 1000
+  image:
+    repository: ghcr.io/k8s-at-home/organizr
+    tag: latest
+    pullPolicy: IfNotPresent
+  ingress:
+    main:
+      enabled: false
+  persistence:
+    config:
+      enabled: false
+  service:
+    main:
+      ports:
+        http:
+          port: 80

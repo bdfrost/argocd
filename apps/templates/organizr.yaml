@@ -5,12 +5,12 @@ metadata:
   namespace: argocd
 spec:
   source:
-    path: charts/homepage
+    path: charts/organizr
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: homepage
+    namespace: organizr
   project: default
   syncPolicy:
     automated:
