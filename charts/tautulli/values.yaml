@@ -1,0 +1,25 @@
+replicaCount: 1
+name: tautulli
+targetPort: 8989
+pgid: 1000
+puid: 1000
+ingress:
+
+tautulli:
+  env:
+    TZ: "America/Chicago"
+  image:
+    repository: ghcr.io/k8s-at-home/tautulli
+    tag: v2.7.7
+    pullPolicy: IfNotPresent
+  service:
+    main:
+      ports:
+        http:
+          port: 8181
+  ingress:
+    main:
+      enabled: false
+  persistence:
+    config:
+      enabled: false

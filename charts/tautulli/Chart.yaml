@@ -1,0 +1,14 @@
+apiVersion: v2
+name: tautulli
+description: A Helm chart for Kubernetes
+
+type: application
+
+version: 11.4.2 
+
+appVersion: "v2.7.7"
+
+dependencies:
+- name: tautulli
+  version: 11.4.2
+  repository: https://k8s-at-home.com/charts/
