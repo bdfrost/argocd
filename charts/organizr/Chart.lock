@@ -2,5 +2,8 @@ dependencies:
 - name: organizr
   repository: https://k8s-at-home.com/charts/
   version: 7.4.2
-digest: sha256:ca869939cda1db98e46a83232cb981fb7c7537e5370acbd81d7f3e4ebd759e40
-generated: "2025-05-23T15:39:32.363646-05:00"
+- name: common
+  repository: https://library-charts.k8s-at-home.com
+  version: 4.5.2
+digest: sha256:96e9c42b49656d1e18fd73d6fc722216e19d73c4d3af1cb996f6c9c754342005
+generated: "2025-05-23T15:55:51.606973-05:00"
