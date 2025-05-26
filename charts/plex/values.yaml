@@ -32,10 +32,10 @@ plex-media-server:
   - name: arr-media
     mountPath: /data
   extraVolumes:
-    - name: arr-media
-      nfs:
-        server: 192.168.100.250
-        path: /volume1/media/library/
+  - name: arr-media
+    nfs:
+      server: 192.168.100.250
+      path: /volume1/media/library/
 
 
 
