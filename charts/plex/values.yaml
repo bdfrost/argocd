@@ -12,6 +12,10 @@ plex-media-server:
     annotations:
       external-dns.alpha.kubernetes.io/host: peppers.k8s.frost.haus
       cert-manager.io/cluster-issuer: letsencrypt
+    tls:
+      - hosts:
+          - plex.k8s.frost.haus
+        secretName: plex-plex-media-server-ingress-lets-encrypt
   pms:
     configExistingClaim: plex-config-pvc
   extraEnv:
