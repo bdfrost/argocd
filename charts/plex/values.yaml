@@ -14,7 +14,7 @@ plex-media-server:
       cert-manager.io/cluster-issuer: letsencrypt
     tls:
       - hosts:
-          - plex.k8s.frost.haus
+          - peppers.k8s.frost.haus
         secretName: plex-plex-media-server-ingress-lets-encrypt
   pms:
     configExistingClaim: plex-config-pvc
