@@ -18,6 +18,22 @@ plex-media-server:
         secretName: plex-plex-media-server-ingress-lets-encrypt
   pms:
     configExistingClaim: plex-config-pvc
+    livenessProbe:
+      httpGet:
+        path: /identity
+        port: 32400
+      initialDelaySeconds: 60
+      periodSeconds: 60
+      timeoutSeconds: 1
+      failureThreshold: 3
+    readinessProbe:
+      httpGet:
+        path: /identity
+        port: 32400
+      initialDelaySeconds: 60
+      periodSeconds: 60
+      timeoutSeconds: 1
+      failureThreshold: 3
   extraEnv:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
