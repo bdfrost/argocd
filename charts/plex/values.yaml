@@ -2,7 +2,7 @@ replicaCount: 1
 name: plex
 targetPort: 32400
 puid: 1026
-pgid: 101
+pgid: 100
 plex-media-server:
   ingress:
     enabled: true
