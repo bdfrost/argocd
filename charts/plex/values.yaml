@@ -55,7 +55,7 @@ plex-media-server:
   - name: arr-media
     nfs:
       server: 192.168.100.250
-      path: /volume1/media/library/
+      path: /volume1/media/
 
 
 
