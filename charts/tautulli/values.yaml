@@ -1,8 +1,8 @@
 replicaCount: 1
 name: tautulli
 targetPort: 8989
-pgid: 1000
-puid: 1000
+puid: 1026
+pgid: 100
 ingress:
 
 tautulli:

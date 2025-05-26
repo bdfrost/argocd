@@ -1,6 +1,6 @@
 name: cloudflared
-pgid: 1000
-puid: 1000
+puid: 1026
+pgid: 100
 cloudflare-tunnel:
   cloudflare:
     tunnelName: "k8s"

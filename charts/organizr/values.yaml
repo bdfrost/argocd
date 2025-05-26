@@ -1,15 +1,15 @@
 replicaCount: 1
 name: organizr
 targetPort: 8989
-pgid: 1000
-puid: 1000
+puid: 1026
+pgid: 100
 ingress:
 
 organizr:
   env:
     TZ: "America/Chicago"
-    PGID: 1000
-    PUID: 1000
+    PUID: 1026
+    PGID: 100
   image:
     repository: organizr/organizr
     tag: latest

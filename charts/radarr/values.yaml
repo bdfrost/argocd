@@ -1,5 +1,5 @@
 replicaCount: 1
 name: radarr
 targetPort: 7878
-pgid: 1000
-puid: 1000
+puid: 1026
+pgid: 100
