@@ -4,6 +4,10 @@ targetPort: 32400
 puid: 1026
 pgid: 100
 plex-media-server:
+  service:
+    type: LoadBalancer
+    port: 32400
+    metallb.io/ip-allocated-from-pool: first-pool
   ingress:
     enabled: true
     url: https://peppers.k8s.frost.haus
