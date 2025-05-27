@@ -11,6 +11,8 @@ cloudflare-tunnel:
         service: https://argocd.frost.haus:443
       - hostname: overseerr.frost.haus
         service: https://overseerr.k8s.frost.haus:443
+      - hostname: overseerr.k8s.frost.haus
+        service: https://overseerr.k8s.frost.haus:443
       # - hostname: 1.frost.haus
       #   service: https://guestbook.frost.haus
       - service: http_status:404
