@@ -14,4 +14,4 @@ kubernetes-dashboard:
         name: letsencrypt
         scope: cluster
       hosts:
-        - dashboard.frost.haus
+        - dashboard.k8s.frost.haus
