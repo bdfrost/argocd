@@ -8,6 +8,7 @@ kubernetes-dashboard:
       annotations:
         # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+        external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
       tls:
         secretName: kubernetes-dashboard
       issuer:
