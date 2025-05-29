@@ -23,6 +23,6 @@ version: 02.21.3
 appVersion: "1.23.13"
 
 dependencies:
-- name: uptimekuma
+- name: uptime-kuma
   version: 02.21.3
   repository: https://helm.irsigler.cloud
