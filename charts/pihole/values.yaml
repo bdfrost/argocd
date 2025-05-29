@@ -9,7 +9,7 @@ ingress:
   - dns1.frost.haus
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: dns1.frost.haus
+    external-dns.alpha.kubernetes.io/host: dns1.brainboy.local.lan
 pihole:
   adlists:
     - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
