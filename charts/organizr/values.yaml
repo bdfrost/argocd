@@ -19,7 +19,7 @@ organizr:
       enabled: false
   persistence:
     config:
-      enabled: false
+      enabled: true
   service:
     main:
       ports:
