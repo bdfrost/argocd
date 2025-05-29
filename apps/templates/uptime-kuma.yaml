@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: uptimekuma
+  name: uptime-kuma
   namespace: argocd
 spec:
   source:
-    path: charts/uptimekuma
+    path: charts/uptime-kuma
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: uptimekuma
+    namespace: uptime-kuma
   project: default
   syncPolicy:
     automated:

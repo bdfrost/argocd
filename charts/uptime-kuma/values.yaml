@@ -1,5 +1,5 @@
 replicaCount: 1
-name: uptimekuma
+name: uptime-kuma
 targetPort: 3001
 puid: 1026
 pgid: 100
