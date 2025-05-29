@@ -8,8 +8,7 @@ helmCharts:
 - name: generic-cronjob
   releaseName: kometa
   valuesFile: values.yaml
-  namespace: media
-
+  namespace: kometa
 
 resources:
   - secrets.yaml
