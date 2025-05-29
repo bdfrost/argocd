@@ -5,13 +5,19 @@ puid: 1026
 pgid: 100
 uptime-kuma:
   ingress:
+    ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/host: uptime-kuma.frost.haus
     enabled: true
     tls:
-    - secretName: uptime-kuma-secret
+    - secretName: uptime-kuma-cert
       hosts:
         - uptime-kuma.frost.haus
+    hosts:
+    - host: uptime-kuma.frost.haus
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
   serviceMonitor:
     enabled: false
