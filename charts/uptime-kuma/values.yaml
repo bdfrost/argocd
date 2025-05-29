@@ -6,12 +6,12 @@ pgid: 100
 uptime-kuma:
   ingress:
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
+      # cert-manager.io/cluster-issuer: letsencrypt
+      # external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
     enabled: true
     tls:
-      - hosts:
-        - {{ .Values.name }}.frost.haus
-        secretName: {{ .Values.name }}-cert
+      # - hosts:
+        # - {{ .Values.name }}.frost.haus
+        # secretName: {{ .Values.name }}-cert
   serviceMonitor:
     enabled: false
