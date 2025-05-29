@@ -4,6 +4,9 @@ targetPort: 3001
 puid: 1026
 pgid: 100
 uptime-kuma:
+  service:
+    type: ClusterIP
+    port: 443
   ingress:
     enabled: true
     annotations:
