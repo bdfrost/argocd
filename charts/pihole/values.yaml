@@ -6,10 +6,10 @@ pgid: 100
 ingress:
   enabled: true
   hosts:
-  - dns1.k8s.frost.haus
+  - dns1.frost.haus
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: dns1.k8s.frost.haus
+    external-dns.alpha.kubernetes.io/host: dns1.frost.haus
 pihole:
   adlists:
     - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts

@@ -22,7 +22,7 @@ spec:
         - containerPort: {{ .Values.targetPort }}
         env:
         - name: HOST_WHITELIST_ENTRIES
-          value: sabnzbd.k8s.frost.haus
+          value: sabnzbd.frost.haus
         - name: TZ
           value: "{{ .Values.timezone }}"
         - name: PGID

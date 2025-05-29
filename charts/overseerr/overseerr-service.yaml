@@ -19,15 +19,15 @@ metadata:
   name: overseerr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: overseerr.k8s.frost.haus
+    external-dns.alpha.kubernetes.io/host: overseerr.frost.haus
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - overseerr.k8s.frost.haus
+    - overseerr.frost.haus
     secretName: overseerr-cert
   rules:
-  - host: overseerr.k8s.frost.haus
+  - host: overseerr.frost.haus
     http:
       paths:
       - path: /

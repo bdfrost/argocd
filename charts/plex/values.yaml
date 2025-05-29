@@ -10,15 +10,15 @@ plex-media-server:
     metallb.io/ip-allocated-from-pool: first-pool
   ingress:
     enabled: true
-    url: https://peppers.k8s.frost.haus
+    url: https://peppers.frost.haus
     ingressClassName: nginx
     certificateSecret: "plex-plex-media-server-ingress-lets-encrypt"
     annotations:
-      external-dns.alpha.kubernetes.io/host: peppers.k8s.frost.haus
+      external-dns.alpha.kubernetes.io/host: peppers.frost.haus
       cert-manager.io/cluster-issuer: letsencrypt
     tls:
       - hosts:
-          - peppers.k8s.frost.haus
+          - peppers.frost.haus
         secretName: plex-plex-media-server-ingress-lets-encrypt
   pms:
     configExistingClaim: plex-config-pvc
@@ -42,7 +42,7 @@ plex-media-server:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
       PLEX_CLAIM: "claim-TPmFffFTSTTpzpPgPbUj"
-      HOSTNAME: "peppers.k8s.frost.haus"
+      HOSTNAME: "peppers.frost.haus"
       TZ: "America/Chicago"
       PLEX_UPDATE_CHANNEL: "5"
       PLEX_UID: "1026"

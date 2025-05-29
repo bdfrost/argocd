@@ -6,12 +6,12 @@ kube-prometheus-stack:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/host: alertmanager.k8s.frost.haus
+        external-dns.alpha.kubernetes.io/host: alertmanager.frost.haus
       hosts:
-        - alertmanager.k8s.frost.haus
+        - alertmanager.frost.haus
       tls:   
       - hosts:
-        - alertmanager.k8s.frost.haus
+        - alertmanager.frost.haus
         secretName: alertmanager-cert
     alertmanagerSpec:
       configSecret: alertmanager-secrets
@@ -21,12 +21,12 @@ kube-prometheus-stack:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.k8s.frost.haus
+        external-dns.alpha.kubernetes.io/host: kube-prometheus-stack.frost.haus
       hosts:
-        - grafana.k8s.frost.haus
+        - grafana.frost.haus
       tls:   
       - hosts:
-        - grafana.k8s.frost.haus
+        - grafana.frost.haus
         secretName: grafana-cert
   prometheus:
     ingress:
@@ -34,12 +34,12 @@ kube-prometheus-stack:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/host: prometheus.k8s.frost.haus
+        external-dns.alpha.kubernetes.io/host: prometheus.frost.haus
       hosts:
-        - prometheus.k8s.frost.haus
+        - prometheus.frost.haus
       tls:   
       - hosts:
-        - prometheus.k8s.frost.haus
+        - prometheus.frost.haus
         secretName: prometheus-cert
     prometheusSpec:
       additionalScrapeConfigs:
