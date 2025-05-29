@@ -1,0 +1,11 @@
+replicaCount: 1
+name: uptimekuma
+targetPort: 3001
+puid: 1026
+pgid: 100
+uptimekuma:
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
+    enabled: true
