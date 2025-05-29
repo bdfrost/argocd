@@ -1,0 +1,608 @@
+image:
+  repository: "kometateam/kometa"
+  tag: "v2.2.0@sha256:e8bf350bcdf7e16fc3ab0f128e2ef43a447bd1c4d3352a2f521fcf2b3b421d39"
+
+schedule: "0 6 * * *"
+
+envs:
+- KOMETA_READ_ONLY_CONFIG: true
+- KOMETA_RUN: true
+- KOMETA_CONFIG: /config/config.yaml
+- KOMETA_WIDTH: 200
+- name: JINJA_VAR_PLEX_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: plex_token
+- name: JINJA_VAR_TMDB_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: tmdb_token
+- name: JINJA_VAR_TAUTULLI_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: tautulli_token
+- name: JINJA_VAR_RADARR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: radarr_token
+- name: JINJA_VAR_SONARR_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: sonarr_token
+- name: JINJA_VAR_TRAKT_CLIENT_ID
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: trakt_client_id
+- name: JINJA_VAR_TRAKT_CLIENT_SECRET
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: trakt_client_secret
+- name: JINJA_VAR_TRAKT_PIN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: trakt_pin
+- name: JINJA_VAR_TRAKT_ACCESS
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: trakt_access
+- name: JINJA_VAR_TRAKT_REFRESH_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: kometa-secret
+      key: trakt_refresh_token   
+- name: JINJA_SRC_FILE
+  value: /config_src/config.yaml
+- name: JINJA_DEST_FILE
+  value: /config/config.yml
+- name: VERBOSE
+  value: "1"
+
+# secretEnvs:
+# - KOMETA_SECRET_PLEX_TOKEN: AgCklOd/EBl38hY1tQPbdJrq9tOmn2z9dMDsOOuTZqpPXHJw8GL/vSIQ21x+7D67zhuRzT4gUBkLG1uGJm1ztiQ+sI84fvKhOv85TTzvgERrT7fBFUqx5hODXukwuI7eiQG5QFTDs/08vLXuOoFYz+XYw6ocq4wulpZzDvYdPtz++3gVlxsjcBTx1JymUy72hY6YmUdCK02j0pf4N6/m9/nmXPrD6wFT/iSbGz9hwvnPcJoSJKLM3EINfJu0jB5HYz6tmsEnpOSJqt/pSEKV4pQobiUM6wSfX8iG7/yWqhiEAM9nZaF19C7WqaT5WU7WbgwHxj+mTcmagGFJnv/+7znrkDcib4n+yyuOIwHdTOLpO7PL2g2DZpBPjyokK+N2hgVbDYiF8Q4+Na3TlWFVDgaBfOwXVdaMXqNU9qEBvdgxhhgkWGB0jhuvTpAPMhThj8Gzix1XtEvMOk5KQXkfVOpSWmLp2G013u50oQ3Oy89RPrwZ9+ZnDTrgjRLyrBwQ4cx4u1CXNR9J8OgxSGLHJDh11K5Q4ampZpo3n29XB2R6Ui2pGGUW7jTrOR2haeMeyjji1WyrI8bvRdoiz3rqI75k/vMBEhyjUtcmtU1sA7Kx4zmuZoXDeidmNN3qQgLhFjvzFjUZK27HFugtbARCS3g/+Ye+TeKpi1uwGzkhHtCUTS9CN4dN0gOB9izJsZOB1h99pCNf+0ZEuhLGZF1FWxnn3fNF0w==
+# - KOMETA_SECRET_TMDB_API_KEY: AgBoSroEUo97+DHbaYdw5h7oySTOVJtVcXWoIuf7OvkMHNWu0o/0ch+6zjIjjjgYnLl05x+N1v9t364PflZPa9/HI8xbzCqBKQ/3+SajreXjZq/jKQGbCPdAdAPedU+4+wl3+zBmUKREH+FSNWw4ycqbPa143QYtY0SqXGHT6MIB+zlsCopFi3o1X+O0QMsh66tJl7lexVQPRGEHPcLAVXDdQd0orugB+Px+yWQMtnvt9E258M7pESCL1Y65u+uLnYgfT2oyMvrQZHtWXI+Miutr+BlAJJ0dr0rNTRQ/cTAhl44y6PPnoPnZB2/+dRdrMg3D9yCdOvoEiuQaDUeyvm6VewIr+tu2iQtOfbZxWhbxa1t0TtI18nmh5Bwqr9b22QX6UxUrpxnGX36RvT3ZZyAqRmRp6qUhUzA3Nw17oTrmBTBHyAER0Y8ELfxX+bvW4FGzO+EdSZy8E1WZVWpmaXRRpOZ8SeVoq8oko1iiVbiQuTu53vfduLImqCkupGsSgBthf+gOM5gX2AaPoZpslK1HpHqLzmW/3wSzH+Mw9KgdPeXaJ0BMyMEbVArpXD/DPuQqJ5tn8cjX44hTf/ryZMsJY7y0WMDXpUbYiD3G22vtcs+8yyleFRy76oQ5AnT9PxIj7nQ3CCKk0Zcfx5PK/xY0dTaJS63luGQSZEo68s75lWojqRzMZvBflADlqKx4wMDGJuads7oJBZvifoLQ0lZfU5E5qQKRnlbjhzFoMfQ+EA==
+# - KOMETA_SECRET_RADAR_TOKEN: AgA4a5EIL968zJAd+RTmT43BsugebVPGrvaAdz3jgTr4zrTI7sYwwQzNCRnEtxMEcTy4tBbj+m/imhtYvpMxacidj8KFwtUpE0QIYlLFETt5JtXvx66AQtzUJM8cfaEDLHqEIdPJ1wZ+BnPtQiCF2b3/SqWCBvSemOVFs/yX4KUIT5bT9//w1faeU26fClO0QXW1k+oNDqDUi+pkcm/2ecgYf+ey87GWJEKtNgZ6wiN0cyYJsdfq3b5x6vodxNPcFZw0DFW53skwPlY1AV9b/pP1+6bwjmkbHHW86FLJrsA+pAtgej2CPtSaZKn+q5qEw8W9BceTAU0q/c5LJBeYK5jG+R3N0i7zdPj5gBTooKBubffos6Zy/ZbILUpB7qvLqBr4aiR408scD119uqiwwLV6+QPylb5w/EBH2vC0fOEfYX4rO76yLl4/JVSe9kDPGhjfMnjPDCav1iJQJkbKiUpeJ3DAv17hCYjfnqrEMVroeqLrpDitDSAPdjqtA5UGOBv2EWtqN5ISWgH8ZCpzKQY5PWKOgN2VkjZ+2JF5kY7GM9T9PkrC7tIbalks8/qUFTa1hmZEzKECYjPjlQbwixpPkDoLCuQEcXVh7N58KbDZHvqGCkO1gFrVxgo9iAodknLuYSdW40sbgbgCbxn9JVJBnK0Zv17Gzv0mEUM97wDXOhCplLRgNVXxn2qrsvhdqKUXQPSf7HmSIY+gnq2fdXfLR8XKQy1TR3hskIOoAXj3gg==
+# # TODO: Fix trakt tokens
+# - KOMETA_SECRET_TRAKT_CLIENT_ID: AgCZvuTtU8QnU6Srv0dK6u/CxxEZ8EFDo6yu9bsJ7W4tnJL0znAorHUWn+X8lnAd3/QmzTzsRdC8YNogFldvtF1THRVU4hmkKUVQ2bH/gi4JQos1GgbH2wIJOq6keiG3/u9YjrczHAnqANKfBEJYZjCHu9Oy093XJ8GP/aNbJuz6Xw2E4n/aAwwIgN4k7o5dpLHYGHYwfRUDK6h+2dpSjnVSLGTPnvhpmTlmyTjYZmHufxrpN+MonK3GN9aFnSWgBNJK4hi1EbueXZqwEzm/aLUeDHUKpNGGcEEarhSAo97mL0IGxvn7/H5WvvJtf9L4bS7ktKquTePHo6uGYnZx8LBjdRslyPQPbXlOg5Nr/gJvDg+jZ7i8Co6hnjej0L9gznZVpBj4s5CowbwRxX5sACf3eUK3mRx4fEenJrQx9oYs557OkvWyNEtfPAbj6g0i2vUnzU2D8LJXeDmAYEcm1cccHMiNZLtCHWFeysmHwyYD/Gd/Ij8HW6LSp1owQYbVw4tHDgUBBfRC3FH6rIdiw8bBCBF1+stimm/Skx8PaTaOP1gIJ9CvKGXHlpHhgymAmtEhBdp8x1TzbRVx4ucMdX3mS1zGh8bYX1Afyj53IeFrA0tTFHkdZIFasx+1j3GX5L6ivHdplI6Avni8Orhy8Wc1JSsSW3hE20Y3r2EKuFkaFBGneP3BM3oJ42eV/ZdxpK3eunVyF/QIHk4yQUL/fZXL0/gyzRd6/JL+N2pHnCD7RyFWNtECoqL/1SNkPbQHLIOZhpK1pjK4SORwsXwmg+22
+# - KOMETA_SECRET_TRAKT_CLIENT_SECRET: AgBBrXBzPIMN+/WxcDcfYORlMHzjHNx2xKbHJL3ABOpLWaAdnon0mNZA/SxlpCogXcHUrMcAfekTOkGPczURa6YF3TJhVaYqL3EzYGw587wQC3YRGm+k9gGs6hU8ftrmoqucGGRhUBkKInIiWtC2WjWzMTCkSi657tVkOlPznlSyBd+3HNjb6LDsC2nxJiy9f9V8e2sJUEjRghL6P6YEKvgH0/UIHxcZlQJnEDKOs27xKLYzxJvnw26ob8A3v3WmDCYQa5M3nPiPEiNmSFXjHftvhhpKkUjaOkNQ8POkL2We1Th8KhNW8u8HcMlylFIzvPdkfnoal9UlBoRXbi+6rtiAYIFK9Iw/XR1hgmGyHWBMKBLJKveHUG5WxO1+idkI/an/v+hH+PIukg4vorxoQ9vI+oex6CG3V7lKDuan9/mlcGW3Pfu2L9mO00+Hb0e/e3t2okLX+7ctJXUz2vBGpPYrp47GQFhIZWU3WI66VfAP3ckEQHmP4CYvojNRjUF90u/7zGEArqf2XfJkoUXIgBBun8cwlLsRXFSvtVhH21Ks3lFIpHma794+JNWHefOUuIQbShZwQleFJ6BG4qOFGpmNslBl7UVzKgZ/wdyHLf1Q4MugbPVaXmAjL/rg8Z7YY1X0iZeVdrbi4jcgTR8TlIFfpuVfNV2/ewrhDOgveOYbUkJkaXO2YwOfJiy8KL+lEHb4xO8m/S34BdMWnuQ2zc/l5sY4GbpngwxUz3AvxLoNyQ0N1uXG63KyoetikqOBOZ7vZ+e0h3BZhN65VSTRJk73
+# - KOMETA_SECRET_TRAKT_ACCESS_TOKEN: AgCFD7DFuxm/3u01+xbYnHM50ujJd9+5xbDlRH5WVh2G/5eEyvh5YetBWmS9pPgcOOxjuJJkKpR0Mzl9oZEk/ZtnOmrqvj1vL+YwMp93THZdX3yulRxlj60S3I3FABnEWtGyjlRQkc7yyCZT/DNPO5KwT0xGRh3+ej2/LLz4MaU/lNsPO1E+EyQ5NAXFenNMSuANe/8X64ARX6Nwr2c8kZBTTo+y8ttByqfAfRqF0+OZNeRmgwZog/WMLY/R8MbLRvkzvNl6V1bZrguMiKtkJPaLNsJTLpYuKJcf9Lgs+xSteNBsAAcXDqBqkpQcJ4uzsg/xFjC78WzPnlhGETZ8AH1CmQYeHyYKdA9q2hvNPZx970F7jimzdaBR9WpU9tifE1kXlCHryZUVrP96P0m6U4veKyV/DQhpgCmjS9+o2JSQGD2fIWn3L6IjojMRsp2852QQfi0Dw+peqCxduZan46/RjTel8ZBS49IW9Vzt5Z2HCVfdGJEgGpIAHi4FQZtO7OXsSgO9z6FU9PixhsJPz1/FumMRUxHqUKH1viqWcQSKbLt/SeIz5UM8euAZi2X2GOrlD3eXvLPMg2BqsmxBMlthDCYzjipYEGs1AidyUiqtlUXpOMc86Bd5eOQIT2xqARe0eic+Iw2Oab12+i8ZAk4PWv2tlGFo0/K6qmVL0ye8HQOy1DjXsAizQdPVMeTzM+m2vqWQHHPCi3nL7Ml8ty2Rf0SsxMghaFoi2uRjLaGHuakLo52KToSIV0YAF1OWk/ZLn1WCr75xMT4KkPNEhtQU
+# - KOMETA_SECRET_TRAKT_REFRESH_TOKEN: AgCU/l9tq+ECTXqB1aF4AizTML5NtwqTeiKpppB4yWXQNwCvU3OxjaW34yChXQO4DPC+cJ2yz/lH5x07V45eoE8eRthpindXr/Y0COASNwb64yE/bduCzyHBc5k/A28kbxlQdM3oMvadjZGETl5eYbAQXQ13iENnKyEQJh9ZKVTOBuPGa70+1T0+5r5PjWJ05zxKZO0rE9a80iSm+MmiNyaOPyXwfwtOJg2oUpPU+QnJb5j1/Xk26jupDiRaQmQ/cFWHdC/wK8UMcY9nwnDIpGjK4WgGKZpuxQ6NUmpxGidir+KeAlQA3AZivI65OYgBUS/BfjnuqkFI+fE0kFcX3cNmjz8nsfj6e9Q6+Os2UsSJPRJgs1Ll+1pM/98YFCZCRosnA3KRcnv9/qCg8ezyi2DGSaQMQ9gvT+Ce80Mtn2MEsv8sUlXXnLvKTXHbjSD+VC/1IUdTg0LOssR7eZ1kc3SVjYTWXqNSKugzy0thOLsnawD0xEfzoaervCvZcI4T5DVdN5N/LufJ77JsrK0xvuZQ/bAe3HcfFHCc3hxuBFmsLvm+tz2V/CxJC2rABIppuQWdA7OtCp+HbjxjBdu9dkWl2Jwd0u/JDcgVwpiduW8WjcwGvvxzFQmGMkPZDeRxnepaHmXhncJfIXkR0ruyzEMiclAXushf7M9NBspxKsubvHQfwAUoYEMASCc8XUJO8GuiH8aZT2wiptPohUXlxcO32oEFLyrA4HPBFIx8/z0Qx9TWN6DqZVTrauVLpYngqYZn9gJ8lEsxLeggsz3TOS6I
+
+configMaps:
+- name: config
+  mountPath: /config
+  subPath: config.yaml
+  content:
+    libraries:                           # This is called out once within the config.yml file
+      Movies:                            # These are names of libraries in your Plex
+        remove_overlays: false           # Set this to true to remove all overlays
+        collection_files:
+        - file: /config/movies-cm.yaml
+        - default: basic                 # This is a file within Kometa's defaults folder
+        - default: imdb                  # This is a file within Kometa's defaults folder
+        overlay_files:
+        - default: ribbon                # This is a file within Kometa's defaults folder
+        - default: commonsense  
+        - default: ratings
+          template_variables:
+            rating1: critic
+            rating1_image: imdb
+            rating1_font_size: 70
+            rating2: audience
+            rating2_image: rt_popcorn
+            rating2_font_size: 63
+            rating3: user
+            rating3_image: tmdb
+            rating3_font_size: 70
+            horizontal_position: right
+        operations:
+          mass_critic_rating_update: imdb
+          mass_audience_rating_update: mdb_tomatoesaudience
+          mass_user_rating_update: tmdb
+      TV Shows:
+        remove_overlays: false           # Set this to true to remove all overlays
+        collection_files:
+        - file: /config/tv_cm.yaml
+        - default: basic                 # This is a file within Kometa's defaults folder
+        - default: imdb                  # This is a file within Kometa's defaults folder
+        overlay_files:
+        - default: ribbon                # This is a file within Kometa's defaults folder
+        - default: status
+        - default: ratings
+          template_variables:
+            rating1: critic
+            rating1_image: imdb
+            rating1_font_size: 70
+            rating2: audience
+            rating2_image: rt_popcorn
+            rating2_font_size: 63
+            rating3: user
+            rating3_image: tmdb
+            rating3_font_size: 70
+            horizontal_position: right
+        operations:
+          mass_critic_rating_update: imdb
+          mass_audience_rating_update: mdb_tomatoesaudience
+          mass_user_rating_update: tmdb
+    playlist_files:
+    - default: playlist                  # This is a file within Kometa's defaults folder
+      template_variables:
+        libraries: Movies, TV Shows      # list of libraries that you want the Kometa Defaults playlists to look at
+      # see the wiki for how to use local files, folders, URLs, or files from git
+    settings:
+      run_order:
+      - operations
+      - metadata
+      - collections
+      - overlays
+      cache: true
+      cache_expiration: 60
+      asset_directory: config/assets
+      asset_folders: true
+      asset_depth: 0
+      create_asset_folders: false
+      prioritize_assets: false
+      dimensional_asset_rename: false
+      download_url_assets: false
+      show_missing_season_assets: false
+      show_missing_episode_assets: false
+      show_asset_not_needed: true
+      sync_mode: append
+      minimum_items: 1
+      default_collection_order:
+      delete_below_minimum: true
+      delete_not_scheduled: false
+      run_again_delay: 2
+      missing_only_released: false
+      only_filter_missing: false
+      show_unmanaged: true
+      show_unconfigured: true
+      show_filtered: false
+      show_options: true
+      show_missing: true
+      show_missing_assets: true
+      save_report: false
+      tvdb_language: eng
+      ignore_ids:
+      ignore_imdb_ids:
+      item_refresh_delay: 0
+      playlist_sync_to_users: all
+      playlist_exclude_users:
+      playlist_report: false
+      verify_ssl: true
+      custom_repo:
+      overlay_artwork_filetype: jpg
+      overlay_artwork_quality: 75
+    webhooks:                            # Can be individually specified per library as well
+      error:
+      version:
+      run_start:
+      run_end:
+      changes:
+      delete:
+    plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
+      url: http://peppers.k8s.brainboy.local.lan:32400
+      token: {{ PLEX_TOKEN }}
+      timeout: 60
+      db_cache:
+      clean_bundles: false
+      empty_trash: false
+      optimize: false
+      verify_ssl:
+    tmdb:                                # REQUIRED for the script to run
+      apikey: {{ TMDB_TOKEN }}
+      language: en
+      cache_expiration: 60
+      region:
+    tautulli:                            # Can be individually specified per library as well
+      url: https://tautulli.frost.haus
+      apikey: {{ TAUTULLI_TOKEN }}
+    radarr:                              # Can be individually specified per library as well
+      url: https://radarr.frost.haus
+      token: {{ RADARR_TOKEN }}
+      add_missing: false
+      add_existing: false
+      upgrade_existing: false
+      monitor_existing: false
+      root_folder_path: /data/movies
+      monitor: true
+      availability: announced
+      quality_profile: Up to HD
+      tag: kometa
+      search: false
+      ignore_cache: false
+      radarr_path:
+      plex_path:
+    sonarr:                              # Can be individually specified per library as well
+      url: https://sonarr.frost.haus
+      token: {{ SONARR_TOKEN }}
+      add_missing: false
+      add_existing: false
+      upgrade_existing: false
+      monitor_existing: false
+      root_folder_path: /data/tv
+      monitor: all
+      quality_profile: Up to 1080p
+      language_profile: English
+      series_type: standard
+      season_folder: true
+      tag: kometa
+      search: false
+      cutoff_search: false
+      ignore_cache: false
+      sonarr_path:
+      plex_path:
+    trakt:
+      client_id: {{ TRAKT_CLIENT_ID }}
+      client_secret: {{ TRAKT_CLIENT_SECRET }}
+      pin: {{ TRAKT_PIN }}
+      authorization:
+        # everything below is autofilled by the script
+        access_token: {{ TRAKT_ACCESS }}
+        token_type: Bearer
+        expires_in: 7889237
+        refresh_token: {{ TRAKT_REFRESH_TOKEN }}
+        scope: public
+        created_at: 1735541649
+- name: config-movies
+  mountPath: /config
+  subPath: movies.yaml
+  content:
+    templates:
+      Holiday:
+        smart_label: title.asc
+        summary: "A timed collection of <<holiday>> movies and other movies that may relate to the holiday. NOTE: this collection will automatically disappear once the holiday period is over."
+        delete_not_scheduled: true
+        sort_title: '!AA'
+        run_again: true
+      #visible_home: true
+      #visible_shared: true
+        sync_mode: sync
+        collection_mode: show_items
+      Chart:
+        sort_title: +++++_<<collection_name>>
+        sync_mode: sync
+        smart_label: random
+        visible_home: false
+        visible_shared: false
+        collection_mode: show_items
+      Movies:
+        radarr_add_missing: true
+        optional:
+          - collection
+          - tmdb_movie
+          - trakt_list
+          - tmdb_list
+        trakt_list_details: <<trakt_list>>
+        tmdb_collection_details: <<collection>>
+        tmdb_movie: <<tmdb_movie>>
+        tmdb_list: <<tmdb_list>>
+        sort_title: +++_<<collection_name>>
+        collection_order: release
+        collection_mode: hide
+        sync_mode: sync
+      IMDb Genre:
+        default:
+          title: feature
+          limit: 100
+        imdb_list:
+          - url: https://www.imdb.com/search/title/?title_type=<<title>>&release_date=1990-01-01,&user_rating=5.0,10.0&num_votes=100000,&genres=<<genre>>
+            limit: <<limit>>
+          - url: https://www.imdb.com/search/title/?title_type=<<title>>&release_date=1990-01-01,&user_rating=5.0,10.0&num_votes=100000,&genres=<<genre>>&sort=user_rating,desc
+            limit: <<limit>>
+        sort_title: +++_<<collection_name>>
+        sync_mode: sync
+        smart_label: random
+        collection_mode: show_items
+      Other Genre:
+        sort_title: ++_<<collection_name>>
+        sync_mode: sync
+        smart_label: random
+        collection_mode: show_items
+      Special Genre:
+        sort_title: +_<<collection_name>>
+        sync_mode: sync
+        smart_label: random
+        collection_mode: show_items
+      Studio:
+        optional:
+          - company
+        tmdb_company: <<company>>
+        sort_title: ++++_<<collection_name>>
+        sync_mode: sync
+        collection_mode: show_items
+      Person:
+        smart_filter:
+          any:
+            actor: tmdb
+            director: tmdb
+            writer: tmdb
+            producer: tmdb
+          sort_by: random
+          validate: false
+        tmdb_person: <<person>>
+        sort_title: ~~~~~_<<collection_name>>
+        sync_mode: sync
+        collection_mode: show_items
+    collections:
+    #####################################
+    #         Studio Collections        #
+    #####################################
+      Classics:
+        plex_search:
+          year.gte: 1920
+          year.lte: 1959
+        sort_title: '###_Classics'
+        collection_order: release
+      Pixar:
+        radarr_tag: Pixar
+        imdb_list: https://www.imdb.com/list/ls087911008/
+        template: { name: Studio, company: 3 }
+        tmdb_company: 3
+        summary: A collection of Pixar movies
+      DC:
+        radarr_tag: DC
+        template: {name: Studio}
+        imdb_list: https://www.imdb.com/list/ls077827588/
+        summary: "The DC Extended Universe (DCEU) is a media franchise and shared universe centered on superheros from DC Comics."
+      Marvel:
+        radarr_tag: Marvel
+        template: {name: Studio}
+        imdb_list: https://www.imdb.com/list/ls009410711/
+        tmdb_company: 420
+        summary: "A collection of movies and shows created by Marvel Studios, comprising of the Marvel Cinematic Universe."
+      Studio Ghibli:
+        radarr_tag: "Studio Ghibli"
+        tmdb_company: 10342
+        template: { name: Studio }
+        summary: Studio Ghibli Inc. is a Japanese animation film studio headquartered in Koganei, Tokyo. The studio is best known for its animated feature films, and has also produced several short films, television commercials, and one television film. The studio’s mascot and most recognizable symbol is the character, Totoro, a giant cat-like spirit from the 1988 classic, My Neighbor Totoro.
+      Disney:
+        radarr_tag: Disney
+        radarr_add_missing: false
+        template: { name: Studio }
+          #  imdb_list: 
+          #- https://www.imdb.com/search/title/?companies=co0074039&count=250
+          #- https://www.imdb.com/list/ls059383351/
+          #- https://www.imdb.com/list/ls077114097/
+        tmdb_company:
+        - 6125
+    #####################################
+    #     General Movies Collections    #
+    #####################################
+    #  Alien:
+    #    template: {name: Movies, collection: 8091}
+    #  The Dark Knight:
+    #    template: {name: Movies, collection: 263}
+    #    sort_title: +++_Dark Knight
+    #  Die Hard:
+    #    template: {name: Movies, collection: 1570}
+    #  Indiana Jones:
+    #    template: {name: Movies, collection: 84}
+    #  John Wick:
+    #    template: {name: Movies, collection: 404609}
+    #  Jurassic Park:
+    #    template: {name: Movies, collection: 328}
+    #  Middle Earth:
+    #    template: {name: Movies, collection: "119,121938"}
+    #    summary: A collection of movies and shows set in J.R.R. Tolkien's Middle Earth.
+    #  Spider-Man:
+    #    template: {name: Movies, collection: "556,125574,531241,573436"}
+    #    summary: A collection of all the mainstream Spider-Man movies.
+    #  Star Wars:
+    #    template: {name: Movies, collection: 10}
+    #  The Twilight Saga:
+    #    template: {name: Movies, collection: 33514}
+    #    sort_title: +++_Twilight Saga
+    #####################################
+    #        Holiday Collections        #
+    #####################################
+      Valentine's Day Movies:
+        schedule: range(02/01-02/14)
+        template: {name: Holiday, holiday: "Valentine's Day"}
+        imdb_list:
+          - https://www.imdb.com/list/ls000094398/
+          - https://www.imdb.com/list/ls057783436/
+          - https://www.imdb.com/list/ls064427905/
+      St. Patrick's Day Movies:
+        schedule: range(03/01-03/17)
+        template: {name: Holiday, holiday: "St. Patrick's Day"}
+        imdb_list: https://www.imdb.com/list/ls063934595/
+      Thanksgiving Movies:
+        schedule: range(11/01-11/31)
+        sort_title: '!AA'
+        template: {name: Holiday, holiday: Thanksgiving}
+        imdb_list: 
+          - https://www.imdb.com/list/ls000835734/
+          - https://www.imdb.com/list/ls091597850/
+      Halloween Movies:
+        schedule: range(10/01-10/31)
+        sort_title: '!AB'
+        template: {name: Holiday, holiday: Halloween}
+        imdb_list:
+          - https://www.imdb.com/list/ls023118929/
+          - https://www.imdb.com/list/ls000099714/
+          - https://www.imdb.com/list/ls000058693/
+          - https://www.imdb.com/search/title/?genres=horror&keywords=haunted-house&sort=moviemeter,asc
+        tmdb_collection:
+          - 91361    # Halloween Collection
+          - 8581     # A Nightmare on Elm Street Collection
+          - 1733     # The Mummy Collection
+          - 8091     # Alien Collection
+        tmdb_movie:
+          - 23437    # A Nightmare on Elm Street (2010)
+      Christmas Movies:
+        schedule: range(12/01-12/31)
+        sort_title: '!AB'
+        template: {name: Holiday, holiday: Christmas}
+        imdb_list: 
+          - https://www.imdb.com/list/ls000096828/
+          - https://www.imdb.com/list/ls097394442/
+          - https://www.imdb.com/list/ls068976997/
+          - https://www.imdb.com/list/ls027567380/
+    #####################################
+    #        Popular Collections        #
+    #####################################
+      Trending Movies:
+        sort_title: +++++++_<<collection_name>>
+        template: { name: Chart, num: 1 }
+        trakt_chart:
+          - chart: trending
+            limit: 10
+          - chart: popular
+            limit: 40
+        summary: Movies Trending across the internet
+        sync_mode: sync
+    #####################################
+    #        Hallmark Christmas         #
+    #####################################
+      Hallmark Christmas:
+        trakt_list:
+          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+          - https://trakt.tv/users/prada3721/lists/hallmark-premieres-2024-2025
+          - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
+          - https://trakt.tv/users/tex24601/lists/hallmark-christmas-movies
+          - https://trakt.tv/users/veninjak/lists/hallmark-christmas-movies
+          - https://trakt.tv/users/kylep09/lists/hallmark-holiday
+          - https://trakt.tv/users/yoly76/lists/holiday-tv-movies-present
+          - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-2023
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-2022
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2022
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2021
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2020
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2019
+          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2018
+        sort_title: '###Hallmark Christmas'
+        collection_order: release.desc
+          #collection_order: release.desc
+        radarr_tag: Hallmark Christmas
+        sync_mode: sync      
+        radarr_add_missing: true
+    #####################################
+    #        Hallmark Fall              #
+    #####################################
+      Hallmark Fall:
+        trakt_list:
+          - https://trakt.tv/users/linsk/lists/hallmark-fall
+          - https://trakt.tv/users/laci88/lists/hallmark-fall-movies
+          - https://trakt.tv/users/sflix/lists/hallmark-fall-movies
+          - https://trakt.tv/users/stillaggin/lists/hallmark-fall-2023
+        sort_title: '###Hallmark Fall'
+        collection_order: release.desc
+        radarr_tag: Hallmark Fall
+        sync_mode: sync
+        radarr_add_missing: true
+    #####################################
+    #        Hallmark                   #
+    #####################################
+      Hallmark:
+        trakt_list:
+        - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-841fc509-8aca-4c90-995b-ddb198d9e259
+        - https://trakt.tv/users/serralee/lists/hallmark-movies-2024
+        - https://trakt.tv/users/crossoverdeseries/lists/hallmark-2024
+        - https://trakt.tv/users/crossoverdeseries/lists/hallmark-2023
+        - https://trakt.tv/users/crossoverdeseries/lists/hallmark-movies-2022
+        #imdb_search:
+            #type: movie
+            #company: co0939898
+            #limit: 999
+        sort_title: '###Hallmark'
+        collection_order: release.desc
+        radarr_tag: Hallmark
+        sync_mode: sync
+        radarr_add_missing: true
+          #Hallmark_imdb:
+        imdb_search:
+        type: movie
+        company: co0939898
+        limit: 999
+          #sort_title: '###Hallmark_imdb'
+          #collection_order: custom
+          #radarr_tag: Hallmark
+          #sync_mode: sync
+          #radarr_add_missing: true
+
+    #####################################
+    #        GAC                        #
+    #####################################
+      GAC:
+        trakt_list:
+          - https://trakt.tv/users/loopher/lists/great-american-family-channel-christmas-list
+          - https://trakt.tv/users/kwolfe/lists/great-american-family-movies
+        sort_title: '###GAC'
+        collection_order: release.desc
+        radarr_tag: GAC
+        sync_mode: sync
+        radarr_add_missing: true
+      GAV_imdb:
+        imdb_search:
+        type: movie
+        company: co0814123
+        limit: 999
+        sort_title: '###GAC_imdb'
+        collection_order: custom
+        radarr_tag: GAC
+        sync_mode: sync
+        radarr_add_missing: true
+    #####################################
+    #       Christmas                   #
+    #####################################
+      Christmas:
+        radarr_add_missing: true
+        template: {name: Holiday, poster: https://theposterdb.com/api/assets/111696}
+        trakt_list:
+          - https://trakt.tv/users/crossoverdeseries/lists/other-christmas-2022
+          - https://trakt.tv/users/movistapp/lists/christmas-movies
+          - https://trakt.tv/users/pualani78/lists/christmas-2020
+          - https://trakt.tv/users/veninjak/lists/complete-christmas-2021-copy
+          - https://trakt.tv/users/veninjak/lists/christmas-2022-copy
+        imdb_list:
+          - https://www.imdb.com/list/ls025976544/
+          - https://www.imdb.com/list/ls003863000/
+          - https://www.imdb.com/list/ls027454200/
+          - https://www.imdb.com/list/ls027886673/
+          - https://www.imdb.com/list/ls097998599/
+        summary: Christmas film is a genre that revolves around the plot involving Christmas.
+- name: config-series
+  mountPath: /config
+  subPath: tv.yaml
+  content:
+    collections:
+      Most Popular:
+        smart_label: originally_available.desc
+        sync_mode: sync
+        imdb_search:
+          type: tv_series, tv_mini_series
+          limit: 10
+        summary: The 10 most popular shows across the internet
+        sonarr_add_missing: true
+        sonarr_search: true
+        sonarr_monitor: pilot
+      Tautulli Most Popular:
+        sync_mode: sync
+        collection_order: custom
+        summary: The 10 most popular shows from Plex users
+        tautulli_popular:
+          list_days: 180
+          list_size: 10
+          #     volumeMounts:
+          #       - name: config
+          #         mountPath: /config
+          #       - name: movie-config
+          #         mountPath: /config/movies.yaml
+          #         subPath: movies.yaml
+          #       - name: tv-config
+          #         mountPath: /config/tv.yaml
+          #         subPath: tv.yaml
+          # volumes:
+          #   - name: config
+          #     persistentVolumeClaim:
+          #       claimName: kometa-config-pvc

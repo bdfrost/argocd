@@ -1,0 +1,131 @@
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: ""
+
+serviceAccount:
+  annotations: {}
+
+podLabels: {}
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+hostNetwork: false
+
+ports: []
+# - name: ""
+#   containerPort: 0
+#   protocol: TCP
+
+service:
+  type: ClusterIP
+  externalTrafficPolicy: ""
+  loadBalancerIP: ""
+
+health:
+  enabled: true
+  startupProbeSeconds: 60
+  port: main
+  type: HTTP
+  path: /
+
+ingress:
+  host: ""
+  path: /
+  public: false
+  publicPath: /
+  port: main
+  annotations: {}
+
+replicas: 1
+strategyType: Recreate
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+terminationGracePeriodSeconds: 30
+
+command: []
+args: []
+
+envs: []
+
+secretEnvs: []
+
+configMaps: []
+# - name: ""
+#   defaultMode: 0644
+#   mountPath: ""
+#   subPath: ""
+#   content: ""
+
+hostPaths: []
+# - name: ""
+#   hostPath: ""
+#   containerPath: ""
+#   readOnly: false
+#   type: "DirectoryOrCreate"
+
+envsubst:
+  image:
+    repository: nixery.dev/shell/envsubst
+    tag: "latest"
+  files: []
+  # - src:
+  #   dest:
+
+database:
+  enabled: false
+  resources: {}
+  hostPath: ""
+  rootPassword: ""
+  userPassword: ""
+  type: mariadb
+  mariadb:
+    image:
+      repository: mariadb
+      tag: "11.7.2@sha256:11706a6fd276c2eada52d0d69b1a2aa1f1484cbe78137678e02cca8f7a0ae502"
+    backup:
+      schedule: "0 4 * * *"
+      image:
+        repository: fradelg/mysql-cron-backup
+        tag: "latest@sha256:d9b9b1514ef5f879031ea88c656c0b64acb98bb787f401c2fc3f62ed6fafb308"
+  postgresql:
+    image:
+      repository: postgres
+      tag: "17.5@sha256:6efd0df010dc3cb40d5e33e3ef84acecc5e73161bd3df06029ee8698e5e12c60"
+    backup:
+      schedule: "0 4 * * *"
+      image:
+        repository: prodrigestivill/postgres-backup-local
+        tag: "17@sha256:483fa15ecd998302bd312fc380cb1b3683a940881d9099d6dfe65bcc1e2714e8"
+
+helper:
+  image:
+    repository: busybox
+    tag: "1.37.0@sha256:f64ff79725d0070955b368a4ef8dc729bd8f3d8667823904adcb299fe58fc3da"
+
+homepage:
+  name: ""
+  description: ""
+  group: ""
+  icon: ""
+  weight: 50
+  widgetType: ""
