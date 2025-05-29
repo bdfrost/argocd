@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 data:
+  kustomize.buildOptions: --enable-helm
   accounts.bfrost: apiKey, login
   accounts.bfrost.enabled: "true"
   application.resourceTrackingMethod: annotation
