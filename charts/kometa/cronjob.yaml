@@ -14,11 +14,11 @@ spec:
           #   runAsGroup: 100
           containers:
             - name: kometa
-              envs:
-              - KOMETA_READ_ONLY_CONFIG: true
-              - KOMETA_RUN: true
-              - KOMETA_CONFIG: /config/config.yaml
-              - KOMETA_WIDTH: 200
+              env:
+              # - KOMETA_READ_ONLY_CONFIG: true
+              # - KOMETA_RUN: true
+              # - KOMETA_CONFIG: /config/config.yaml
+              # - KOMETA_WIDTH: 200
               - name: JINJA_VAR_PLEX_TOKEN
                 valueFrom:
                   secretKeyRef:
@@ -83,7 +83,6 @@ spec:
                   cpu: 100m
                   memory: 256Mi
                 requests:
-                  cpu: 100m
                   memory: 125Mi
               volumeMounts:
                 - name: config
