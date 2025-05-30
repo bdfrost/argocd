@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  tv.yaml: |
+    collections:
+      Most Popular:
+        smart_label: originally_available.desc
+        sync_mode: sync
+        imdb_search:
+          type: tv_series, tv_mini_series
+          limit: 10
+        summary: The 10 most popular shows across the internet
+        sonarr_add_missing: true
+        sonarr_search: true
+        sonarr_monitor: pilot
+      Tautulli Most Popular:
+        sync_mode: sync
+        collection_order: custom
+        summary: The 10 most popular shows from Plex users
+        tautulli_popular:
+          list_days: 180
+          list_size: 10
+          #     volumeMounts:
+          #       - name: config
+          #         mountPath: /config
+          #       - name: movie-config
+          #         mountPath: /config/movies.yaml
+          #         subPath: movies.yaml
+          #       - name: tv-config
+          #         mountPath: /config/tv.yaml
+          #         subPath: tv.yaml
+          # volumes:
+          #   - name: config
+          #     persistentVolumeClaim:
+          #       claimName: kometa-config-pvc
+kind: ConfigMap
+metadata:
+  name: tv-config
+  namespace: media
