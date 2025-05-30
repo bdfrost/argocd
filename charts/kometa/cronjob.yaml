@@ -15,10 +15,14 @@ spec:
           containers:
             - name: kometa
               env:
-              # - KOMETA_READ_ONLY_CONFIG: true
-              # - KOMETA_RUN: true
-              # - KOMETA_CONFIG: /config/config.yaml
-              # - KOMETA_WIDTH: 200
+              - name: KOMETA_READ_ONLY_CONFIG
+                value: "true"
+              - name: KOMETA_RUN
+                value: "true"
+              - name: KOMETA_CONFIG
+                value: /config/config.yaml
+              - name: KOMETA_WIDTH
+                value: "200"
               - name: PLEX_TOKEN
                 valueFrom:
                   secretKeyRef:
@@ -69,10 +73,6 @@ spec:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_refresh_token   
-              - name: JINJA_SRC_FILE
-                value: /config_src/config.yaml
-              - name: JINJA_DEST_FILE
-                value: /config/config.yml
               - name: VERBOSE
                 value: "1"
               image: kometateam/kometa:latest
