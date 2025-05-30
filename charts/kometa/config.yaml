@@ -175,4 +175,4 @@ data:
 kind: ConfigMap
 metadata:
   name: kometa-config
-  namespace: media
+  namespace: kometa

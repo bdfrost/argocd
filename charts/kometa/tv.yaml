@@ -35,4 +35,4 @@ data:
 kind: ConfigMap
 metadata:
   name: tv-config
-  namespace: media
+  namespace: kometa

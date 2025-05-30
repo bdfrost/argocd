@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: kometa
-  namespace: media
+  namespace: kometa
 spec:
   schedule: "0 0 * * *"
   jobTemplate:
