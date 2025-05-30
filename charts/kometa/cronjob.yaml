@@ -19,8 +19,6 @@ spec:
                 value: "true"
               - name: KOMETA_RUN
                 value: "true"
-              - name: KOMETA_CONFIG
-                value: /config/config.yaml
               - name: KOMETA_WIDTH
                 value: "200"
               - name: PLEX_TOKEN
