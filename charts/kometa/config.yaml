@@ -5,7 +5,7 @@ data:
       Movies:                            # These are names of libraries in your Plex
         remove_overlays: false           # Set this to true to remove all overlays
         collection_files:
-        - file: /config/movies-cm.yaml
+        - file: /config/movies.yaml
         - default: basic                 # This is a file within Kometa's defaults folder
         - default: imdb                  # This is a file within Kometa's defaults folder
         overlay_files:
@@ -30,7 +30,7 @@ data:
       TV Shows:
         remove_overlays: false           # Set this to true to remove all overlays
         collection_files:
-        - file: /config/tv_cm.yaml
+        - file: /config/tv.yaml
         - default: basic                 # This is a file within Kometa's defaults folder
         - default: imdb                  # This is a file within Kometa's defaults folder
         overlay_files:
