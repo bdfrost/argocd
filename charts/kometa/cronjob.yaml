@@ -81,12 +81,12 @@ spec:
               image: kometateam/kometa:latest
               imagePullPolicy: IfNotPresent
               args: [ "--run", "--read-only-config" ]
-              resources:
-                limits:
-                  memory: 512Mi
-                requests:
-                  cpu: 500m
-                  memory: 512Mi
+              # resources:
+              #   limits:
+              #     memory: 512Mi
+              #   requests:
+              #     cpu: 500m
+              #     memory: 512Mi
               volumeMounts:
                 - name: config
                   mountPath: /config
