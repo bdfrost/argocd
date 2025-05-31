@@ -109,7 +109,7 @@ data:
       changes:
       delete:
     plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
-      url: http://peppers.frost.haus:32400
+      url: https://peppers.frost.haus
       token: <<PLEXTOKEN>>
       timeout: 60
       db_cache:
