@@ -26,7 +26,7 @@ spec:
                   secretKeyRef:
                     name: kometa-secret
                     key: plex_token
-              - name: KOMETA_TMDBTOKEN
+              - name: TMDBTOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
