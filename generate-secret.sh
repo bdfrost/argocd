@@ -15,8 +15,8 @@ fi
 
 echo "Password: $password"
 
-export SEALED_SECRETS_CONTROLLER_NAMESPACE="sealed-secrets"
-export SEALED_SECRETS_CONTROLLER_NAME="sealed-secrets"
+export SEALED_SECRETS_CONTROLLER_NAMESPACE="kube-system"
+export SEALED_SECRETS_CONTROLLER_NAME="sealed-secrets-controller"
 export SEALED_SECRETS_SCOPE="cluster-wide"
 
 encryptedPassword=$(kubectl create secret generic script --dry-run=client --from-literal "script=$password" -o json | kubeseal -o json | jq -r '.spec.encryptedData.script')
@@ -26,5 +26,5 @@ echo "Encrypted password:"
 echo "$encryptedPassword"
 echo ""
 
-echo "$encryptedPassword" | xclip -sel clip
-echo "Copied to Clipboard!"
+# echo "$encryptedPassword" | xclip -sel clip
+# echo "Copied to Clipboard!"
