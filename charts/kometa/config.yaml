@@ -122,7 +122,6 @@ data:
       language: en
       cache_expiration: 60
       region: US
-      cache_expiration: 60
     tautulli:                            # Can be individually specified per library as well
       url: https://tautulli.frost.haus
       apikey: {{ TAUTULLI_TOKEN }}
