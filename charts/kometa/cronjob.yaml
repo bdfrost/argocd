@@ -31,6 +31,11 @@ spec:
                   secretKeyRef:
                     name: kometa-secret
                     key: tmdb_token
+              - name: KOMETA_TMDBTOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: kometa-secret
+                    key: tmdb_token
               - name: KOMETA_TAUTULLITOKEN
                 valueFrom:
                   secretKeyRef:
