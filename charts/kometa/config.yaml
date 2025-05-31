@@ -118,7 +118,7 @@ data:
       optimize: false
       verify_ssl:
     tmdb:                                # REQUIRED for the script to run
-      apikey: << TMDBTOKEN >>
+      apikey: <<TMDBTOKEN>>
       language: en
       cache_expiration: 60
       region: US
