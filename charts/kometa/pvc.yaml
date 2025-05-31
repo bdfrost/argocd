@@ -6,6 +6,7 @@ metadata:
   name: kometa
   namespace: kometa
 spec:
+  storageClassName: longhorn
   accessModes:
   - ReadWriteOnce
   resources:
