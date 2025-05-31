@@ -132,7 +132,7 @@ data:
       add_existing: false
       upgrade_existing: false
       monitor_existing: false
-      root_folder_path: /data/movies
+      root_folder_path: /data/library/movies
       monitor: true
       availability: announced
       quality_profile: Up to HD
@@ -148,7 +148,7 @@ data:
       add_existing: false
       upgrade_existing: false
       monitor_existing: false
-      root_folder_path: /data/tv
+      root_folder_path: /data/library/tv
       monitor: all
       quality_profile: Up to 1080p
       language_profile: English
