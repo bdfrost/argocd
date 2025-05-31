@@ -21,57 +21,57 @@ spec:
                 value: "true"
               - name: KOMETA_WIDTH
                 value: "200"
-              - name: PLEX_TOKEN
+              - name: KOMETA_PLEX_TOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: plex_token
-              - name: TMDB_TOKEN
+              - name: KOMETA_TMDB_TOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: tmdb_token
-              - name: TAUTULLI_TOKEN
+              - name: KOMETA_TAUTULLI_TOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: tautulli_token
-              - name: RADARR_TOKEN
+              - name: KOMETA_RADARR_TOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: radarr_token
-              - name: SONARR_TOKEN
+              - name: KOMETA_SONARR_TOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: sonarr_token
-              - name: TRAKT_CLIENT_ID
+              - name: KOMETA_TRAKT_CLIENT_ID
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_client_id
-              - name: TRAKT_CLIENT_SECRET
+              - name: KOMETA_TRAKT_CLIENT_SECRET
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_client_secret
-              - name: TRAKT_PIN
+              - name: KOMETA_TRAKT_PIN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_pin
-              - name: TRAKT_ACCESS
+              - name: KOMETA_TRAKT_ACCESS
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_access
-              - name: TRAKT_REFRESH_TOKEN
+              - name: KOMETA_TRAKT_REFRESH_TOKEN
                 valueFrom:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_refresh_token   
-              - name: VERBOSE
+              - name: KOMETA_VERBOSE
                 value: "1"
               image: kometateam/kometa:latest
               imagePullPolicy: IfNotPresent
