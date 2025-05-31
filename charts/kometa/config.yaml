@@ -25,7 +25,7 @@ data:
             horizontal_position: right
         operations:
           mass_critic_rating_update: imdb
-          mass_audience_rating_update: mdb_tomatoesaudience
+          # mass_audience_rating_update: mdb_tomatoesaudience
           mass_user_rating_update: tmdb
       TV Shows:
         remove_overlays: false           # Set this to true to remove all overlays
@@ -50,7 +50,7 @@ data:
             horizontal_position: right
         operations:
           mass_critic_rating_update: imdb
-          mass_audience_rating_update: mdb_tomatoesaudience
+          # mass_audience_rating_update: mdb_tomatoesaudience
           mass_user_rating_update: tmdb
     playlist_files:
     - default: playlist                  # This is a file within Kometa's defaults folder
@@ -135,7 +135,7 @@ data:
       root_folder_path: /data/library/movies
       monitor: true
       availability: announced
-      quality_profile: Up to HD
+      quality_profile: HD-1080p
       tag: kometa
       search: false
       ignore_cache: false
@@ -150,7 +150,7 @@ data:
       monitor_existing: false
       root_folder_path: /data/library/tv
       monitor: all
-      quality_profile: Up to 1080p
+      quality_profile: HD-1080p
       language_profile: English
       series_type: standard
       season_folder: true
