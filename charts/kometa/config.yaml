@@ -110,7 +110,7 @@ data:
       delete:
     plex:                                # Can be individually specified per library as well; REQUIRED for the script to run
       url: http://peppers.frost.haus:32400
-      token: << PLEXTOKEN >>
+      token: <<PLEXTOKEN>>
       timeout: 60
       db_cache:
       clean_bundles: false
@@ -124,10 +124,10 @@ data:
       region: US
     tautulli:                            # Can be individually specified per library as well
       url: https://tautulli.frost.haus
-      apikey: << TAUTULLITOKEN >>
+      apikey: <<TAUTULLITOKEN>>
     radarr:                              # Can be individually specified per library as well
       url: https://radarr.frost.haus
-      token: << RADARRTOKEN >>
+      token: <<RADARRTOKEN>>
       add_missing: false
       add_existing: false
       upgrade_existing: false
@@ -143,7 +143,7 @@ data:
       plex_path:
     sonarr:                              # Can be individually specified per library as well
       url: https://sonarr.frost.haus
-      token: << SONARRTOKEN >>
+      token: <<SONARRTOKEN>>
       add_missing: false
       add_existing: false
       upgrade_existing: false
@@ -161,15 +161,15 @@ data:
       sonarr_path:
       plex_path:
     trakt:
-      client_id: << TRAKTCLIENTID >>
-      client_secret: << TRAKTCLIENTSECRET >>
-      pin: << TRAKTPIN >>
+      client_id: <<TRAKTCLIENTID>>
+      client_secret: <<TRAKTCLIENTSECRET>>
+      pin: <<TRAKTPIN>>
       authorization:
         # everything below is autofilled by the script
-        access_token: << TRAKTACCESS >>
+        access_token: <<TRAKTACCESS>>
         token_type: Bearer
         expires_in: 7889237
-        refresh_token: << TRAKTREFRESHTOKEN >>
+        refresh_token: <<TRAKTREFRESHTOKEN>>
         scope: public
         created_at: 1735541649
 kind: ConfigMap
