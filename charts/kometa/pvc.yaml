@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: kometa
-  name: kometa
+  name: kometa-config-pvc
   namespace: kometa
 spec:
   storageClassName: longhorn
@@ -11,4 +11,4 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 1024Mi
+      storage: 1Gi
