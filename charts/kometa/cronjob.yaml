@@ -83,9 +83,9 @@ spec:
               args: [ "--run", "--read-only-config" ]
               resources:
                 limits:
-                  cpu: 500m
                   memory: 512Mi
                 requests:
+                  cpu: 500m
                   memory: 512Mi
               volumeMounts:
                 - name: config
