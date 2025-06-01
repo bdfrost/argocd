@@ -94,6 +94,8 @@ spec:
                 - name: tv-config
                   mountPath: /config/tv.yaml
                   subPath: tv.yaml
+                - mountPath: /tmpfs-storage 
+                  name: tmpfs-storage
           volumes:
             - name: config
               persistentVolumeClaim:
@@ -107,4 +109,8 @@ spec:
             - configMap:
                 name: tv-config
               name: tv-config
+            - emptyDir: 
+                medium: Memory 
+                sizeLimit: 500Mi
+              name: tmpfs-storage
           restartPolicy: OnFailure
