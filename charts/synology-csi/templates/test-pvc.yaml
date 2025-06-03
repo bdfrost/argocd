@@ -9,4 +9,4 @@ spec:
   storageClassName: synology-csi-iscsi-delete
   resources:
     requests:
-      storage: 1G
+      storage: 2G
