@@ -6,29 +6,14 @@ keywords:
   - CSI Driver
 kubeVersion: ">= 1.20.0"
 
-# A chart can be either an 'application' or a 'library' chart.
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
 type: application
-
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
 version: 0.10.1
-
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application. Versions are not expected to
-# follow Semantic Versioning. They should reflect the version the application is using.
-# It is recommended to use it with quotes.
 appVersion: "v1.2.0"
-
-# Let's look professional with a Cloudflare icon.
-icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
 
 dependencies:
   - name: synology-csi
     version: 0.10.1
-    repository: https://github.com/christian-schlichtherle/synology-csi-chart/tree/main
+    repository: https://christian-schlichtherle.github.io/synology-csi-chart
 
 sources:
   - https://github.com/christian-schlichtherle/synology-csi-chart/tree/main
