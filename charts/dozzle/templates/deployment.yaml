@@ -50,6 +50,21 @@ spec:
       storage: 2Gi
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc-nu
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  dataSource: 
+    name: {{ .Values.name }}-config-pvc
+    kind: PersistentVolumeClaim
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: pod-viewer
