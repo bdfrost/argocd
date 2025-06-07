@@ -23,3 +23,5 @@ tautulli:
   persistence:
     config:
       enabled: true
+      storageClassName: synology-csi-iscsi-delete
+      existingClaim: "tautulli-config-pvc"
