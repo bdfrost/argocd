@@ -41,8 +41,7 @@ synology-csi:
       disabled: false
       isDefault: true
       parameters:
-       formatOptions: --no-discard 
-       fsType: btrfs
+       csi.storage.k8s.io/fstype: btrfs
        location: /volume4 
        protocol: iscsi 
       reclaimPolicy: Delete
@@ -51,8 +50,7 @@ synology-csi:
       disabled: false
       isDefault: true
       parameters:
-       formatOptions: --no-discard
-       fsType: btrfs  
+       csi.storage.k8s.io/fstype: btrfs  
        location: /volume4 
        protocol: iscsi 
     nfs-delete:
