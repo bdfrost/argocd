@@ -58,6 +58,7 @@ pihole:
       enabled: true
   persistentVolumeClaim:
     enabled: true
+    existingClaim: "pihole-config-pvc"
   podDnsConfig:
     enabled: false
   admin:
