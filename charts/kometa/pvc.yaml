@@ -12,16 +12,3 @@ spec:
   resources:
     requests:
       storage: 10Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: kometa-config-pvc-synology
-  namespace: kometa
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: synology-csi-iscsi-delete
-  resources:
-    requests:
-      storage: 10G
