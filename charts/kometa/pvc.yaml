@@ -6,7 +6,7 @@ metadata:
   name: kometa-config-pvc
   namespace: kometa
 spec:
-  storageClassName: longhorn
+  storageClassName: synology-csi-iscsi-retain
   accessModes:
   - ReadWriteOnce
   resources:
