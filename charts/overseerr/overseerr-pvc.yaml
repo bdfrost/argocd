@@ -2,8 +2,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    io.kompose.service: overseerr-claim0
-  name: overseerr-claim0
+    io.kompose.service: overseerr-pvc
+  name: overseerr-pvc
 spec:
   accessModes:
     - ReadWriteOnce

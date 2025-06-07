@@ -37,9 +37,9 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /config
-              name: overseerr-claim0
+              name: overseerr-pvc
       restartPolicy: Always
       volumes:
-        - name: overseerr-claim0
+        - name: overseerr-pvc
           persistentVolumeClaim:
-            claimName: overseerr-claim0
+            claimName: overseerr-pvc
