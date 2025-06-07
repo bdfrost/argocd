@@ -8,7 +8,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  storageClassName: synology-csi-iscsi-delete
   resources:
     requests:
-      storage: 55Gi
+      storage: 100Gi
