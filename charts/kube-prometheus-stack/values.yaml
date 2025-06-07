@@ -43,9 +43,6 @@ kube-prometheus-stack:
         secretName: prometheus-cert
     prometheusSpec:
       additionalScrapeConfigs:
-        - job_name: 'longhorn'
-          static_configs:
-            - targets: [longhorn-backend.longhorn.svc.cluster.local:9500]
         - job_name: "sonarr-exporter"
           static_configs:
             - targets: ["sonarr-exporter.sonarr-exporter.svc.cluster.local:9707"]

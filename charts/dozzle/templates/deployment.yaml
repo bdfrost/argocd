@@ -38,9 +38,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.name }}-config-pvc-synology
-  labels: 
-    recurring-job.longhorn.io/default: enabled
-    recurring-job.longhorn.io/remote: enabled
 spec:
   accessModes:
     - ReadWriteOnce
