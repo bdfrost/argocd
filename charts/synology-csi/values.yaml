@@ -38,20 +38,23 @@ synology-csi:
   installCSIDriver: true
   storageClasses:
     iscsi-delete:
-      ## Optional: `true` or `false` (default):
       disabled: false
-      ## Optional: `true` or `false` (default):
       isDefault: true
       parameters:
-       dsm: 192.168.100.250            # optional: needs to be present in the client-info secret
-       formatOptions: --no-discard # optional (iSCSI only): mkfs.* options
-       fsType: ext4                # optional (iSCSI only): `btrfs` or `ext4` (default)
-       location: /volume4          # optional, defaults to your primary volume
-       mountPermissions: '0750'    # optional: (NFS only) mounted folder permissions
-       protocol: iscsi             # optional: 'nfs', `smb` or `iscsi` (default)
+       formatOptions: --no-discard 
+       fsType: btrfs
+       location: /volume4 
+       protocol: iscsi 
       reclaimPolicy: Delete
     iscsi-retain:
       reclaimPolicy: Retain
+      disabled: false
+      isDefault: true
+      parameters:
+       formatOptions: --no-discard
+       fsType: btrfs  
+       location: /volume4 
+       protocol: iscsi 
     nfs-delete:
       mountOptions:
         - vers=4.1
@@ -65,6 +68,10 @@ synology-csi:
       parameters:
         protocol: nfs
       reclaimPolicy: Retain
+    smb-delete:
+      disabled: true
+    smb-retain:
+      disabled: true
   volumeSnapshotClasses:
     delete:
       ## One of true or false (default):
