@@ -1,0 +1,11 @@
+replicaCount: 1
+name: longhorn
+longhorn:
+  preUpgradeChecker:
+    jobEnabled: false
+  metrics:
+    serviceMonitor:
+      enabled: true
+  persistence:
+    defaultClassReplicaCount: 2
+    dataEngine: v1
