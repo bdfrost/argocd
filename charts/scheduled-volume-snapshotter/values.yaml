@@ -1,0 +1,63 @@
+replicaCount: 1
+name: snapshotter
+puid: 1026
+pgid: 100
+
+
+scheduled-volume-snapshotter:
+  cronLabels: {}
+  useArgoCD: true
+  image:
+    repository: ryaneorth/scheduled-volume-snapshotter
+  nameOverride: ""
+  schedule: "*/15 * * * *"
+
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 1
+
+  rbac:
+    enabled: true
+
+  logLevel: INFO
+
+  ignoreUnsuccessfulSnapshots: false
+
+  maxSnapshotCount: 0
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  podAnnotations: {}
+  podLabels: {}
+  podSecurityContext: {}
+  containerSecurityContext: {}
+
+  snapshotClasses: []
+    # List of VolumeSnapshotClass
+    #- metadata:
+    #    name: my-snapshotclass
+    #  parameters:
+    #    storage-locations: us-east2
+    #  driver: pd.csi.storage.gke.io
+    #  deletionPolicy: Delete
+
+  snapshots: []
+    # List of ScheduledVolumeSnapshot
+    #- metadata:
+    #    name: my-snapshot
+    #    namespace: my-namespace
+    #  spec:
+    #    snapshotClassName: my-snapshotclass
+    #    persistentVolumeClaimName: my-pvc
+    #    snapshotFrequency: 1d
+    #    snapshotRetention: 365d
+    #    snapshotLabels:
+    #      firstLabel: someLabelValue
+    #      secondLabel: anotherLabelValue
+
+  startingDeadlineSeconds: 300
