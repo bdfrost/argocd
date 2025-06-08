@@ -1,0 +1,10 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: organizr-scheduled-snapshot
+  namespace: organizr
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: organizr-config-pvc
+  snapshotFrequency: 1d
+  snapshotRetention: 7d

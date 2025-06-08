@@ -2,28 +2,19 @@ replicaCount: 1
 name: snapshotter
 puid: 1026
 pgid: 100
-
-
 scheduled-volume-snapshotter:
-  cronLabels: {}
   useArgoCD: true
   image:
     repository: ryaneorth/scheduled-volume-snapshotter
   nameOverride: ""
   schedule: "*/15 * * * *"
-
-  successfulJobsHistoryLimit: 7
-  failedJobsHistoryLimit: 1
-
+  successfulJobsHistoryLimit: 8
+  failedJobsHistoryLimit: 2
   rbac:
     enabled: true
-
   logLevel: INFO
-
   ignoreUnsuccessfulSnapshots: false
-
   maxSnapshotCount: 0
-
   resources:
     limits:
       cpu: 100m
@@ -31,12 +22,10 @@ scheduled-volume-snapshotter:
     requests:
       cpu: 100m
       memory: 128Mi
-
   podAnnotations: {}
   podLabels: {}
   podSecurityContext: {}
   containerSecurityContext: {}
-
   snapshotClasses:
     - metadata:
        name: synology-csi-iscsi-delete
@@ -46,19 +35,5 @@ scheduled-volume-snapshotter:
        name: synology-csi-iscsi-retain
       driver: csi.san.synology.com
       deletionPolicy: Retain
-
   snapshots: []
-    # List of ScheduledVolumeSnapshot
-    #- metadata:
-    #    name: my-snapshot
-    #    namespace: my-namespace
-    #  spec:
-    #    snapshotClassName: my-snapshotclass
-    #    persistentVolumeClaimName: my-pvc
-    #    snapshotFrequency: 1d
-    #    snapshotRetention: 365d
-    #    snapshotLabels:
-    #      firstLabel: someLabelValue
-    #      secondLabel: anotherLabelValue
-
   startingDeadlineSeconds: 300

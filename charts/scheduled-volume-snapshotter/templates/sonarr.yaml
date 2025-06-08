@@ -1,0 +1,10 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: sonarr-scheduled-snapshot
+  namespace: sonarr
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: sonarr-config-pvc
+  snapshotFrequency: 1d
+  snapshotRetention: 7d

@@ -1,0 +1,10 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: uptime-kuma-scheduled-snapshot
+  namespace: uptime-kuma
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: uptime-kuma-config-pvc
+  snapshotFrequency: 1d
+  snapshotRetention: 7d

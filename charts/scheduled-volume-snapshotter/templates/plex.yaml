@@ -6,8 +6,5 @@ metadata:
 spec:
   snapshotClassName: synology-csi-iscsi-delete
   persistentVolumeClaimName: plex-config-pvc
-#   snapshotFrequency: 1
-#   snapshotRetention: 3
-#   snapshotLabels:
-#     firstLabel: someLabelValue
-#     secondLabel: anotherLabelValue
+  snapshotFrequency: 1d
+  snapshotRetention: 7d

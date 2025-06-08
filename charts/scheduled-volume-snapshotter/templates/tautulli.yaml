@@ -1,0 +1,10 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: tautulli-scheduled-snapshot
+  namespace: tautulli
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: tautulli-config-pvc
+  snapshotFrequency: 1d
+  snapshotRetention: 7d

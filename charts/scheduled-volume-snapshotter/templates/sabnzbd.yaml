@@ -1,0 +1,10 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: sabnzbd-scheduled-snapshot
+  namespace: sabnzbd
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: sabnzbd-config-pvc
+  snapshotFrequency: 1d
+  snapshotRetention: 7d

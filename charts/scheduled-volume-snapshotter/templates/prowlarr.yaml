@@ -1,0 +1,10 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: prowlarr-scheduled-snapshot
+  namespace: prowlarr
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: prowlarr-config-pvc
+  snapshotFrequency: 1d
+  snapshotRetention: 7d
