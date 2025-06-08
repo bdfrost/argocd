@@ -37,14 +37,15 @@ scheduled-volume-snapshotter:
   podSecurityContext: {}
   containerSecurityContext: {}
 
-  snapshotClasses: []
-    # List of VolumeSnapshotClass
-    #- metadata:
-    #    name: my-snapshotclass
-    #  parameters:
-    #    storage-locations: us-east2
-    #  driver: pd.csi.storage.gke.io
-    #  deletionPolicy: Delete
+  snapshotClasses:
+    - metadata:
+       name: synology-csi-iscsi-delete
+      driver: csi.san.synology.com
+      deletionPolicy: Delete
+    - metadata:
+       name: synology-csi-iscsi-retain
+      driver: csi.san.synology.com
+      deletionPolicy: Retain
 
   snapshots: []
     # List of ScheduledVolumeSnapshot

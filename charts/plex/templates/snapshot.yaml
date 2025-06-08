@@ -1,0 +1,13 @@
+apiVersion: k8s.ryanorth.io/v1beta1
+kind: ScheduledVolumeSnapshot
+metadata:
+  name: plex-scheduled-snapshot
+  namespace: plex
+spec:
+  snapshotClassName: synology-csi-iscsi-delete
+  persistentVolumeClaimName: plex-config-pvc
+#   snapshotFrequency: 1
+#   snapshotRetention: 3
+#   snapshotLabels:
+#     firstLabel: someLabelValue
+#     secondLabel: anotherLabelValue
