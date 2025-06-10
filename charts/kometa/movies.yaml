@@ -255,7 +255,7 @@ data:
         - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
         - https://trakt.tv/users/goonerdom/lists/hallmark-2024
-        - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025:
+        - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
         sort_title: '###Hallmark'
         collection_order: release.desc
         radarr_tag: Hallmark
