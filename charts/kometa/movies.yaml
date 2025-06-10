@@ -261,16 +261,16 @@ data:
         radarr_tag: Hallmark
         sync_mode: sync
         radarr_add_missing: true
-      Hallmark-imdb:
+      # Hallmark-imdb:
         imdb_search:
           type: movie
           company: co0939898
           limit: 999
-        sort_title: '###Hallmark'
-        collection_order: release.desc
-        radarr_tag: Hallmark
-        sync_mode: sync
-        radarr_add_missing: true
+        # sort_title: '###Hallmark'
+        # collection_order: release.desc
+        # radarr_tag: Hallmark
+        # sync_mode: sync
+        # radarr_add_missing: true
     #####################################
     #        GAC                        #
     #####################################
