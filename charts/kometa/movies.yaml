@@ -218,16 +218,8 @@ data:
           - https://trakt.tv/users/kylep09/lists/hallmark-holiday
           - https://trakt.tv/users/yoly76/lists/holiday-tv-movies-present
           - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-2023
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-2022
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2022
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2021
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2020
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2019
-          - https://trakt.tv/users/crossoverdeseries/lists/hallmark-christmas-movies-2018
         sort_title: '###Hallmark Christmas'
         collection_order: release.desc
-          #collection_order: release.desc
         radarr_tag: Hallmark Christmas
         sync_mode: sync      
         radarr_add_missing: true
@@ -261,16 +253,10 @@ data:
         radarr_tag: Hallmark
         sync_mode: sync
         radarr_add_missing: true
-      # Hallmark-imdb:
         imdb_search:
           type: movie
           company: co0939898
           limit: 999
-        # sort_title: '###Hallmark'
-        # collection_order: release.desc
-        # radarr_tag: Hallmark
-        # sync_mode: sync
-        # radarr_add_missing: true
     #####################################
     #        GAC                        #
     #####################################
@@ -283,16 +269,10 @@ data:
         radarr_tag: GAC
         sync_mode: sync
         radarr_add_missing: true
-      GAV_imdb:
         imdb_search:
-        type: movie
-        company: co0814123
-        limit: 999
-        sort_title: '###GAC_imdb'
-        collection_order: custom
-        radarr_tag: GAC
-        sync_mode: sync
-        radarr_add_missing: true
+          type: movie
+          company: co0814123
+          limit: 999
     #####################################
     #       Christmas                   #
     #####################################
