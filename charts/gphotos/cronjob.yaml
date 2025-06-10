@@ -32,7 +32,7 @@ spec:
                   subPath: library/gphotos
                 - name: storage
                   mountPath: /root/.config/gphotos-sync/
-                  subpath: library/gphotos/
+                  subpath: library/gphotos
           volumes:
             - name: storage
               nfs:
