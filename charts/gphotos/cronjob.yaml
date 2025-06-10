@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kometa
+  namespace: kometa
+spec:
+  schedule: "0 4 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            runAsUser: 1026
+            runAsGroup: 100
+          containers:
+            - name: gphotos-sync
+              env:
+              - name: log-level
+                value: INFO
+              image: gilesknap/gphotos-sync
+              imagePullPolicy: IfNotPresent
+              args: [ "/storage" ]
+              resources:
+                limits:
+                  memory: 1Gi
+                requests:
+                  cpu: 500m
+                  memory: 1Gi
+              volumeMounts:
+                - name: storage
+                  mountPath: /storage
+                  subPath: library
+                - name: storage
+                  mountPath: /root/.config/gphotos-sync/
+                  subpath: library
+          volumes:
+            - name: storage
+              nfs:
+                server: 192.168.100.250
+                path: /volume1/media/
+          restartPolicy: OnFailure
