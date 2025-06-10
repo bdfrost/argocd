@@ -31,11 +31,15 @@ spec:
                 - name: storage
                   mountPath: /storage
                   subPath: library/gphotos
-                - name: storage
+                - name: auth
                   mountPath: /root/.config/gphotos-sync/
                   subpath: library/gphotos
           volumes:
             - name: storage
+              nfs:
+                server: 192.168.100.250
+                path: /volume1/media/
+            - name: auth
               nfs:
                 server: 192.168.100.250
                 path: /volume1/media/
