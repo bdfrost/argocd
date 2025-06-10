@@ -32,7 +32,7 @@ spec:
                   mountPath: /storage
                   subPath: library/gphotos
                 - name: auth
-                  mountPath: /root/.config/gphotos-sync/
+                  mountPath: /root/.config/gphotos-sync
                   subpath: library/gphotos
           volumes:
             - name: storage
