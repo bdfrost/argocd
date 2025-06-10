@@ -252,29 +252,25 @@ data:
         trakt_list:
         - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-841fc509-8aca-4c90-995b-ddb198d9e259
         - https://trakt.tv/users/serralee/lists/hallmark-movies-2024
-        - https://trakt.tv/users/crossoverdeseries/lists/hallmark-2024
-        - https://trakt.tv/users/crossoverdeseries/lists/hallmark-2023
-        - https://trakt.tv/users/crossoverdeseries/lists/hallmark-movies-2022
-        #imdb_search:
-            #type: movie
-            #company: co0939898
-            #limit: 999
+        - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+        - https://trakt.tv/users/goonerdom/lists/hallmark-2024
+        - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025:
         sort_title: '###Hallmark'
         collection_order: release.desc
         radarr_tag: Hallmark
         sync_mode: sync
         radarr_add_missing: true
-          #Hallmark_imdb:
+      Hallmark-imdb:
         imdb_search:
-        type: movie
-        company: co0939898
-        limit: 999
-          #sort_title: '###Hallmark_imdb'
-          #collection_order: custom
-          #radarr_tag: Hallmark
-          #sync_mode: sync
-          #radarr_add_missing: true
-
+          type: movie
+          company: co0939898
+          limit: 999
+        sort_title: '###Hallmark'
+        collection_order: release.desc
+        radarr_tag: Hallmark
+        sync_mode: sync
+        radarr_add_missing: true
     #####################################
     #        GAC                        #
     #####################################
