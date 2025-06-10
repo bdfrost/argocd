@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: kometa
-  namespace: kometa
+  name: gphotos
+  namespace: gphotos
 spec:
   schedule: "0 4 * * *"
   jobTemplate:
