@@ -29,10 +29,10 @@ spec:
               volumeMounts:
                 - name: storage
                   mountPath: /storage
-                  subPath: library
+                  subPath: library/gphotos
                 - name: storage
                   mountPath: /root/.config/gphotos-sync/
-                  subpath: library
+                  subpath: library/gphotos
           volumes:
             - name: storage
               nfs:
