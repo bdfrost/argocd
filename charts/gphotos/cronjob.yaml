@@ -31,8 +31,8 @@ spec:
                   mountPath: /storage
                   subPath: library/gphotos
                 - name: storage
-                  mountPath: /root/.config/gphotos-sync/client_secret.json
-                  subpath: library/gphotos/client_secret.json
+                  mountPath: /root/.config/gphotos-sync/
+                  subpath: library/gphotos/
           volumes:
             - name: storage
               nfs:
