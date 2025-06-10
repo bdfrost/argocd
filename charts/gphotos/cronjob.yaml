@@ -20,6 +20,7 @@ spec:
               image: gilesknap/gphotos-sync
               imagePullPolicy: IfNotPresent
               args: [ "/storage" ]
+              command: [find, /root, -ls]
               resources:
                 limits:
                   memory: 1Gi
