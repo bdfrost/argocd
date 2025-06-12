@@ -31,14 +31,14 @@ spec:
                   mountPath: /storage
                   subPath: library/gphotos
                 - mountPath: "/root/.config/gphotos-sync/"
-                  name: gphotos
+                  name: client-secret
                   readOnly: true
           volumes:
             - name: storage
               nfs:
                 server: 192.168.100.250
                 path: /volume1/media/
-            - name: gphotos
+            - name: client-secret
               secret:
-                secretName: client-secret
+                secretName: gphotos
           restartPolicy: OnFailure
