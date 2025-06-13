@@ -38,6 +38,12 @@ plex-media-server:
       periodSeconds: 60
       timeoutSeconds: 1
       failureThreshold: 3
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
   extraEnv:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
