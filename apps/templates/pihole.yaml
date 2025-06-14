@@ -21,3 +21,5 @@ spec:
     - PrunePropagationPolicy=foreground
     - PruneLast=true
     managedNamespaceMetadata:
+  kustomize:
+    namePrefix: ""

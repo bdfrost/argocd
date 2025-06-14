@@ -3,14 +3,6 @@ name: pihole
 targetPort: 8989
 puid: 1026
 pgid: 100
-# releaseName: pihole
-# ingress:
-#   enabled: true
-#   hosts:
-#   - dns1.frost.haus
-#   annotations:
-#     cert-manager.io/cluster-issuer: letsencrypt
-#     external-dns.alpha.kubernetes.io/host: dns1.brainboy.local.lan
 pihole:
   kustomize: 
     namePrefix: ""
