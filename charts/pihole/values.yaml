@@ -3,6 +3,7 @@ name: pihole
 targetPort: 8989
 puid: 1026
 pgid: 100
+releaseName: pihole
 ingress:
   enabled: true
   hosts:
