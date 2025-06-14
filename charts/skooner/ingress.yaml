@@ -1,0 +1,26 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: skooner
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: skooner.frost.haus
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - skooner.frost.haus
+    secretName: skooner-cert
+  rules:
+    - host: skooner.example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: skooner
+                port:
+                  number: 80
+              # name: https
+            pathType: ImplementationSpecific

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: skooner
+  namespace: argocd
+spec:
+  destination:
+    namespace: skooner
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: charts/skooner
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision:  {{ .Values.spec.source.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    managedNamespaceMetadata:
