@@ -35,7 +35,6 @@ pihole:
         WEBTHEME=default-light
         PIHOLE_INTERFACE=wlan0
         IPV4_ADDRESS="192.168.100.21/24"
-        IPV6_ADDRESS=""
         QUERY_LOGGING=false
         INSTALL_WEB_SERVER=false
         INSTALL_WEB_INTERFACE=true
