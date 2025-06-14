@@ -14,7 +14,7 @@ pihole:
     - address=/gateway.lan/192.168.1.1
     - address=/blacky.lan/192.168.1.10
     - address=/pi.hole/192.168.1.10
-    # enableCustomDnsMasq: true
+    enableCustomDnsMasq: true
     extraEnvVars:
       DNSMASQ_LISTENING: all
       DHCP_START: /192.168.100.100/
