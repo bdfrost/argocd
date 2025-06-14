@@ -13,7 +13,7 @@ spec:
     - skooner.frost.haus
     secretName: skooner-cert
   rules:
-    - host: skooner.example.com
+    - host: skooner.frost.haus
       http:
         paths:
           - path: /
