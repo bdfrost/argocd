@@ -4,6 +4,8 @@ targetPort: 8989
 puid: 1026
 pgid: 100
 releaseName: pihole
+kustomize:
+  namePrefix: ""
 ingress:
   enabled: true
   hosts:
