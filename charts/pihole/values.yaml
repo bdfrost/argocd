@@ -17,7 +17,9 @@ pihole:
     - https://small.oisd.nl
     - https://nsfw.oisd.nl
   dnsmasq:
-    enableCustomDnsMasq: |-
+    enableCustomDnsMasq: true
+    customSettings:
+     otherSettings: |-
       DNSMASQ_LISTENING=all
       DHCP_START=/192.168.100.100/
       DHCP_END=192.168.100.200
