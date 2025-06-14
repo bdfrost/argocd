@@ -16,8 +16,9 @@ pihole:
     - https://blocklistproject.github.io/Lists/alt-version/porn-nl.txt
     - https://small.oisd.nl
     - https://nsfw.oisd.nl
-  customSettings:
-    otherSettings: |-
+  dnsmasq:
+    # enableCustomDnsMasq: |-
+    customSettings: |-
       DNSMASQ_LISTENING=all
       DHCP_START=/192.168.100.100/
       DHCP_END=192.168.100.200
