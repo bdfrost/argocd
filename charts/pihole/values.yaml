@@ -11,9 +11,8 @@ pihole:
     - https://nsfw.oisd.nl
   dnsmasq:
     customDnsEntries:
-    - address=/gateway.lan/192.168.1.1
-    - address=/blacky.lan/192.168.1.10
-    - address=/pi.hole/192.168.1.10
+    - dhcp-option=6,192.168.100.20,192.168.100.21
+    - address=/prowlarr.frost.haus/192.168.100.50
     enableCustomDnsMasq: true
     extraEnvVars:
       DNSMASQ_LISTENING: all
