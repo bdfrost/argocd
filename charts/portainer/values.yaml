@@ -24,21 +24,18 @@ portainer:
     enabled: true
     size: "10G"
     storageClass: synology-csi-iscsi-delete
-
-
-
-  tls:
-  - hosts:
-    - {{ .Values.name }}.frost.haus
-    secretName: {{ .Values.name }}-cert
-  rules:
-  - host: {{ .Values.name }}.frost.haus
-    http:
-      paths:
-      - pathType: ImplementationSpecific
-        path: "/"
-        backend:
-          service:
-            name: {{ .Values.name }}
-            port:
-              name: http
+  # tls:
+  # - hosts:
+  #   - {{ .Values.name }}.frost.haus
+  #   secretName: {{ .Values.name }}-cert
+  # rules:
+  # - host: {{ .Values.name }}.frost.haus
+  #   http:
+  #     paths:
+  #     - pathType: ImplementationSpecific
+  #       path: "/"
+  #       backend:
+  #         service:
+  #           name: {{ .Values.name }}
+  #           port:
+  #             name: http
