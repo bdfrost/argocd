@@ -6,16 +6,7 @@ speedtest-tracker:
   eula:
     OOKLA_EULA_GDPR: false
   ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/host: speedtest-tracker.frost.haus
-    hosts:
-      - host: speedtest-tracker.frost.haus
-    tls:
-      - secretName: speedtest-tracker-cert
-        hosts:
-          - speedtest-tracker.frost.haus
+    enabled: false
     persistence:
       enabled: true
       storageClassName: synology-csi-iscsi-delete
