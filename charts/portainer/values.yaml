@@ -31,6 +31,10 @@ portainer:
     hosts:
       - hosts:
         - portainer.frost.haus
+        paths: "/"
+    tls:
+      - hosts:
+        - portainer.frost.haus
         secretName: portainer-cert
   persistence:
     enabled: true
