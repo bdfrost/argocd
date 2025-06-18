@@ -13,20 +13,25 @@ portainer:
     annotations:
       external-dns.alpha.kubernetes.io/host: portainer.frost.haus
       cert-manager.io/cluster-issuer: letsencrypt
-    hosts:
-      - host: portainer.frost.haus
-        paths: /
-    tls:
-      - hosts:
-        - portainer.frost.haus
   persistence:
     enabled: true
     size: "10G"
     storageClass: synology-csi-iscsi-delete
-  # tls:
-  # - hosts:
-  #   - {{ .Values.name }}.frost.haus
-  #   secretName: {{ .Values.name }}-cert
+    hosts:
+      - host: portainer.frost.haus
+        http:
+          paths:
+          - pathType: ImplementationSpecific
+            path: "/"
+            backend:
+              service:
+                name: portainer
+                port:
+                  name: http
+    tls:
+    - hosts:
+      - portainer.frost.haus
+      secretName: portainer-cert
   # rules:
   # - host: {{ .Values.name }}.frost.haus
   #   http:
