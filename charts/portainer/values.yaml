@@ -14,9 +14,8 @@ portainer:
       external-dns.alpha.kubernetes.io/host: portainer.frost.haus
       cert-manager.io/cluster-issuer: letsencrypt
     hosts:
-      - hosts:
-        - portainer.frost.haus
-        # paths: /
+      - host: portainer.frost.haus
+        paths: /
     tls:
       - hosts:
         - portainer.frost.haus
