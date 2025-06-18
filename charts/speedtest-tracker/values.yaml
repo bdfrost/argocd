@@ -4,7 +4,7 @@ puid: 1026
 pgid: 100
 speedtest-tracker:
   eula:
-    OOKLA_EULA_GDPR: false
+    OOKLA_EULA_GDPR: true
   ingress:
     enabled: false
     persistence:
