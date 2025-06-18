@@ -1,0 +1,23 @@
+replicaCount: 1
+name: speedtest-tracker
+puid: 1026
+pgid: 100
+speedtest-tracker:
+  eula:
+    OOKLA_EULA_GDPR: false
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: speedtest-tracker.frost.haus
+    hosts:
+      - host: speedtest-tracker.frost.haus
+    tls:
+      - secretName: speedtest-tracker-cert
+        hosts:
+          - speedtest-tracker.frost.haus
+    persistence:
+      enabled: true
+      storageClassName: synology-csi-iscsi-delete
+      accessMode: ReadWriteOnce
+      size: 2G
