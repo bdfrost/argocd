@@ -16,7 +16,7 @@ portainer:
     hosts:
       - hosts:
         - portainer.frost.haus
-        paths: /
+        # paths: /
     tls:
       - hosts:
         - portainer.frost.haus
