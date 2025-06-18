@@ -7,16 +7,16 @@ portainer:
   localMgmt: true
   service:
     type: ClusterIP
+  persistence:
+    enabled: true
+    size: "10G"
+    storageClass: synology-csi-iscsi-delete
   ingress:
     enabled: true
     ingressClassName: nginx
     annotations:
       external-dns.alpha.kubernetes.io/host: portainer.frost.haus
       cert-manager.io/cluster-issuer: letsencrypt
-  persistence:
-    enabled: true
-    size: "10G"
-    storageClass: synology-csi-iscsi-delete
     hosts:
       - host: portainer.frost.haus
         http:
@@ -29,9 +29,9 @@ portainer:
                 port:
                   name: http
     tls:
-    - hosts:
-      - portainer.frost.haus
-      secretName: portainer-cert
+      - hosts:
+        - portainer.frost.haus
+        secretName: portainer-cert
   # rules:
   # - host: {{ .Values.name }}.frost.haus
   #   http:
