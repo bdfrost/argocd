@@ -30,8 +30,8 @@ portainer:
       cert-manager.io/cluster-issuer: letsencrypt
     hosts:
       - hosts:
-        - {{ .Values.name }}.frost.haus
-        secretName: {{ .Values.name }}-cert
+        - portainer.frost.haus
+        secretName: portainer-cert
   persistence:
     enabled: true
     size: "10G"
