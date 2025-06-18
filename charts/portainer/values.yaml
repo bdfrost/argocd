@@ -6,22 +6,7 @@ pgid: 100
 portainer:
   localMgmt: true
   service:
-    # Set the httpNodePort and edgeNodePort only if the type is NodePort
-    # For Ingress, set the type to be ClusterIP and set ingress.enabled to true
-    # For Cloud Providers, set the type to be LoadBalancer
     type: ClusterIP
-    httpPort: 9000
-    httpsPort: 9443
-  tls:
-    # If set, Portainer will be configured to use TLS only
-    force: false
-    # If set, will mount the existing secret into the pod
-    existingSecret: ""
-  mtls:
-    # If set, Portainer will be configured to use mTLS only
-    enable: false
-    # If set, will mount the existing secret into the pod
-    existingSecret: ""
   ingress:
     enabled: true
     ingressClassName: nginx
