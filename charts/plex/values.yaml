@@ -28,7 +28,7 @@ plex-media-server:
         port: 32400
       initialDelaySeconds: 60
       periodSeconds: 60
-      timeoutSeconds: 1
+      timeoutSeconds: 5
       failureThreshold: 3
     readinessProbe:
       httpGet:
@@ -36,7 +36,7 @@ plex-media-server:
         port: 32400
       initialDelaySeconds: 60
       periodSeconds: 60
-      timeoutSeconds: 1
+      timeoutSeconds: 5
       failureThreshold: 3
     resources:
       limits:
