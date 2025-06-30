@@ -41,6 +41,7 @@ plex-media-server:
     resources:
       limits:
         memory: 1024Mi
+        ephemeral-storage: 16Gi
       requests:
         cpu: 2000m
         memory: 1024Mi
