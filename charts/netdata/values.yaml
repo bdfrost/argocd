@@ -1,0 +1,17 @@
+replicaCount: 1
+name: netdata
+targetPort: 19999
+puid: 1026
+pgid: 100
+netdata:
+  image:
+    repository: netdata/netdata
+    tag: 3.7.140
+    pullPolicy: Always
+  ingress:
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: netdata.frost.haus
+    hosts:
+      - netdata.frost.haus
