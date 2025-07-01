@@ -28,7 +28,7 @@ descheduler:
     runAsNonRoot: true
     runAsUser: 1000
   cronJobApiVersion: "batch/v1"
-  schedule: "*/2 * * * *"
+  schedule: "0 * * * *"
   suspend: false
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
