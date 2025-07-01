@@ -40,7 +40,7 @@ descheduler:
     v: 3
   deschedulerPolicyAPIVersion: "descheduler/v1alpha2"
   deschedulerPolicy:
-    nodeSelector: "kubernetes.io/hostname=k8s-n1,kubernetes.io/hostname=k8s-n2,kubernetes.io/hostname=k8s-n3"
+    # nodeSelector: "kubernetes.io/hostname=k8s-n1,kubernetes.io/hostname=k8s-n2,kubernetes.io/hostname=k8s-n3"
     maxNoOfPodsToEvictPerNode: 10
     metricsProviders:
     - source: KubernetesMetrics
