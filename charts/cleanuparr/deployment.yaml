@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cleanuparr
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cleanuparr
+  template:
+    metadata:
+      labels:
+        app: cleanuparr
+    spec:
+      containers:
+      - name: cleanuparr
+        resources:
+          requests:
+            cpu: 500m
+            memory: 256Mi
+          limits:
+            memory: 256Mi
+        image: ghcr.io/cleanuparr/cleanuparr:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 11011
+        env:
+        - name: TZ
+          value: "Etc/CDT"
+        - name: PORT
+          value: "11011"
+        - name: PUID
+          value: "1026"
+        - name: PGID
+          value: "100"
+        volumeMounts:
+        - name: cleanuparr-config
+          mountPath: /config
+      volumes:
+        - name: cleanuparr-config
+          persistentVolumeClaim:
+            claimName: cleanuparr-config-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cleanuparr-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi
