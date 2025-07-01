@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: huntarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: huntarr.frost.haus
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - huntarr.frost.haus
+    secretName: huntarr-cert
+  rules:
+  - host: huntarr.frost.haus
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: huntarr
+            port:
+              name: http

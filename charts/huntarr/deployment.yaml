@@ -1,76 +1,60 @@
-# https://github.com/plexguide/Radarr-Hunter
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    io.kompose.service: sonarr-huntarr
-  name: sonarr-huntarr
+  name: huntarr
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: sonarr-huntarr
+      app: huntarr
   template:
     metadata:
       labels:
-        io.kompose.service: sonarr-huntarr
+        app: huntarr
     spec:
       containers:
-        - env:
-            - name: API_KEY
-              value: your-api-key
-            - name: API_URL
-              value: http://your-sonarr-address:8989
-            - name: DEBUG_MODE
-              value: "false"
-            - name: MAX_MISSING
-              value: "1"
-            - name: MAX_UPGRADES
-              value: "5"
-            - name: MONITORED_ONLY
-              value: "true"
-            - name: RANDOM_SELECTION
-              value: "true"
-            - name: SEARCH_TYPE
-              value: both
-            - name: SLEEP_DURATION
-              value: "900"
-            - name: STATE_RESET_INTERVAL_HOURS
-              value: "168"
-          image: huntarr/4sonarr:latest
-          name: huntarr
-      restartPolicy: Always
+      - name: huntarr
+        resources:
+          requests:
+            cpu: 500m
+            memory: 256Mi
+          limits:
+            memory: 256Mi
+        image: ghcr.io/plexguide/huntarr:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9705
+        env:
+        - name: PGID
+          value: "{{ .Values.pgid }}"
+        - name: PUID
+          value: "{{ .Values.puid }}"
+        - name: TZ
+          value: "America/Chicago"
+        volumeMounts:
+        - name: huntarr-config
+          mountPath: /config
+        - name: arr-media
+          mountPath: /data
+      volumes:
+        - name: huntarr-config
+          persistentVolumeClaim:
+            claimName: huntarr-config-pvc
+        - name: arr-media
+          nfs:
+            server: 192.168.100.250
+            path: /volume1/media
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  labels:
-    io.kompose.service: radarr-hunter
-  name: radarr-hunter
+  name: huntarr-config-pvc
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: radarr-hunter
-  template:
-    metadata:
-      labels:
-        io.kompose.service: radarr-hunter
-    spec:
-      containers:
-        - env:
-            - name: API_KEY
-              value: your-api-key
-            - name: API_URL
-              value: http://radarr:7878
-            - name: MAX_MOVIES
-              value: "1"
-            - name: RANDOM_SELECTION
-              value: "true"
-            - name: REFRESH_DURATION
-              value: "30"
-            - name: SLEEP_DURATION
-              value: "600"
-          image: admin9705/radarr-hunter
-          name: radarr-hunter
-      restartPolicy: Always
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi
