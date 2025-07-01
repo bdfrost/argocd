@@ -24,24 +24,20 @@ spec:
             memory: 256Mi
         image: huntarr/huntarr:latest
         imagePullPolicy: Always
-        ports:
-        - containerPort: 9705
+        # ports:
+        # - containerPort: 9705
         env:
         - name: TZ
           value: "America/Chicago"
+        - name: HUNTARR_PORT
+          value: "9705"
         volumeMounts:
         - name: huntarr-config
           mountPath: /config
-        - name: arr-media
-          mountPath: /data
       volumes:
         - name: huntarr-config
           persistentVolumeClaim:
             claimName: huntarr-config-pvc
-        - name: arr-media
-          nfs:
-            server: 192.168.100.250
-            path: /volume1/media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
