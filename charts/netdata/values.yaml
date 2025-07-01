@@ -6,7 +6,6 @@ pgid: 100
 netdata:
   image:
     repository: netdata/netdata
-    tag: 3.7.140
     pullPolicy: Always
   ingress:
     ingressClassName: nginx
