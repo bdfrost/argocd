@@ -22,15 +22,11 @@ spec:
             memory: 256Mi
           limits:
             memory: 256Mi
-        image: ghcr.io/plexguide/huntarr:latest
+        image: huntarr/huntarr:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 9705
         env:
-        - name: PGID
-          value: "{{ .Values.pgid }}"
-        - name: PUID
-          value: "{{ .Values.puid }}"
         - name: TZ
           value: "America/Chicago"
         volumeMounts:
