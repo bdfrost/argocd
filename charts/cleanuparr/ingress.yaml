@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cleanuparr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: cleanuparr.frost.haus
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - cleanuparr.frost.haus
+    secretName: cleanuparr-cert
+  rules:
+  - host: cleanuparr.frost.haus
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: cleanuparr
+            port:
+              name: http
