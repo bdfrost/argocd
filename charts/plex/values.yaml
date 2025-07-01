@@ -45,11 +45,11 @@ plex-media-server:
       failureThreshold: 3
     resources:
       limits:
-        memory: 1024Mi
+        memory: 512Mi
         ephemeral-storage: 16Gi
       requests:
         cpu: 2000m
-        memory: 1024Mi
+        memory: 512Mi
   extraEnv:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes
