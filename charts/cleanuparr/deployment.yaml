@@ -19,9 +19,9 @@ spec:
         resources:
           requests:
             cpu: 500m
-            memory: 256Mi
+            memory: 512Mi
           limits:
-            memory: 256Mi
+            memory: 512Mi
         image: ghcr.io/cleanuparr/cleanuparr:latest
         imagePullPolicy: Always
         ports:
