@@ -25,6 +25,9 @@ netdata:
     limits:
       memory: 256Mi
   k8sState:
+    envFrom:
+      - secretRef:
+          name: netdata
     requests:
       cpu: 500m
       memory: 256Mi
