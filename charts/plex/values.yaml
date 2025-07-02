@@ -45,7 +45,7 @@ plex-media-server:
       failureThreshold: 3
     resources:
       limits:
-        memory: 1024Mi
+        memory: 1568Mi
         ephemeral-storage: 16Gi
       requests:
         cpu: 2000m
