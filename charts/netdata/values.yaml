@@ -9,3 +9,12 @@ netdata:
     pullPolicy: Always
   ingress:
     enabled: false
+  envFrom:
+    - secretRef:
+        name: netdata
+  parent:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      memory: 256Mi
