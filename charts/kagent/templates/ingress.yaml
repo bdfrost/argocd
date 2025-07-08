@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}-ui
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: {{ .Values.name }}-ui.frost.haus
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - {{ .Values.name }}-ui.frost.haus
+    secretName: {{ .Values.name }}-cert
+  rules:
+  - host: {{ .Values.name }}-ui.frost.haus
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: ui
+            port:
+              name: ui
