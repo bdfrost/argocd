@@ -19,6 +19,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: ui
+            name: kagent
             port:
               name: ui
