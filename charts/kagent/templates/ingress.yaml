@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.name }}-ui.frost.haus
-    secretName: {{ .Values.name }}-cert
+    secretName: {{ .Values.name }}-ui-cert
   rules:
   - host: {{ .Values.name }}-ui.frost.haus
     http:
@@ -35,7 +35,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.name }}-app.frost.haus
-    secretName: {{ .Values.name }}-cert
+    secretName: {{ .Values.name }}-app-cert
   rules:
   - host: {{ .Values.name }}-app.frost.haus
     http:
@@ -60,7 +60,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.name }}-controller.frost.haus
-    secretName: {{ .Values.name }}-cert
+    secretName: {{ .Values.name }}-controller-cert
   rules:
   - host: {{ .Values.name }}-controller.frost.haus
     http:
