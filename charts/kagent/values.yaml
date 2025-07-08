@@ -2,4 +2,22 @@ replicaCount: 1
 name: kagent
 puid: 1026
 pgid: 100
-  
+kagent:
+  cilium-policy-agent:
+    enabled: false
+
+  cilium-manager-agent:
+    enabled: false
+
+  cilium-debug-agent:
+    enabled: false
+
+  argo-rollouts-agent:
+    enabled: false
+
+  istio-agent:
+    enabled: false
+
+  otel:
+    tracing:
+      enabled: false
