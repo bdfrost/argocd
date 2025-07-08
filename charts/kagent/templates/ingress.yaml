@@ -21,4 +21,4 @@ spec:
           service:
             name: kagent
             port:
-              name: ui
+              number: 80
