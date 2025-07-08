@@ -22,7 +22,7 @@ spec:
             name: kagent
             port:
               # name: ui
-              number: 8082
+              number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
