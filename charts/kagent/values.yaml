@@ -1,23 +1,22 @@
 replicaCount: 1
 name: kagent
-puid: 1026
-pgid: 100
 kagent:
   cilium-policy-agent:
     enabled: false
-
   cilium-manager-agent:
     enabled: false
-
   cilium-debug-agent:
     enabled: false
-
   argo-rollouts-agent:
     enabled: false
-
   istio-agent:
     enabled: false
-
-  otel:
-    tracing:
-      enabled: false
+  tools:
+    loglevel: "debug"
+    prometheus:
+      url: "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090"
+      username: ""
+      password: ""
+    grafana: # kubectl port-forward svc/grafana 3000:3000
+      url: "http://kube-prometheus-stack-grafana.kube-prometheus-stack.svc.cluster.local:3000"
+      apiKey: ""
