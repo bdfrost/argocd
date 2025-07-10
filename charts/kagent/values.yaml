@@ -15,6 +15,10 @@ kagent:
     enabled: false
   observability-agent:
     enabled: false
+  kgateway-agent:
+    enabled: false
+  helm-agent:
+    enabled: false
   # tools:
   #   loglevel: "debug"
   #   prometheus:
