@@ -1,7 +1,8 @@
 replicaCount: 1
 name: kagent
+cilium-policy-agent.enabled: false
+
 kagent:
-  cilium-policy-agent.enabled: false
   cilium-manager-agent.enabled: false
   cilium-debug-agent.enabled: false
   argo-rollouts-agent.enabled: false
