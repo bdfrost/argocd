@@ -11,6 +11,10 @@ kagent:
     enabled: false
   istio-agent:
     enabled: false
+  promql-agent:
+    enabled: false
+  observability-agent:
+    enabled: false
   # tools:
   #   loglevel: "debug"
   #   prometheus:
@@ -20,3 +24,8 @@ kagent:
   #   grafana: # kubectl port-forward svc/grafana 3000:3000
   #     url: "http://kube-prometheus-stack-grafana.kube-prometheus-stack.svc.cluster.local:3000"
   #     apiKey: ""
+
+
+
+
+
