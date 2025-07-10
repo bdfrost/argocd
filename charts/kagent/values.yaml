@@ -1,16 +1,11 @@
 replicaCount: 1
 name: kagent
 kagent:
-  cilium-policy-agent:
-    enabled: false
-  cilium-manager-agent:
-    enabled: false
-  cilium-debug-agent:
-    enabled: false
-  argo-rollouts-agent:
-    enabled: false
-  istio-agent:
-    enabled: false
+  cilium-policy-agent.enabled: false
+  cilium-manager-agent.enabled: false
+  cilium-debug-agent.enabled: false
+  argo-rollouts-agent.enabled: false
+  istio-agent.enabled: false
   # tools:
   #   loglevel: "debug"
   #   prometheus:
