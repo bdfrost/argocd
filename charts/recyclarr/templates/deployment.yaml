@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.name }}
-        image: recyclarr/recyclarr
+        image: recyclarr/recyclarr:7.4.1
         imagePullPolicy: Always
         env:
         - name: TZ
