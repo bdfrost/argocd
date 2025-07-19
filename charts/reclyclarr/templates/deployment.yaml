@@ -21,8 +21,6 @@ spec:
       - name: {{ .Values.name }}
         image: recyclarr/recyclarr
         imagePullPolicy: Always
-        ports:
-        - containerPort: {{ .Values.targetPort }}
         env:
         - name: PGID
           value: "{{ .Values.pgid }}"
