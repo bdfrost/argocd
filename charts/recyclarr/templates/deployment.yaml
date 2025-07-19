@@ -21,6 +21,8 @@ spec:
         env:
         - name: TZ
           value: "America/Chicago"
+        - name: RECYCLARR_CREATE_CONFIG
+          value: "true"
         volumeMounts:
         - name: {{ .Values.name }}-config
           mountPath: /config
