@@ -1,0 +1,5 @@
+replicaCount: 1
+name: bazarr
+targetPort: 6767
+puid: 1026
+pgid: 100

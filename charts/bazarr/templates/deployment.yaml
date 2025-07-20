@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: lscr.io/linuxserver/bazarr:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        - name: PGID
+          value: "{{ .Values.pgid }}"
+        - name: PUID
+          value: "{{ .Values.puid }}"
+        volumeMounts:
+        - name: {{ .Values.name }}-config
+          mountPath: /config
+        - name: tv
+          mountPath: /tv
+        - name: movies
+          mountPath: /movies
+      volumes:
+        - name: {{ .Values.name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-config-pvc
+        - name: movies
+          nfs:
+            server: 192.168.100.250
+            path: /volume1/media/library/movies
+          - name: tv
+          nfs:
+            server: 192.168.100.250
+            path: /volume1/media/library/tv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi
