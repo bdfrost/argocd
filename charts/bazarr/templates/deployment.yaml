@@ -30,10 +30,10 @@ spec:
         volumeMounts:
         - name: {{ .Values.name }}-config
           mountPath: /config
-        - name: tv
-          mountPath: /tv
-        - name: movies
-          mountPath: /movies
+        # - name: tv
+        #   mountPath: /tv
+        # - name: movies
+        #   mountPath: /movies
         - name: arr-media
           mountPath: /data
       volumes:
@@ -44,14 +44,14 @@ spec:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
-        - name: movies
-          nfs:
-            server: 192.168.100.250
-            path: /volume1/media/library/movies
-        - name: tv
-          nfs:
-            server: 192.168.100.250
-            path: /volume1/media/library/tv
+        # - name: movies
+        #   nfs:
+        #     server: 192.168.100.250
+        #     path: /volume1/media/library/movies
+        # - name: tv
+        #   nfs:
+        #     server: 192.168.100.250
+        #     path: /volume1/media/library/tv
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
