@@ -34,7 +34,13 @@ spec:
           mountPath: /tv
         - name: movies
           mountPath: /movies
+        - name: arr-media
+          mountPath: /data
       volumes:
+        - name: arr-media
+          nfs:
+            server: 192.168.100.250
+            path: /volume1/media
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
