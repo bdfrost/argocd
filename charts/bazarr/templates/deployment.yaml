@@ -42,7 +42,7 @@ spec:
           nfs:
             server: 192.168.100.250
             path: /volume1/media/library/movies
-          - name: tv
+        - name: tv
           nfs:
             server: 192.168.100.250
             path: /volume1/media/library/tv
