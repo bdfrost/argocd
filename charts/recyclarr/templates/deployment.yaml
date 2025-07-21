@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.name }}
-        image: ghcr.io/recyclarr/recyclarr:7.4.1
+        image: ghcr.io/recyclarr/recyclarr:latest
         imagePullPolicy: Always
         resources:
           requests:
