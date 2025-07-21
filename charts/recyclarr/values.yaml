@@ -1,16 +1,2 @@
 replicaCount: 1
 name: recyclarr
-recyclarr:
-  image:
-    repository: recyclarr/recyclarr
-    pullPolicy: IfNotPresent
-  extraEnv: []
-  serviceAccount:
-    create: true
-  volumes: 
-    - name: recyclarr-config
-      persistentVolumeClaim:
-        claimName: recyclarr-config-pvc
-  volumeMounts: 
-    - name: recyclarr-config
-      mountPath: /config
