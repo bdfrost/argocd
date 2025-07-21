@@ -4,7 +4,7 @@ recyclarr:
   replicaCount: 1
 
   image:
-    registry: ghcr.io
+    # registry: ghcr.io
     repository: recyclarr/recyclarr
     pullPolicy: IfNotPresent
 
