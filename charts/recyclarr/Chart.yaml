@@ -25,4 +25,4 @@ appVersion: "7.4.1"
 dependencies:
   - name: recyclarr
     version: 1.0.3
-    repository: oci://ghcr.io/m0nsterrr/helm-charts/recyclarr
+    repository: oci://ghcr.io/m0nsterrr/helm-charts
