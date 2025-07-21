@@ -5,6 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
+    nginx.ingress.kubernetes.io/proxy-body-size: 200m
 spec:
   ingressClassName: nginx
   tls:
