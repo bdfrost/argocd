@@ -36,8 +36,16 @@ spec:
           mountPath: /config
         - name: arr-media
           mountPath: /data
-          - name: temp-local-storage
+        - name: temp-local-storage
           mountPath: /download-temp
+        resources:
+          limits:
+            memory: 2Gi
+            ephemeral-storage: 16Gi
+          requests:
+            cpu: "2"
+            memory: 2Gi
+            ephemeral-storage: 16Gi
       volumes:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
