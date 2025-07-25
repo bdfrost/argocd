@@ -16,6 +16,17 @@ spec:
               image: ghcr.io/raydak-labs/configarr:latest
               imagePullPolicy: Always
               tty: true # for color support
+              env:
+              - name: SONARR_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: configarr
+                    key: SONARR_API_KEY
+              - name: RADARR_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: configarr
+                    key: RADARR_API_KEY
               volumeMounts:
                 - mountPath: /app/repos
                   name: {{ .Values.name }}-config-pvc
@@ -23,9 +34,6 @@ spec:
                 - name: config-volume
                   mountPath: /app/config/config.yml
                   subPath: config.yml
-                - name: secret-volume
-                  mountPath: /app/config/secrets.yml
-                  subPath: secrets.yml
           volumes:
             - name: {{ .Values.name }}-config-pvc
               persistentVolumeClaim:
@@ -33,9 +41,6 @@ spec:
             - name: config-volume
               configMap:
                 name: configarr
-            - name: secret-volume
-              secret:
-                secretName: configarr
           restartPolicy: Never
 ---
 apiVersion: v1

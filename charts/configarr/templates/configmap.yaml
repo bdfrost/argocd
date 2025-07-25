@@ -11,7 +11,8 @@ data:
     sonarr:
       series:
         base_url: https://sonarr.frost.haus
-        api_key: !secret SONARR_API_KEY
+        api_key: !env SONARR_API_KEY
+        !env ENV_NAME
 
         quality_definition:
           type: series
@@ -31,7 +32,7 @@ data:
       instance1:
         # Set the URL/API Key to your actual instance
         base_url: https://radarr.frost.haus
-        api_key: !secret RADARR_API_KEY
+        api_key: !env RADARR_API_KEY
 
         quality_definition:
           type: movie
