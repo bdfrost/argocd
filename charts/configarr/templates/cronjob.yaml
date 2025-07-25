@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: configarr
 spec:
-  schedule: "0 * * * *" # Runs every hour
+  schedule: "0 * * * *"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
@@ -20,14 +20,14 @@ spec:
                 - configMapRef:
                     name: common-deployment-environment
               volumeMounts:
-                - mountPath: /app/repos # Cache repositories
+                - mountPath: /app/repos
                   name: {{ .Values.name }}-config-pvc
                   subPath: configarr-repos
-                - name: config-volume # Mount specific config
+                - name: config-volume
                   mountPath: /app/config/config.yml
                   subPath: config.yml
                 - name: secret-volume
-                  mountPath: /app/config/secrets.yml # Mount secrets
+                  mountPath: /app/config/secrets.yml
                   subPath: secrets.yml
           volumes:
             - name: {{ .Values.name }}-config-pvc

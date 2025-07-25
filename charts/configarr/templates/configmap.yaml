@@ -10,7 +10,7 @@ data:
 
     sonarr:
       series:
-        base_url: http://sonarr:8989
+        base_url: https://sonarr.frost.haus
         api_key: !secret SONARR_API_KEY
 
         quality_definition:
@@ -27,4 +27,18 @@ data:
           - template: sonarr-v4-custom-formats-web-2160p
 
         custom_formats: []
-    radarr: {}
+    radarr:
+      instance1:
+        # Set the URL/API Key to your actual instance
+        base_url: https://radarr.frost.haus
+        api_key: !secret RADARR_API_KEY
+
+        quality_definition:
+          type: movie
+
+        include:
+          - template: radarr-quality-definition-movie
+          - template: radarr-quality-profile-hd-bluray-web
+          - template: radarr-custom-formats-hd-bluray-web
+
+        custom_formats: []
