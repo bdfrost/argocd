@@ -21,7 +21,7 @@ spec:
                     name: common-deployment-environment
               volumeMounts:
                 - mountPath: /app/repos # Cache repositories
-                  name: app-data
+                  name: {{ .Values.name }}-config-pvc
                   subPath: configarr-repos
                 - name: config-volume # Mount specific config
                   mountPath: /app/config/config.yml
@@ -30,9 +30,9 @@ spec:
                   mountPath: /app/config/secrets.yml # Mount secrets
                   subPath: secrets.yml
           volumes:
-            - name: app-data
+            - name: {{ .Values.name }}-config-pvc
               persistentVolumeClaim:
-                claimName: configarr-data
+                claimName: {{ .Values.name }}-config-pvc
             - name: config-volume
               configMap:
                 name: configarr
@@ -40,3 +40,15 @@ spec:
               secret:
                 secretName: configarr
           restartPolicy: Never
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi
