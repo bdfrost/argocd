@@ -16,9 +16,6 @@ spec:
               image: ghcr.io/raydak-labs/configarr:latest
               imagePullPolicy: Always
               tty: true # for color support
-              # envFrom:
-              #   - configMapRef:
-              #       name: common-deployment-environment
               volumeMounts:
                 - mountPath: /app/repos
                   name: {{ .Values.name }}-config-pvc
