@@ -12,7 +12,6 @@ data:
       series:
         base_url: https://sonarr.frost.haus
         api_key: !env SONARR_API_KEY
-        !env ENV_NAME
 
         quality_definition:
           type: series
