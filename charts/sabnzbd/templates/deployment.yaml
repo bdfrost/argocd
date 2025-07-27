@@ -41,11 +41,11 @@ spec:
         resources:
           limits:
             memory: 2Gi
-            ephemeral-storage: 16Gi
+            ephemeral-storage: 600Gi
           requests:
             cpu: "2"
             memory: 2Gi
-            ephemeral-storage: 16Gi
+            ephemeral-storage: 600Gi
       volumes:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
