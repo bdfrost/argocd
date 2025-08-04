@@ -51,6 +51,18 @@ plex-media-server:
         cpu: "1"
         memory: 1Gi
         ephemeral-storage: 16Gi
+        # nvidia.com/gpu: 1 # requesting 1 NVIDIA GPU
+      affinity:
+    # nodeAffinity:
+    #   requiredDuringSchedulingIgnoredDuringExecution:
+    #     nodeSelectorTerms:
+    #     - matchExpressions:
+    #       - key: "feature.node.kubernetes.io/pci-10.present"
+    #         operator: In
+    #         values: ["true"]
+    #       - key: "gpu.vendor.example/installed-memory"
+    #         operator: Gt
+    #         values: ["40960"]
   extraEnv:
       # This claim is optional, and is only used for the first startup of PMS
       # The claim is obtained from https://www.plex.tv/claim/ is only valid for a few minutes

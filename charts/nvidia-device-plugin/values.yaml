@@ -1,0 +1,28 @@
+replicaCount: 1
+name: boilerplate
+targetPort: 8989
+puid: 1026
+pgid: 100
+nvidia-device-plugin:
+  gfd:
+    enabled: true
+  nfd:
+    # enableNodeFeatureApi: false
+    worker:
+      config:
+        sources:
+          custom:
+          - name: "USB Coral TPU"
+            labels:
+              google-coral-device: "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  vendor: {op: In, value: ["18d1", "1a6e"]}
+          - name: "Z-Wave"
+            labels:
+              zwave-device: "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  vendor: {op: In, value: ["10c4"]}
