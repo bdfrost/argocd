@@ -1,7 +1,7 @@
 name: nvidia-device-plugin
 nvidia-device-plugin:
   devicePlugin:
-    enabled: true
+    enabled: false
     config:
       name: time-slicing-config-all
       default: any
