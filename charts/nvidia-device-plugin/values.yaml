@@ -1,17 +1,14 @@
-replicaCount: 1
-name: boilerplate
-targetPort: 8989
-puid: 1026
-pgid: 100
+name: nvidia-device-plugin
 nvidia-device-plugin:
   devicePlugin:
+    enabled: true
     config:
       name: time-slicing-config-all
       default: any
   gfd:
     enabled: true
   nfd:
-    # enableNodeFeatureApi: false
+    enabled: true
     worker:
       config:
         sources:
