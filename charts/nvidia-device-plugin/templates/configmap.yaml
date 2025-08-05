@@ -7,8 +7,14 @@ data:
     version: v1
     flags:
       migStrategy: none
+      failOnInitError: true
+      nvidiaDriverRoot: "/"
+      plugin:
+        passDeviceSpecs: false
+        deviceListStrategy: envvar
+        deviceIDStrategy: uuid
     sharing:
       timeSlicing:
         resources:
         - name: nvidia.com/gpu
-          replicas: 4
+          replicas: 10
