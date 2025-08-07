@@ -1,2 +1,44 @@
 replicaCount: 1
 name: gpu-operator  
+gpu-operator:
+  nfd:
+    enabled: true
+    nodefeaturediscovery: true
+    worker:
+      securityContext:
+        privileged: true
+        allowPrivilegeEscalation: true
+      # https://medium.com/@reefland/dynamic-kubernetes-node-labeling-via-node-feature-discovery-2c3e9c1879d1
+      config:
+        core:
+          sources: ["custom"]
+        sources:
+          custom:
+          - name: "USB Coral TPU"
+            labels:
+              google-coral-device: "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  vendor: {op: In, value: ["18d1", "1a6e"]}
+          - name: "ZWave Adapter"
+            labels:
+              zwave-device: "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  vendor: {op: In, value: ["10c4"]}
+          - name: "SDR Adapter"
+            labels:
+              sdr-device: "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  vendor: {op: In, value: ["0dba"]}
+          - name: "Bluetooth Adapter"
+            labels:
+              bluetooth-device: "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  vendor: {op: In, value: ["0b05"]}
