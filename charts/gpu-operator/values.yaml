@@ -14,12 +14,10 @@ gpu-operator:
       privileged: true
       allowPrivilegeEscalation: true
     config:
-      migStrategy: "none"  # Use 'none' for non-MIG GPUs, 'single' for single GPU, 'all' for all MIG GPUs
-      timeSlicingStrategy: "all"  # Use 'none' to disable time-slicing, 'all' to enable it for all GPUs
       name: device-plugin-config
       create: true
       data:
-        any: |-
+        default: |-
           version: v1
           flags:
             migStrategy: none
