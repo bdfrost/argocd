@@ -51,7 +51,7 @@ plex-media-server:
         cpu: "1"
         memory: 1Gi
         ephemeral-storage: 16Gi
-        # nvidia.com/gpu: 1 # requesting 1 NVIDIA GPU
+        nvidia.com/gpu: 4
       affinity:
     # nodeAffinity:
     #   requiredDuringSchedulingIgnoredDuringExecution:
