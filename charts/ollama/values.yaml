@@ -9,7 +9,8 @@ ollama:
     gpu:
       enabled: true
       type: 'nvidia'
-      number: 5
+      number: 1
+      nvidiaResource: "nvidia.com/gpu"
     models:
       pull:
         - mistral
