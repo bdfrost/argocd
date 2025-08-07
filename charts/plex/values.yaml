@@ -50,10 +50,12 @@ plex-media-server:
       limits:
         memory: 1Gi
         ephemeral-storage: 16Gi
+        nvidia.com/gpu: "5"
       requests:
         cpu: "1"
         memory: 1Gi
         ephemeral-storage: 16Gi
+        nvidia.com/gpu: "5"
       affinity:
     # nodeAffinity:
     #   requiredDuringSchedulingIgnoredDuringExecution:
