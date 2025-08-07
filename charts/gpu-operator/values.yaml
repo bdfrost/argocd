@@ -4,7 +4,7 @@ gpu-operator:
   node-feature-discovery:
     config:
       enableTaints: true
-      labelWhiteList: "nvidia.com/gpu"
+      labelWhiteList: "nvidia.com/gpu.present=true"
   devicePlugin:
     enabled: true
     nodeSelector:
