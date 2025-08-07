@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nvidia-gpu-operator
+  name: gpu-operator
   namespace: argocd
 spec:
   source:
-    path: charts/nvidia-gpu-operator
+    path: charts/gpu-operator
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: nvidia-gpu-operator
+    namespace: gpu-operator
   project: default
   syncPolicy:
     automated:
