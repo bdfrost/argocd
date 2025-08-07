@@ -44,4 +44,3 @@ ollama:
       - ReadWriteOnce
     size: 30Gi
     storageClass: "synology-csi-iscsi-delete"
-    volumeName: "ollama-config-pvc"
