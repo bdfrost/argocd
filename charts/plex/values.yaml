@@ -26,6 +26,9 @@ plex-media-server:
           - peppers.frost.haus
         secretName: plex-plex-media-server-ingress-lets-encrypt
   pms:
+    gpu:
+      nvidia:
+        enabled: false
     configExistingClaim: plex-config-pvc
     livenessProbe:
       httpGet:
@@ -47,12 +50,10 @@ plex-media-server:
       limits:
         memory: 1Gi
         ephemeral-storage: 16Gi
-        nvidia.com/gpu: 5
       requests:
         cpu: "1"
         memory: 1Gi
         ephemeral-storage: 16Gi
-        nvidia.com/gpu: 5
       affinity:
     # nodeAffinity:
     #   requiredDuringSchedulingIgnoredDuringExecution:
@@ -65,8 +66,6 @@ plex-media-server:
     #         operator: Gt
     #         values: ["40960"]
   extraEnv:
-      NVIDIA_VISIBLE_DEVICES: all
-      NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
       PLEX_CLAIM: "claim-TPmFffFTSTTpzpPgPbUj"
       HOSTNAME: "peppers.frost.haus"
       TZ: "America/Chicago"
