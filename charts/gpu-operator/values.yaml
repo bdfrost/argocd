@@ -20,8 +20,9 @@ gpu-operator:
     config:
       name: device-plugin-config
       create: true
+      default: any
       data:
-        default: |-
+        any: |-
           version: v1
           flags:
             migStrategy: none
