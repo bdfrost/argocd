@@ -23,6 +23,6 @@ version: 1.26.0
 appVersion: "1.0"
 
 dependencies:
-- name: plex-media-server
+- name: ollama
   version: 1.26.0
-  repository: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
+  repository: https://helm.otwld.com/
