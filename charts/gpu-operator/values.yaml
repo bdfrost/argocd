@@ -1,6 +1,33 @@
 replicaCount: 1
 name: gpu-operator  
 gpu-operator:
+  devicePlugin:
+    enabled: true
+    nodeSelector:
+      gpu-operator: "true"
+    tolerations:
+      - key: "gpu-operator"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+    securityContext:
+      privileged: true
+      allowPrivilegeEscalation: true
+    config:
+      migStrategy: "none"  # Use 'none' for non-MIG GPUs, 'single' for single GPU, 'all' for all MIG GPUs
+      timeSlicingStrategy: "all"  # Use 'none' to disable time-slicing, 'all' to enable it for all GPUs
+      name: device-plugin-config
+      create: true
+      data:
+        any: |-
+          version: v1
+          flags:
+            migStrategy: none
+          sharing:
+            timeSlicing:
+              resources:
+              - name: nvidia.com/gpu
+                replicas: 4
   nfd:
     enabled: true
     nodefeaturediscovery: true
