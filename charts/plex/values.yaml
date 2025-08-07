@@ -4,6 +4,7 @@ targetPort: 32400
 puid: 1026
 pgid: 100
 plex-media-server:
+  runtimeClassName: nvidia
   image:
     registry: index.docker.io
     repository: plexinc/pms-docker
