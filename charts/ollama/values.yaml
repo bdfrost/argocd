@@ -1,0 +1,48 @@
+replicaCount: 1
+name: ollama
+targetPort: 11434
+puid: 1026
+pgid: 100
+ollama:
+  runtimeClassName: nvidia
+  ollama:
+    gpu:
+      enabled: true
+      type: 'nvidia'
+      number: 5
+    models:
+      pull:
+        - mistral
+        - llama2
+  service:
+    type: ClusterIP
+    port: 11434
+    nodePort: 31434
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: ollama.frost.haus
+    hosts:
+      - host: ollama.frost.haus
+        http:
+          paths:
+          - pathType: ImplementationSpecific
+            path: "/"
+            backend:
+              service:
+                name: ollama
+                port:
+                  name: http
+    tls:
+      - hosts:
+        - ollama.frost.haus
+        secretName: ollama-cert
+  persistentVolume:
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    size: 30Gi
+    storageClass: "synology-csi-iscsi-delete"
+    volumeName: "ollama-config-pvc"
