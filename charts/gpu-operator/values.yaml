@@ -1,11 +1,6 @@
 replicaCount: 1
 name: gpu-operator  
 gpu-operator:
-  node-feature-discovery:
-    master:
-      config:
-        enableTaints: true
-        # labelWhiteList: "nvidia.com/gpu.present=true"
   devicePlugin:
     enabled: true
     nodeSelector:
