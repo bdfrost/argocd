@@ -26,15 +26,14 @@ ollama:
       external-dns.alpha.kubernetes.io/host: ollama.frost.haus
     hosts:
       - host: ollama.frost.haus
-        http:
-          paths:
-          - pathType: ImplementationSpecific
-            path: "/"
-            backend:
-              service:
-                name: ollama
-                port:
-                  name: http
+        paths:
+        - pathType: ImplementationSpecific
+          path: "/"
+          backend:
+            service:
+              name: ollama
+              port:
+                name: http
     tls:
       - hosts:
         - ollama.frost.haus
