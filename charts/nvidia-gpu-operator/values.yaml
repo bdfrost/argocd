@@ -1,0 +1,4 @@
+replicaCount: 1
+name: nvidia-gpu-operator
+gpu-operator:
+  
