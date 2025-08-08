@@ -1,0 +1,14 @@
+replicaCount: 1
+name: open-webui
+targetPort: 8080
+open-webui:
+  ollama:
+    enabled: false
+  ollamaUrls:
+    - "http://ollama.frost.haus"
+  persistence:
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    size: 2Gi
+    storageClass: "synology-csi-iscsi-delete"
