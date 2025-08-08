@@ -1,6 +1,5 @@
 replicaCount: 1
 name: open-webui
-targetPort: 8080
 open-webui:
   ollama:
     enabled: false
@@ -12,3 +11,7 @@ open-webui:
       - ReadWriteOnce
     size: 2Gi
     storageClass: "synology-csi-iscsi-delete"
+  service:
+    labels:
+      app: open-webui
+      kubernetes.io/name: open-webui
