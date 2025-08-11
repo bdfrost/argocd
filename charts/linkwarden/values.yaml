@@ -17,3 +17,7 @@ linkwarden:
       filesystem:
         pvc:
           storageClass: "synology-csi-iscsi-delete"
+    nextAuthSecret:
+      existingSecret:
+        name: linkwarden-nextauth-secret
+        key: nextauth-secret
