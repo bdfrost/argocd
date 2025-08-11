@@ -1,0 +1,25 @@
+name: linkwarden
+linkwarden:
+  runtimeClassName: nvidia
+  service:
+    type: ClusterIP
+    port: 80
+    nodePort: 30080
+    ipFamilyPolicy: SingleStack
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: linkwarden.frost.haus
+    tls:
+      - hosts:
+        - linkwarden.frost.haus
+        secretName: linkwarden-cert
+  linkwarden:
+    data:
+      storageType: "persistent"
+      filesystem:
+        pvc:
+          size: 4Gi
+          storageClass: "synology-csi-iscsi-delete"
