@@ -1,11 +1,5 @@
 name: linkwarden
 linkwarden:
-  runtimeClassName: nvidia
-  service:
-    type: ClusterIP
-    port: 80
-    nodePort: 30080
-    ipFamilyPolicy: SingleStack
   ingress:
     enabled: true
     className: nginx
