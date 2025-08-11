@@ -15,5 +15,4 @@ linkwarden:
       storageType: filesystem
       filesystem:
         pvc:
-          size: 4Gi
           storageClass: "synology-csi-iscsi-delete"
