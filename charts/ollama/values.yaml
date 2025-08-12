@@ -15,6 +15,7 @@ ollama:
       pull:
         - mistral
         - llama2
+        - llava:7b
   service:
     type: ClusterIP
     port: 11434
