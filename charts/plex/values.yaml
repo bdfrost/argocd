@@ -8,7 +8,7 @@ plex-media-server:
   image:
     registry: index.docker.io
     repository: plexinc/pms-docker
-    tag: "1.41.8.9834-071366d65"
+    tag: "1.42.1.10060-4e8b05daf"
     pullPolicy: IfNotPresent
   service:
     type: LoadBalancer
