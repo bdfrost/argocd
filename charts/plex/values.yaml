@@ -58,16 +58,6 @@ plex-media-server:
         ephemeral-storage: 16Gi
         nvidia.com/gpu: "5"
       affinity:
-    # nodeAffinity:
-    #   requiredDuringSchedulingIgnoredDuringExecution:
-    #     nodeSelectorTerms:
-    #     - matchExpressions:
-    #       - key: "feature.node.kubernetes.io/pci-10.present"
-    #         operator: In
-    #         values: ["true"]
-    #       - key: "gpu.vendor.example/installed-memory"
-    #         operator: Gt
-    #         values: ["40960"]
   extraEnv:
       PLEX_CLAIM: "claim-TPmFffFTSTTpzpPgPbUj"
       HOSTNAME: "peppers.frost.haus"

@@ -9,7 +9,7 @@ open-webui:
     enabled: true
     accessModes:
       - ReadWriteOnce
-    size: 2Gi
+    size: 5Gi
     storageClass: "synology-csi-iscsi-delete"
   service:
     labels:
