@@ -16,6 +16,7 @@ ollama:
         - mistral
         - moondream
         - llama2
+        - llama3.1
         - llava:7b
   service:
     type: ClusterIP
