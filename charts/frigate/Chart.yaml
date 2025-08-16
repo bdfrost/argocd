@@ -20,9 +20,9 @@ version: 7.8.0
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: "1.0"
+appVersion: "0.15.1"
 
 dependencies:
   - name: frigate
-    version: frigate-7.8.0
+    version: 7.8.0
     repository: https://blakeblackshear.github.io/blakeshome-charts/
