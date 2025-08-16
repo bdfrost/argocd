@@ -316,4 +316,3 @@ frigate:
       filters:
         speech:
           threshold: 0.8
-    version: 0.15-1
