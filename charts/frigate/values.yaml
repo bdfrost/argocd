@@ -4,11 +4,11 @@ targetPort: 5000
 frigate:
   envFromSecrets:
     - name: frigate-secrets
-      secretName: FRIGATE_CAMERA_PASSWORD_FANCY
+      secretName: frigate_camera_password_fancy
     - name: frigate-secrets
-      secretName: FRIGATE_CAMERA_PASSWORD_LOWER
+      secretName: frigate_camera_password_lower
     - name: frigate-secrets
-      secretName: FRIGATE_MQTT_PASSWORD
+      secretName: frigate_mqtt_password
   tmpfs:
     enabled: true
     sizeLimit: 1Gi
@@ -25,15 +25,9 @@ frigate:
       external-dns.alpha.kubernetes.io/host: frigate.frost.haus
     hosts:
       - host: frigate.frost.haus
-        http:
-          paths:
-          - pathType: ImplementationSpecific
-            path: "/"
-            backend:
-              service:
-                name: frigate
-                port:
-                  name: http
+        paths:
+          - path: '/'
+            portName: http
     tls:
       - hosts:
         - frigate.frost.haus
@@ -52,11 +46,11 @@ frigate:
   resources:
     limits:
       memory: 1Gi
-      nvidia.com/gpu: "5"
+      nvidia.com/gpu: "1"
     requests:
       cpu: "1"
       memory: 1Gi
-      nvidia.com/gpu: "5"
+      nvidia.com/gpu: "1"
   gpu:
     nvidia: 
       enabled: "false"
