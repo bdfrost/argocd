@@ -242,7 +242,7 @@ frigate:
         - robot_lawnmower
         - umbrella
     model:
-      path: plus://39ea8f8fddecc75b5a46dc74342d24c7
+      # path: plus://39ea8f8fddecc75b5a46dc74342d24c7
       path: /edgetpu_model.tflite
       labelmap_path: /labelmap.txt
       width: 320
