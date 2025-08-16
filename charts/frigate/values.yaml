@@ -4,11 +4,11 @@ targetPort: 5000
 frigate:
   envFromSecrets:
     - name: frigate-secrets
-      secretName: frigate_camera_password_fancy
+      secretName: frigate-camera-password-fancy
     - name: frigate-secrets
-      secretName: frigate_camera_password_lower
+      secretName: frigate-camera-password-lower
     - name: frigate-secrets
-      secretName: frigate_mqtt_password
+      secretName: frigate-mqtt-password
   tmpfs:
     enabled: true
     sizeLimit: 1Gi
