@@ -70,16 +70,16 @@ frigate:
       streams:
         bnb_barn:
           # - rtsp://admin:{FRIGATE_CAMERA_PASSWORD_FANCY}@192.168.100.198:554/h264Preview_01_main
-          - ffmpeg:http://192.168.100.198/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=Gr33n3ggs!#video=copy#audio=copy#audio=opus
+          - ffmpeg:http://192.168.100.198/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password={FRIGATE_CAMERA_PASSWORD_FANCY}#video=copy#audio=copy#audio=opus
         bnb_barn_sub:
           # - rtsp://admin:{FRIGATE_CAMERA_PASSWORD_FANCY}@192.168.100.198:554/h264Preview_01_sub
-          - ffmpeg:http://192.168.100.198/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=Gr33n3ggs!
+          - ffmpeg:http://192.168.100.198/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password={FRIGATE_CAMERA_PASSWORD_FANCY}
         bnb_doors:
           # - rtsp://admin:{FRIGATE_CAMERA_PASSWORD_FANCY}@192.168.100.151:554/h264Preview_01_main
-          - ffmpeg:http://192.168.100.151/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=Gr33n3ggs!#video=copy#audio=copy#audio=opus
+          - ffmpeg:http://192.168.100.151/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password={FRIGATE_CAMERA_PASSWORD_FANCY}#video=copy#audio=copy#audio=opus
         bnb_doors_sub:
           # - rtsp://admin:{FRIGATE_CAMERA_PASSWORD_FANCY}@192.168.100.151:554/h264Preview_01_sub
-          - ffmpeg:http://192.168.100.151/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=Gr33n3ggs!
+          - ffmpeg:http://192.168.100.151/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password={FRIGATE_CAMERA_PASSWORD_FANCY}
         bnb_front_door:
           - rtsp://administrator:{FRIGATE_CAMERA_PASSWORD_FANCY}@192.168.100.126:554/stream1
         bnb_front_door_sub:
@@ -111,6 +111,8 @@ frigate:
           output_args:
             record: preset-record-generic-audio-aac
       BnB_doors:
+        lpr:
+          enabled: False
         snapshots:
           enabled: true
           timestamp: true
@@ -136,6 +138,7 @@ frigate:
             coordinates: 0.478,0.177,0.997,0.165,0.994,0.984,0.481,0.984
             loitering_time: 0
       BnB_front_door:
+    
         audio:
           enabled: false
         snapshots:
@@ -186,10 +189,10 @@ frigate:
               input_args: preset-rtsp-restream
               roles:
                 - detect
-    # detectors:
-    #   coral:
-    #     type: edgetpu
-    #     device: usb
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb
     record:
       enabled: true
       alerts:
@@ -242,8 +245,8 @@ frigate:
         - robot_lawnmower
         - umbrella
     model:
-      # path: plus://39ea8f8fddecc75b5a46dc74342d24c7
-      path: /edgetpu_model.tflite
+      path: plus://23bcb37de34f236df4d7d6587446c3c8
+      # path: /edgetpu_model.tflite
       labelmap_path: /labelmap.txt
       width: 320
       height: 320
@@ -280,17 +283,16 @@ frigate:
         intel_gpu_stats: true
         network_bandwidth: true
       version_check: true
-    semantic_search:
-      enabled: true
-      # model_size: large
-      # model_size: small
-      reindex: true
-      model_size: large
+    # semantic_search:
+    #   enabled: true
+    #   # model_size: large
+    #   # model_size: small
+    #   reindex: true
+    #   model_size: large
     genai:
       enabled: true
       provider: ollama
       base_url: http://ollama.frost.haus
-      # model: llama2:latest
       model: llava:7b
       prompt: Analyze the {label} in these images from the {camera} security camera.
         Focus on the actions, behavior, and potential intent of the {label}, rather 
@@ -303,6 +305,19 @@ frigate:
         car: Observe the primary vehicle in these images. Focus on its movement, 
           direction, or purpose (e.g., parking, approaching, circling). If it's a 
           delivery vehicle, mention the company.
+    lpr:
+      enabled: True
+      match_distance: 1 # Allow one character variation in plate matching
+      min_area: 1500 # Ignore plates with an area (length x width) smaller than 1500 pixels
+      min_plate_length: 4 # Only recognize plates with 4 or more characters
+      known_plates:
+        Brian's Car:
+          - "PDA-990"
+        Brian's Truck:
+          - "PDA-995"
+    classification:
+      bird:
+        enabled: true
     audio:
       enabled: true
       max_not_heard: 30
@@ -316,3 +331,5 @@ frigate:
       filters:
         speech:
           threshold: 0.8
+    detect:
+      enabled: true
