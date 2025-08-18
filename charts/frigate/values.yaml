@@ -8,7 +8,7 @@ frigate:
     enabled: true
     sizeLimit: 1Gi
   coral:
-    enabled: "true"
+    enabled: "false"
   shmSize: 1Gi
   service:
     port: 5000
@@ -42,11 +42,11 @@ frigate:
   resources:
     limits:
       memory: 4Gi
-      nvidia.com/gpu: "1"
+      # nvidia.com/gpu: "1"
     requests:
       cpu: "4"
       memory: 4Gi
-      nvidia.com/gpu: "1"
+      # nvidia.com/gpu: "1"
   gpu:
     nvidia: 
       enabled: "false"
@@ -190,11 +190,6 @@ frigate:
                 - detect
           output_args: 
             record: preset-record-generic-audio-aac
-        # mqtt:
-        #   enabled: true
-        #   bounding_box: false #this will get rid of the box around the bird. We already know it is a bird. Sheesh.
-        #   timestamp: false #this will get rid of the time stamp in the image. 
-        #   quality: 95 #default quality is 70, which will get you lots of compression artifacts
         motion:
           mask:
             - 0.263,0.521,0.315,0.516,0.322,0.604,0.252,0.6
@@ -285,12 +280,9 @@ frigate:
         - umbrella
     model:
       path: plus://23bcb37de34f236df4d7d6587446c3c8
-      # path: /edgetpu_model.tflite
       labelmap_path: /labelmap.txt
       width: 320
       height: 320
-      # input_pixel_format: rgb
-      # input_tensor: nhwc
       labelmap:
         2: vehicle
       attributes_map:
@@ -322,17 +314,10 @@ frigate:
         intel_gpu_stats: false
         network_bandwidth: true
       version_check: true
-    # semantic_search:
-    #   enabled: true
-    #   # model_size: large
-    #   # model_size: small
-    #   reindex: false
-    #   model_size: large
     genai:
       enabled: true
       provider: ollama
       base_url: http://ollama.frost.haus
-      # model: llama2:latest
       model: llava:7b
       prompt: Analyze the {label} in these images from the {camera} security camera.
         Focus on the actions, behavior, and potential intent of the {label}, rather 
