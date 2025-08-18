@@ -50,12 +50,12 @@ plex-media-server:
     resources:
       limits:
         memory: 1Gi
-        ephemeral-storage: 16Gi
+        ephemeral-storage: 64Gi
         nvidia.com/gpu: "5"
       requests:
-        cpu: "1"
+        cpu: "2"
         memory: 1Gi
-        ephemeral-storage: 16Gi
+        ephemeral-storage: 64Gi
         nvidia.com/gpu: "5"
       affinity:
   extraEnv:
