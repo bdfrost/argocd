@@ -34,7 +34,7 @@ frigate:
       storageClass: "synology-csi-iscsi-delete"
     media:
       enabled: "true"
-      size: 50Gi
+      size: 60Gi
       accessMode: ReadWriteOnce
       storageClass: "synology-csi-iscsi-delete"
   resources:
