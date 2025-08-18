@@ -89,28 +89,6 @@ frigate:
       height: 720
       quality: 8
       mode: motion
-    go2rtc:
-      streams:
-        bnb_barn:
-          # - rtsp://admin:Gr33n3ggs!@192.168.100.198:554/h264Preview_01_main
-          - ffmpeg:http://192.168.100.198/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=Gr33n3ggs!#video=copy#audio=copy#audio=opus
-        bnb_barn_sub:
-          # - rtsp://admin:Gr33n3ggs!@192.168.100.198:554/h264Preview_01_sub
-          - ffmpeg:http://192.168.100.198/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=Gr33n3ggs!
-        bnb_doors:
-          # - rtsp://admin:Gr33n3ggs!@192.168.100.151:554/h264Preview_01_main
-          - ffmpeg:http://192.168.100.151/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=Gr33n3ggs!#video=copy#audio=copy#audio=opus
-        bnb_doors_sub:
-          # - rtsp://admin:Gr33n3ggs!@192.168.100.151:554/h264Preview_01_sub
-          - ffmpeg:http://192.168.100.151/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=Gr33n3ggs!
-        bnb_front_door:
-          - rtsp://administrator:Gr33n3ggs!@192.168.100.126:554/stream1
-        bnb_front_door_sub:
-          - rtsp://administrator:Gr33n3ggs!@192.168.100.126:554/stream2
-        bnb_living_room:
-          - rtsp://admin:greeneggs@192.168.100.162:554//h264Preview_01_main
-        bnb_living_room_sub:
-          - rtsp://admin:greeneggs@192.168.100.162:554//h264Preview_01_sub
     cameras:
     #  BnB_esp32_cam:
     #    ffmpeg:

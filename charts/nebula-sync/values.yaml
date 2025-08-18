@@ -1,0 +1,5 @@
+replicaCount: 1
+name: nebula-sync
+targetPort: 8989
+puid: 1026
+pgid: 100
