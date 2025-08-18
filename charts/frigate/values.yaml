@@ -41,11 +41,11 @@ frigate:
       storageClass: "synology-csi-iscsi-delete"
   resources:
     limits:
-      memory: 1Gi
+      memory: 4Gi
       nvidia.com/gpu: "1"
     requests:
-      cpu: "1"
-      memory: 1Gi
+      cpu: "4"
+      memory: 4Gi
       nvidia.com/gpu: "1"
   gpu:
     nvidia: 
