@@ -28,6 +28,7 @@ ollama:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/host: ollama.frost.haus
+      nginx.ingress.kubernetes.io/proxy-body-size: 200m
     hosts:
       - host: ollama.frost.haus
         paths:
