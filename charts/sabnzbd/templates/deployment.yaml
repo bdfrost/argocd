@@ -40,11 +40,11 @@ spec:
           mountPath: /download-temp
         resources:
           limits:
-            memory: 2Gi
+            memory: 4Gi
             ephemeral-storage: 320Gi
           requests:
             cpu: "2"
-            memory: 2Gi
+            memory: 4Gi
             ephemeral-storage: 320Gi
       volumes:
         - name: {{ .Values.name }}-config
