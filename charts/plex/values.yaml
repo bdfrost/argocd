@@ -49,12 +49,12 @@ plex-media-server:
       failureThreshold: 3
     resources:
       limits:
-        memory: 1Gi
+        memory: 2Gi
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "5"
       requests:
         cpu: "2"
-        memory: 1Gi
+        memory: 2Gi
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "5"
       affinity:
