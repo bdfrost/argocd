@@ -78,10 +78,10 @@ spec:
               args: [ "--run", "--read-only-config" ]
               resources:
                 limits:
-                  memory: 1Gi
+                  memory: 2Gi
                 requests:
                   cpu: 500m
-                  memory: 1Gi
+                  memory: 2Gi
               volumeMounts:
                 - name: config
                   mountPath: /config
