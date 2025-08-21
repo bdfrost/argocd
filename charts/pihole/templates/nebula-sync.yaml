@@ -49,11 +49,11 @@ spec:
           - name: SYNC_CONFIG_NTP
             value: "true"
           - name: SYNC_CONFIG_RESOLVER
-            value: "false"
+            value: "true"
           - name: SYNC_CONFIG_DATABASE
-            value: "false"
+            value: "true"
           - name: SYNC_CONFIG_MISC
-            value: "false"
+            value: "true"
           - name: SYNC_CONFIG_DEBUG
             value: "false"
           - name: SYNC_GRAVITY_DHCP_LEASES
