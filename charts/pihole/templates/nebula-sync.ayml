@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nebula-sync
+  namespace: nebula-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nebula-sync
+  template:
+    metadata:
+      labels:
+        app: nebula-sync
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: nebula-sync
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: "2"
+              memory: 1Gi
+          image: ghcr.io/lovelaze/nebula-sync:latest
+          imagePullPolicy: Always
+          env:
+          - name: TZ
+            value: "America/Phoenix"
+          - name: PRIMARY
+            valueFrom:
+              secretKeyRef:
+                name: nebula-sync-env
+                key: dns2
+          - name: REPLICAS
+            valueFrom:
+              secretKeyRef:
+                name: nebula-sync-env
+                key: dns1
+          - name: FULL_SYNC
+            value: "false"
+          - name: RUN_GRAVITY
+            value: "true"
+          - name: CRON
+            value: "*/15 * * * *"
