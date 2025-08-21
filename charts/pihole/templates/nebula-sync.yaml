@@ -43,7 +43,7 @@ spec:
           - name: CRON
             value: "*/15 * * * *"
           - name: SYNC_CONFIG_DNS
-            value: "false"
+            value: "true"
           - name: SYNC_CONFIG_DHCP
             value: "true"
           - name: SYNC_CONFIG_NTP
