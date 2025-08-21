@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: Always
           env:
           - name: TZ
-            value: "America/Phoenix"
+            value: "America/Chicago"
           - name: PRIMARY
             valueFrom:
               secretKeyRef:
