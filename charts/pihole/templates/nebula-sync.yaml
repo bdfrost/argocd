@@ -53,9 +53,9 @@ spec:
           - name: SYNC_CONFIG_DATABASE
             value: "false" #I think this is a problem sync
           - name: SYNC_CONFIG_MISC
-            value: "false"
+            value: "true" #test
           - name: SYNC_CONFIG_DEBUG
-            value: "false"
+            value: "true" #test
           - name: SYNC_GRAVITY_DHCP_LEASES
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_GROUP
@@ -65,10 +65,10 @@ spec:
           - name: SYNC_GRAVITY_AD_LIST_BY_GROUP
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_DOMAIN_LIST
-            value: "true" #test
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_DOMAIN_LIST_BY_GROUP
-            value: "true" #test
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_CLIENT
-            value: "true" #test 
+            value: "true" #safe to sync 
           - name: SYNC_GRAVITY_CLIENT_BY_GROUP
-            value: "true" #test
+            value: "true" #safe to sync
