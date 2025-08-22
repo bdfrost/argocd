@@ -43,13 +43,13 @@ spec:
           - name: CRON
             value: "*/15 * * * *"
           - name: SYNC_CONFIG_DNS
-            value: "false" #PROBLEM!!!
+            value: "false" #NOT safe to sync
           - name: SYNC_CONFIG_MISC
-            value: "false" #PROBLEM!!!
+            value: "false" #NOT safe to sync
           - name: SYNC_CONFIG_DHCP
             value: "true" #safe to sync
           - name: SYNC_CONFIG_NTP
-            value: "true" #safe to sync
+            value: "false" #safe to sync BUT will enable DHCP on secondary
           - name: SYNC_CONFIG_RESOLVER
             value: "true" #safe to sync
           - name: SYNC_CONFIG_DATABASE
