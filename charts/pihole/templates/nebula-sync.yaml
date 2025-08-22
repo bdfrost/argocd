@@ -43,9 +43,9 @@ spec:
           - name: CRON
             value: "*/15 * * * *"
           - name: SYNC_CONFIG_DNS
-            value: "false" #test
+            value: "false"
           - name: SYNC_CONFIG_DHCP
-            value: "false" #test
+            value: "false"
           - name: SYNC_CONFIG_NTP
             value: "true" #safe to sync
           - name: SYNC_CONFIG_RESOLVER
@@ -53,9 +53,9 @@ spec:
           - name: SYNC_CONFIG_DATABASE
             value: "false" #I think this is a problem sync
           - name: SYNC_CONFIG_MISC
-            value: "true" #safe to sync
+            value: "false"
           - name: SYNC_CONFIG_DEBUG
-            value: "true" #safe to sync
+            value: "true" #test
           - name: SYNC_GRAVITY_DHCP_LEASES
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_GROUP
