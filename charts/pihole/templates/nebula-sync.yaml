@@ -43,7 +43,7 @@ spec:
           - name: CRON
             value: "*/15 * * * *"
           - name: SYNC_CONFIG_DNS
-            value: "true" #PROBLEM?
+            value: "true" #PROBLEM!!!
           - name: SYNC_CONFIG_MISC
             value: "false" #PROBLEM!!!
           - name: SYNC_CONFIG_DHCP
