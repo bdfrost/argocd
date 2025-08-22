@@ -51,9 +51,9 @@ spec:
           - name: SYNC_CONFIG_RESOLVER
             value: "true" #safe to sync
           - name: SYNC_CONFIG_DATABASE
-            value: "false" #PROBLEM
+            value: "true" #PROBLEM?
           - name: SYNC_CONFIG_MISC
-            value: "false" #PROBLEM?
+            value: "false" #PROBLEM
           - name: SYNC_CONFIG_DEBUG
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_DHCP_LEASES
