@@ -53,7 +53,7 @@ spec:
           - name: SYNC_CONFIG_DATABASE
             value: "false" #PROBLEM
           - name: SYNC_CONFIG_MISC
-            value: "true" #testing
+            value: "false" #PROBLEM?
           - name: SYNC_CONFIG_DEBUG
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_DHCP_LEASES
