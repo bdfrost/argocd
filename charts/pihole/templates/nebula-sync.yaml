@@ -47,9 +47,9 @@ spec:
           - name: SYNC_CONFIG_DHCP
             value: "false"
           - name: SYNC_CONFIG_NTP
-            value: "true"
+            value: "true" #safe to sync
           - name: SYNC_CONFIG_RESOLVER
-            value: "true"
+            value: "true" #safe to sync
           - name: SYNC_CONFIG_DATABASE
             value: "false" #I think this is a problem sync
           - name: SYNC_CONFIG_MISC
@@ -57,13 +57,13 @@ spec:
           - name: SYNC_CONFIG_DEBUG
             value: "false"
           - name: SYNC_GRAVITY_DHCP_LEASES
-            value: "true"
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_GROUP
-            value: "true"
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_AD_LIST
-            value: "false"
+            value: "true" #test
           - name: SYNC_GRAVITY_AD_LIST_BY_GROUP
-            value: "false"
+            value: "true" #test
           - name: SYNC_GRAVITY_DOMAIN_LIST
             value: "false"
           - name: SYNC_GRAVITY_DOMAIN_LIST_BY_GROUP
