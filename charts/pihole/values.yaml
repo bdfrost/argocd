@@ -87,10 +87,10 @@ pihole:
     loadBalancerIP: 192.168.100.20
     externalTrafficPolicy: Cluster
     port: 67
-  doh:
-    enabled: true
-    pullPolicy: Always
-    envVars: {
-      DOH_UPSTREAM: "https://1.1.1.1/dns-query"
-    }
+  # doh:
+  #   enabled: true
+  #   pullPolicy: Always
+  #   envVars: {
+  #     DOH_UPSTREAM: "https://1.1.1.1/dns-query"
+  #   }
 
