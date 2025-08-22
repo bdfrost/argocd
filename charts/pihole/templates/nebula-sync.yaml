@@ -61,14 +61,14 @@ spec:
           - name: SYNC_GRAVITY_GROUP
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_AD_LIST
-            value: "true" #test
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_AD_LIST_BY_GROUP
-            value: "true" #test
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_DOMAIN_LIST
-            value: "false"
+            value: "true" #test
           - name: SYNC_GRAVITY_DOMAIN_LIST_BY_GROUP
-            value: "false"
+            value: "true" #test
           - name: SYNC_GRAVITY_CLIENT
-            value: "false"
+            value: "true" #test 
           - name: SYNC_GRAVITY_CLIENT_BY_GROUP
-            value: "false"
+            value: "true" #test
