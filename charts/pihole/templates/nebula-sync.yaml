@@ -30,12 +30,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: nebula-sync-env
-                key: dns1
+                key: dns2
           - name: REPLICAS
             valueFrom:
               secretKeyRef:
                 name: nebula-sync-env
-                key: dns2
+                key: dns1
           - name: FULL_SYNC
             value: "false"
           - name: RUN_GRAVITY
