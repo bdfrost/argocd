@@ -45,17 +45,17 @@ spec:
           - name: SYNC_CONFIG_DNS
             value: "false"
           - name: SYNC_CONFIG_DHCP
-            value: "false"
+            value: "true" #test
           - name: SYNC_CONFIG_NTP
             value: "true" #safe to sync
           - name: SYNC_CONFIG_RESOLVER
             value: "true" #safe to sync
           - name: SYNC_CONFIG_DATABASE
-            value: "false" #I think this is a problem sync
+            value: "false"
           - name: SYNC_CONFIG_MISC
             value: "false"
           - name: SYNC_CONFIG_DEBUG
-            value: "true" #test
+            value: "true" #safe to sync
           - name: SYNC_GRAVITY_DHCP_LEASES
             value: "true" #safe to sync
           - name: SYNC_GRAVITY_GROUP
