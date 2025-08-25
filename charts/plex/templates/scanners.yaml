@@ -18,7 +18,7 @@ spec:
         args:
         - |
           echo "Starting the scan process..."
-          curl -sS "https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$X-PLEX-TOKEN"
+          curl -sS "https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$X-PLEX-TOKEN" && \
           echo "Scan job completed."
       restartPolicy: Never
   backoffLimit: 1
@@ -43,7 +43,7 @@ spec:
         args:
         - |
           echo "Starting the scan process..."
-          curl -sS "https://peppers.frost.haus/library/sections/2/refresh?X-Plex-Token=$X-PLEX-TOKEN"
+          curl -sS "https://peppers.frost.haus/library/sections/2/refresh?X-Plex-Token=$X-PLEX-TOKEN" && \
           echo "Scan job completed."
       restartPolicy: Never
   backoffLimit: 1
