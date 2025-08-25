@@ -14,7 +14,7 @@ spec:
             secretKeyRef:
               name: plex-secrets
               key: x-plex-token
-        command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$XPLEXTOKEN"]
+        command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$XPLEXTOKEN && echo 'Movies scan triggered successfully.' || echo 'Failed to trigger Movies scan.'"]
       restartPolicy: Never
   backoffLimit: 1
 ---
@@ -34,6 +34,6 @@ spec:
             secretKeyRef:
               name: plex-secrets
               key: x-plex-token
-        command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/2/refresh?X-Plex-Token=$XPLEXTOKEN"]
+        command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/2/refresh?X-Plex-Token=$XPLEXTOKEN && echo 'TV Shows scan triggered successfully.' || echo 'Failed to trigger TV Shows scan.'"]
       restartPolicy: Never
   backoffLimit: 1
