@@ -9,12 +9,12 @@ spec:
       - name: scan-container
         image: alpine/curl
         env:
-        - name: X-PLEX-TOKEN
+        - name: XPLEXTOKEN
           valueFrom:
             secretKeyRef:
               name: plex-secrets
               key: x-plex-token
-        command: ["/bin/sh", "-c", "echo $X\-PLEX\-TOKEN"]
+        command: ["/bin/sh", "-c", "echo $XPLEXTOKEN"]
         # command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$X-PLEX-TOKEN"]
       restartPolicy: Never
   backoffLimit: 1
