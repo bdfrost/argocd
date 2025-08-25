@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: scan-movies-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: scan-container
+        image: busybox
+        env:
+            - name: X-PLEX-TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: plex-secrets
+                  key: x-plex-token
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          echo "Starting the scan process..."
+          curl -sS "https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$X-PLEX-TOKEN"
+          echo "Scan job completed."
+      restartPolicy: Never
+  backoffLimit: 1
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: scan-tv-shows-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: scan-container
+        image: busybox
+        env:
+            - name: X-PLEX-TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: plex-secrets
+                  key: x-plex-token
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          echo "Starting the scan process..."
+          curl -sS "https://peppers.frost.haus/library/sections/2/refresh?X-Plex-Token=$X-PLEX-TOKEN"
+          echo "Scan job completed."
+      restartPolicy: Never
+  backoffLimit: 1

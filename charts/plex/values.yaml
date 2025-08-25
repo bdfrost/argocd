@@ -58,8 +58,10 @@ plex-media-server:
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "5"
       affinity:
+      claimSecret:
+        name: "plex-secrets"
+        key: "plex-claim"
   extraEnv:
-      PLEX_CLAIM: "claim-TPmFffFTSTTpzpPgPbUj"
       HOSTNAME: "peppers.frost.haus"
       TZ: "America/Chicago"
       PLEX_UPDATE_CHANNEL: "5"
