@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: scan-container
-        image: busybox
+        image: alpine/curl
         env:
             - name: X-PLEX-TOKEN
               valueFrom:
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: scan-container
-        image: busybox
+        image: alpine/curl
         env:
             - name: X-PLEX-TOKEN
               valueFrom:
