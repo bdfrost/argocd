@@ -22,9 +22,9 @@ external-dns:
           name: pihole-password
           key: EXTERNAL_DNS_PIHOLE_PASSWORD
     - name: EXTERNAL_DNS_PIHOLE_SERVER
-      # make sure NOT to put a trailing slash, as external-dns adds its own
       value: http://192.168.100.21
-    ## Limit external-dns resources
+    - name: EXTERNAL_DNS_PIHOLE_API_VERSION
+      value: 6
   resources:
     limits:
       memory: 50Mi
