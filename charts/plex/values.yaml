@@ -14,14 +14,7 @@ plex-media-server:
     type: LoadBalancer
     port: 32400
     metallb.io/ip-allocated-from-pool: first-pool
-  ingress:
-    enabled: true
-    url: https://peppers.frost.haus
-    ingressClassName: nginx
-    certificateSecret: "plex-plex-media-server-ingress-lets-encrypt"
     annotations:
-      external-dns.alpha.kubernetes.io/host: peppers.frost.haus
-      cert-manager.io/cluster-issuer: letsencrypt
       gethomepage.dev/enabled: "true"
       gethomepage.dev/description: Media Server
       gethomepage.dev/group: Media
@@ -30,6 +23,14 @@ plex-media-server:
       gethomepage.dev/widget.type: "plex"
       gethomepage.dev/widget.url: "https://peppers.frost.haus"
       gethomepage.dev/weight: "10"
+  ingress:
+    enabled: true
+    url: https://peppers.frost.haus
+    ingressClassName: nginx
+    certificateSecret: "plex-plex-media-server-ingress-lets-encrypt"
+    annotations:
+      external-dns.alpha.kubernetes.io/host: peppers.frost.haus
+      cert-manager.io/cluster-issuer: letsencrypt
     tls:
       - hosts:
           - peppers.frost.haus
