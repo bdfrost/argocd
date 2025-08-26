@@ -25,4 +25,4 @@ appVersion: "v1.4.6"
 dependencies:
   - name: homepage
     version: 4.1.4
-    repository: oci://ghcr.io/m0nsterrr/helm-charts/homepage
+    repository: oci://ghcr.io/m0nsterrr/helm-charts
