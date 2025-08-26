@@ -29,8 +29,7 @@ plex-media-server:
       gethomepage.dev/name: Plex
       gethomepage.dev/widget.type: "plex"
       gethomepage.dev/widget.url: "https://peppers.frost.haus"
-      gethomepage.dev/pod-selector: ""
-      gethomepage.dev/weight: "10" # optional
+      gethomepage.dev/weight: "10"
     tls:
       - hosts:
           - peppers.frost.haus
