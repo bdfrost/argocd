@@ -29,7 +29,7 @@ data:
         header: true
       Applications:
         style: column
-        # columns: 3
+        columns: 3
         header: true
       Arr:
         style: row
