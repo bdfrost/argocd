@@ -11,12 +11,54 @@ data:
     traefik: true # enable traefik ingressRoute
     gateway: true # enable gateway-api
   settings.yaml: |
-    title: Homepage
+    title: Homelab Dashboard
+    background:
+      image: images/homepage.png
+      brightness: 50
+      opacity: 25
+
+    providers:
+      openweathermap: openweathermapapikey
+      weatherapi: weatherapiapikey
+
     logo: logo.png
     favicon: favicon.png
     theme: dark
     showThemeToggle: true
     defaultWidgetView: grid
+
+    layout:
+      Glances:
+        style: row
+        columns: 3
+        header: false
+
+      Homelab:
+        header: false
+
+      Media-Servers:
+        style: row
+        columns: 3
+        header: false
+
+      Network:
+        style: row
+        columns: 2
+        header: false
+
+      Torrents:
+        header: false
+
+      Nextainer:
+        style: row
+        columns: 2
+        header: false
+
+      Media-Viewer:
+        style: row
+        columns: 2
+        header: false
+
     gridsterOptions:
       minCols: 3
       maxCols: 6
@@ -86,10 +128,18 @@ data:
               password:
               key: APIKEY
         - Plex:
-            icon: plex
+            icon: plex.png
             href: https://peppers.frost.haus
-            description: media
-            ping: https://peppers.frost.haus
+            description: Watch movies and TV shows.
+            server: peppers.frost.haus
+            container: plex
+            widgets:
+              - type: tautulli
+                url: https://tautulli.frost.haus
+                key: e2d493a22d5f42608cd247f7ac2df008
+              - type: uptimekuma
+                url: https://uptime-kuma.frost.haus
+                slug: default
         - Tautili:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
@@ -100,13 +150,39 @@ data:
               type: tautulli
               url: https://tautulli.frost.haus
               key: e2d493a22d5f42608cd247f7ac2df008
+    - Network:
+        - 'Nginx Proxy Manager':
+            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/nginx-proxy-manager.png
+            href: https://yournginxdomain.com
+            ping: yournginxdomain.com
+            widget:
+              type: npm
+              url: https://yournginxdomain.com
+              username: <npm_login_email>
+              password: <npm_login_password>
+
+        - Pihole:
+            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pi-hole.png
+            href: https://yourpiholedomain.com
+            ping: yourpiholedomain.com
+            widget:
+              type: pihole
+              url: https://yourpiholedomain.com
+              version: 6 # required if running v6 or higher, defaults to 5
+              key: <pihole_api_key>  #optional, in v6 can be your password or app password
+
     - Applications: 
         - Portainer:
-            icon: mdi-docker
-            href: http://IPADDRESS
-            description: docker controller 
-            ping: http://IPADDRESS
+            icon: portainer.png
+            href: https://yourportainerdomain.com
+            ping: yourportainerdomain.com
             container: portainer
+            widget:
+              type: portainer
+              url:  http://<portainer_ip>:<port> # Domain didn't work for me, not sure why
+              env: 3
+              key: ptr_rz+/Pns2ddIIYiX84oJAgT5TRLLGSYTwCscNMHDj4Gw=
+
         - Uptime Kuma:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus
@@ -118,16 +194,72 @@ data:
               url: https://uptime-kuma.frost.haus/
               slug: default
         - Proxmox:
-            icon:  mdi-server
-            href: https://IPADDRESS
-            description: hypervisor
-            ping: https://IPADDRESS
+            icon: proxmox.png
+            href: https://yourdomainame.com
+            ping: yourdomain.com
+            widget:
+              type: proxmox
+              url: https://yourdomainame.com
+              username: <proxmox_usrname>
+              password: <proxmox_api_key>
+              node: royalfox
+              fields: ["vms", "lxc"]
         - Dozzle:
             icon: mdi-database
             href: http://IPADDRESS
             description: docker logs
             ping: http://IPADDRESS
+    - Media-Servers:
+        - Sonarr:
+            icon: sonarr.png
+            href: https://yoursonarrdomain.com
+            ping: yoursonarrdomain.com
+            widget:
+              type: sonarr
+              url: https://yoursonarrdomain.com
+              key: <sonarr_api_key>
 
+        - Radarr:
+            icon: radarr.png
+            href: https://youradarrdomain.com
+            ping: youradarrdomain.com
+            widget:
+              type: radarr
+              url: https://youradarrdomain.com
+              key: <radarr_api_key>
+
+        - Prowlarr:
+            icon: prowlarr.png
+            href: https://yourprowlarrdomain.com
+            ping: yourprowlarrdomain.com
+            widget:
+              type: prowlarr
+              url: https://yourprowlarrdomain.com
+              key: <prowlarr_api_key>
+    - Media-Viewer:
+        - Jellyfin:
+            icon: jellyfin.png
+            href: https://yourjellyfindomain.com
+            ping: yourjellyfindomain.com
+            widget:
+              type: jellyfin
+              url: https://yourjellyfindomain.com
+              key: <jellyfin_api_key>
+              enableBlocks: true # optional, defaults to false
+              enableNowPlaying: true # optional, defaults to true
+              enableUser: true # optional, defaults to false
+              showEpisodeNumber: true # optional, defaults to false
+              expandOneStreamToTwoRows: false # optional, defaults to true
+
+        - Immich:
+            icon: immich.png
+            href: https://yourimmichdomain.com
+            ping: yourimmichdomain.com
+            widget:
+              type: immich
+              url: https://yourimmichdomain.com
+              key: <immich_api_key>
+              version: 2 # optional, default is 1
     - Information:
         - Speedtest Tracker:
             icon: mdi-speedometer
@@ -147,20 +279,28 @@ data:
                 type: tailscale
                 deviceid: DEVICEID
                 key: APIKEY
+    - Glances:
+      -  'CPU Usage':
+          widget:
+            type: glances
+            url: http://<yourpvehostip>:<port> # generally port 61208
+            metric: cpu
+            version: 4
+
+      - 'GPU Usage':
+          widget:
+            type: glances
+            url: http://<gpuvm_ip>:<port> # I've passed gpu to an ubuntu server vm in PVE and I'm referencing it here
+            metric: gpu:nvidia0
+            version: 4
+
+      - 'Network':
+          widget:
+            type: glances
+            url: http://<yourpvehostip>:<port>
+            metric: network:enp7s0
+            version: 4
   widgets.yaml: |
-    - Plex:
-        icon: plex.png
-        href: https://peppers.frost.haus
-        description: Watch movies and TV shows.
-        server: peppers.frost.haus
-        container: plex
-        widgets:
-          - type: tautulli
-            url: https://tautulli.frost.haus
-            key: e2d493a22d5f42608cd247f7ac2df008
-          - type: uptimekuma
-            url: https://uptime-kuma.frost.haus
-            slug: default
     - kubernetes:
         cluster:
           show: true
@@ -185,6 +325,20 @@ data:
     - logo:
         href: https://example.com
         target: _blank # Optional, can be set in settings
+    - glances:
+        url: http://<proxmox_host_ip>:61208
+    #    username: user # optional if auth enabled in Glances
+    #    password: pass # optional if auth enabled in Glances
+        version: 4 # required only if running glances v4 or higher, defaults to 3
+        disk: / # disabled by default, use mount point of disk(s) in glances. Can also be a list (see below)
+        cpu: false # optional, enabled by default, disable by setting to false
+        mem: false # optional, enabled by default, disable by setting to false
+        cputemp: true # disabled by default
+        uptime: true # disabled by default
+        diskUnits: bytes # optional, bytes (default) or bbytes. Only applies to disk
+        expanded: false # show the expanded view
+    #    label: MyMachine # optional
+
   docker.yaml: ""
   proxmox.yaml: |
     - HomeAssistant:
