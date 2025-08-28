@@ -28,18 +28,14 @@ data:
       Homelab:
         header: true
       Applications:
-        style: row
-        columns: 3
+        style: column
+        # columns: 3
         header: true
       Arr:
         style: row
         columns: 3
         header: true
       Network:
-        style: row
-        columns: 2
-        header: true
-      Media-Viewer:
         style: row
         columns: 2
         header: true
