@@ -85,16 +85,6 @@ data:
         - abbr: YT
           href: https://youtube.com/
   services.yaml: |
-    - Network:
-        - pihole:
-            icon: mdi-pi-hole
-            href: http://dns2.frost.haus/admin
-            description: network ad blocking
-            ping: http://dns2.frost.haus
-            widget:
-                type: pihole
-                url: http://dns2.frost.haus
-                key: molLmkh1Hb6Ds/vga7RmJNlYGWh++FapNG7ZHZv9zOA=
     - Arr:
         - Sonarr:
             icon: sonarr.png
@@ -144,6 +134,15 @@ data:
               url: https://tautulli.frost.haus
               key: e2d493a22d5f42608cd247f7ac2df008
     - Network:
+        - pihole:
+            icon: mdi-pi-hole
+            href: http://dns2.frost.haus/admin
+            description: network ad blocking
+            ping: http://dns2.frost.haus
+            widget:
+                type: pihole
+                url: http://dns2.frost.haus
+                key: molLmkh1Hb6Ds/vga7RmJNlYGWh++FapNG7ZHZv9zOA=
         - 'Nginx Proxy Manager':
             icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/nginx-proxy-manager.png
             href: https://yournginxdomain.com
@@ -153,7 +152,25 @@ data:
               url: https://yournginxdomain.com
               username: <npm_login_email>
               password: <npm_login_password>
-
+        - Speedtest Tracker:
+            icon: mdi-speedometer
+            href: http://IPADDRESS
+            description: speedtest
+            ping: http://IPADDRESS
+            container: speedtest
+            widget:
+                type: speedtest
+                url: http://IPADDRESS  
+        - Uptime Kuma:
+            icon: mdi-bell
+            href: https://uptime-kuma.frost.haus
+            description: uptime monitoring
+            ping: https://uptime-kuma.frost.haus
+            container: uptime-kuma
+            widget:
+              type: uptimekuma
+              url: https://uptime-kuma.frost.haus/
+              slug: default
         - Pihole:
             icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pi-hole.png
             href: https://yourpiholedomain.com
@@ -174,16 +191,7 @@ data:
               url:  http://<portainer_ip>:<port> # Domain didn't work for me, not sure why
               env: 3
               key: ptr_rz+/Pns2ddIIYiX84oJAgT5TRLLGSYTwCscNMHDj4Gw=
-        - Uptime Kuma:
-            icon: mdi-bell
-            href: https://uptime-kuma.frost.haus
-            description: uptime monitoring
-            ping: https://uptime-kuma.frost.haus
-            container: uptime-kuma
-            widget:
-              type: uptimekuma
-              url: https://uptime-kuma.frost.haus/
-              slug: default
+
         - Proxmox:
             icon: proxmox.png
             href: https://yourdomainame.com
@@ -200,15 +208,7 @@ data:
             href: http://IPADDRESS
             description: docker logs
             ping: http://IPADDRESS
-        - Speedtest Tracker:
-            icon: mdi-speedometer
-            href: http://IPADDRESS
-            description: speedtest
-            ping: http://IPADDRESS
-            container: speedtest
-            widget:
-                type: speedtest
-                url: http://IPADDRESS   
+ 
   widgets.yaml: |
     - kubernetes:
         cluster:
