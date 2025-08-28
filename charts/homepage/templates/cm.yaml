@@ -77,6 +77,38 @@ data:
           href: https://youtube.com/
   services.yaml: |
     - Arr:
+        - Calendar:
+            icon: calendar.png
+            href: https://calendar.frost.haus
+            ping: calendar.frost.haus
+            widget:
+              - type: calendar
+                firstDayInWeek: sunday # optional - defaults to monday
+                view: monthly # optional - possible values monthly, agenda
+                maxEvents: 10 # optional - defaults to 10
+                showTime: true # optional - show time for event happening today - defaults to false
+                timezone: America/Los_Angeles # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+                integrations: # optional
+                  - type: sonarr
+                    service_group: Arr
+                    service_name: Sonarr
+                    color: teal # optional
+                    baseUrl: https://sonarr.frost.haus
+                    params:
+                      unmonitored: true # optional - defaults to false, used with *arr stack    
+                  - type: radarr
+                    service_group: Arr
+                    service_name: Radarr
+                    color: orange
+                    baseUrl: https://radarr.frost.haus
+                    params:
+                      unmonitored: true # optional - defaults to false, used with *arr stack
+              - type: calendar
+                view: agenda
+                maxEvents: 10 # optional - defaults to 10
+                showTime: true # optional - show time for event happening today - defaults to false
+                previousDays: 3 # optional - shows events since three days ago - defaults to 0
+                integrations: # same as in Monthly view example     
         - Sabnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frost.haus
@@ -109,6 +141,22 @@ data:
               type: prowlarr
               url: https://prowlarr.frost.haus
               key: <prowlarr_api_key>
+        - Bazarr:
+            icon: bazarr.png
+            href: https://bazarr.frost.haus
+            ping: bazarr.frost.haus
+            widget:
+              type: bazarr
+              url: https://bazarr.frost.haus
+              key: <bazarr_api_key>
+        - Overseerr:
+            icon: overseerr.png
+            href: https://overseerr.frost.haus
+            ping: overseerr.frost.haus
+            widget:
+              type: overseerr
+              url: https://overseerr.frost.haus
+              key: <overseerr_api_key>
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
@@ -122,6 +170,9 @@ data:
               - type: uptimekuma
                 url: https://uptime-kuma.frost.haus
                 slug: default
+              - type: plex
+                url: http://plex.host.or.ip:32400
+                key: mytokenhere # see https://www.plexopedia.com/plex-media-server/general/plex-token/
         - Tautili:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
@@ -172,7 +223,58 @@ data:
               type: uptimekuma
               url: https://uptime-kuma.frost.haus/
               slug: default
+        - Netdata:
+            icon: netdata.png
+            href: https://netdata.frost.haus
+            description: system monitoring
+            ping: netdata.frost.haus
+            container: netdata
+            widget:
+              type: netdata
+              url: https://netdata.frost.haus
+              key: netdatakeyhere
+        - Datastation:
+            icon: datastation.png
+            href: https://datastation.frost.haus
+            description: data analytics
+            ping: datastation.frost.haus
+            container: datastation
+            widget:
+              type: datastation
+              url: https://datastation.frost.haus
+              key: datastationkeyhere
+              username: username
+              password: password
+              volume: volume_N # optional
     - Applications: 
+        - Home Assistant:
+            icon: home-assistant.png
+            href: http://homeassistant.frost.haus:8123
+            description: Home automation
+            ping: homeassistant.frost.haus
+            container: home-assistant
+            widget:
+              type: homeassistant
+              url: http://homeassistant.frost.haus:8123
+              key: longlivedaccesstokenhere
+              custom:
+                - state: sensor.total_power
+                - state: sensor.total_energy_today
+                  label: energy today
+                - template: "{{ states.switch|selectattr('state','equalto','on')|list|length }}"
+                  label: switches on
+                - state: weather.forecast_home
+                  label: wind speed
+                  value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
+        - Argo CD:
+            icon: argocd.png
+            href: https://argocd.frost.haus
+            ping: argocd.frost.haus
+            container: argocd-server
+            widget:
+              type: argocd
+              url: https://argocd.frost.haus
+              key: argocdapikey
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
@@ -181,7 +283,7 @@ data:
             widget:
               type: portainer
               url:  http://portainer.frost.haus
-              env: 3
+              env: 1
               key: ptr_rz+/Pns2ddIIYiX84oJAgT5TRLLGSYTwCscNMHDj4Gw=
         - Proxmox1:
             icon: proxmox.png
@@ -192,7 +294,7 @@ data:
               url: https://pve1.frost.haus:8006/api2/json
               username: <proxmox_usrname>
               password: <proxmox_api_key>
-              node: royalfox
+              node: pve1
               fields: ["vms", "lxc"]
         - Proxmox2:
             icon: proxmox.png
@@ -203,7 +305,7 @@ data:
               url: https://pve2.frost.haus:8006/api2/json
               username: <proxmox_usrname>
               password: <proxmox_api_key>
-              node: royalfox
+              node: pve2
               fields: ["vms", "lxc"]
         - Proxmox3:
             icon: proxmox.png
@@ -214,7 +316,7 @@ data:
               url: https://pve3.frost.haus:8006/api2/json
               username: <proxmox_usrname>
               password: <proxmox_api_key>
-              node: royalfox
+              node: pve3
               fields: ["vms", "lxc"]
         - Proxmox Backups Server:
             icon: proxmox.png
@@ -236,7 +338,7 @@ data:
   widgets.yaml: |
     - kubernetes:
         cluster:
-          show: true
+          show: false
           cpu: true
           memory: true
           showLabel: true
