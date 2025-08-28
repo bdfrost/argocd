@@ -63,24 +63,90 @@ data:
         - abbr: YT
           href: https://youtube.com/
   services.yaml: |
-    - My First Group:
-      - My First Service:
-        href: http://localhost/
-        description: Homepage is awesome
-      - Emby:
-        icon: emby.png
-        href: "http://emby.home/"
-        description: Media server
-        namespace: media # The kubernetes namespace the app resides in
-        app: emby # The name of the deployed app
-    - My Second Group:
-      - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
-    - My Third Group:
-      - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+    - Network Services:
+        - pihole:
+            icon: mdi-pi-hole
+            href: http://dns2.frost.haus/admin
+            description: network ad blocking
+            ping: http://dns2.frost.haus
+            widget:
+                type: pihole
+                url: http://dns2.frost.haus
+                key: molLmkh1Hb6Ds/vga7RmJNlYGWh++FapNG7ZHZv9zOA=
+    - Media Services:
+        - TrueNAS:
+            icon: mdi-nas
+            href: http://IPADDRESS
+            description: NAS
+            ping: http://IPADDRESS
+            widget:
+              type: truenas
+              url: http://IPADDRESS
+              username:
+              password:
+              key: APIKEY
+        - Plex:
+            icon: plex
+            href: https://peppers.frost.haus
+            description: media
+            ping: https://peppers.frost.haus
+        - Tautili:
+            icon: mdi-folder-play
+            href: https://tautulli.frost.haus
+            description: plex stats
+            ping: https://tautulli.frost.haus
+            container: tautulli
+            widget:
+              type: tautulli
+              url: https://tautulli.frost.haus
+              key: e2d493a22d5f42608cd247f7ac2df008
+    - Applications: 
+        - Portainer:
+            icon: mdi-docker
+            href: http://IPADDRESS
+            description: docker controller 
+            ping: http://IPADDRESS
+            container: portainer
+        - Uptime Kuma:
+            icon: mdi-bell
+            href: https://uptime-kuma.frost.haus
+            description: uptime monitoring
+            ping: https://uptime-kuma.frost.haus
+            container: uptime-kuma
+            widget:
+              type: uptimekuma
+              url: https://uptime-kuma.frost.haus/
+              slug: default
+        - Proxmox:
+            icon:  mdi-server
+            href: https://IPADDRESS
+            description: hypervisor
+            ping: https://IPADDRESS
+        - Dozzle:
+            icon: mdi-database
+            href: http://IPADDRESS
+            description: docker logs
+            ping: http://IPADDRESS
+
+    - Information:
+        - Speedtest Tracker:
+            icon: mdi-speedometer
+            href: http://IPADDRESS
+            description: speedtest
+            ping: http://IPADDRESS
+            container: speedtest
+            widget:
+                type: speedtest
+                url: http://IPADDRESS   
+        - Tailscale:
+            icon: mdi-tailwind
+            href: https://tailscale.com
+            description: router connection
+            ping: https://tailscale.com
+            widget:
+                type: tailscale
+                deviceid: DEVICEID
+                key: APIKEY
   widgets.yaml: |
     - Plex:
         icon: plex.png
