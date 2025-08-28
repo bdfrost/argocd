@@ -17,19 +17,19 @@ data:
     theme: dark
     showThemeToggle: true
     defaultWidgetView: grid
-    # gridsterOptions:
-    #   minCols: 3
-    #   maxCols: 6
-    #   minRows: 3
-    #   maxRows: 6
-    #   defaultSizeX: 2
-    #   defaultSizeY: 2
-    #   mobileBreakpoint: 640
-    #   useBodyForMobile: true
-    #   resizable:
-    #     enabled: true
-    #   draggable:
-    #     enabled: true
+    gridsterOptions:
+      minCols: 3
+      maxCols: 6
+      minRows: 3
+      maxRows: 6
+      defaultSizeX: 2
+      defaultSizeY: 2
+      mobileBreakpoint: 640
+      useBodyForMobile: true
+      resizable:
+        enabled: true
+      draggable:
+        enabled: true
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
