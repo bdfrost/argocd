@@ -88,27 +88,27 @@ data:
     - Arr:
         - Sonarr:
             icon: sonarr.png
-            href: https://yoursonarrdomain.com
-            ping: yoursonarrdomain.com
+            href: https://sonarr.frost.haus
+            ping: sonarr.frost.haus
             widget:
               type: sonarr
-              url: https://yoursonarrdomain.com
+              url: https://sonarr.frost.haus
               key: <sonarr_api_key>
         - Radarr:
             icon: radarr.png
-            href: https://youradarrdomain.com
-            ping: youradarrdomain.com
+            href: https://radarr.frost.haus
+            ping: radarr.frost.haus
             widget:
               type: radarr
-              url: https://youradarrdomain.com
+              url: https://radarr.frost.haus
               key: <radarr_api_key>
         - Prowlarr:
             icon: prowlarr.png
-            href: https://yourprowlarrdomain.com
-            ping: yourprowlarrdomain.com
+            href: https://prowlarr.frost.haus
+            ping: prowlarr.frost.haus
             widget:
               type: prowlarr
-              url: https://yourprowlarrdomain.com
+              url: https://prowlarr.frost.haus
               key: <prowlarr_api_key>
         - Plex:
             icon: plex.png
@@ -134,29 +134,31 @@ data:
               url: https://tautulli.frost.haus
               key: e2d493a22d5f42608cd247f7ac2df008
     - Network:
-        - pihole:
+        - pihole1:
+            icon: mdi-pi-hole
+            href: http://dns1.frost.haus/admin
+            description: network ad blocking
+            ping: dns1.frost.haus
+            widget:
+                type: pihole
+                url: http://dns1.frost.haus
+                key: STUFF
+                version: 6 # required if running v6 or higher, defaults to 5
+        - pihole2:
             icon: mdi-pi-hole
             href: http://dns2.frost.haus/admin
             description: network ad blocking
-            ping: http://dns2.frost.haus
+            ping: dns2.frost.haus
             widget:
                 type: pihole
                 url: http://dns2.frost.haus
                 key: molLmkh1Hb6Ds/vga7RmJNlYGWh++FapNG7ZHZv9zOA=
-        - 'Nginx Proxy Manager':
-            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/nginx-proxy-manager.png
-            href: https://yournginxdomain.com
-            ping: yournginxdomain.com
-            widget:
-              type: npm
-              url: https://yournginxdomain.com
-              username: <npm_login_email>
-              password: <npm_login_password>
+                version: 6 # required if running v6 or higher, defaults to 5
         - Speedtest Tracker:
             icon: mdi-speedometer
-            href: http://IPADDRESS
+            href: https://speedtest.frost.haus
             description: speedtest
-            ping: http://IPADDRESS
+            ping: speedtest.frost.haus
             container: speedtest
             widget:
                 type: speedtest
@@ -171,43 +173,55 @@ data:
               type: uptimekuma
               url: https://uptime-kuma.frost.haus/
               slug: default
-        - Pihole:
-            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pi-hole.png
-            href: https://yourpiholedomain.com
-            ping: yourpiholedomain.com
-            widget:
-              type: pihole
-              url: https://yourpiholedomain.com
-              version: 6 # required if running v6 or higher, defaults to 5
-              key: <pihole_api_key>  #optional, in v6 can be your password or app password
     - Applications: 
         - Portainer:
             icon: portainer.png
-            href: https://yourportainerdomain.com
-            ping: yourportainerdomain.com
+            href: https://portainer.frost.haus
+            ping: portainer.frost.haus
             container: portainer
             widget:
               type: portainer
-              url:  http://<portainer_ip>:<port> # Domain didn't work for me, not sure why
+              url:  http://portainer.frost.haus
               env: 3
               key: ptr_rz+/Pns2ddIIYiX84oJAgT5TRLLGSYTwCscNMHDj4Gw=
-
-        - Proxmox:
+        - Proxmox1:
             icon: proxmox.png
-            href: https://yourdomainame.com
-            ping: yourdomain.com
+            href: https://pve1.frost.haus:8006
+            ping: pve1.frost.haus
             widget:
               type: proxmox
-              url: https://yourdomainame.com
+              url: https://pve1.frost.haus:8006/api2/json
+              username: <proxmox_usrname>
+              password: <proxmox_api_key>
+              node: royalfox
+              fields: ["vms", "lxc"]
+        - Proxmox2:
+            icon: proxmox.png
+            href: https://pve2.frost.haus:8006
+            ping: pve2.frost.haus
+            widget:
+              type: proxmox
+              url: https://pve2.frost.haus:8006/api2/json
+              username: <proxmox_usrname>
+              password: <proxmox_api_key>
+              node: royalfox
+              fields: ["vms", "lxc"]
+        - Proxmox3:
+            icon: proxmox.png
+            href: https://pve3.frost.haus:8006
+            ping: pve3.frost.haus
+            widget:
+              type: proxmox
+              url: https://pve3.frost.haus:8006/api2/json
               username: <proxmox_usrname>
               password: <proxmox_api_key>
               node: royalfox
               fields: ["vms", "lxc"]
         - Dozzle:
             icon: mdi-database
-            href: http://IPADDRESS
+            href: http://dozzle.frost.haus
             description: docker logs
-            ping: http://IPADDRESS
+            ping: dozzle.frost.haus
  
   widgets.yaml: |
     - kubernetes:
