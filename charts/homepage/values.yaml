@@ -1,25 +1,3 @@
 name: homepage
-targetPort: 8989
-homepage:
-  replicaCount: 1
-  config:
-    allowedHosts:
-      - "brainboy.com"
-  service:
-    type: ClusterIP
-    port: 80
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/host: homepage.frost.haus
-    hosts:
-      - host: homepage.frost.haus
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls:
-      - hosts:
-        - homepage.frost.haus
-        secretName: homepage-cert
+targetPort: 3000
+replicaCount: 1
