@@ -7,58 +7,42 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
-    ingress: true # default, enable ingress
-    traefik: true # enable traefik ingressRoute
-    gateway: true # enable gateway-api
+    ingress: true
+    traefik: true
+    gateway: true
   settings.yaml: |
     title: Homelab Dashboard
     background:
       image: images/homepage.png
       brightness: 50
       opacity: 25
-
     providers:
       openweathermap: openweathermapapikey
       weatherapi: weatherapiapikey
-
     logo: logo.png
     favicon: favicon.png
     theme: dark
     showThemeToggle: true
     defaultWidgetView: grid
-
     layout:
-      Glances:
-        style: row
-        columns: 3
-        header: false
-
       Homelab:
         header: false
-
-      Media-Servers:
+      Applications:
         style: row
         columns: 3
         header: false
-
+      Arr:
+        style: row
+        columns: 3
+        header: false
       Network:
         style: row
         columns: 2
         header: false
-
-      Torrents:
-        header: false
-
-      Nextainer:
-        style: row
-        columns: 2
-        header: false
-
       Media-Viewer:
         style: row
         columns: 2
         header: false
-
     gridsterOptions:
       minCols: 3
       maxCols: 6
@@ -105,7 +89,7 @@ data:
         - abbr: YT
           href: https://youtube.com/
   services.yaml: |
-    - Network Services:
+    - Network:
         - pihole:
             icon: mdi-pi-hole
             href: http://dns2.frost.haus/admin
@@ -115,18 +99,31 @@ data:
                 type: pihole
                 url: http://dns2.frost.haus
                 key: molLmkh1Hb6Ds/vga7RmJNlYGWh++FapNG7ZHZv9zOA=
-    - Media Services:
-        - TrueNAS:
-            icon: mdi-nas
-            href: http://IPADDRESS
-            description: NAS
-            ping: http://IPADDRESS
+    - Arr:
+        - Sonarr:
+            icon: sonarr.png
+            href: https://yoursonarrdomain.com
+            ping: yoursonarrdomain.com
             widget:
-              type: truenas
-              url: http://IPADDRESS
-              username:
-              password:
-              key: APIKEY
+              type: sonarr
+              url: https://yoursonarrdomain.com
+              key: <sonarr_api_key>
+        - Radarr:
+            icon: radarr.png
+            href: https://youradarrdomain.com
+            ping: youradarrdomain.com
+            widget:
+              type: radarr
+              url: https://youradarrdomain.com
+              key: <radarr_api_key>
+        - Prowlarr:
+            icon: prowlarr.png
+            href: https://yourprowlarrdomain.com
+            ping: yourprowlarrdomain.com
+            widget:
+              type: prowlarr
+              url: https://yourprowlarrdomain.com
+              key: <prowlarr_api_key>
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
@@ -170,7 +167,6 @@ data:
               url: https://yourpiholedomain.com
               version: 6 # required if running v6 or higher, defaults to 5
               key: <pihole_api_key>  #optional, in v6 can be your password or app password
-
     - Applications: 
         - Portainer:
             icon: portainer.png
@@ -182,7 +178,6 @@ data:
               url:  http://<portainer_ip>:<port> # Domain didn't work for me, not sure why
               env: 3
               key: ptr_rz+/Pns2ddIIYiX84oJAgT5TRLLGSYTwCscNMHDj4Gw=
-
         - Uptime Kuma:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus
@@ -209,58 +204,6 @@ data:
             href: http://IPADDRESS
             description: docker logs
             ping: http://IPADDRESS
-    - Media-Servers:
-        - Sonarr:
-            icon: sonarr.png
-            href: https://yoursonarrdomain.com
-            ping: yoursonarrdomain.com
-            widget:
-              type: sonarr
-              url: https://yoursonarrdomain.com
-              key: <sonarr_api_key>
-
-        - Radarr:
-            icon: radarr.png
-            href: https://youradarrdomain.com
-            ping: youradarrdomain.com
-            widget:
-              type: radarr
-              url: https://youradarrdomain.com
-              key: <radarr_api_key>
-
-        - Prowlarr:
-            icon: prowlarr.png
-            href: https://yourprowlarrdomain.com
-            ping: yourprowlarrdomain.com
-            widget:
-              type: prowlarr
-              url: https://yourprowlarrdomain.com
-              key: <prowlarr_api_key>
-    - Media-Viewer:
-        - Jellyfin:
-            icon: jellyfin.png
-            href: https://yourjellyfindomain.com
-            ping: yourjellyfindomain.com
-            widget:
-              type: jellyfin
-              url: https://yourjellyfindomain.com
-              key: <jellyfin_api_key>
-              enableBlocks: true # optional, defaults to false
-              enableNowPlaying: true # optional, defaults to true
-              enableUser: true # optional, defaults to false
-              showEpisodeNumber: true # optional, defaults to false
-              expandOneStreamToTwoRows: false # optional, defaults to true
-
-        - Immich:
-            icon: immich.png
-            href: https://yourimmichdomain.com
-            ping: yourimmichdomain.com
-            widget:
-              type: immich
-              url: https://yourimmichdomain.com
-              key: <immich_api_key>
-              version: 2 # optional, default is 1
-    - Information:
         - Speedtest Tracker:
             icon: mdi-speedometer
             href: http://IPADDRESS
@@ -270,36 +213,6 @@ data:
             widget:
                 type: speedtest
                 url: http://IPADDRESS   
-        - Tailscale:
-            icon: mdi-tailwind
-            href: https://tailscale.com
-            description: router connection
-            ping: https://tailscale.com
-            widget:
-                type: tailscale
-                deviceid: DEVICEID
-                key: APIKEY
-    - Glances:
-      -  'CPU Usage':
-          widget:
-            type: glances
-            url: http://<yourpvehostip>:<port> # generally port 61208
-            metric: cpu
-            version: 4
-
-      - 'GPU Usage':
-          widget:
-            type: glances
-            url: http://<gpuvm_ip>:<port> # I've passed gpu to an ubuntu server vm in PVE and I'm referencing it here
-            metric: gpu:nvidia0
-            version: 4
-
-      - 'Network':
-          widget:
-            type: glances
-            url: http://<yourpvehostip>:<port>
-            metric: network:enp7s0
-            version: 4
   widgets.yaml: |
     - kubernetes:
         cluster:
@@ -325,20 +238,6 @@ data:
     - logo:
         href: https://example.com
         target: _blank # Optional, can be set in settings
-    - glances:
-        url: http://<proxmox_host_ip>:61208
-    #    username: user # optional if auth enabled in Glances
-    #    password: pass # optional if auth enabled in Glances
-        version: 4 # required only if running glances v4 or higher, defaults to 3
-        disk: / # disabled by default, use mount point of disk(s) in glances. Can also be a list (see below)
-        cpu: false # optional, enabled by default, disable by setting to false
-        mem: false # optional, enabled by default, disable by setting to false
-        cputemp: true # disabled by default
-        uptime: true # disabled by default
-        diskUnits: bytes # optional, bytes (default) or bbytes. Only applies to disk
-        expanded: false # show the expanded view
-    #    label: MyMachine # optional
-
   docker.yaml: ""
   proxmox.yaml: |
     - HomeAssistant:
