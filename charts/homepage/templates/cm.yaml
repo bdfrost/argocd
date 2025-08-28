@@ -82,6 +82,19 @@ data:
         href: http://localhost/
         description: Homepage is 😎
   widgets.yaml: |
+    - Plex:
+      icon: plex.png
+      href: https://peppers.frost.haus/
+      description: Watch movies and TV shows.
+      server: peppers.frost.haus
+      container: plex
+      widgets:
+        - type: tautulli
+          url: https://tautulli.frost.haus
+          key: e2d493a22d5f42608cd247f7ac2df008
+        - type: uptimekuma
+          url: https://uptime-kuma.frost.haus
+          slug: default
     - kubernetes:
         cluster:
           show: true
