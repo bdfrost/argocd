@@ -32,11 +32,11 @@ data:
         columns: 3
         header: true
       Arr:
-        style: row
+        style: column
         columns: 3
         header: true
       Network:
-        style: row
+        style: column
         columns: 2
         header: true
     gridsterOptions:
