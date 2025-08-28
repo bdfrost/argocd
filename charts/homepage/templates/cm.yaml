@@ -77,6 +77,14 @@ data:
           href: https://youtube.com/
   services.yaml: |
     - Arr:
+        - Sabnzbd:
+            icon: sabnzbd.png
+            href: https://sabnzbd.frost.haus
+            ping: sabnzbd.frost.haus
+            widget:
+              type: sabnzbd
+              url: https://sabnzbd.frost.haus
+              key: <sabnzbd_api_key>
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
@@ -208,12 +216,23 @@ data:
               password: <proxmox_api_key>
               node: royalfox
               fields: ["vms", "lxc"]
+        - Proxmox Backups Server:
+            icon: proxmox.png
+            href: https://pbs.frost.haus:8006
+            ping: pve4.frost.haus
+            widget:
+              type: proxmox
+              url: https://pbs.frost.haus:8006/api2/json
+              username: <proxmox_usrname>
+              password: <proxmox_api_key>
+              node: royalfox
+              fields: ["backups"]
+              datastore: datastore_name #optional; if ommitted, will display a combination of all datastores used / total         
         - Dozzle:
             icon: mdi-database
             href: http://dozzle.frost.haus
             description: docker logs
             ping: dozzle.frost.haus
- 
   widgets.yaml: |
     - kubernetes:
         cluster:
