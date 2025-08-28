@@ -35,33 +35,33 @@ data:
   bookmarks.yaml: |
     - Bookmarks:
       - 9Anime:
-        icon: https://9animetv.to/images/logo.png
-        href: https://9animetv.to
+        - icon: https://9animetv.to/images/logo.png
+          href: https://9animetv.to
       - AI Text Remover:
-        icon: https://i.imgur.com/R1VdLLo.png
-        href: https://snapedit.app/remove-text
+        - icon: https://i.imgur.com/R1VdLLo.png
+          href: https://snapedit.app/remove-text
       - Allrecipes:
-        icon: https://i.imgur.com/cPUE6a0.png
-        href: https://www.allrecipes.com/
+        - icon: https://i.imgur.com/cPUE6a0.png
+          href: https://www.allrecipes.com/
       - Amazon:
-        icon: amazon-light.png
-        href: https://amazon.com/
+        - icon: amazon-light.png
+          href: https://amazon.com/
       - Aniwatch:
-        icon: https://aniwatchtv.to/images/logo.png
-        href: https://aniwatchtv.to
+        - icon: https://aniwatchtv.to/images/logo.png
+          href: https://aniwatchtv.to
     - Developer:
       - Github:
-        abbr: GH
-        href: https://github.com/
+        - abbr: GH
+          href: https://github.com/
     - Social:
       - Reddit:
-        icon: reddit.png
-        href: https://reddit.com/
-        description: The front page of the internet
+        - icon: reddit.png
+          href: https://reddit.com/
+          description: The front page of the internet
     - Entertainment:
       - YouTube:
-        abbr: YT
-        href: https://youtube.com/
+        - abbr: YT
+          href: https://youtube.com/
   services.yaml: |
     - My First Group:
       - My First Service:
