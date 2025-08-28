@@ -16,7 +16,6 @@ spec:
       labels:
         app: {{ .Values.name }}
         app.kubernetes.io/name: {{ .Values.name }}
-
     spec:
       serviceAccountName: homepage
       automountServiceAccountToken: true
@@ -33,6 +32,9 @@ spec:
           value: homepage.frost.haus, frost.haus, localhost
         volumeMounts:
         - mountPath: /app/config/custom.js
+          name: homepage-config
+          subPath: custom.js
+        - mountPath: /app/config/proxmox.yaml
           name: homepage-config
           subPath: custom.js
         - mountPath: /app/config/custom.css
