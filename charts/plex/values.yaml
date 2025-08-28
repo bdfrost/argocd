@@ -26,7 +26,7 @@ plex-media-server:
       gethomepage.dev/description: Plex Media Server
       gethomepage.dev/group: Arr
       gethomepage.dev/icon: plex.png
-      gethomepage.dev/name: Emby
+      gethomepage.dev/name: Plex-in-ingress
       gethomepage.dev/widget.url: "https://peppers.frost.haus"
       gethomepage.dev/widget.type: plex
       gethomepage.dev/widget.key: mytokenhere

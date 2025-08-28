@@ -216,12 +216,12 @@ data:
  
   widgets.yaml: |
     - kubernetes:
-        cluster:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
-          label: "k8s-cluster"
+        # cluster:
+        #   show: true
+        #   cpu: true
+        #   memory: true
+        #   showLabel: true
+        #   label: "k8s-cluster"
         nodes:
           show: true
           cpu: true
