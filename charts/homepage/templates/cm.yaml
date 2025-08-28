@@ -247,6 +247,60 @@ data:
               password: password
               volume: volume_N # optional
     - Applications: 
+        - Gitlab:
+            icon: gitlab.png
+            href: https://gitlab.frost.haus
+            description: git repositories & ci/cd
+            ping: gitlab.frost.haus
+            container: gitlab
+            widget:
+              type: gitlab
+              url: https://gitlab.frost.haus
+              key: longlivedaccesstokenhere
+              user_id: 123456
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.frost.haus
+            description: metrics & alerting
+            ping: prometheus.frost.haus
+            container: prometheus
+            widget:
+              type: prometheus
+              url: https://prometheus.frost.haus
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.frost.haus
+            description: analytics & monitoring
+            ping: grafana.frost.haus
+            container: grafana
+            widget:
+              type: grafana
+              url: https://grafana.frost.haus
+              version: 2 # optional, default is 1
+              alerts: alertmanager # optional, default is grafana
+              username: username
+              password: password
+              key: longlivedaccesstokenhere
+        - Linkwarden:
+            icon: linkwarden.png
+            href: https://linkwarden.frost.haus
+            description: password manager
+            ping: linkwarden.frost.haus
+            container: linkwarden
+            widget:
+              type: linkwarden
+              url: https://linkwarden.frost.haus
+              key: longlivedaccesstokenhere
+        - Cloudflare Tunnel:
+            icon: cloudflaretunnel.png
+            href: https://dash.cloudflare.com
+            description: cloudflare tunnel management
+            ping: dash.cloudflare.com
+            widget:
+              type: cloudflared
+              accountid: accountid # from zero trust dashboard url e.g. https://one.dash.cloudflare.com/<accountid>/home/quick-start
+              tunnelid: tunnelid # found in tunnels dashboard under the tunnel name
+              key: cloudflareapitoken # api token with `Account.Cloudflare Tunnel:Read` https://dash.cloudflare.com/profile/api-tokens
         - Home Assistant:
             icon: home-assistant.png
             href: http://homeassistant.frost.haus:8123
