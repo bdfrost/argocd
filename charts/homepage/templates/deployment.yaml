@@ -67,12 +67,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
-              key:  pbs_apikey              
-        - name: HOMEPAGE_VAR__APIKEY
-          valueFrom:
-            secretKeyRef:
-              name: homepage-secrets
-              key:  _apikey              
+              key:  pbs_apikey                          
         - name: HOMEPAGE_VAR_PORTAINER_APIKEY
           valueFrom:
             secretKeyRef:
