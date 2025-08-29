@@ -66,6 +66,9 @@ data:
       - Github:
         - abbr: GH
           href: https://github.com/
+      - Dozzle:
+        - href: http://dozzle.frost.haus
+          abbr: DZ
     - Social:
       - Reddit:
         - icon: reddit.png
@@ -112,7 +115,6 @@ data:
         - Sabnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frost.haus
-            ping: sabnzbd.frost.haus
             widget:
               type: sabnzbd
               url: https://sabnzbd.frost.haus
@@ -120,7 +122,6 @@ data:
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
-            ping: https://sonarr.frost.haus
             widget:
               type: sonarr
               url: https://sonarr.frost.haus
@@ -128,7 +129,6 @@ data:
         - Radarr:
             icon: radarr.png
             href: https://radarr.frost.haus
-            ping: radarr.frost.haus
             widget:
               type: radarr
               url: https://radarr.frost.haus
@@ -136,7 +136,6 @@ data:
         - Prowlarr:
             icon: prowlarr.png
             href: https://prowlarr.frost.haus
-            ping: prowlarr.frost.haus
             widget:
               type: prowlarr
               url: https://prowlarr.frost.haus
@@ -144,7 +143,6 @@ data:
         - Bazarr:
             icon: bazarr.png
             href: https://bazarr.frost.haus
-            ping: bazarr.frost.haus
             widget:
               type: bazarr
               url: https://bazarr.frost.haus
@@ -152,7 +150,6 @@ data:
         - Overseerr:
             icon: overseerr.png
             href: https://overseerr.frost.haus
-            ping: overseerr.frost.haus
             widget:
               type: overseerr
               url: https://overseerr.frost.haus
@@ -160,6 +157,7 @@ data:
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
+            ping: https://peppers.frost.haus
             description: Watch movies and TV shows.
             server: peppers.frost.haus
             container: plex
@@ -171,7 +169,6 @@ data:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
             description: plex stats
-            ping: https://tautulli.frost.haus
             container: tautulli
             widget:
               type: tautulli
@@ -182,7 +179,6 @@ data:
             icon: mdi-pi-hole
             href: http://dns1.brainboy.local.lan/admin
             description: network ad blocking
-            ping: dns1.brainboy.local.lan
             widget:
                 type: pihole
                 url: http://dns1.brainboy.local.lan
@@ -192,7 +188,7 @@ data:
             icon: mdi-pi-hole
             href: http://dns2.brainboy.local.lan/admin
             description: network ad blocking
-            ping: dns2.brainboy.local.lan
+            ping: http://dns2.brainboy.local.lan
             widget:
                 type: pihole
                 url: http://dns2.brainboy.local.lan
@@ -211,7 +207,6 @@ data:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus
             description: uptime monitoring
-            ping: https://uptime-kuma.frost.haus
             container: uptime-kuma
             widget:
               type: uptimekuma
@@ -221,7 +216,6 @@ data:
             icon: netdata.png
             href: https://netdata.frost.haus
             description: system monitoring
-            ping: netdata.frost.haus
             container: netdata
             widget:
               type: netdata
@@ -245,25 +239,23 @@ data:
             icon: prometheus.png
             href: https://prometheus.frost.haus
             description: metrics & alerting
-            ping: prometheus.frost.haus
             container: prometheus
             widget:
               type: prometheus
               url: https://prometheus.frost.haus
-        - Grafana:
-            icon: grafana.png
-            href: https://grafana.frost.haus
-            description: analytics & monitoring
-            ping: grafana.frost.haus
-            container: grafana
-            widget:
-              type: grafana
-              url: https://grafana.frost.haus
-              version: 2 # optional, default is 1
-              alerts: alertmanager # optional, default is grafana
-              username: username
-              password: password
-              key: longlivedaccesstokenhere
+        # - Grafana:
+        #     icon: grafana.png
+        #     href: https://grafana.frost.haus
+        #     description: analytics & monitoring
+        #     container: grafana
+        #     widget:
+        #       type: grafana
+        #       url: https://grafana.frost.haus
+        #       version: 2 # optional, default is 1
+        #       alerts: alertmanager # optional, default is grafana
+        #       username: username
+        #       password: password
+        #       key: longlivedaccesstokenhere
         # - Linkwarden:
         #     icon: linkwarden.png
         #     href: https://linkwarden.frost.haus
@@ -295,16 +287,15 @@ data:
               url: http://homeassistant.brainboy.local.lan:8123
               key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
               custom:
-                - state: sensor.total_power
-                - state: sensor.total_energy_today
-                  label: energy today
+                # - state: sensor.total_power
+                # - state: sensor.total_energy_today
+                #   label: energy today
                 - state: weather.forecast_home
                   label: wind speed
                   value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
         - Argo CD:
             icon: argocd.png
             href: https://argocd.frost.haus
-            ping: argocd.frost.haus
             container: argocd-server
             widget:
               type: argocd
@@ -313,7 +304,6 @@ data:
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
-            ping: portainer.frost.haus
             container: portainer
             widget:
               type: portainer
@@ -323,7 +313,7 @@ data:
         - Proxmox:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
-            ping: pve1.frost.haus
+            ping: https://pve1.frost.haus:8006
             widget:
               type: proxmox
               url: https://pve1.frost.haus:8006
@@ -334,7 +324,7 @@ data:
         - Proxmox Backups Server:
             icon: proxmox.png
             href: https://pbs.frost.haus:8007
-            ping: pbs.frost.haus
+            ping: https://pbs.frost.haus:8007
             widget:
               type: proxmox
               url: https://pbs.frost.haus:8007
@@ -343,11 +333,6 @@ data:
               node: pbs
               fields: ["backups"]
               datastore: datastore_name #optional; if ommitted, will display a combination of all datastores used / total         
-        - Dozzle:
-            icon: mdi-database
-            href: http://dozzle.frost.haus
-            description: docker logs
-            ping: dozzle.frost.haus
   widgets.yaml: |
     - kubernetes:
         cluster:
