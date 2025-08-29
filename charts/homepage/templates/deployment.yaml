@@ -53,11 +53,11 @@ spec:
             secretKeyRef:
               name: homepage-secrets
               key:  homeassistant_apikey              
-        - name: HOMEPAGE_VAR_OVERSEER_APIKEY
+        - name: HOMEPAGE_VAR_OVERSEERR_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
-              key:  overseer_apikey              
+              key:  overseerr_apikey              
         - name: HOMEPAGE_VAR_NETDATA_APIKEY
           valueFrom:
             secretKeyRef:
