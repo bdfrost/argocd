@@ -159,7 +159,7 @@ data:
             href: https://peppers.frost.haus
             description: Watch movies and TV shows.
             # server: peppers.frost.haus
-            widget:
+            widgets:
               - type: plex
                 url: https://peppers.frost.haus
                 key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
