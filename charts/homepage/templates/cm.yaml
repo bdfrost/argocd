@@ -173,13 +173,13 @@ data:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
             description: plex stats
-            widget:
-              type: tautulli
-              url: https://tautulli.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
-              enableUser: true # optional, defaults to false
-              showEpisodeNumber: true # optional, defaults to false
-              expandOneStreamToTwoRows: false # optional, defaults to true
+            # widget:
+            #   type: tautulli
+            #   url: https://tautulli.frost.haus
+            #   key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
+            #   enableUser: true # optional, defaults to false
+            #   showEpisodeNumber: true # optional, defaults to false
+            #   expandOneStreamToTwoRows: false # optional, defaults to true
     - Network:
         - dns1:
             icon: mdi-pi-hole
