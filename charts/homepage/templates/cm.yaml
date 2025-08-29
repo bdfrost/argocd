@@ -159,7 +159,6 @@ data:
             href: https://peppers.frost.haus
             description: Watch movies and TV shows.
             # server: peppers.frost.haus
-            # container: plex
             widget:
               type: plex
               url: https://peppers.frost.haus
@@ -168,11 +167,13 @@ data:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
             description: plex stats
-            container: tautulli
             widget:
               type: tautulli
               url: https://tautulli.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
+              enableUser: true # optional, defaults to false
+              showEpisodeNumber: true # optional, defaults to false
+              expandOneStreamToTwoRows: false # optional, defaults to true
     - Network:
         - dns1:
             icon: mdi-pi-hole
@@ -198,7 +199,6 @@ data:
         #     href: https://speedtest.frost.haus
         #     description: speedtest
         #     ping: speedtest.frost.haus
-        #     container: speedtest
         #     widget:
         #         type: speedtest
         #         url: http://IPADDRESS  
@@ -206,7 +206,6 @@ data:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus
             description: uptime monitoring
-            container: uptime-kuma
             widget:
               type: uptimekuma
               url: https://uptime-kuma.frost.haus/
@@ -215,7 +214,6 @@ data:
             icon: netdata.png
             href: https://netdata.frost.haus
             description: system monitoring
-            container: netdata
             widget:
               type: netdata
               url: https://netdata.frost.haus
@@ -225,7 +223,6 @@ data:
         #     href: https://datastation.frost.haus
         #     description: data analytics
         #     ping: datastation.frost.haus
-        #     container: datastation
         #     widget:
         #       type: datastation
         #       url: https://datastation.frost.haus
@@ -238,7 +235,6 @@ data:
             icon: prometheus.png
             href: https://prometheus.frost.haus
             description: metrics & alerting
-            container: prometheus
             widget:
               type: prometheus
               url: https://prometheus.frost.haus
@@ -246,7 +242,6 @@ data:
         #     icon: grafana.png
         #     href: https://grafana.frost.haus
         #     description: analytics & monitoring
-        #     container: grafana
         #     widget:
         #       type: grafana
         #       url: https://grafana.frost.haus
@@ -260,7 +255,6 @@ data:
         #     href: https://linkwarden.frost.haus
         #     description: password manager
         #     ping: linkwarden.frost.haus
-        #     container: linkwarden
         #     widget:
         #       type: linkwarden
         #       url: https://linkwarden.frost.haus
@@ -280,7 +274,6 @@ data:
             href: http://homeassistant.brainboy.local.lan:8123
             description: Home automation
             ping: homeassistant.brainboy.local.lan
-            # container: home-assistant
             widget:
               type: homeassistant
               url: http://homeassistant.brainboy.local.lan:8123
@@ -295,7 +288,6 @@ data:
         - Argo CD:
             # icon: argocd.png
             href: https://argocd.frost.haus
-            container: argocd-server
             widget:
               type: argocd
               url: https://argocd.frost.haus
@@ -303,7 +295,6 @@ data:
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
-            container: portainer
             widget:
               type: portainer
               url:  https://portainer.frost.haus
