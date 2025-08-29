@@ -79,15 +79,15 @@ data:
     - Arr:
         - Calendar:
             icon: calendar.png
-            href: https://calendar.frost.haus
-            ping: calendar.frost.haus
+            # href: https://calendar.frost.haus
+            # ping: calendar.frost.haus
             widget:
               - type: calendar
                 firstDayInWeek: sunday # optional - defaults to monday
                 view: monthly # optional - possible values monthly, agenda
                 maxEvents: 10 # optional - defaults to 10
                 showTime: true # optional - show time for event happening today - defaults to false
-                timezone: America/Los_Angeles # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+                timezone: America/Chicago # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
                 integrations: # optional
                   - type: sonarr
                     service_group: Arr
@@ -233,19 +233,19 @@ data:
               type: netdata
               url: https://netdata.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
-        - Datastation:
-            icon: datastation.png
-            href: https://datastation.frost.haus
-            description: data analytics
-            ping: datastation.frost.haus
-            container: datastation
-            widget:
-              type: datastation
-              url: https://datastation.frost.haus
-              key: datastationkeyhere
-              username: username
-              password: password
-              volume: volume_N # optional
+        # - Datastation:
+        #     icon: datastation.png
+        #     href: https://datastation.frost.haus
+        #     description: data analytics
+        #     ping: datastation.frost.haus
+        #     container: datastation
+        #     widget:
+        #       type: datastation
+        #       url: https://datastation.frost.haus
+        #       key: datastationkeyhere
+        #       username: username
+        #       password: password
+        #       volume: volume_N # optional
     - Applications: 
         - Gitlab:
             icon: gitlab.png
@@ -344,9 +344,9 @@ data:
             widget:
               type: proxmox
               url: https://pve1.frost.haus:8006/api2/json
-              username: root@pam
+              username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PROXMOX_APIKEY{{ "}}" }}"
-              node: pve1
+              # node: pve1
               fields: ["vms", "lxc"]
         - Proxmox Backups Server:
             icon: proxmox.png
@@ -355,7 +355,7 @@ data:
             widget:
               type: proxmox
               url: https://pbs.frost.haus:8006/api2/json
-              username: root@pam
+              username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
               node: pbs
               fields: ["backups"]
