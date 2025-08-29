@@ -66,9 +66,9 @@ data:
       - Github:
         - abbr: GH
           href: https://github.com/
-      - Dozzle:
-        - href: https://dozzle.frost.haus
-          abbr: DZ
+      # - Dozzle:
+      #   - href: https://dozzle.frost.haus
+      #     abbr: DZ
     - Social:
       - Reddit:
         - icon: reddit.png
@@ -231,6 +231,9 @@ data:
         #       password: password
         #       volume: volume_N # optional
     - Applications: 
+        - Dozzle:
+            href: https://dozzle.frost.haus
+            description: log viewer
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.frost.haus
@@ -299,7 +302,7 @@ data:
               type: portainer
               url:  https://portainer.frost.haus
               env: 1
-              key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
+              key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
         - Proxmox:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
@@ -308,7 +311,7 @@ data:
               type: proxmox
               url: https://pve1.frost.haus:8006
               username: root@pam!homepage.io
-              password: "{{ "{{" }}HOMEPAGE_VAR_PROXMOX_APIKEY{{ "}}" }}"
+              password: "{{ "{{" }}HOMEPAGE_VAR_PVE_APIKEY{{ "}}" }}"
               # node: pve1
               fields: ["vms", "lxc"]
         - Proxmox Backups Server:
