@@ -85,33 +85,33 @@ data:
             # href: https://calendar.frost.haus
             # ping: calendar.frost.haus
             widget:
-              - type: calendar
-                firstDayInWeek: sunday # optional - defaults to monday
-                view: monthly # optional - possible values monthly, agenda
-                maxEvents: 10 # optional - defaults to 10
-                showTime: true # optional - show time for event happening today - defaults to false
-                timezone: America/Chicago # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
-                integrations: # optional
-                  - type: sonarr
-                    service_group: Arr
-                    service_name: Sonarr
-                    color: teal # optional
-                    baseUrl: https://sonarr.frost.haus
-                    params:
-                      unmonitored: true # optional - defaults to false, used with *arr stack    
-                  - type: radarr
-                    service_group: Arr
-                    service_name: Radarr
-                    color: orange
-                    baseUrl: https://radarr.frost.haus
-                    params:
-                      unmonitored: true # optional - defaults to false, used with *arr stack
-              - type: calendar
-                view: agenda
-                maxEvents: 10 # optional - defaults to 10
-                showTime: true # optional - show time for event happening today - defaults to false
-                previousDays: 3 # optional - shows events since three days ago - defaults to 0
-                integrations: # same as in Monthly view example     
+              type: calendar
+              firstDayInWeek: sunday # optional - defaults to monday
+              view: monthly # optional - possible values monthly, agenda
+              maxEvents: 10 # optional - defaults to 10
+              showTime: true # optional - show time for event happening today - defaults to false
+              timezone: America/Chicago # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+              integrations: # optional
+                - type: sonarr
+                  service_group: Arr
+                  service_name: Sonarr
+                  color: teal # optional
+                  baseUrl: https://sonarr.frost.haus
+                  params:
+                    unmonitored: true # optional - defaults to false, used with *arr stack    
+                - type: radarr
+                  service_group: Arr
+                  service_name: Radarr
+                  color: orange
+                  baseUrl: https://radarr.frost.haus
+                  params:
+                    unmonitored: true # optional - defaults to false, used with *arr stack
+              # - type: calendar
+              #   view: agenda
+              #   maxEvents: 10 # optional - defaults to 10
+              #   showTime: true # optional - show time for event happening today - defaults to false
+              #   previousDays: 3 # optional - shows events since three days ago - defaults to 0
+              #   integrations: # same as in Monthly view example     
         - Sabnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frost.haus
@@ -157,14 +157,13 @@ data:
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
-            ping: https://peppers.frost.haus
             description: Watch movies and TV shows.
-            server: peppers.frost.haus
-            container: plex
+            # server: peppers.frost.haus
+            # container: plex
             widget:
-              - type: plex
-                url: https://peppers.frost.haus
-                key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
+              type: plex
+              url: https://peppers.frost.haus
+              key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
         - Tautili:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
