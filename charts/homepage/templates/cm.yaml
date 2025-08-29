@@ -325,9 +325,10 @@ data:
               url: https://pbs.frost.haus:8007
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
-              node: pbs
-              fields: ["backups"]
-              datastore: datastore_name #optional; if ommitted, will display a combination of all datastores used / total         
+              # node: pbs
+              # fields: ["backups"]
+              fields: ["datastore_usage", "failed_tasks_24h", "cpu_usage", "memory_usage"]
+              # datastore: datastore_name #optional; if ommitted, will display a combination of all datastores used / total         
   widgets.yaml: |
     - kubernetes:
         cluster:
