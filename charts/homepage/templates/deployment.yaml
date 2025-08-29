@@ -28,6 +28,16 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
+        - name: HOMEPAGE_VAR_SABNZBD_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  sabnzbd_apikey
+        - name: HOMEPAGE_VAR_PLEX_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  x-plex-token
         - name: HOMEPAGE_ALLOWED_HOSTS
           value: homepage.frost.haus, frost.haus, localhost
         volumeMounts:
