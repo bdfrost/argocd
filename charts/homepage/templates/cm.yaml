@@ -301,8 +301,10 @@ data:
             widget:
               type: portainer
               url:  https://portainer.frost.haus
+              kubernetes: true
               env: 1
               key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
+              fields: ["applications", "services", "namespaces"]
         - Proxmox:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
