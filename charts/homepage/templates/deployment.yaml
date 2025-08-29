@@ -33,11 +33,11 @@ spec:
             secretKeyRef:
               name: homepage-secrets
               key:  argocd_apikey
-        - name: HOMEPAGE_VAR_BAZAAR_APIKEY
+        - name: HOMEPAGE_VAR_BAZARR_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
-              key:  bazaar_apikey
+              key:  bazarr_apikey
         - name: HOMEPAGE_VAR_DNS1_APIKEY
           valueFrom:
             secretKeyRef:

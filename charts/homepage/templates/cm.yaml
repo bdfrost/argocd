@@ -186,7 +186,7 @@ data:
     - Network:
         - dns1:
             icon: mdi-pi-hole
-            href: http:/dns1.brainboy.local.lan/admin
+            href: http://dns1.brainboy.local.lan/admin
             description: network ad blocking
             ping: dns1.brainboy.local.lan
             widget:
