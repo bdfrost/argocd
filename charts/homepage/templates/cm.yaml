@@ -163,15 +163,9 @@ data:
             description: Watch movies and TV shows.
             server: peppers.frost.haus
             container: plex
-            widgets:
-              - type: tautulli
-                url: https://tautulli.frost.haus
-                key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
-              - type: uptimekuma
-                url: https://uptime-kuma.frost.haus
-                slug: default
+            widget:
               - type: plex
-                url: http://peppers.frost.haus
+                url: https://peppers.frost.haus
                 key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
         - Tautili:
             icon: mdi-folder-play
