@@ -171,7 +171,7 @@ data:
                 url: https://uptime-kuma.frost.haus
                 slug: default
               - type: plex
-                url: http://plex.host.or.ip:32400
+                url: http://peppers.frost.haus
                 key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
         - Tautili:
             icon: mdi-folder-play
@@ -184,24 +184,24 @@ data:
               url: https://tautulli.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
     - Network:
-        - pihole1:
+        - dns1:
             icon: mdi-pi-hole
-            href: http://dns1.frost.haus/admin
+            href: http:/dns1.brainboy.local.lan/admin
             description: network ad blocking
-            ping: dns1.frost.haus
+            ping: dns1.brainboy.local.lan
             widget:
                 type: pihole
-                url: http://dns1.frost.haus
+                url: http://dns1.brainboy.local.lan
                 key: "{{ "{{" }}HOMEPAGE_VAR_DNS1_APIKEY{{ "}}" }}"
                 version: 6 # required if running v6 or higher, defaults to 5
-        - pihole2:
+        - dns2:
             icon: mdi-pi-hole
-            href: http://dns2.frost.haus/admin
+            href: http://dns2.brainboy.local.lan/admin
             description: network ad blocking
-            ping: dns2.frost.haus
+            ping: dns2.brainboy.local.lan
             widget:
                 type: pihole
-                url: http://dns2.frost.haus
+                url: http://dns2.brainboy.local.lan
                 key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
                 version: 6 # required if running v6 or higher, defaults to 5
         # - Speedtest Tracker:
