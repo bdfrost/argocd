@@ -294,7 +294,7 @@ data:
             widget:
               type: argocd
               url: https://argocd.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
+              key: "Bearer: {{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
               fields: ["apps", "healthy", "progressing", "degraded"]
         - Portainer:
             icon: portainer.png
