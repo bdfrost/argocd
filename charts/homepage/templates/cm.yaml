@@ -297,13 +297,13 @@ data:
         #       key: cloudflareapitoken # api token with `Account.Cloudflare Tunnel:Read` https://dash.cloudflare.com/profile/api-tokens
         - Home Assistant:
             icon: home-assistant.png
-            href: http://homeassistant.frost.haus:8123
+            href: http://homeassistant.brainboy.local.lan:8123
             description: Home automation
-            ping: homeassistant.frost.haus
-            container: home-assistant
+            ping: homeassistant.brainboy.local.lan
+            # container: home-assistant
             widget:
               type: homeassistant
-              url: http://homeassistant.frost.haus:8123
+              url: http://homeassistant.brainboy.local.lan:8123
               key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
               custom:
                 - state: sensor.total_power
