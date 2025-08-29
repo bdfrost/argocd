@@ -116,7 +116,7 @@ data:
             widget:
               type: sabnzbd
               url: https://sabnzbd.frost.haus
-              key: \"{{HOMEPAGE_VAR_SABNZBD}}\"
+              key: '{{HOMEPAGE_VAR_SABNZBD}}'
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
