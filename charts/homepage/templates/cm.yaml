@@ -120,7 +120,7 @@ data:
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
-            ping: sonarr.frost.haus
+            ping: https://sonarr.frost.haus
             widget:
               type: sonarr
               url: https://sonarr.frost.haus
@@ -241,17 +241,6 @@ data:
         #       password: password
         #       volume: volume_N # optional
     - Applications: 
-        - Gitlab:
-            icon: gitlab.png
-            href: https://gitlab.frost.haus
-            description: git repositories & ci/cd
-            ping: gitlab.frost.haus
-            container: gitlab
-            widget:
-              type: gitlab
-              url: https://gitlab.frost.haus
-              key: longlivedaccesstokenhere
-              user_id: 123456
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.frost.haus
