@@ -28,12 +28,12 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
-        - name: HOMEPAGE_VAR_SABNZBD_APIKEY
+        - name: HOMEPAGE_VAR_SABNZBD_API_KEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
               key:  sabnzbd_apikey
-        - name: HOMEPAGE_VAR_PLEX_APIKEY
+        - name: HOMEPAGE_VAR_PLEX_API_KEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
