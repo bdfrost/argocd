@@ -28,7 +28,7 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
-        - name: HOMEPAGE_VAR_SABNZBD
+        - name: HOMEPAGE_VAR_SABNZBD_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets

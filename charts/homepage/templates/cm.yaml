@@ -116,7 +116,7 @@ data:
             widget:
               type: sabnzbd
               url: https://sabnzbd.frost.haus
-              key: {{ "{{" }}HOMEPAGE_VAR_SABNZBD{{ "}}" }}
+              key: {{ "{{" }}HOMEPAGE_VAR_SABNZBD_API_KEY{{ "}}" }}
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
@@ -172,7 +172,7 @@ data:
                 slug: default
               - type: plex
                 url: http://plex.host.or.ip:32400
-                key: {{HOMEPAGE_VAR_PLEX_APIKEY}}
+                key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
         - Tautili:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
