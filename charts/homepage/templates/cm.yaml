@@ -67,7 +67,7 @@ data:
         - abbr: GH
           href: https://github.com/
       - Dozzle:
-        - href: http://dozzle.frost.haus
+        - href: https://dozzle.frost.haus
           abbr: DZ
     - Social:
       - Reddit:
@@ -81,7 +81,7 @@ data:
   services.yaml: |
     - Arr:
         - Calendar:
-            icon: calendar.png
+            # icon: calendar.png
             # href: https://calendar.frost.haus
             # ping: calendar.frost.haus
             widget:
@@ -293,7 +293,7 @@ data:
                   label: wind speed
                   value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
         - Argo CD:
-            icon: argocd.png
+            # icon: argocd.png
             href: https://argocd.frost.haus
             container: argocd-server
             widget:
@@ -306,7 +306,7 @@ data:
             container: portainer
             widget:
               type: portainer
-              url:  http://portainer.frost.haus
+              url:  https://portainer.frost.haus
               env: 1
               key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
         - Proxmox:
