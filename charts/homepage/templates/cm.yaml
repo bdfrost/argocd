@@ -299,9 +299,9 @@ data:
             href: https://argocd.frost.haus
             widget:
               type: argocd
-              url: https://argocd.frost.haus
+              url: https://argocd.frost.haus/api/v1/
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
-              # fields: ["apps", "healthy", "progressing", "degraded"]
+              fields: ["apps", "healthy", "progressing", "degraded"]
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
