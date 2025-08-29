@@ -337,18 +337,18 @@ data:
             ping: pve1.frost.haus
             widget:
               type: proxmox
-              url: https://pve1.frost.haus:8006/api2/json
+              url: https://pve1.frost.haus:8006
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PROXMOX_APIKEY{{ "}}" }}"
               # node: pve1
               fields: ["vms", "lxc"]
         - Proxmox Backups Server:
             icon: proxmox.png
-            href: https://pbs.frost.haus:8006
+            href: https://pbs.frost.haus:8007
             ping: pbs.frost.haus
             widget:
               type: proxmox
-              url: https://pbs.frost.haus:8006/api2/json
+              url: https://pbs.frost.haus:8007
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
               node: pbs
