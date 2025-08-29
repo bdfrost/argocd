@@ -28,7 +28,7 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
-        - name: HOMEPAGE_VAR_ARGO_APIKEY
+        - name: HOMEPAGE_VAR_ARGOCD_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
