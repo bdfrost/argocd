@@ -116,7 +116,7 @@ data:
             widget:
               type: sabnzbd
               url: https://sabnzbd.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_SABNZBD_API_KEY{{ "}}" }}"
+              key: "{{ "{{" }}HOMEPAGE_VAR_SABNZBD_APIKEY{{ "}}" }}"
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
@@ -124,7 +124,7 @@ data:
             widget:
               type: sonarr
               url: https://sonarr.frost.haus
-              key: <sonarr_api_key>
+              key: "{{ "{{" }}HOMEPAGE_VAR_SONARR_APIKEY{{ "}}" }}"
         - Radarr:
             icon: radarr.png
             href: https://radarr.frost.haus
@@ -132,7 +132,7 @@ data:
             widget:
               type: radarr
               url: https://radarr.frost.haus
-              key: <radarr_api_key>
+              key: "{{ "{{" }}HOMEPAGE_VAR_RADARR_APIKEY{{ "}}" }}"
         - Prowlarr:
             icon: prowlarr.png
             href: https://prowlarr.frost.haus
@@ -140,7 +140,7 @@ data:
             widget:
               type: prowlarr
               url: https://prowlarr.frost.haus
-              key: <prowlarr_api_key>
+              key: "{{ "{{" }}HOMEPAGE_VAR_PROWLARR_APIKEY{{ "}}" }}"
         - Bazarr:
             icon: bazarr.png
             href: https://bazarr.frost.haus
@@ -148,7 +148,7 @@ data:
             widget:
               type: bazarr
               url: https://bazarr.frost.haus
-              key: <bazarr_api_key>
+              key: "{{ "{{" }}HOMEPAGE_VAR_BAZARR_APIKEY{{ "}}" }}"
         - Overseerr:
             icon: overseerr.png
             href: https://overseerr.frost.haus
@@ -156,7 +156,7 @@ data:
             widget:
               type: overseerr
               url: https://overseerr.frost.haus
-              key: <overseerr_api_key>
+              key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
@@ -166,13 +166,13 @@ data:
             widgets:
               - type: tautulli
                 url: https://tautulli.frost.haus
-                key: e2d493a22d5f42608cd247f7ac2df008
+                key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
               - type: uptimekuma
                 url: https://uptime-kuma.frost.haus
                 slug: default
               - type: plex
                 url: http://plex.host.or.ip:32400
-                key: {{ "{{" }}HOMEPAGE_VAR_PLEX_API_KEY{{ "}}" }}
+                key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
         - Tautili:
             icon: mdi-folder-play
             href: https://tautulli.frost.haus
@@ -182,7 +182,7 @@ data:
             widget:
               type: tautulli
               url: https://tautulli.frost.haus
-              key: e2d493a22d5f42608cd247f7ac2df008
+              key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
     - Network:
         - pihole1:
             icon: mdi-pi-hole
@@ -192,7 +192,7 @@ data:
             widget:
                 type: pihole
                 url: http://dns1.frost.haus
-                key: STUFF
+                key: "{{ "{{" }}HOMEPAGE_VAR_DNS1_APIKEY{{ "}}" }}"
                 version: 6 # required if running v6 or higher, defaults to 5
         - pihole2:
             icon: mdi-pi-hole
@@ -202,17 +202,17 @@ data:
             widget:
                 type: pihole
                 url: http://dns2.frost.haus
-                key: molLmkh1Hb6Ds/vga7RmJNlYGWh++FapNG7ZHZv9zOA=
+                key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
                 version: 6 # required if running v6 or higher, defaults to 5
-        - Speedtest Tracker:
-            icon: mdi-speedometer
-            href: https://speedtest.frost.haus
-            description: speedtest
-            ping: speedtest.frost.haus
-            container: speedtest
-            widget:
-                type: speedtest
-                url: http://IPADDRESS  
+        # - Speedtest Tracker:
+        #     icon: mdi-speedometer
+        #     href: https://speedtest.frost.haus
+        #     description: speedtest
+        #     ping: speedtest.frost.haus
+        #     container: speedtest
+        #     widget:
+        #         type: speedtest
+        #         url: http://IPADDRESS  
         - Uptime Kuma:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus
@@ -232,7 +232,7 @@ data:
             widget:
               type: netdata
               url: https://netdata.frost.haus
-              key: netdatakeyhere
+              key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
         - Datastation:
             icon: datastation.png
             href: https://datastation.frost.haus
@@ -281,26 +281,26 @@ data:
               username: username
               password: password
               key: longlivedaccesstokenhere
-        - Linkwarden:
-            icon: linkwarden.png
-            href: https://linkwarden.frost.haus
-            description: password manager
-            ping: linkwarden.frost.haus
-            container: linkwarden
-            widget:
-              type: linkwarden
-              url: https://linkwarden.frost.haus
-              key: longlivedaccesstokenhere
-        - Cloudflare Tunnel:
-            icon: cloudflaretunnel.png
-            href: https://dash.cloudflare.com
-            description: cloudflare tunnel management
-            ping: dash.cloudflare.com
-            widget:
-              type: cloudflared
-              accountid: accountid # from zero trust dashboard url e.g. https://one.dash.cloudflare.com/<accountid>/home/quick-start
-              tunnelid: tunnelid # found in tunnels dashboard under the tunnel name
-              key: cloudflareapitoken # api token with `Account.Cloudflare Tunnel:Read` https://dash.cloudflare.com/profile/api-tokens
+        # - Linkwarden:
+        #     icon: linkwarden.png
+        #     href: https://linkwarden.frost.haus
+        #     description: password manager
+        #     ping: linkwarden.frost.haus
+        #     container: linkwarden
+        #     widget:
+        #       type: linkwarden
+        #       url: https://linkwarden.frost.haus
+        #       key: longlivedaccesstokenhere
+        # - Cloudflare Tunnel:
+        #     icon: cloudflaretunnel.png
+        #     href: https://dash.cloudflare.com
+        #     description: cloudflare tunnel management
+        #     ping: dash.cloudflare.com
+        #     widget:
+        #       type: cloudflared
+        #       accountid: accountid # from zero trust dashboard url e.g. https://one.dash.cloudflare.com/<accountid>/home/quick-start
+        #       tunnelid: tunnelid # found in tunnels dashboard under the tunnel name
+        #       key: cloudflareapitoken # api token with `Account.Cloudflare Tunnel:Read` https://dash.cloudflare.com/profile/api-tokens
         - Home Assistant:
             icon: home-assistant.png
             href: http://homeassistant.frost.haus:8123
@@ -310,7 +310,7 @@ data:
             widget:
               type: homeassistant
               url: http://homeassistant.frost.haus:8123
-              key: longlivedaccesstokenhere
+              key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
               custom:
                 - state: sensor.total_power
                 - state: sensor.total_energy_today
@@ -326,7 +326,7 @@ data:
             widget:
               type: argocd
               url: https://argocd.frost.haus
-              key: argocdapikey
+              key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
@@ -336,50 +336,28 @@ data:
               type: portainer
               url:  http://portainer.frost.haus
               env: 1
-              key: ptr_rz+/Pns2ddIIYiX84oJAgT5TRLLGSYTwCscNMHDj4Gw=
-        - Proxmox1:
+              key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
+        - Proxmox:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
             ping: pve1.frost.haus
             widget:
               type: proxmox
               url: https://pve1.frost.haus:8006/api2/json
-              username: <proxmox_usrname>
-              password: <proxmox_api_key>
+              username: root@pam
+              password: "{{ "{{" }}HOMEPAGE_VAR_PROXMOX_APIKEY{{ "}}" }}"
               node: pve1
-              fields: ["vms", "lxc"]
-        - Proxmox2:
-            icon: proxmox.png
-            href: https://pve2.frost.haus:8006
-            ping: pve2.frost.haus
-            widget:
-              type: proxmox
-              url: https://pve2.frost.haus:8006/api2/json
-              username: <proxmox_usrname>
-              password: <proxmox_api_key>
-              node: pve2
-              fields: ["vms", "lxc"]
-        - Proxmox3:
-            icon: proxmox.png
-            href: https://pve3.frost.haus:8006
-            ping: pve3.frost.haus
-            widget:
-              type: proxmox
-              url: https://pve3.frost.haus:8006/api2/json
-              username: <proxmox_usrname>
-              password: <proxmox_api_key>
-              node: pve3
               fields: ["vms", "lxc"]
         - Proxmox Backups Server:
             icon: proxmox.png
             href: https://pbs.frost.haus:8006
-            ping: pve4.frost.haus
+            ping: pbs.frost.haus
             widget:
               type: proxmox
               url: https://pbs.frost.haus:8006/api2/json
-              username: <proxmox_usrname>
-              password: <proxmox_api_key>
-              node: royalfox
+              username: root@pam
+              password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
+              node: pbs
               fields: ["backups"]
               datastore: datastore_name #optional; if ommitted, will display a combination of all datastores used / total         
         - Dozzle:

@@ -28,12 +28,87 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
-        - name: HOMEPAGE_VAR_SABNZBD_API_KEY
+        - name: HOMEPAGE_VAR_ARGO_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
-              key:  sabnzbd_apikey
-        - name: HOMEPAGE_VAR_PLEX_API_KEY
+              key:  argocd_apikey
+        - name: HOMEPAGE_VAR_BAZAAR_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  bazaar_apikey
+        - name: HOMEPAGE_VAR_DNS1_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  dns1_apikey              
+        - name: HOMEPAGE_VAR_DNS2_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  dns2_apikey              
+        - name: HOMEPAGE_VAR_HOMEASSISTANT_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  homeassistant_apikey              
+        - name: HOMEPAGE_VAR_OVERSEER_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  overseer_apikey              
+        - name: HOMEPAGE_VAR_NETDATA_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  netdata_apikey              
+        - name: HOMEPAGE_VAR_PBS_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  pbs_apikey              
+        - name: HOMEPAGE_VAR__APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  _apikey              
+        - name: HOMEPAGE_VAR_PORTAINER_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  portainer_apikey              
+        - name: HOMEPAGE_VAR_PROWLARR_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  prowlarr_apikey              
+        - name: HOMEPAGE_VAR_PVE_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  pve_apikey              
+        - name: HOMEPAGE_VAR_RADARR_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  radarr_apikey              
+        - name: HOMEPAGE_VAR_SABNZBD_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  sabnzbd_apikey              
+        - name: HOMEPAGE_VAR_SONARR_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  sonarr_apikey              
+        - name: HOMEPAGE_VAR_TAUTULLI_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: homepage-secrets
+              key:  tautulli_apikey              
+        - name: HOMEPAGE_VAR_PLEX_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
