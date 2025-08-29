@@ -321,7 +321,7 @@ data:
             href: https://pbs.frost.haus:8007
             ping: https://pbs.frost.haus:8007
             widget:
-              type: proxmox
+              type: proxmoxbackupserver
               url: https://pbs.frost.haus:8007
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
