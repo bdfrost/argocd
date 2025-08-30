@@ -8,6 +8,8 @@ data:
         - file: /config/movies.yaml
         - default: basic                 # This is a file within Kometa's defaults folder
         - default: imdb                  # This is a file within Kometa's defaults folder
+        - default: studio
+        - default: network
         overlay_files:
         - default: ribbon                # This is a file within Kometa's defaults folder
         - default: commonsense  
@@ -33,6 +35,8 @@ data:
         - file: /config/tv.yaml
         - default: basic                 # This is a file within Kometa's defaults folder
         - default: imdb                  # This is a file within Kometa's defaults folder
+        - default: studio
+        - default: network
         overlay_files:
         - default: ribbon                # This is a file within Kometa's defaults folder
         - default: status
@@ -135,7 +139,7 @@ data:
       root_folder_path: /data/library/movies
       monitor: true
       availability: announced
-      quality_profile: HD-1080p
+      quality_profile: "Remux + WEB 1080p""
       tag: kometa
       search: false
       ignore_cache: false
@@ -150,7 +154,7 @@ data:
       monitor_existing: false
       root_folder_path: /data/library/tv
       monitor: all
-      quality_profile: HD-1080p
+      quality_profile: WEB-1080p
       language_profile: English
       series_type: standard
       season_folder: true
