@@ -139,7 +139,7 @@ data:
       root_folder_path: /data/library/movies
       monitor: true
       availability: announced
-      quality_profile: "Remux + WEB 1080p""
+      quality_profile: 'Remux + WEB 1080p'
       tag: kometa
       search: false
       ignore_cache: false
