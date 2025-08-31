@@ -9,9 +9,6 @@ spec:
     spec:
       template:
         spec:
-          # securityContext:
-          #   runAsUser: 1026
-          #   runAsGroup: 100
           containers:
             - name: kometa
               env:

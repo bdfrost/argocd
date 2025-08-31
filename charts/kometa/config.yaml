@@ -8,8 +8,8 @@ data:
         - file: /config/movies.yaml
         - default: basic                 # This is a file within Kometa's defaults folder
         - default: imdb                  # This is a file within Kometa's defaults folder
-        - default: studio
-        - default: network
+        # - default: studio
+        # - default: network
         overlay_files:
         - default: ribbon                # This is a file within Kometa's defaults folder
         - default: commonsense  
@@ -35,8 +35,8 @@ data:
         - file: /config/tv.yaml
         - default: basic                 # This is a file within Kometa's defaults folder
         - default: imdb                  # This is a file within Kometa's defaults folder
-        - default: studio
-        - default: network
+        # - default: studio
+        # - default: network
         overlay_files:
         - default: ribbon                # This is a file within Kometa's defaults folder
         - default: status
@@ -62,11 +62,11 @@ data:
         libraries: Movies, TV Shows      # list of libraries that you want the Kometa Defaults playlists to look at
       # see the wiki for how to use local files, folders, URLs, or files from git
     settings:
-      run_order:
-      - operations
-      - metadata
-      - collections
-      - overlays
+      # run_order:
+      # - operations
+      # - metadata
+      # - collections
+      # - overlays
       cache: true
       cache_expiration: 60
       asset_directory: /config/assets
