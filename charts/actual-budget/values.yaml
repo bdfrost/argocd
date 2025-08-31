@@ -1,0 +1,23 @@
+name: actual-budget
+actual-budget:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: actual-budget.frost.haus
+    url: actual-budget.example.com
+  persistence:
+    enabled: true
+    storageClass: synology-csi-iscsi-delete
+    size: 2Gi
+  service:
+    type: ClusterIP
+    port: 80
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
