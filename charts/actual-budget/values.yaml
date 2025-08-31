@@ -7,7 +7,7 @@ actual-budget:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/host: actual-budget.frost.haus
-    url: actual-budget.example.com
+    url: actual-budget.frost.haus
   persistence:
     enabled: true
     storageClass: synology-csi-iscsi-delete
