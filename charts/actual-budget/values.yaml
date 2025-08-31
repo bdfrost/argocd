@@ -1,6 +1,7 @@
 name: actual-budget
 actual-budget:
-  enabled: true
+  image:
+    tag: "25.8.0"
   ingress:
     enabled: true
     ingressClassName: nginx
