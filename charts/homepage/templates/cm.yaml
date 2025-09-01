@@ -208,6 +208,18 @@ data:
         #     widget:
         #         type: speedtest
         #         url: http://IPADDRESS  
+        - HDHomeRun:
+            icon: hdhr.png
+            href: http://hdhomerun.brainboy.local.lan
+            description: TV tuner
+            ping: hdhomerun.brainboy.local.lan
+            widgets:
+              - type: hdhomerun
+                tuner: 0   
+                url: http://hdhomerun.brainboy.local.lan
+              - type: hdhomerun
+                tuner: 1   
+                url: http://hdhomerun.brainboy.local.lan
         - Uptime Kuma:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus
@@ -339,7 +351,7 @@ data:
   widgets.yaml: |
     - kubernetes:
         cluster:
-          show: false
+          show: true
           cpu: true
           memory: true
           showLabel: true

@@ -40,17 +40,16 @@ frigate:
   resources:
     limits:
       memory: 4Gi
-      # nvidia.com/gpu: "1"
+      nvidia.com/gpu: "1"
     requests:
       cpu: "4"
       memory: 4Gi
-      # nvidia.com/gpu: "1"
+      nvidia.com/gpu: "1"
   gpu:
     nvidia: 
       enabled: "false"
       runtimeClassName: nvidia	
   config: |
-
     go2rtc:
       streams:
         bnb_barn:
@@ -193,9 +192,11 @@ frigate:
               roles:
                 - detect
     detectors:
-      coral:
-        type: edgetpu
-        device: usb
+      tensorrt:
+        type: tensorrt
+      # coral:
+      #   type: edgetpu
+      #   device: usb
     record:
       enabled: true
       alerts:
