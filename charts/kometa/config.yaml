@@ -176,6 +176,9 @@ data:
         refresh_token: <<TRAKTREFRESHTOKEN>>
         scope: public
         created_at: 1748815967
+    mdblist:
+      apikey: <<MDBLISTTOKEN>>
+      cache_expiration: 60
 kind: ConfigMap
 metadata:
   name: kometa-config

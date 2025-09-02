@@ -209,6 +209,15 @@ data:
     #        Hallmark Christmas         #
     #####################################
       Hallmark Christmas:
+        mdblist_list:
+          - https://mdblist.com/lists/marko8426/hallmark-xmas-movies
+          - https://mdblist.com/lists/slimshizn/hallmark-countdown-to-christmas
+          - https://mdblist.com/lists/briandnj/hallmark-x-mas
+          - https://mdblist.com/lists/kcprophecy/hallmark-christmas-ywa8un60mz
+          - https://mdblist.com/lists/setifer/hallmarkchristmasfrom2015
+          - https://mdblist.com/lists/vectrexgamer/hallmark-original-christmas-movies
+          - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
+          - https://mdblist.com/lists/mdatum/hallmark
         trakt_list:
           - https://trakt.tv/users/ad76/lists/hallmark-christmas
           - https://trakt.tv/users/milly84/lists/hallmark-2025
@@ -243,6 +252,8 @@ data:
     #        Hallmark                   #
     #####################################
       Hallmark:
+        mdblist_list:
+          - https://mdblist.com/lists/SynAcksHM/hallmark
         trakt_list:
         - https://trakt.tv/users/alexamaclaud/lists/hallmark-2
         - https://trakt.tv/users/ad76/lists/hallmark-movies-mysteries

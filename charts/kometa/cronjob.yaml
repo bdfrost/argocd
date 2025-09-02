@@ -68,6 +68,11 @@ spec:
                   secretKeyRef:
                     name: kometa-secret
                     key: trakt_refresh_token   
+              - name: KOMETA_MDBLISTTOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: kometa-secret
+                    key: mdblist_token
               - name: KOMETA_VERBOSE
                 value: "1"
               image: kometateam/kometa:latest
