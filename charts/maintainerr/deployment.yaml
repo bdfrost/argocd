@@ -27,7 +27,6 @@ spec:
             cpu: 500m
             memory: 1Gi
         image: jorenn92/maintainerr:latest
-        user: 1026:100
         imagePullPolicy: Always
         ports:
         - containerPort: 6246
