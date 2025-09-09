@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: maintainerr
+  labels:
+    app: maintainerr
+    kubernetes.io/name: maintainerr
+spec:
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  type: ClusterIP
+  selector:
+    app: maintainerr
+  ports:
+  - name: http
+    port: 80
+    targetPort: 6246
+    protocol: TCP

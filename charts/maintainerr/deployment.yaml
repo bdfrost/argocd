@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maintainerr
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maintainerr
+  template:
+    metadata:
+      labels:
+        app: maintainerr
+    spec:
+      containers:
+      - name: maintainerr
+        securityContext:
+          runAsUser: 1026
+          runAsGroup: 100
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+        image: jorenn92/maintainerr:latest
+        user: 1026:100
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6246
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        volumeMounts:
+        - name: maintainerr-config
+          mountPath: /config
+        - name: arr-media
+          mountPath: /opt/data
+      volumes:
+        - name: arr-media
+          nfs:
+            server: 192.168.100.250
+            path: /volume1/media
+        - name: maintainerr-config
+          persistentVolumeClaim:
+            claimName: maintainerr-config-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: maintainerr-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi
