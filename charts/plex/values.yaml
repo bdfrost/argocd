@@ -74,12 +74,12 @@ plex-media-server:
   extraVolumeMounts:
   - name: arr-media
     mountPath: /data
-  - name: temp-local-storage
-    mountPath: /transcode
+  # - name: temp-local-storage
+  #   mountPath: /transcode
   extraVolumes:
   - name: arr-media
     nfs:
       server: 192.168.100.250
       path: /volume1/media/
-  - name: temp-local-storage
-    emptyDir: {}
+  # - name: temp-local-storage
+  #   emptyDir: {}
