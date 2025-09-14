@@ -209,9 +209,6 @@ data:
     #        Hallmark Christmas         #
     #####################################
       Hallmark Christmas:
-        operations:
-          delete_collections:
-            managed: true
         mdblist_list:
           - https://mdblist.com/lists/marko8426/hallmark-xmas-movies
           - https://mdblist.com/lists/slimshizn/hallmark-countdown-to-christmas
@@ -241,9 +238,6 @@ data:
     #        Hallmark Fall              #
     #####################################
       Hallmark Fall:
-        operations:
-          delete_collections:
-            managed: true
         trakt_list:
           - https://trakt.tv/users/linsk/lists/hallmark-fall
           - https://trakt.tv/users/laci88/lists/hallmark-fall-movies
@@ -258,9 +252,6 @@ data:
     #        Hallmark                   #
     #####################################
       Hallmark:
-        operations:
-          delete_collections:
-            managed: true
         mdblist_list:
           - https://mdblist.com/lists/SynAcksHM/hallmark
         trakt_list:
