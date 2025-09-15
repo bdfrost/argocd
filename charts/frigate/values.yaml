@@ -27,11 +27,11 @@ frigate:
         - frigate.frost.haus
         secretName: frigate-cert
   persistence:
-    # config: 
-    #   enabled: "true"
-    #   size: 5Gi
-    #   accessMode: ReadWriteOnce
-    #   storageClass: "synology-csi-iscsi-delete"
+    config: 
+      enabled: "true"
+      size: 2Gi
+      accessMode: ReadWriteOnce
+      storageClass: "synology-csi-iscsi-delete"
     media:
       enabled: "true"
       size: 60Gi
