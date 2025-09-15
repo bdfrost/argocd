@@ -51,12 +51,12 @@ plex-media-server:
       limits:
         memory: 2Gi
         ephemeral-storage: 64Gi
-        nvidia.com/gpu: "5"
+        nvidia.com/gpu: "1"
       requests:
         cpu: "2"
         memory: 2Gi
         ephemeral-storage: 64Gi
-        nvidia.com/gpu: "5"
+        nvidia.com/gpu: "1"
       affinity:
       claimSecret:
         name: "plex-secrets"
