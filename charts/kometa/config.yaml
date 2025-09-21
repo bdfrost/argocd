@@ -72,7 +72,7 @@ data:
       asset_directory: /config/assets
       asset_folders: true
       asset_depth: 0
-      create_asset_folders: false
+      create_asset_folders: true
       prioritize_assets: false
       dimensional_asset_rename: false
       download_url_assets: false
@@ -119,7 +119,7 @@ data:
       db_cache:
       clean_bundles: false
       empty_trash: false
-      optimize: false
+      optimize: true
       verify_ssl:
     tmdb:                                # REQUIRED for the script to run
       apikey: <<TMDBTOKEN>>
