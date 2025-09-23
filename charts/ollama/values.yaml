@@ -18,6 +18,7 @@ ollama:
         - llama2
         - llama3.1
         - llava:7b
+        - orca-mini:latest
   service:
     type: ClusterIP
     port: 11434
