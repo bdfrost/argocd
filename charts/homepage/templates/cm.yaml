@@ -56,6 +56,10 @@ data:
   custom.js: ""
   bookmarks.yaml: |
     - Bookmarks:
+      - Open-Webui:
+        - icon: mdi-web
+          href: https://open-webui.frost.haus
+          description: Access various LLMs from one location
       - Allrecipes:
         - icon: https://i.imgur.com/cPUE6a0.png
           href: https://www.allrecipes.com/
