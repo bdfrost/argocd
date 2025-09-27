@@ -271,7 +271,6 @@ data:
         radarr_tag: Hallmark
         sync_mode: sync
         radarr_add_missing: true
-        template: {name: Movies}
         imdb_search:
           type: movie
           company: co0939898
