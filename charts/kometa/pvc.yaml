@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: kometa
-  name: kometa-config-pvc
+  name: kometa-config-pvc-v2
   namespace: kometa
 spec:
   storageClassName: synology-csi-iscsi-retain

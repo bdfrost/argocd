@@ -99,7 +99,7 @@ spec:
           volumes:
             - name: config
               persistentVolumeClaim:
-                claimName: kometa-config-pvc
+                claimName: kometa-config-pvc-v2
             - configMap:
                 name: kometa-config
               name: kometa-config
