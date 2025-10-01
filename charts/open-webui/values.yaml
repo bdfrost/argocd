@@ -1,6 +1,12 @@
 replicaCount: 1
 name: open-webui
 open-webui:
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      cpu: "2"
+      memory: 2Gi
   ollama:
     enabled: false
   ollamaUrls:
