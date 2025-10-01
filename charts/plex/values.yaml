@@ -54,7 +54,7 @@ plex-media-server:
         nvidia.com/gpu: "1"
       requests:
         cpu: "2"
-        memory: 2Gi
+        memory: 3Gi
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "1"
       affinity:
