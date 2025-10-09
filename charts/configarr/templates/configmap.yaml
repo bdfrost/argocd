@@ -39,8 +39,8 @@ data:
           - trash_ids:
                 - 9b27ab6498ec0f31a3353992e19434ca # DV (w/o HDR fallback)
                 - 7c3a61a9c6cb04f52f1544be6d44a026 # DV Boost
-              assign_scores_to:
-                - name: WEB-2160p
+            assign_scores_to:
+              - name: WEB-2160p
           - trash_ids:
               - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
             assign_scores_to:
