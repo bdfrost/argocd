@@ -29,6 +29,8 @@ metadata:
   annotations:
     "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-weight": "1" # Ensure this runs after actual resources are deployed
+    # argocd.argoproj.io/hook: Sync
+    # argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
   template:
     spec:
