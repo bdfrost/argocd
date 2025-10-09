@@ -1,7 +1,10 @@
+---
+{{- define "scan-movies-jobYaml" }}
+{{- $moviejobName := printf "scan-movies-job-%s" .moviejobSuffix }}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: scan-movies-job
+  name: {{ $moviejobName }}
 spec:
   template:
     spec:
@@ -17,11 +20,16 @@ spec:
         command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/1/refresh?X-Plex-Token=$XPLEXTOKEN && echo 'Movies scan triggered successfully.' || echo 'Failed to trigger Movies scan.'"]
       restartPolicy: Never
   backoffLimit: 1
+{{- end }}
+{{- $moviejobSuffix := include "scan-movies-jobYaml" (dict "root" $) | toYaml | sha256sum | trunc 10 }}
+{{- include "scan-movies-jobYaml" (dict "root" $ "moviejobSuffix" $jobmoviejobSuffixSuffix) }}
 ---
+{{- define "scan-tv-jobYaml" }}
+{{- $tvjobName := printf "scan-tv-job-%s" .tvjobSuffix }}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: scan-tv-shows-job
+  name: {{ $tvjobName }}
 spec:
   template:
     spec:
@@ -37,3 +45,6 @@ spec:
         command: ["/bin/sh", "-c", "curl -sS https://peppers.frost.haus/library/sections/2/refresh?X-Plex-Token=$XPLEXTOKEN && echo 'TV Shows scan triggered successfully.' || echo 'Failed to trigger TV Shows scan.'"]
       restartPolicy: Never
   backoffLimit: 1
+{{- end }}
+{{- $tvjobSuffix := include "scan-tv-jobYaml" (dict "root" $) | toYaml | sha256sum | trunc 10 }}
+{{- include "scan-tv-jobYaml" (dict "root" $ "tvjobSuffix" $tvjobSuffix) }}
