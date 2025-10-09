@@ -22,7 +22,7 @@ spec:
   backoffLimit: 1
 {{- end }}
 {{- $moviejobSuffix := include "scan-movies-jobYaml" (dict "root" $) | toYaml | sha256sum | trunc 10 }}
-{{- include "scan-movies-jobYaml" (dict "root" $ "moviejobSuffix" $jobmoviejobSuffixSuffix) }}
+{{- include "scan-movies-jobYaml" (dict "root" $ "moviejobSuffix" $moviejobSuffix) }}
 ---
 {{- define "scan-tv-jobYaml" }}
 {{- $tvjobName := printf "scan-tv-job-%s" .tvjobSuffix }}
