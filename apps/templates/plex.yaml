@@ -25,6 +25,6 @@ spec:
     managedNamespaceMetadata:
   ignoreDifferences:
     - group: apps
-      kind: Deployment
+      kind: StatefulSet
       jsonPointers:
-        - template/metadata/annotations/kubectl.kubernetes.io/restartedAt
+      - /spec/template/metadata/annotations
