@@ -23,3 +23,8 @@ spec:
     - PrunePropagationPolicy=foreground
     - PruneLast=true
     managedNamespaceMetadata:
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - template/metadata/annotations/kubectl.kubernetes.io/restartedAt
