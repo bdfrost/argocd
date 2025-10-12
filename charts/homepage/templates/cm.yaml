@@ -253,6 +253,10 @@ data:
         #       password: password
         #       volume: volume_N # optional
     - Applications: 
+        - Agregarr:
+            icon: agregarr.png
+            href: https://agregarr.frost.haus
+            description: Manage your media downloaders in one place
         - Dozzle:
             href: https://dozzle.frost.haus
             description: log viewer
