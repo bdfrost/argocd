@@ -1,0 +1,3 @@
+replicaCount: 1
+name: agregarr
+targetPort: 7171
