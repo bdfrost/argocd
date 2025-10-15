@@ -232,6 +232,7 @@ data:
         sort_title: '###Hallmark Christmas'
         collection_order: release.desc
         radarr_tag: Hallmark Christmas
+        radarr_monitor: true
         sync_mode: sync      
         radarr_add_missing: true
     #####################################
@@ -247,6 +248,7 @@ data:
         collection_order: release.desc
         radarr_tag: Hallmark Fall
         sync_mode: sync
+        radarr_monitor: true
         radarr_add_missing: true
     #####################################
     #        Hallmark                   #
@@ -266,6 +268,7 @@ data:
         sort_title: '###Hallmark'
         collection_order: release.desc
         radarr_tag: Hallmark
+        radarr_monitor: true
         sync_mode: sync
         radarr_add_missing: true
         imdb_search:

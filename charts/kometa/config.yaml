@@ -132,10 +132,11 @@ data:
     radarr:                              # Can be individually specified per library as well
       url: https://radarr.frost.haus
       token: <<RADARRTOKEN>>
-      add_missing: false
-      add_existing: false
-      upgrade_existing: false
-      monitor_existing: false
+      add_missing: true
+      add_existing: true
+      radarr_monitor: true
+      upgrade_existing: true
+      monitor_existing: true
       root_folder_path: /data/library/movies
       monitor: true
       availability: announced
@@ -148,10 +149,11 @@ data:
     sonarr:                              # Can be individually specified per library as well
       url: https://sonarr.frost.haus
       token: <<SONARRTOKEN>>
-      add_missing: false
-      add_existing: false
-      upgrade_existing: false
-      monitor_existing: false
+      add_missing: true
+      add_existing: true
+      sonarr_monitor: true
+      upgrade_existing: true
+      monitor_existing: true
       root_folder_path: /data/library/tv
       monitor: all
       quality_profile: WEB-1080p
