@@ -20,7 +20,7 @@ data:
         visible_shared: false
         collection_mode: show_items
       Movies:
-        radarr_add_missing: true
+        radarr_add_missing: false
         optional:
           - collection
           - tmdb_movie
@@ -111,7 +111,6 @@ data:
         summary: Studio Ghibli Inc. is a Japanese animation film studio headquartered in Koganei, Tokyo. The studio is best known for its animated feature films, and has also produced several short films, television commercials, and one television film. The studio’s mascot and most recognizable symbol is the character, Totoro, a giant cat-like spirit from the 1988 classic, My Neighbor Totoro.
       Disney:
         radarr_tag: Disney
-        radarr_add_missing: false
         template: { name: Studio }
           #  imdb_list: 
           #- https://www.imdb.com/search/title/?companies=co0074039&count=250
