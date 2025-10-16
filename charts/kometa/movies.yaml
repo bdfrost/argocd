@@ -38,7 +38,7 @@ data:
         default:
           title: feature
           limit: 100
-        imdb_list:
+        imdb_search:
           - url: https://www.imdb.com/search/title/?title_type=<<title>>&release_date=1990-01-01,&user_rating=5.0,10.0&num_votes=100000,&genres=<<genre>>
             limit: <<limit>>
           - url: https://www.imdb.com/search/title/?title_type=<<title>>&release_date=1990-01-01,&user_rating=5.0,10.0&num_votes=100000,&genres=<<genre>>&sort=user_rating,desc
@@ -89,19 +89,19 @@ data:
         collection_order: release
       Pixar:
         radarr_tag: Pixar
-        imdb_list: https://www.imdb.com/list/ls087911008/
+        imdb_search: https://www.imdb.com/list/ls087911008/
         template: { name: Studio, company: 3 }
         tmdb_company: 3
         summary: A collection of Pixar movies
       DC:
         radarr_tag: DC
         template: {name: Studio}
-        imdb_list: https://www.imdb.com/list/ls077827588/
+        imdb_search: https://www.imdb.com/list/ls077827588/
         summary: "The DC Extended Universe (DCEU) is a media franchise and shared universe centered on superheros from DC Comics."
       Marvel:
         radarr_tag: Marvel
         template: {name: Studio}
-        imdb_list: https://www.imdb.com/list/ls009410711/
+        imdb_search: https://www.imdb.com/list/ls009410711/
         tmdb_company: 420
         summary: "A collection of movies and shows created by Marvel Studios, comprising of the Marvel Cinematic Universe."
       Studio Ghibli:
@@ -112,10 +112,10 @@ data:
       Disney:
         radarr_tag: Disney
         template: { name: Studio }
-          #  imdb_list: 
-          #- https://www.imdb.com/search/title/?companies=co0074039&count=250
-          #- https://www.imdb.com/list/ls059383351/
-          #- https://www.imdb.com/list/ls077114097/
+        imdb_search: 
+          - https://www.imdb.com/search/title/?companies=co0074039&count=250
+          - https://www.imdb.com/list/ls059383351/
+          - https://www.imdb.com/list/ls077114097/
         tmdb_company:
         - 6125
     #####################################
@@ -151,26 +151,26 @@ data:
       Valentine's Day Movies:
         schedule: range(02/01-02/14)
         template: {name: Holiday, holiday: "Valentine's Day"}
-        imdb_list:
+        imdb_search:
           - https://www.imdb.com/list/ls000094398/
           - https://www.imdb.com/list/ls057783436/
           - https://www.imdb.com/list/ls064427905/
       St. Patrick's Day Movies:
         schedule: range(03/01-03/17)
         template: {name: Holiday, holiday: "St. Patrick's Day"}
-        imdb_list: https://www.imdb.com/list/ls063934595/
+        imdb_search: https://www.imdb.com/list/ls063934595/
       Thanksgiving Movies:
         schedule: range(11/01-11/31)
         sort_title: '!AA'
         template: {name: Holiday, holiday: Thanksgiving}
-        imdb_list: 
+        imdb_search: 
           - https://www.imdb.com/list/ls000835734/
           - https://www.imdb.com/list/ls091597850/
       Halloween Movies:
         schedule: range(10/01-10/31)
         sort_title: '!AB'
         template: {name: Holiday, holiday: Halloween}
-        imdb_list:
+        imdb_search:
           - https://www.imdb.com/list/ls023118929/
           - https://www.imdb.com/list/ls000099714/
           - https://www.imdb.com/list/ls000058693/
@@ -186,7 +186,7 @@ data:
         schedule: range(12/01-12/31)
         sort_title: '!AB'
         template: {name: Holiday, holiday: Christmas}
-        imdb_list: 
+        imdb_search: 
           - https://www.imdb.com/list/ls000096828/
           - https://www.imdb.com/list/ls097394442/
           - https://www.imdb.com/list/ls068976997/
@@ -307,7 +307,7 @@ data:
           - https://trakt.tv/users/pualani78/lists/christmas-2020
           - https://trakt.tv/users/veninjak/lists/complete-christmas-2021-copy
           - https://trakt.tv/users/veninjak/lists/christmas-2022-copy
-        imdb_list:
+        imdb_search:
           - https://www.imdb.com/list/ls025976544/
           - https://www.imdb.com/list/ls003863000/
           - https://www.imdb.com/list/ls027454200/
