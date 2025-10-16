@@ -234,6 +234,7 @@ data:
         radarr_monitor: true
         sync_mode: sync      
         radarr_add_missing: true
+        radarr_add_existing: true
     #####################################
     #        Hallmark Fall              #
     #####################################
@@ -247,6 +248,7 @@ data:
         collection_order: release.desc
         radarr_tag: Hallmark Fall
         radarr_add_missing: true
+        radarr_add_existing: true
         sync_mode: sync
         radarr_monitor: true
     #####################################
@@ -270,6 +272,7 @@ data:
         radarr_monitor: true
         sync_mode: sync
         radarr_add_missing: true
+        radarr_add_existing: true
         imdb_search:
           type: movie
           company: co0939898
@@ -286,6 +289,7 @@ data:
         radarr_tag: GAC
         sync_mode: sync
         radarr_add_missing: true
+        radarr_add_existing: true
         imdb_search:
           type: movie
           company: co0814123
@@ -295,6 +299,7 @@ data:
     #####################################
       Christmas:
         radarr_add_missing: true
+        radarr_add_existing: true
         template: {name: Holiday, poster: https://theposterdb.com/api/assets/111696}
         trakt_list:
           - https://trakt.tv/users/crossoverdeseries/lists/other-christmas-2022
