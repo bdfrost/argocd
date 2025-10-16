@@ -132,7 +132,7 @@ data:
     radarr:                              # Can be individually specified per library as well
       url: https://radarr.frost.haus
       token: <<RADARRTOKEN>>
-      add_missing: true
+      add_missing: false
       add_existing: true
       radarr_monitor: true
       upgrade_existing: true
@@ -149,7 +149,7 @@ data:
     sonarr:                              # Can be individually specified per library as well
       url: https://sonarr.frost.haus
       token: <<SONARRTOKEN>>
-      add_missing: true
+      add_missing: false
       add_existing: true
       sonarr_monitor: true
       upgrade_existing: true

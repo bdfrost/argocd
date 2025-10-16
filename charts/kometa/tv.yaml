@@ -10,8 +10,8 @@ data:
           limit: 10
         summary: The 10 most popular shows across the internet
         sonarr_add_missing: false
-        sonarr_search: false
-        sonarr_monitor: pilot
+        sonarr_search: true
+        sonarr_monitor: true
       # Tautulli Most Popular:
       #   sync_mode: sync
       #   collection_order: custom
