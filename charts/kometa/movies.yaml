@@ -89,19 +89,19 @@ data:
         collection_order: release
       Pixar:
         radarr_tag: Pixar
-        imdb_search: https://www.imdb.com/list/ls087911008/
+        imdb_list: https://www.imdb.com/list/ls087911008/
         template: { name: Studio, company: 3 }
         tmdb_company: 3
         summary: A collection of Pixar movies
       DC:
         radarr_tag: DC
         template: {name: Studio}
-        imdb_search: https://www.imdb.com/list/ls077827588/
+        imdb_list: https://www.imdb.com/list/ls077827588/
         summary: "The DC Extended Universe (DCEU) is a media franchise and shared universe centered on superheros from DC Comics."
       Marvel:
         radarr_tag: Marvel
         template: {name: Studio}
-        imdb_search: https://www.imdb.com/list/ls009410711/
+        imdb_list: https://www.imdb.com/list/ls009410711/
         tmdb_company: 420
         summary: "A collection of movies and shows created by Marvel Studios, comprising of the Marvel Cinematic Universe."
       Studio Ghibli:
@@ -112,7 +112,7 @@ data:
       Disney:
         radarr_tag: Disney
         template: { name: Studio }
-        imdb_search: 
+        imdb_list: 
           - https://www.imdb.com/search/title/?companies=co0074039&count=250
           - https://www.imdb.com/list/ls059383351/
           - https://www.imdb.com/list/ls077114097/
@@ -170,7 +170,7 @@ data:
         schedule: range(10/01-10/31)
         sort_title: '!AB'
         template: {name: Holiday, holiday: Halloween}
-        imdb_search:
+        imdb_list:
           - https://www.imdb.com/list/ls023118929/
           - https://www.imdb.com/list/ls000099714/
           - https://www.imdb.com/list/ls000058693/
