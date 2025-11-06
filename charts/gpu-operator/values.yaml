@@ -2,6 +2,7 @@ replicaCount: 1
 name: gpu-operator  
 gpu-operator:
   devicePlugin:
+    version: v0.15.0-ubi8
     enabled: true
     nodeSelector:
       gpu-operator: "true"
