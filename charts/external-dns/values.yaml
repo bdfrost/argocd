@@ -1,7 +1,7 @@
 external-dns:
   image:
     repository: registry.k8s.io/external-dns/external-dns
-    tag:  "0.19.0"
+    tag:  ""
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
   provider: pihole
   # policy: sync
