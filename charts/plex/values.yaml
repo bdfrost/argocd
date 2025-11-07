@@ -29,7 +29,7 @@ plex-media-server:
   pms:
     gpu:
       nvidia:
-        enabled: false
+        enabled: true
     configExistingClaim: plex-config-pvc
     livenessProbe:
       httpGet:
