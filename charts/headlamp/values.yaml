@@ -13,13 +13,13 @@ headlamp:
     hosts:
       - host: frost.headlamp.com
         paths:
-          - pathType: ImplementationSpecific
+          - type: ImplementationSpecific
             path: "/"
             backend:
               service:
                 name: headlamp
                 port:
-                  name: http
+                  number: 80
     tls: 
       - hosts:
         - headlamp.frost.haus
@@ -28,3 +28,4 @@ headlamp:
     enabled: true
     size: 2Gi
     storageClassName: synology-csi-iscsi-delete
+    accessModes: ReadWriteOnce
