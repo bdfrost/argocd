@@ -28,4 +28,5 @@ headlamp:
     enabled: true
     size: 2Gi
     storageClassName: synology-csi-iscsi-delete
-    accessModes: ReadWriteOnce
+    accessModes: 
+      - ReadWriteOnce
