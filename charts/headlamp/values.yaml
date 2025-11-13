@@ -11,7 +11,7 @@ headlamp:
       external-dns.alpha.kubernetes.io/host: headlamp.frost.haus    
     ingressClassName: nginx
     hosts:
-      - host: frost.headlamp.com
+      - host: headlamp.frost.haus
         paths:
           - type: ImplementationSpecific
             path: "/"
