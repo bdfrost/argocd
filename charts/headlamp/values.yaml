@@ -6,9 +6,17 @@ headlamp:
   replicaCount: 1
   pluginsManager:
     enabled: "true"
-  config:
-    enableHelm: "true"
-    watchPlugins: "true"
+    configContent: |
+      plugins:
+        - name: ai-assistant
+          source: https://github.com/headlamp-k8s/plugins/blob/main/ai-assistant/
+          version: "0.1.0-alpha"
+      installOptions:
+        parallel: true
+        maxConcurrent: 2  
+    config:
+      enableHelm: "true"
+      watchPlugins: "true"
   ingress:
     enabled: true
     annotations:
