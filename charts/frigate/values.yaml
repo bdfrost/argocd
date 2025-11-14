@@ -48,10 +48,10 @@ frigate:
       cpu: "4"
       memory: 2Gi
       nvidia.com/gpu: "1"
-  gpu:
-    nvidia: 
-      enabled: "true"
-      runtimeClassName: nvidia	
+  # gpu:
+  #   nvidia: 
+  #     enabled: "true"
+  #     runtimeClassName: nvidia	
   config: |
     go2rtc:
       streams:
