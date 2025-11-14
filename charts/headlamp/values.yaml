@@ -4,6 +4,11 @@ name: headlamp
 # pgid: 100
 headlamp:
   replicaCount: 1
+  pluginsManager:
+    enabled: "true"
+  config:
+    enableHelm: "true"
+    watchPlugins: "true"
   ingress:
     enabled: true
     annotations:
