@@ -195,8 +195,10 @@ frigate:
               roles:
                 - detect
     detectors:
-      tensorrt:
-        type: tensorrt
+      default:
+        type: cpu
+      # tensorrt:
+      #   type: tensorrt
       # coral:
       #   type: edgetpu
       #   device: usb
