@@ -13,6 +13,8 @@ spec:
       app: {{ .Values.name }}
   template:
     metadata:
+      annotations:
+        reloader.stakater.com/auto: "true"
       labels:
         app: {{ .Values.name }}
         app.kubernetes.io/name: {{ .Values.name }}
