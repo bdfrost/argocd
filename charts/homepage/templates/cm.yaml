@@ -11,156 +11,114 @@ data:
     traefik: true
     gateway: true
   settings.yaml: |
-    title: Homelab Dashboard
+    title: Frost Homelab
+    headerStyle: boxed
+    statusStyle: dot
     background:
       image: images/homepage.png
       brightness: 50
       opacity: 25
-    providers:
-      openweathermap: openweathermapapikey
-      weatherapi: weatherapiapikey
+    cardBlur: sm
+    hideErrors: false
     logo: logo.png
     favicon: favicon.png
     theme: dark
+    color: slate
     showThemeToggle: true
     defaultWidgetView: grid
     layout:
-      Homelab:
+      Media & Entertainment:
+        style: row
+        columns: 4
         header: true
+        icon: mdi-filmstrip
+      Media Management:
+        style: row
+        columns: 4
+        header: true
+        icon: mdi-cog
+      Infrastructure:
+        style: row
+        columns: 4
+        header: true
+        icon: mdi-server-network
+      Monitoring & Observability:
+        style: row
+        columns: 3
+        header: true
+        icon: mdi-chart-line
+      Network & Smart Home:
+        style: row
+        columns: 3
+        header: true
+        icon: mdi-network
       Applications:
-        style: column
+        style: row
         columns: 3
         header: true
-      Arr:
-        style: column
-        columns: 3
-        header: true
-      Network:
-        style: column
-        columns: 2
-        header: true
-    gridsterOptions:
-      minCols: 3
-      maxCols: 6
-      minRows: 3
-      maxRows: 6
-      defaultSizeX: 2
-      defaultSizeY: 2
-      mobileBreakpoint: 640
-      useBodyForMobile: true
-      resizable:
-        enabled: true
-      draggable:
-        enabled: true
+        icon: mdi-apps
+    quicklaunch:
+      searchDescriptions: true
+      hideInternetSearch: false
+      showSearchSuggestions: true
+      hideVisitURL: false
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - Bookmarks:
-      - Open-Webui:
-        - icon: mdi-web
+    - Quick Access:
+      - Open WebUI:
+        - icon: mdi-robot
           href: https://open-webui.frost.haus
-          description: Access various LLMs from one location
-      - Allrecipes:
-        - icon: https://i.imgur.com/cPUE6a0.png
-          href: https://www.allrecipes.com/
-      - Amazon:
-        - icon: amazon-light.png
-          href: https://amazon.com/
-    - Developer:
-      - Github:
-        - abbr: GH
+          description: Local LLM interface
+      - Plex:
+        - icon: plex.png
+          href: https://peppers.frost.haus
+          description: Media server
+      - Home Assistant:
+        - icon: home-assistant.png
+          href: http://homeassistant.brainboy.local.lan:8123
+          description: Home automation
+    - Documentation:
+      - Kubernetes Docs:
+        - icon: kubernetes.png
+          href: https://kubernetes.io/docs/
+          description: Kubernetes documentation
+      - ArgoCD Docs:
+        - icon: argocd.png
+          href: https://argo-cd.readthedocs.io/
+          description: ArgoCD documentation
+      - Proxmox Docs:
+        - icon: proxmox.png
+          href: https://pve.proxmox.com/wiki/
+          description: Proxmox wiki & docs
+      - Homepage Docs:
+        - icon: homepage.png
+          href: https://gethomepage.dev/
+          description: Homepage configuration docs
+    - Development:
+      - GitHub:
+        - icon: github.png
           href: https://github.com/
-      # - Dozzle:
-      #   - href: https://dozzle.frost.haus
-      #     abbr: DZ
-    - Social:
+          description: Code repositories
+      - Docker Hub:
+        - icon: docker.png
+          href: https://hub.docker.com/
+          description: Container images
+    - Entertainment:
+      - YouTube:
+        - icon: youtube.png
+          href: https://youtube.com/
+          description: Video streaming
       - Reddit:
         - icon: reddit.png
           href: https://reddit.com/
-          description: The front page of the internet
-    - Entertainment:
-      - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
+          description: Social news aggregation
   services.yaml: |
-    - Arr:
-        - Calendar:
-            widget:
-              type: calendar
-              firstDayInWeek: sunday # optional - defaults to monday
-              view: agenda # optional - possible values monthly, agenda
-              maxEvents: 10 # optional - defaults to 10
-              showTime: true # optional - show time for event happening today - defaults to false
-              timezone: America/Chicago # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
-              integrations: # optional
-                - type: sonarr
-                  service_group: Arr
-                  service_name: Sonarr
-                  color: teal # optional
-                  baseUrl: https://sonarr.frost.haus
-                  params:
-                    unmonitored: true # optional - defaults to false, used with *arr stack    
-                - type: radarr
-                  service_group: Arr
-                  service_name: Radarr
-                  color: orange
-                  baseUrl: https://radarr.frost.haus
-                  params:
-                    unmonitored: true # optional - defaults to false, used with *arr stack
-        - Sabnzbd:
-            icon: sabnzbd.png
-            href: https://sabnzbd.frost.haus
-            widget:
-              type: sabnzbd
-              url: https://sabnzbd.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_SABNZBD_APIKEY{{ "}}" }}"
-        - Sonarr:
-            icon: sonarr.png
-            href: https://sonarr.frost.haus
-            widget:
-              type: sonarr
-              url: https://sonarr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_SONARR_APIKEY{{ "}}" }}"
-        - Radarr:
-            icon: radarr.png
-            href: https://radarr.frost.haus
-            widget:
-              type: radarr
-              url: https://radarr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_RADARR_APIKEY{{ "}}" }}"
-        - Prowlarr:
-            icon: prowlarr.png
-            href: https://prowlarr.frost.haus
-            widget:
-              type: prowlarr
-              url: https://prowlarr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_PROWLARR_APIKEY{{ "}}" }}"
-        - Bazarr:
-            icon: bazarr.png
-            href: https://bazarr.frost.haus
-            widget:
-              type: bazarr
-              url: https://bazarr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_BAZARR_APIKEY{{ "}}" }}"
-        - Overseerr:
-            icon: overseerr.png
-            href: https://overseerr.frost.haus
-            widget:
-              type: overseerr
-              url: https://overseerr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
-        - Cleanuparr:
-            icon: mdi-broom
-            href: https://cleanuparr.frost.haus
-            description: Cleanup media in Arr apps
-        - Huntarr:
-            icon: mdi-magnify
-            href: https://huntarr.frost.haus
-            description: Search and manage Arr apps
+    - Media & Entertainment:
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
-            description: Watch movies and TV shows.
+            description: Media streaming server
             widgets:
               - type: plex
                 url: https://peppers.frost.haus
@@ -168,112 +126,100 @@ data:
               - type: tautulli
                 url: https://tautulli.frost.haus
                 key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
-                enableUser: true # optional, defaults to false
-                showEpisodeNumber: true # optional, defaults to false
-                expandOneStreamToTwoRows: false # optional, defaults to true
-    - Network:
-        - dns1:
-            icon: mdi-pi-hole
-            href: http://dns1.brainboy.local.lan/admin
-            description: network ad blocking
+                enableUser: true
+                showEpisodeNumber: true
+                expandOneStreamToTwoRows: false
+        - Overseerr:
+            icon: overseerr.png
+            href: https://overseerr.frost.haus
+            description: Media request management
             widget:
-                type: pihole
-                url: http://dns1.brainboy.local.lan
-                key: "{{ "{{" }}HOMEPAGE_VAR_DNS1_APIKEY{{ "}}" }}"
-                version: 6 # required if running v6 or higher, defaults to 5
-        - dns2:
-            icon: mdi-pi-hole
-            href: http://dns2.brainboy.local.lan/admin
-            description: network ad blocking
-            ping: http://dns2.brainboy.local.lan
+              type: overseerr
+              url: https://overseerr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
+        - Sonarr:
+            icon: sonarr.png
+            href: https://sonarr.frost.haus
+            description: TV show management
             widget:
-                type: pihole
-                url: http://dns2.brainboy.local.lan
-                key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
-                version: 6 # required if running v6 or higher, defaults to 5
-        - Speedtest Tracker:
-            icon: mdi-speedometer
-            href: https://speedtest-tracker.frost.haus
-            description: Internet speed monitoring
+              type: sonarr
+              url: https://sonarr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_SONARR_APIKEY{{ "}}" }}"
+        - Radarr:
+            icon: radarr.png
+            href: https://radarr.frost.haus
+            description: Movie management
             widget:
-                type: speedtest
-                url: https://speedtest-tracker.frost.haus
-        - HDHomeRun:
-            icon: hdhr.png
-            href: http://hdhomerun.brainboy.local.lan
-            description: TV tuner
-            ping: hdhomerun.brainboy.local.lan
-            widgets:
-              - type: hdhomerun
-                tuner: 0   
-                url: http://hdhomerun.brainboy.local.lan
-              - type: hdhomerun
-                tuner: 1   
-                url: http://hdhomerun.brainboy.local.lan
-        - Uptime Kuma:
-            icon: mdi-bell
-            href: https://uptime-kuma.frost.haus
-            description: uptime monitoring
+              type: radarr
+              url: https://radarr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_RADARR_APIKEY{{ "}}" }}"
+        - Prowlarr:
+            icon: prowlarr.png
+            href: https://prowlarr.frost.haus
+            description: Indexer management
             widget:
-              type: uptimekuma
-              url: https://uptime-kuma.frost.haus/
-              slug: default
-        - Netdata:
-            icon: netdata.png
-            href: https://netdata.frost.haus
-            description: system monitoring
+              type: prowlarr
+              url: https://prowlarr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_PROWLARR_APIKEY{{ "}}" }}"
+        - Bazarr:
+            icon: bazarr.png
+            href: https://bazarr.frost.haus
+            description: Subtitle management
             widget:
-              type: netdata
-              url: https://netdata.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_NETDATA_APIKEY{{ "}}" }}"
-    - Applications:
+              type: bazarr
+              url: https://bazarr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_BAZARR_APIKEY{{ "}}" }}"
+        - Sabnzbd:
+            icon: sabnzbd.png
+            href: https://sabnzbd.frost.haus
+            description: Usenet downloader
+            widget:
+              type: sabnzbd
+              url: https://sabnzbd.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_SABNZBD_APIKEY{{ "}}" }}"
+    - Media Management:
+        - Calendar:
+            icon: mdi-calendar
+            description: Upcoming media releases
+            widget:
+              type: calendar
+              firstDayInWeek: sunday
+              view: agenda
+              maxEvents: 10
+              showTime: true
+              timezone: America/Chicago
+              integrations:
+                - type: sonarr
+                  service_group: Media & Entertainment
+                  service_name: Sonarr
+                  color: teal
+                  baseUrl: https://sonarr.frost.haus
+                  params:
+                    unmonitored: true
+                - type: radarr
+                  service_group: Media & Entertainment
+                  service_name: Radarr
+                  color: orange
+                  baseUrl: https://radarr.frost.haus
+                  params:
+                    unmonitored: true
         - Agregarr:
             icon: agregarr.png
             href: https://agregarr.frost.haus
-            description: Manage your media downloaders in one place
-        - Actual Budget:
-            icon: actual.png
-            href: https://actual-budget.frost.haus
-            description: Personal budgeting tool
-        - Dozzle:
-            href: https://dozzle.frost.haus
-            description: log viewer
-        - Frigate:
-            icon: frigate.png
-            href: https://frigate.frost.haus
-            description: NVR with AI object detection
+            description: Bulk add media to Arr apps
+        - Cleanuparr:
+            icon: mdi-broom
+            href: https://cleanuparr.frost.haus
+            description: Cleanup media in Arr apps
+        - Huntarr:
+            icon: mdi-magnify
+            href: https://huntarr.frost.haus
+            description: Search across Arr apps
         - Maintainerr:
             icon: mdi-wrench
             href: https://maintainerr.frost.haus
-            description: Plex library maintenance
-        - Prometheus:
-            icon: prometheus.png
-            href: https://prometheus.frost.haus
-            description: metrics & alerting
-            widget:
-              type: prometheus
-              url: https://prometheus.frost.haus
-        - Grafana:
-            icon: grafana.png
-            href: https://grafana.frost.haus
-            description: analytics & monitoring
-        - Alertmanager:
-            icon: mdi-alert-circle
-            href: https://alertmanager.frost.haus
-            description: Alert management
-        - Home Assistant:
-            icon: home-assistant.png
-            href: http://homeassistant.brainboy.local.lan:8123
-            description: Home automation
-            ping: homeassistant.brainboy.local.lan
-            widget:
-              type: homeassistant
-              url: http://homeassistant.brainboy.local.lan:8123
-              key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
-              custom:
-                - state: weather.forecast_home
-                  label: wind speed
-                  value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
+            description: Automated Plex library maintenance
+    - Infrastructure:
         - Argo CD:
             icon: argocd.png
             href: https://argocd.frost.haus
@@ -283,6 +229,17 @@ data:
               url: https://argocd.frost.haus/
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
               fields: ["apps", "healthy", "progressing", "degraded"]
+        - Portainer:
+            icon: portainer.png
+            href: https://portainer.frost.haus
+            description: Container management
+            widget:
+              type: portainer
+              url: https://portainer.frost.haus
+              kubernetes: true
+              env: 1
+              key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
+              fields: ["applications", "services", "namespaces"]
         - Headlamp:
             icon: mdi-kubernetes
             href: https://headlamp.frost.haus
@@ -291,19 +248,10 @@ data:
             icon: kubernetes-dashboard.png
             href: https://dashboard.frost.haus
             description: Official Kubernetes dashboard
-        - Portainer:
-            icon: portainer.png
-            href: https://portainer.frost.haus
-            widget:
-              type: portainer
-              url:  https://portainer.frost.haus
-              kubernetes: true
-              env: 1
-              key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
-              fields: ["applications", "services", "namespaces"]
         - Proxmox:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
+            description: Virtualization platform
             ping: https://pve1.frost.haus:8006
             widget:
               type: proxmox
@@ -311,9 +259,10 @@ data:
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PVE_APIKEY{{ "}}" }}"
               fields: ["vms", "lxc"]
-        - Proxmox Backups Server:
+        - Proxmox Backup Server:
             icon: proxmox.png
             href: https://pbs.frost.haus:8007
+            description: Backup solution
             ping: https://pbs.frost.haus:8007
             widget:
               type: proxmoxbackupserver
@@ -321,26 +270,146 @@ data:
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
               fields: ["datastore_usage", "failed_tasks_24h", "cpu_usage", "memory_usage"]
+    - Monitoring & Observability:
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.frost.haus
+            description: Metrics collection & alerting
+            widget:
+              type: prometheus
+              url: https://prometheus.frost.haus
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.frost.haus
+            description: Metrics visualization
+        - Alertmanager:
+            icon: mdi-alert-circle
+            href: https://alertmanager.frost.haus
+            description: Alert management & routing
+        - Netdata:
+            icon: netdata.png
+            href: https://netdata.frost.haus
+            description: Real-time performance monitoring
+            widget:
+              type: netdata
+              url: https://netdata.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_NETDATA_APIKEY{{ "}}" }}"
+        - Uptime Kuma:
+            icon: mdi-bell
+            href: https://uptime-kuma.frost.haus
+            description: Uptime monitoring & alerts
+            widget:
+              type: uptimekuma
+              url: https://uptime-kuma.frost.haus/
+              slug: default
+    - Network & Smart Home:
+        - Pi-hole DNS 1:
+            icon: mdi-pi-hole
+            href: http://dns1.brainboy.local.lan/admin
+            description: Primary DNS with ad blocking
+            widget:
+              type: pihole
+              url: http://dns1.brainboy.local.lan
+              key: "{{ "{{" }}HOMEPAGE_VAR_DNS1_APIKEY{{ "}}" }}"
+              version: 6
+        - Pi-hole DNS 2:
+            icon: mdi-pi-hole
+            href: http://dns2.brainboy.local.lan/admin
+            description: Secondary DNS with ad blocking
+            ping: http://dns2.brainboy.local.lan
+            widget:
+              type: pihole
+              url: http://dns2.brainboy.local.lan
+              key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
+              version: 6
+        - Speedtest Tracker:
+            icon: mdi-speedometer
+            href: https://speedtest-tracker.frost.haus
+            description: Internet speed monitoring
+            widget:
+              type: speedtest
+              url: https://speedtest-tracker.frost.haus
+        - HDHomeRun:
+            icon: hdhr.png
+            href: http://hdhomerun.brainboy.local.lan
+            description: TV tuner & live TV
+            ping: hdhomerun.brainboy.local.lan
+            widgets:
+              - type: hdhomerun
+                tuner: 0
+                url: http://hdhomerun.brainboy.local.lan
+              - type: hdhomerun
+                tuner: 1
+                url: http://hdhomerun.brainboy.local.lan
+        - Home Assistant:
+            icon: home-assistant.png
+            href: http://homeassistant.brainboy.local.lan:8123
+            description: Home automation hub
+            ping: homeassistant.brainboy.local.lan
+            widget:
+              type: homeassistant
+              url: http://homeassistant.brainboy.local.lan:8123
+              key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
+              custom:
+                - state: weather.forecast_home
+                  label: wind speed
+                  value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
+    - Applications:
+        - Actual Budget:
+            icon: actual.png
+            href: https://actual-budget.frost.haus
+            description: Personal budgeting tool
+        - Open WebUI:
+            icon: mdi-robot
+            href: https://open-webui.frost.haus
+            description: Web UI for local LLMs
         - Ollama:
             icon: ollama.png
             href: https://ollama.frost.haus
             description: Local LLM inference server
+        - Frigate:
+            icon: frigate.png
+            href: https://frigate.frost.haus
+            description: NVR with AI object detection
+        - Dozzle:
+            icon: dozzle.png
+            href: https://dozzle.frost.haus
+            description: Docker container log viewer
   widgets.yaml: |
+    - logo:
+        icon: https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/homepage.png
+    - greeting:
+        text_size: xl
+        text: "Welcome to Frost Homelab"
+    - datetime:
+        text_size: xl
+        format:
+          dateStyle: long
+          timeStyle: short
+          hour12: false
+    - search:
+        provider: duckduckgo
+        target: _blank
+        focus: false
+    - openmeteo:
+        label: Chicago
+        latitude: 41.8781
+        longitude: -87.6298
+        timezone: America/Chicago
+        units: imperial
+        cache: 5
     - kubernetes:
         cluster:
           show: true
           cpu: true
           memory: true
           showLabel: true
-          label: "k8s-cluster"
+          label: "cluster"
         nodes:
           show: true
           cpu: true
           memory: true
           showLabel: true
-    - search:
-        provider: duckduckgo
-        target: _blank
   docker.yaml: ""
   proxmox.yaml: |
     - HomeAssistant:
