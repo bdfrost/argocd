@@ -3,6 +3,12 @@ frigate:
   image:
     repository: ghcr.io/blakeblackshear/frigate
     tag: "0.16.2"
+  env:
+    PLUS_API_KEY:
+      valueFrom:
+        secretKeyRef:
+          name: frigate-secrets
+          key: FRIGATE_PLUS_API_KEY
   envFromSecrets:
     - frigate-secrets
   tmpfs:
