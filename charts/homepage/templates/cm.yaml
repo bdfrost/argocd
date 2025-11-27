@@ -392,9 +392,9 @@ data:
         target: _blank
         focus: false
     - openmeteo:
-        label: Chicago
-        latitude: 41.8781
-        longitude: -87.6298
+        label: Oklahoma City
+        latitude: 35.4676
+        longitude: -97.5164
         timezone: America/Chicago
         units: imperial
         cache: 5
