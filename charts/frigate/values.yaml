@@ -254,21 +254,21 @@ frigate:
         - robot_lawnmower
         - umbrella
     model:
-      path: plus://23bcb37de34f236df4d7d6587446c3c8
-      labelmap_path: /labelmap.txt
+      path: plus://a688a8f1733544be72cf4a13dce6d582
+      # labelmap_path: /labelmap.txt
       width: 320
       height: 320
-      labelmap:
-        2: vehicle
-      attributes_map:
-        person:
-          - amazon
-          - face
-        car:
-          - amazon
-          - fedex
-          - license_plate
-          - ups
+      # labelmap:
+      #   2: vehicle
+      # attributes_map:
+      #   person:
+      #     - amazon
+      #     - face
+      #   car:
+      #     - amazon
+      #     - fedex
+      #     - license_plate
+      #     - ups
     ffmpeg:
       # hwaccel_args: preset-vaapi
       global_args: -hide_banner -loglevel warning
