@@ -85,9 +85,6 @@ data:
   services.yaml: |
     - Arr:
         - Calendar:
-            # icon: calendar.png
-            # href: https://calendar.frost.haus
-            # ping: calendar.frost.haus
             widget:
               type: calendar
               firstDayInWeek: sunday # optional - defaults to monday
@@ -110,12 +107,6 @@ data:
                   baseUrl: https://radarr.frost.haus
                   params:
                     unmonitored: true # optional - defaults to false, used with *arr stack
-              # - type: calendar
-              #   view: agenda
-              #   maxEvents: 10 # optional - defaults to 10
-              #   showTime: true # optional - show time for event happening today - defaults to false
-              #   previousDays: 3 # optional - shows events since three days ago - defaults to 0
-              #   integrations: # same as in Monthly view example     
         - Sabnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frost.haus
@@ -158,11 +149,18 @@ data:
               type: overseerr
               url: https://overseerr.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
+        - Cleanuparr:
+            icon: mdi-broom
+            href: https://cleanuparr.frost.haus
+            description: Cleanup media in Arr apps
+        - Huntarr:
+            icon: mdi-magnify
+            href: https://huntarr.frost.haus
+            description: Search and manage Arr apps
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
             description: Watch movies and TV shows.
-            # server: peppers.frost.haus
             widgets:
               - type: plex
                 url: https://peppers.frost.haus
@@ -173,17 +171,6 @@ data:
                 enableUser: true # optional, defaults to false
                 showEpisodeNumber: true # optional, defaults to false
                 expandOneStreamToTwoRows: false # optional, defaults to true
-        - Tautili:
-            icon: mdi-folder-play
-            href: https://tautulli.frost.haus
-            description: plex stats
-            # widget:
-            #   type: tautulli
-            #   url: https://tautulli.frost.haus
-            #   key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
-            #   enableUser: true # optional, defaults to false
-            #   showEpisodeNumber: true # optional, defaults to false
-            #   expandOneStreamToTwoRows: false # optional, defaults to true
     - Network:
         - dns1:
             icon: mdi-pi-hole
@@ -204,14 +191,13 @@ data:
                 url: http://dns2.brainboy.local.lan
                 key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
                 version: 6 # required if running v6 or higher, defaults to 5
-        # - Speedtest Tracker:
-        #     icon: mdi-speedometer
-        #     href: https://speedtest.frost.haus
-        #     description: speedtest
-        #     ping: speedtest.frost.haus
-        #     widget:
-        #         type: speedtest
-        #         url: http://IPADDRESS  
+        - Speedtest Tracker:
+            icon: mdi-speedometer
+            href: https://speedtest-tracker.frost.haus
+            description: Internet speed monitoring
+            widget:
+                type: speedtest
+                url: https://speedtest-tracker.frost.haus
         - HDHomeRun:
             icon: hdhr.png
             href: http://hdhomerun.brainboy.local.lan
@@ -239,27 +225,27 @@ data:
             widget:
               type: netdata
               url: https://netdata.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
-        # - Datastation:
-        #     icon: datastation.png
-        #     href: https://datastation.frost.haus
-        #     description: data analytics
-        #     ping: datastation.frost.haus
-        #     widget:
-        #       type: datastation
-        #       url: https://datastation.frost.haus
-        #       key: datastationkeyhere
-        #       username: username
-        #       password: password
-        #       volume: volume_N # optional
-    - Applications: 
+              key: "{{ "{{" }}HOMEPAGE_VAR_NETDATA_APIKEY{{ "}}" }}"
+    - Applications:
         - Agregarr:
             icon: agregarr.png
             href: https://agregarr.frost.haus
             description: Manage your media downloaders in one place
+        - Actual Budget:
+            icon: actual.png
+            href: https://actual-budget.frost.haus
+            description: Personal budgeting tool
         - Dozzle:
             href: https://dozzle.frost.haus
             description: log viewer
+        - Frigate:
+            icon: frigate.png
+            href: https://frigate.frost.haus
+            description: NVR with AI object detection
+        - Maintainerr:
+            icon: mdi-wrench
+            href: https://maintainerr.frost.haus
+            description: Plex library maintenance
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.frost.haus
@@ -267,37 +253,14 @@ data:
             widget:
               type: prometheus
               url: https://prometheus.frost.haus
-        # - Grafana:
-        #     icon: grafana.png
-        #     href: https://grafana.frost.haus
-        #     description: analytics & monitoring
-        #     widget:
-        #       type: grafana
-        #       url: https://grafana.frost.haus
-        #       version: 2 # optional, default is 1
-        #       alerts: alertmanager # optional, default is grafana
-        #       username: username
-        #       password: password
-        #       key: longlivedaccesstokenhere
-        # - Linkwarden:
-        #     icon: linkwarden.png
-        #     href: https://linkwarden.frost.haus
-        #     description: password manager
-        #     ping: linkwarden.frost.haus
-        #     widget:
-        #       type: linkwarden
-        #       url: https://linkwarden.frost.haus
-        #       key: longlivedaccesstokenhere
-        # - Cloudflare Tunnel:
-        #     icon: cloudflaretunnel.png
-        #     href: https://dash.cloudflare.com
-        #     description: cloudflare tunnel management
-        #     ping: dash.cloudflare.com
-        #     widget:
-        #       type: cloudflared
-        #       accountid: accountid # from zero trust dashboard url e.g. https://one.dash.cloudflare.com/<accountid>/home/quick-start
-        #       tunnelid: tunnelid # found in tunnels dashboard under the tunnel name
-        #       key: cloudflareapitoken # api token with `Account.Cloudflare Tunnel:Read` https://dash.cloudflare.com/profile/api-tokens
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.frost.haus
+            description: analytics & monitoring
+        - Alertmanager:
+            icon: mdi-alert-circle
+            href: https://alertmanager.frost.haus
+            description: Alert management
         - Home Assistant:
             icon: home-assistant.png
             href: http://homeassistant.brainboy.local.lan:8123
@@ -308,20 +271,26 @@ data:
               url: http://homeassistant.brainboy.local.lan:8123
               key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
               custom:
-                # - state: sensor.total_power
-                # - state: sensor.total_energy_today
-                #   label: energy today
                 - state: weather.forecast_home
                   label: wind speed
                   value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
         - Argo CD:
-            # icon: argocd.png
+            icon: argocd.png
             href: https://argocd.frost.haus
+            description: GitOps continuous delivery
             widget:
               type: argocd
               url: https://argocd.frost.haus/
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
               fields: ["apps", "healthy", "progressing", "degraded"]
+        - Headlamp:
+            icon: mdi-kubernetes
+            href: https://headlamp.frost.haus
+            description: Modern Kubernetes UI
+        - Kubernetes Dashboard:
+            icon: kubernetes-dashboard.png
+            href: https://dashboard.frost.haus
+            description: Official Kubernetes dashboard
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
@@ -341,7 +310,6 @@ data:
               url: https://pve1.frost.haus:8006
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PVE_APIKEY{{ "}}" }}"
-              # node: pve1
               fields: ["vms", "lxc"]
         - Proxmox Backups Server:
             icon: proxmox.png
@@ -352,10 +320,11 @@ data:
               url: https://pbs.frost.haus:8007
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
-              # node: pbs
-              # fields: ["backups"]
               fields: ["datastore_usage", "failed_tasks_24h", "cpu_usage", "memory_usage"]
-              # datastore: datastore_name #optional; if ommitted, will display a combination of all datastores used / total         
+        - Ollama:
+            icon: ollama.png
+            href: https://ollama.frost.haus
+            description: Local LLM inference server
   widgets.yaml: |
     - kubernetes:
         cluster:
@@ -369,18 +338,9 @@ data:
           cpu: true
           memory: true
           showLabel: true
-    # - resources:
-    #     backend: resources
-    #     expanded: true
-    #     cpu: true
-    #     memory: true
-    #     network: default
     - search:
         provider: duckduckgo
         target: _blank
-    # - logo:
-    #     href: https://example.com
-    #     target: _blank # Optional, can be set in settings
   docker.yaml: ""
   proxmox.yaml: |
     - HomeAssistant:
