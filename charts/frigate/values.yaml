@@ -196,7 +196,7 @@ frigate:
                 - detect
     detectors:
       default:
-        type: cpu
+        type: onnx
       # tensorrt:
       #   type: tensorrt
       # coral:
