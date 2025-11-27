@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-config
+  labels:
+    app: {{ .Values.name }}
+data:
+  request_timeout: "{{ .Values.config.requestTimeout }}"

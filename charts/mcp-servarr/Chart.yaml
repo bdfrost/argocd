@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mcp-servarr
+description: MCP Server for Sonarr and Radarr integration with Claude AI
+type: application
+version: 1.0.0
+appVersion: "latest"

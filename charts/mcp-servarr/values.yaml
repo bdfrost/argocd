@@ -1,0 +1,52 @@
+name: mcp-servarr
+replicaCount: 1
+
+image:
+  repository: ghcr.io/bdfrost/mcp_servarr
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+config:
+  requestTimeout: 30
+
+# API endpoints - update these if your services are at different URLs
+sonarrUrl: https://sonarr.frost.haus
+radarrUrl: https://radarr.frost.haus
+
+resources:
+  limits:
+    memory: 256Mi
+    cpu: 500m
+  requests:
+    memory: 128Mi
+    cpu: 100m
+
+securityContext:
+  runAsUser: 1000
+  runAsNonRoot: true
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+ingress:
+  enabled: false
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: mcp-servarr.frost.haus
+  hosts:
+    - host: mcp-servarr.frost.haus
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - mcp-servarr.frost.haus
+      secretName: mcp-servarr-cert

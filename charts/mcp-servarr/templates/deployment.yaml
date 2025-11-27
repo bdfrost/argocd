@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      securityContext:
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+        runAsNonRoot: {{ .Values.securityContext.runAsNonRoot }}
+        fsGroup: {{ .Values.securityContext.runAsUser }}
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: stdio
+          containerPort: {{ .Values.service.targetPort }}
+          protocol: TCP
+        env:
+        - name: SONARR_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-secrets
+              key: sonarr_url
+        - name: SONARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-secrets
+              key: sonarr_api_key
+        - name: RADARR_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-secrets
+              key: radarr_url
+        - name: RADARR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-secrets
+              key: radarr_api_key
+        - name: REQUEST_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.name }}-config
+              key: request_timeout
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        securityContext:
+          readOnlyRootFilesystem: {{ .Values.securityContext.readOnlyRootFilesystem }}
+          allowPrivilegeEscalation: {{ .Values.securityContext.allowPrivilegeEscalation }}
+          capabilities:
+            drop: {{ toYaml .Values.securityContext.capabilities.drop | nindent 14 }}
+        resources: {{ toYaml .Values.resources | nindent 10 }}
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: home
+          mountPath: /home/mcp
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: home
+        emptyDir: {}
