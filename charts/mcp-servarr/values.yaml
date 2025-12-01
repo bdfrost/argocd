@@ -2,7 +2,7 @@ name: mcp-servarr
 replicaCount: 1
 
 image:
-  repository: ghcr.io/bdfrost/mcp_servarr
+  repository: ghcr.io/bdfrost/mcp-servarr
   tag: latest
   pullPolicy: Always
 
