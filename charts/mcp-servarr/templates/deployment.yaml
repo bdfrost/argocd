@@ -68,21 +68,17 @@ spec:
         - name: home
           mountPath: /home/mcp
         livenessProbe:
-          exec:
-            command:
-            - python
-            - -c
-            - "import sys; sys.exit(0)"
+          httpGet:
+            path: /health
+            port: {{ .Values.service.targetPort }}
           initialDelaySeconds: 30
           periodSeconds: 30
           timeoutSeconds: 5
           failureThreshold: 3
         readinessProbe:
-          exec:
-            command:
-            - python
-            - -c
-            - "import sys; sys.exit(0)"
+          httpGet:
+            path: /ready
+            port: {{ .Values.service.targetPort }}
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
