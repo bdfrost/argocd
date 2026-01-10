@@ -43,7 +43,7 @@ spec:
         - name: SCANOPY_MODE
           value: "Push"
         - name: SCANOPY_HEARTBEAT_INTERVAL
-          value: "30s"
+          value: "30"
         volumeMounts:
         - name: daemon-config
           mountPath: /app/config
