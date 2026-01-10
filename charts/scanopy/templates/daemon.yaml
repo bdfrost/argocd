@@ -39,7 +39,7 @@ spec:
         - name: SCANOPY_DAEMON_PORT
           value: {{ .Values.daemon.port | quote }}
         - name: SCANOPY_SERVER_URL
-          value: "http://{{ .Values.name }}-server:{{ .Values.server.port }}"
+          value: "http://{{ .Values.name }}-server"
         - name: SCANOPY_MODE
           value: "Push"
         - name: SCANOPY_HEARTBEAT_INTERVAL
