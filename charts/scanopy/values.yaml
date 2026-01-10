@@ -15,7 +15,7 @@ daemon:
 
 # PostgreSQL configuration
 postgres:
-  image: postgres:17-alpine
+  image: postgres:18-alpine
   port: 5432
   storage: 10Gi
   # This should be replaced with a sealed secret in production
