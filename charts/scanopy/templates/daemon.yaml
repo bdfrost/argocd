@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-daemon-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.storage.className }}
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-daemon
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}-daemon
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-daemon
+    spec:
+      hostNetwork: {{ .Values.daemon.hostNetwork }}
+      containers:
+      - name: daemon
+        image: {{ .Values.daemon.image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.daemon.port }}
+        env:
+        - name: SCANOPY_LOG_LEVEL
+          value: "info"
+        - name: SCANOPY_DAEMON_PORT
+          value: {{ .Values.daemon.port | quote }}
+        - name: SCANOPY_SERVER_URL
+          value: "http://{{ .Values.name }}-server:{{ .Values.server.port }}"
+        - name: SCANOPY_MODE
+          value: "Push"
+        - name: SCANOPY_HEARTBEAT_INTERVAL
+          value: "30s"
+        volumeMounts:
+        - name: daemon-config
+          mountPath: /app/config
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      volumes:
+      - name: daemon-config
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-daemon-config-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-daemon
+  labels:
+    app: {{ .Values.name }}-daemon
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.name }}-daemon
+  ports:
+  - name: daemon
+    port: {{ .Values.daemon.port }}
+    targetPort: {{ .Values.daemon.port }}
+    protocol: TCP
