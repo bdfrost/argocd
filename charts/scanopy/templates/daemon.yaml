@@ -34,6 +34,8 @@ spec:
         ports:
         - containerPort: {{ .Values.daemon.port }}
         env:
+        - name: SCANOPY_SERVER_PORT
+          value: {{ .Values.server.port | quote }}
         - name: SCANOPY_LOG_LEVEL
           value: "info"
         - name: SCANOPY_DAEMON_PORT
