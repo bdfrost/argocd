@@ -25,5 +25,5 @@ appVersion: "1.0"
 
 dependencies:
 - name: flannel
-  version: v0.28.0
+  version: v0.28.1
   repository: https://flannel-io.github.io/flannel/
