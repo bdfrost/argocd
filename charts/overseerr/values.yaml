@@ -18,6 +18,7 @@ seerr-chart:
       accessModes:
         - ReadWriteOnce
       existingClaim: 'overseerr-pvc'
+      name: 'overseerr-pvc'
       volumeName: 'pvc-02639796-8217-461b-866a-efed822b10d3'
   service:
     type: ClusterIP
