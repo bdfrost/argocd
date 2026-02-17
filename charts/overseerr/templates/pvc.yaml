@@ -6,7 +6,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: synology-csi-iscsi-delete
-  volumeName: pvc-bcb5a03f-b2df-4ea5-abca-b07edd71d86a
+  volumeName: pvc-02639796-8217-461b-866a-efed822b10d3
   resources:
     requests:
       storage: 1Gi
