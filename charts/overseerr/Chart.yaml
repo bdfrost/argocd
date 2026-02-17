@@ -6,9 +6,9 @@ type: application
 
 version: 3.1.0 
 
-appVersion: "latest"
+appVersion: 'v3.0.1'
 
 dependencies:
 - name: seer
   version: 3.1.0
-  repository: https://github.com/seerr-team/seerr
+  repository: seerr-team/seerr
