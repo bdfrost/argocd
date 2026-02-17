@@ -1,5 +1,5 @@
 replicaCount: 1
-name: seer
+name: seerr
 targetPort: 80
 
 seer:
@@ -21,3 +21,24 @@ seer:
   service:
     type: ClusterIP
     port: 80
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: seerr.frost.haus
+    hosts:
+      - host: seerr.frost.haus
+        http:
+          paths:
+          - pathType: ImplementationSpecific
+            path: "/"
+            backend:
+              service:
+                name: seerr
+                port:
+                  name: http
+    tls:
+      - hosts:
+        - seerr.frost.haus
+        secretName: seerr-cert

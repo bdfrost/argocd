@@ -1,49 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.name }}
+  name: overseerr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
+    external-dns.alpha.kubernetes.io/host: overseerr.frost.haus
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - {{ .Values.name }}.frost.haus
-    secretName: {{ .Values.name }}-cert
+    - overseerr.frost.haus
+    secretName: overseerr-cert
   rules:
-  - host: {{ .Values.name }}.frost.haus
+  - host: overseerr.frost.haus
     http:
       paths:
       - pathType: ImplementationSpecific
         path: "/"
         backend:
           service:
-            name: {{ .Values.name }}
-            port:
-              name: http
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: seer
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/host: seer.frost.haus
-spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - seer.frost.haus
-    secretName: seer-cert
-  rules:
-  - host: seer.frost.haus
-    http:
-      paths:
-      - pathType: ImplementationSpecific
-        path: "/"
-        backend:
-          service:
-            name: seer
+            name: overseerr
             port:
               name: http
