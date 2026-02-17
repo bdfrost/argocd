@@ -17,6 +17,7 @@ seerr-chart:
         - storageClassName: synology-csi-iscsi-delete
       accessModes:
         - ReadWriteOnce
+      name: seerr
   service:
     type: ClusterIP
     port: 80
