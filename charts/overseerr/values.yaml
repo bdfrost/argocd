@@ -14,9 +14,8 @@ seerr-chart:
     persistence:
       size: 1Gi
       annotations:
-        - storageClassName: synology-csi-iscsi-delete
-      accessModes:
-        - ReadWriteOnce
+        storageClassName: synology-csi-iscsi-delete
+      accessModes: ReadWriteOnce
       name: seerr
   service:
     type: ClusterIP
