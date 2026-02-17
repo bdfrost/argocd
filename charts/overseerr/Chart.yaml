@@ -11,4 +11,4 @@ appVersion: "latest"
 dependencies:
 - name: seer
   version: 3.1.0
-  repository: https://github.com/seerr-team/seerr/tree/main/charts/seerr
+  repository: https://github.com/seerr-team/seerr
