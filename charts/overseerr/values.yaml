@@ -2,7 +2,7 @@ replicaCount: 1
 name: seerr
 targetPort: 80
 
-seer:
+seerr-chart:
   image:
     registry: ghcr.io
     repository: seerr-team/seerr
