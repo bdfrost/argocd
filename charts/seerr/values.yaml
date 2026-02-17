@@ -3,6 +3,7 @@ name: seerr
 targetPort: 80
 
 seerr-chart:
+  nameOverride: seerr
   image:
     registry: ghcr.io
     repository: seerr-team/seerr
