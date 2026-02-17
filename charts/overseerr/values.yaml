@@ -12,7 +12,11 @@ seerr-chart:
     automount: true
   config:
     persistence:
-      existingClaim: 'overseerr-pvc'
+      size: 1Gi
+      annotations:
+        - storageClassName: synology-csi-iscsi-delete
+      accessModes:
+        - ReadWriteOnce
   service:
     type: ClusterIP
     port: 80
