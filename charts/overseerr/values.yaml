@@ -1,0 +1,23 @@
+replicaCount: 1
+name: seer
+targetPort: 80
+
+seer:
+  image:
+    registry: ghcr.io
+    repository: seerr-team/seerr
+    pullPolicy: IfNotPresent  
+  serviceAccount:
+    create: true
+    automount: true
+  config:
+    persistence:
+      size: 1Gi
+      annotations:
+        - storageClassName: synology-csi-iscsi-delete
+      accessModes:
+        - ReadWriteOnce
+      existingClaim: 'overseerr-pvc'
+  service:
+    type: ClusterIP
+    port: 80
