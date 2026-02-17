@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: overseerr-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  volumeName: pvc-bcb5a03f-b2df-4ea5-abca-b07edd71d86a
+  resources:
+    requests:
+      storage: 1Gi
