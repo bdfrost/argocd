@@ -29,15 +29,9 @@ seerr-chart:
       external-dns.alpha.kubernetes.io/host: seerr.frost.haus
     hosts:
       - host: seerr.frost.haus
-        http:
-          paths:
-          - pathType: ImplementationSpecific
-            path: "/"
-            backend:
-              service:
-                name: seerr
-                port:
-                  name: http
+        paths:
+        - pathType: ImplementationSpecific
+          path: "/"
     tls:
       - hosts:
         - seerr.frost.haus
