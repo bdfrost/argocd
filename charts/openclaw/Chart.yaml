@@ -1,0 +1,26 @@
+apiVersion: v2
+name: openclaw
+version: "1.0.0"
+
+dependencies:
+  - name: openclaw
+    version: 1.3.20
+    repository: https://serhanekicii.github.io/openclaw-helm
+
+
+# kubectx kubernetes-admin@kubernetes
+# k create ns openclaw
+# kubens openclaw
+# cd ~/git/argocd/charts/openclaw/templates/
+# kubectl create secret generic openclaw-env-secrets --from-literal="ANTHROPIC_API_KEY=sk-ant-xxx" --from-literal="OPENCLAW_GATEWAY_TOKEN=your-token" --dry-run=client -o yaml > secret.yaml
+# kubeseal -f secret.yaml -o yaml -w sealedsecret.yaml
+# rm secret.yaml
+
+# Pair your device:
+# # Access the web UI
+# kubectl port-forward -n openclaw svc/openclaw 18789:18789
+# # Open http://localhost:18789, enter your Gateway Token, click Connect
+
+# # Approve the pairing request
+# kubectl exec -n openclaw deployment/openclaw -- node dist/index.js devices list
+# kubectl exec -n openclaw deployment/openclaw -- node dist/index.js devices approve <REQUEST_ID>
