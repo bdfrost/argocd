@@ -129,13 +129,13 @@ data:
                 enableUser: true
                 showEpisodeNumber: true
                 expandOneStreamToTwoRows: false
-        - Overseerr:
+        - Seerr:
             icon: overseerr.png
             href: https://overseerr.frost.haus
             description: Media request management
             widget:
-              type: overseerr
-              url: https://overseerr.frost.haus
+              type: seerr
+              url: https://seerr.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
         - Sonarr:
             icon: sonarr.png

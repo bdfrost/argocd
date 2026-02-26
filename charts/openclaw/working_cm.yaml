@@ -1,0 +1,150 @@
+apiVersion: v1
+data:
+  openclaw.json: |
+    {
+      // Gateway configuration
+      "gateway": {
+        "port": 18789,
+        "mode": "local",
+        // IMPORTANT: trustedProxies uses exact IP matching only
+        // - CIDR notation is NOT supported - list each proxy IP individually
+        // - IPv6 exact addresses may work but are untested
+        // - Recommend single-stack IPv4 deployments for simplicity
+        "trustedProxies": ["10.0.0.1"],
+        "controlUi": {
+          "allowedOrigins": ["https://openclaw.frost.haus"]
+        },
+      },
+
+      // Browser configuration (Chromium sidecar)
+      "browser": {
+        "enabled": true,
+        "defaultProfile": "default",
+        "profiles": {
+          "default": {
+            "cdpUrl": "http://localhost:9222",
+            "color": "#4285F4"
+          }
+        }
+      },
+
+      // Agent configuration
+      "agents": {
+        "defaults": {
+          "workspace": "/home/node/.openclaw/workspace",
+          "model": {
+            // Uses ANTHROPIC_API_KEY from environment
+            "primary": "anthropic/claude-opus-4-6"
+          },
+          "userTimezone": "UTC",
+          "timeoutSeconds": 600,
+          "maxConcurrent": 1
+        },
+        "list": [
+          {
+            "id": "main",
+            "default": true,
+            "identity": {
+              "name": "OpenClaw",
+              "emoji": "🦞"
+            }
+          }
+        ]
+      },
+
+      // Session management
+      "session": {
+        "scope": "per-sender",
+        "store": "/home/node/.openclaw/sessions",
+        "reset": {
+          "mode": "idle",
+          "idleMinutes": 60
+        }
+      },
+
+      // Logging
+      "logging": {
+        "level": "info",
+        "consoleLevel": "info",
+        "consoleStyle": "compact",
+        "redactSensitive": "tools"
+      },
+
+      // Tools configuration
+      "tools": {
+        "profile": "full",
+        "web": {
+          "search": {
+            "enabled": false
+          },
+          "fetch": {
+            "enabled": true
+          }
+        }
+      }
+
+      // Channel configuration can be added here:
+      // "channels": {
+      //   "telegram": {
+      //     "botToken": "${TELEGRAM_BOT_TOKEN}",
+      //     "enabled": true
+      //   },
+      //   "discord": {
+      //     "token": "${DISCORD_BOT_TOKEN}"
+      //   },
+      //   "slack": {
+      //     "botToken": "${SLACK_BOT_TOKEN}",
+      //     "appToken": "${SLACK_APP_TOKEN}"
+      //   }
+      // }
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: openclaw:/ConfigMap:openclaw/openclaw
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","data":{"openclaw.json":"{\n  // Gateway
+      configuration\n  \"gateway\": {\n    \"port\": 18789,\n    \"mode\":
+      \"local\",\n    // IMPORTANT: trustedProxies uses exact IP matching
+      only\n    // - CIDR notation is NOT supported - list each proxy IP
+      individually\n    // - IPv6 exact addresses may work but are untested\n   
+      // - Recommend single-stack IPv4 deployments for simplicity\n   
+      \"trustedProxies\": [\"10.0.0.1\"]\n  },\n\n  // Browser configuration
+      (Chromium sidecar)\n  \"browser\": {\n    \"enabled\": true,\n   
+      \"defaultProfile\": \"default\",\n    \"profiles\": {\n      \"default\":
+      {\n        \"cdpUrl\": \"http://localhost:9222\",\n        \"color\":
+      \"#4285F4\"\n      }\n    }\n  },\n\n  // Agent configuration\n 
+      \"agents\": {\n    \"defaults\": {\n      \"workspace\":
+      \"/home/node/.openclaw/workspace\",\n      \"model\": {\n        // Uses
+      ANTHROPIC_API_KEY from environment\n        \"primary\":
+      \"anthropic/claude-opus-4-6\"\n      },\n      \"userTimezone\":
+      \"UTC\",\n      \"timeoutSeconds\": 600,\n      \"maxConcurrent\": 1\n   
+      },\n    \"list\": [\n      {\n        \"id\": \"main\",\n       
+      \"default\": true,\n        \"identity\": {\n          \"name\":
+      \"OpenClaw\",\n          \"emoji\": \"🦞\"\n        }\n      }\n    ]\n 
+      },\n\n  // Session management\n  \"session\": {\n    \"scope\":
+      \"per-sender\",\n    \"store\": \"/home/node/.openclaw/sessions\",\n   
+      \"reset\": {\n      \"mode\": \"idle\",\n      \"idleMinutes\": 60\n   
+      }\n  },\n\n  // Logging\n  \"logging\": {\n    \"level\": \"info\",\n   
+      \"consoleLevel\": \"info\",\n    \"consoleStyle\": \"compact\",\n   
+      \"redactSensitive\": \"tools\"\n  },\n\n  // Tools configuration\n 
+      \"tools\": {\n    \"profile\": \"full\",\n    \"web\": {\n     
+      \"search\": {\n        \"enabled\": false\n      },\n      \"fetch\":
+      {\n        \"enabled\": true\n      }\n    }\n  }\n\n  // Channel
+      configuration can be added here:\n  // \"channels\": {\n  //  
+      \"telegram\": {\n  //     \"botToken\": \"${TELEGRAM_BOT_TOKEN}\",\n 
+      //     \"enabled\": true\n  //   },\n  //   \"discord\": {\n  //    
+      \"token\": \"${DISCORD_BOT_TOKEN}\"\n  //   },\n  //   \"slack\": {\n 
+      //     \"botToken\": \"${SLACK_BOT_TOKEN}\",\n  //     \"appToken\":
+      \"${SLACK_APP_TOKEN}\"\n  //   }\n  //
+      }\n}\n"},"kind":"ConfigMap","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"openclaw:/ConfigMap:openclaw/openclaw"},"labels":{"app.kubernetes.io/instance":"openclaw","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"openclaw","helm.sh/chart":"app-template-4.6.2"},"name":"openclaw","namespace":"openclaw"}}
+  creationTimestamp: '2026-02-22T18:37:42Z'
+  labels:
+    app.kubernetes.io/instance: openclaw
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: openclaw
+    helm.sh/chart: app-template-4.6.2
+  name: openclaw
+  namespace: openclaw
+  resourceVersion: '174705320'
+  uid: 3f61b85d-2af0-40ad-8033-5240790983cb
