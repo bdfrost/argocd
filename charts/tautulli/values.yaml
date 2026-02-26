@@ -10,7 +10,7 @@ tautulli:
     TZ: "America/Chicago"
   image:
     repository: tautulli/tautulli
-    tag: v2.16.0
+    tag: v2.16.1
     pullPolicy: IfNotPresent
   service:
     main:
