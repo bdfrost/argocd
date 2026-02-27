@@ -2,7 +2,7 @@ name: frigate
 frigate:
   image:
     repository: ghcr.io/blakeblackshear/frigate
-    tag: "0.16.4"
+    tag: "0.17.0"
   envFromSecrets:
     - frigate-secrets
   tmpfs:
