@@ -14,7 +14,6 @@ ollama:
     models:
       pull:
         - qwen3.5
-        - InterVL3.5
   service:
     type: ClusterIP
     port: 11434
