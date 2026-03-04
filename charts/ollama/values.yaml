@@ -45,5 +45,5 @@ ollama:
     enabled: true
     accessModes:
       - ReadWriteOnce
-    size: 30Gi
+    size: 64Gi
     storageClass: "synology-csi-iscsi-delete"
