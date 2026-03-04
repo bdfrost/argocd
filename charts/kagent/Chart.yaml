@@ -27,5 +27,5 @@ dependencies:
     version: 0.7.20
     repository: oci://ghcr.io/kagent-dev/kagent/helm
   - name: kagent
-    version: 0.7.20
+    version: 0.7.22
     repository: oci://ghcr.io/kagent-dev/kagent/helm
