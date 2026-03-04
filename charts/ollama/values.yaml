@@ -13,7 +13,7 @@ ollama:
       nvidiaResource: "nvidia.com/gpu"
     models:
       pull:
-        - qwen3.5
+        - qwen3.5:4b
   service:
     type: ClusterIP
     port: 11434
