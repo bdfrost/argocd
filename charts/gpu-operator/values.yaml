@@ -4,7 +4,7 @@ gpu-operator:
   # driver:
   #   usePrecompiled: "true"
   devicePlugin:
-    version: v0.15.0-ubi8
+    # version: v0.15.0-ubi8
     enabled: true
     nodeSelector:
       gpu-operator: "true"
