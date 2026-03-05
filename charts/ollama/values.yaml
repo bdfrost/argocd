@@ -13,12 +13,8 @@ ollama:
       nvidiaResource: "nvidia.com/gpu"
     models:
       pull:
-        - mistral
-        - moondream
-        - llama2
-        - llama3.1
-        - llava:7b
-        - orca-mini:latest
+        - qwen3.5:4b
+        - qwen3-vl:4b-instruct
   service:
     type: ClusterIP
     port: 11434
@@ -48,5 +44,5 @@ ollama:
     enabled: true
     accessModes:
       - ReadWriteOnce
-    size: 30Gi
+    size: 64Gi
     storageClass: "synology-csi-iscsi-delete"
