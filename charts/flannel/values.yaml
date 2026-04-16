@@ -2,7 +2,7 @@ flannel:
   flannel:
     image:
       repository: ghcr.io/flannel-io/flannel
-      tag: v0.28.2
+      tag: v0.28.4
     image_cni:
       repository: ghcr.io/flannel-io/flannel-cni-plugin
       tag: v1.8.0-flannel1
