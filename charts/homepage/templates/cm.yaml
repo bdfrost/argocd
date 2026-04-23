@@ -131,7 +131,7 @@ data:
                 expandOneStreamToTwoRows: false
         - Seerr:
             icon: overseerr.png
-            href: https://overseerr.frost.haus
+            href: https://seerr.frost.haus
             description: Media request management
             widget:
               type: seerr
