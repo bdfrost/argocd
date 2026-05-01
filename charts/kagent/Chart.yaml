@@ -27,5 +27,5 @@ dependencies:
     version: 0.8.6
     repository: oci://ghcr.io/kagent-dev/kagent/helm
   - name: kagent
-    version: 0.8.6
+    version: 0.9.1
     repository: oci://ghcr.io/kagent-dev/kagent/helm
