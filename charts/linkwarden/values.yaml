@@ -21,3 +21,8 @@ linkwarden:
       existingSecret:
         name: linkwarden-nextauth-secret
         key: nextauth-secret
+  postgresql:
+    image:
+      registry: docker.io
+      repository: bitnami/postgresql
+      tag: "16"
