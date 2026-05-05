@@ -22,7 +22,7 @@ spec:
             memory: 1Gi
           limits:
             memory: 1Gi
-        image: ghcr.io/plexguide/huntarr:latest
+        image: huntarr/plexguide:latest
         imagePullPolicy: Always
         # ports:
         # - containerPort: 9705
