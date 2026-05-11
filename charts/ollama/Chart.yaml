@@ -24,5 +24,5 @@ appVersion: "0.17.5"
 
 dependencies:
 - name: ollama
-  version: 1.55.0
+  version: 1.56.0
   repository: https://helm.otwld.com/
