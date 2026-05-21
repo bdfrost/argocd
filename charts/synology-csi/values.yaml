@@ -19,7 +19,7 @@ synology-csi:
     plugin:
       image: synology/synology-csi
       pullPolicy: IfNotPresent
-      tag: ""
+      tag: "v1.2.1"
     # https://kubernetes-csi.github.io/docs/external-provisioner.html
     provisioner:
       image: registry.k8s.io/sig-storage/csi-provisioner

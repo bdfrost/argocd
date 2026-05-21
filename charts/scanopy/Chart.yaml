@@ -1,0 +1,5 @@
+apiVersion: v2
+name: scanopy
+version: 0.1.0
+description: Empty placeholder chart to keep the Argo CD Application valid after Scanopy was removed.
+type: application

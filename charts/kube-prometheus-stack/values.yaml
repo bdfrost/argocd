@@ -16,6 +16,10 @@ kube-prometheus-stack:
     alertmanagerSpec:
       configSecret: alertmanager-secrets
   grafana:
+    # Work around k8s-n3/containerd image-cache I/O errors seen as
+    # `exec /run.sh: input/output error` during Grafana pod startup.
+    nodeSelector:
+      kubernetes.io/hostname: k8s-n2
     ingress:
       enabled: true
       ingressClassName: nginx
