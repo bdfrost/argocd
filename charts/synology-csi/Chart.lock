@@ -1,6 +1,0 @@
-dependencies:
-- name: synology-csi
-  repository: https://christian-schlichtherle.github.io/synology-csi-chart
-  version: 0.11.2
-digest: sha256:86df1be31b59ee4c0379290764f2e3f9117be27991eb0a3180bed55ac7ebb239
-generated: "2026-05-22T05:00:05.60100969Z"

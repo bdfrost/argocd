@@ -5,31 +5,6 @@ synology-csi:
   clientInfoSecret:
     create: false
     name: synology-csi
-  images:
-    # https://kubernetes-csi.github.io/docs/external-attacher.htmlis
-    attacher:
-      image: registry.k8s.io/sig-storage/csi-attacher
-      pullPolicy: IfNotPresent
-    # https://kubernetes-csi.github.io/docs/node-driver-registrar.html
-    nodeDriverRegistrar:
-      image: registry.k8s.io/sig-storage/csi-node-driver-registrar
-      pullPolicy: IfNotPresent
-    plugin:
-      image: synology/synology-csi
-      pullPolicy: IfNotPresent
-    # https://kubernetes-csi.github.io/docs/external-provisioner.html
-    provisioner:
-      image: registry.k8s.io/sig-storage/csi-provisioner
-      pullPolicy: IfNotPresent
-    # https://kubernetes-csi.github.io/docs/external-resizer.html
-    resizer:
-      image: registry.k8s.io/sig-storage/csi-resizer
-      pullPolicy: IfNotPresent
-    # https://kubernetes-csi.github.io/docs/external-snapshotter.html
-    snapshotter:
-      image: registry.k8s.io/sig-storage/csi-snapshotter
-      pullPolicy: IfNotPresent
-  installCSIDriver: true
   storageClasses:
     iscsi-delete:
       disabled: false
