@@ -64,7 +64,7 @@ postgres:
 redis:
   image:
     repository: redis
-    tag: "8.2"
+    tag: "8.6"
     pullPolicy: IfNotPresent
   storage:
     className: synology-csi-iscsi-delete
