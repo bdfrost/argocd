@@ -1,0 +1,91 @@
+name: honcho
+replicaCount: 1
+
+image:
+  repository: ghcr.io/plastic-labs/honcho
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8000
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  host: honcho.frost.haus
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: honcho.frost.haus
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+  tls:
+    enabled: true
+    secretName: honcho-cert
+
+# Optional secret for provider keys and auth/webhook secrets.
+# Create/seal this as honcho-env-secrets with keys such as:
+#   LLM_OPENAI_API_KEY, LLM_ANTHROPIC_API_KEY, LLM_GEMINI_API_KEY,
+#   AUTH_JWT_SECRET, WEBHOOK_SECRET
+existingSecret: honcho-env-secrets
+
+config:
+  logLevel: INFO
+  namespace: honcho
+  auth:
+    useAuth: false
+  cache:
+    enabled: true
+  deriver:
+    workers: 1
+  database:
+    name: honcho
+    user: honcho
+    password: honcho
+  llm:
+    # Honcho defaults to OpenAI/gpt-5.4-mini for several model configs upstream.
+    # Override these if you want to route through OpenRouter/vLLM/Ollama later.
+    openaiBaseUrl: ""
+
+postgres:
+  image:
+    repository: pgvector/pgvector
+    tag: pg15
+    pullPolicy: IfNotPresent
+  storage:
+    className: synology-csi-iscsi-delete
+    size: 20Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 1Gi
+
+redis:
+  image:
+    repository: redis
+    tag: "8.2"
+    pullPolicy: IfNotPresent
+  storage:
+    className: synology-csi-iscsi-delete
+    size: 2Gi
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      memory: 256Mi
+
+resources:
+  api:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 2Gi
+  deriver:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 2Gi

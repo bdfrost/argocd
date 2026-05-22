@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "honcho.name" . }}-deriver
+  labels:
+{{ include "honcho.labels" . | nindent 4 }}
+    app.kubernetes.io/component: deriver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "honcho.name" . }}
+      app.kubernetes.io/component: deriver
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "honcho.name" . }}
+        app.kubernetes.io/component: deriver
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      initContainers:
+      - name: wait-for-api-migrations
+        image: "{{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}"
+        command: ["sh", "-c", "until pg_isready -h {{ include "honcho.name" . }}-postgres -U {{ .Values.config.database.user }} -d {{ .Values.config.database.name }}; do sleep 2; done; sleep 20"]
+      containers:
+      - name: deriver
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["/app/.venv/bin/python", "-m", "src.deriver"]
+        envFrom:
+        - configMapRef:
+            name: {{ include "honcho.name" . }}-config
+        - secretRef:
+            name: {{ .Values.existingSecret }}
+            optional: true
+        resources: {{ toYaml .Values.resources.deriver | nindent 10 }}

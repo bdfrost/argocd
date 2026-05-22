@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: headlamp
+  name: honcho
   namespace: argocd
 spec:
   source:
-    path: charts/headlamp
+    path: charts/honcho
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: headlamp
+    namespace: honcho
   project: default
   syncPolicy:
     automated:

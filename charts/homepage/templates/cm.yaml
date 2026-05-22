@@ -240,10 +240,6 @@ data:
               env: 1
               key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
               fields: ["applications", "services", "namespaces"]
-        - Headlamp:
-            icon: mdi-kubernetes
-            href: https://headlamp.frost.haus
-            description: Modern Kubernetes UI
         - Kubernetes Dashboard:
             icon: kubernetes-dashboard.png
             href: https://dashboard.frost.haus
@@ -303,79 +299,12 @@ data:
               url: https://uptime-kuma.frost.haus/
               slug: default
     - Network & Smart Home:
-        - Pi-hole DNS 1:
-            icon: mdi-pi-hole
-            href: http://dns1.brainboy.local.lan/admin
-            description: Primary DNS with ad blocking
-            widget:
-              type: pihole
-              url: http://dns1.brainboy.local.lan
-              key: "{{ "{{" }}HOMEPAGE_VAR_DNS1_APIKEY{{ "}}" }}"
-              version: 6
         - Pi-hole DNS 2:
             icon: mdi-pi-hole
             href: http://dns2.brainboy.local.lan/admin
             description: Secondary DNS with ad blocking
             ping: http://dns2.brainboy.local.lan
-            widget:
-              type: pihole
-              url: http://dns2.brainboy.local.lan
-              key: "{{ "{{" }}HOMEPAGE_VAR_DNS2_APIKEY{{ "}}" }}"
-              version: 6
-        - Speedtest Tracker:
-            icon: mdi-speedometer
-            href: https://speedtest-tracker.frost.haus
-            description: Internet speed monitoring
-            widget:
-              type: speedtest
-              url: https://speedtest-tracker.frost.haus
-        - HDHomeRun:
-            icon: hdhr.png
-            href: http://hdhomerun.brainboy.local.lan
-            description: TV tuner & live TV
-            ping: hdhomerun.brainboy.local.lan
-            widgets:
-              - type: hdhomerun
-                tuner: 0
-                url: http://hdhomerun.brainboy.local.lan
-              - type: hdhomerun
-                tuner: 1
-                url: http://hdhomerun.brainboy.local.lan
-        - Home Assistant:
-            icon: home-assistant.png
-            href: http://homeassistant.brainboy.local.lan:8123
-            description: Home automation hub
-            ping: homeassistant.brainboy.local.lan
-            widget:
-              type: homeassistant
-              url: http://homeassistant.brainboy.local.lan:8123
-              key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
-              custom:
-                - state: weather.forecast_home
-                  label: wind speed
-                  value: "{attributes.wind_speed} {attributes.wind_speed_unit}"
     - Applications:
-        - Actual Budget:
-            icon: actual.png
-            href: https://actual-budget.frost.haus
-            description: Personal budgeting tool
-        - Open WebUI:
-            icon: mdi-robot
-            href: https://open-webui.frost.haus
-            description: Web UI for local LLMs
-        - Ollama:
-            icon: ollama.png
-            href: https://ollama.frost.haus
-            description: Local LLM inference server
-        - Frigate:
-            icon: frigate.png
-            href: https://frigate.frost.haus
-            description: NVR with AI object detection
-        - Dozzle:
-            icon: dozzle.png
-            href: https://dozzle.frost.haus
-            description: Docker container log viewer
-  widgets.yaml: |
     - logo:
         icon: https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/homepage.png
     - greeting:
