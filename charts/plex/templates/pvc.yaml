@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plex-config-pvc-v4
+  name: plex-config-pvc-v5
 spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: synology-csi-iscsi-delete
   resources:
     requests:
-      storage: 250Gi
+      storage: 50Gi

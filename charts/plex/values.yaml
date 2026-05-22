@@ -30,7 +30,7 @@ plex-media-server:
     gpu:
       nvidia:
         enabled: false
-    configExistingClaim: plex-config-pvc-v4
+    configExistingClaim: plex-config-pvc-v5
     livenessProbe:
       httpGet:
         path: /identity
