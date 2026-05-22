@@ -1,6 +1,0 @@
-apiVersion: v2
-name: honcho
-description: Honcho memory service for stateful agents
-type: application
-version: 0.1.0
-appVersion: "latest"
