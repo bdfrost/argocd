@@ -1,0 +1,7 @@
+# Patterns to ignore when building packages.
+# This only affects making the chart tarball, not how user installs it.
+.DS_Store
+*.swp
+*.bak
+*.swo
+*~

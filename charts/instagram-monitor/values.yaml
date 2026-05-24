@@ -1,0 +1,30 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/bdfrost/instagram-monitor
+  pullPolicy: Always
+  tag: "latest"
+
+cronjob:
+  schedule: "0 */6 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  backoffLimit: 1
+  activeDeadlineSeconds: 600
+  startingDeadlineSeconds: 300
+
+env:
+  - name: INSTAGRAM_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: instagram-monitor-secret
+        key: INSTAGRAM_USERNAME
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
