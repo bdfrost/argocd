@@ -8,7 +8,7 @@ RUN go mod download
 COPY main.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o /build/instagram-monitor .
 
-FROM alpine:3.20
+FROM alpine:3.23
 RUN apk add --no-cache ca-certificates
 RUN adduser -D appuser
 USER appuser

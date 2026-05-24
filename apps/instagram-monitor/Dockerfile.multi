@@ -6,7 +6,7 @@ RUN go mod download
 COPY main.go ./
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /build/instagram-monitor .
 
-FROM alpine:3.20 AS amd64
+FROM alpine:3.23 AS amd64
 RUN apk add --no-cache ca-certificates
 RUN adduser -D appuser
 USER appuser
@@ -20,7 +20,7 @@ RUN go mod download
 COPY main.go ./
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o /build/instagram-monitor .
 
-FROM alpine:3.20 AS arm64
+FROM alpine:3.23 AS arm64
 RUN apk add --no-cache ca-certificates
 RUN adduser -D appuser
 USER appuser
