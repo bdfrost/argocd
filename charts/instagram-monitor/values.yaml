@@ -3,7 +3,7 @@
 image:
   repository: ghcr.io/bdfrost/instagram-monitor
   pullPolicy: IfNotPresent
-  tag: "0.1.4"
+  tag: "0.1.5"
 
 schedule: "0 */3 * * *"
 concurrencyPolicy: Forbid
