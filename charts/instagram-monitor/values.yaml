@@ -42,3 +42,6 @@ monitors:
       - "slots"
       - "calendar"
     notifyOnAny: false
+  - username: "rainy_artist88"
+    displayName: "Rainy Artist"
+    notifyOnAny: true
