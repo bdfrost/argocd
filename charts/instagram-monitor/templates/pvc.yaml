@@ -15,3 +15,19 @@ spec:
     requests:
       storage: {{ .Values.state.size }}
 {{- end }}
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: kometa
+  name: kometa-config-pvc-v2
+  namespace: kometa
+spec:
+  storageClassName: synology-csi-iscsi-retain
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
