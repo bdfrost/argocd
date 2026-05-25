@@ -32,8 +32,8 @@ httpTimeout: 30
 dryRun: false
 
 monitors:
-  - username: "example_artist"
-    displayName: "Example Tattoo Artist"
+  - username: "goldenandtrue"
+    displayName: "Golden & True"
     keywords:
       - "book"
       - "booking"
