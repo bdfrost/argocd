@@ -37,7 +37,7 @@ resources:
 # State persistence — PVC for remembering which posts have been seen
 state:
   enabled: true
-  size: 10Mi
+  size: 1Gi
   storageClass: "synology-csi-iscsi-delete"
   accessModes:
     - ReadWriteOnce
@@ -58,8 +58,8 @@ dryRun: false
 #   keywords: list of keywords to match in captions
 #   notifyOnAny: if true, alert on ANY new post (not just keyword matches)
 monitors:
-  - username: "example_artist"
-    displayName: "Example Tattoo Artist"
+  - username: "goldenandtrue"
+    displayName: "Golden and True"
     keywords:
       - "book"
       - "booking"
