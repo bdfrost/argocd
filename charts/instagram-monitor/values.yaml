@@ -1,30 +1,70 @@
-replicaCount: 1
+# Default values for instagram-monitor.
+# This is a YAML-formatted file.
 
 image:
   repository: ghcr.io/bdfrost/instagram-monitor
-  pullPolicy: Always
-  tag: "latest"
+  pullPolicy: IfNotPresent
+  tag: "0.1.3"
 
-cronjob:
-  schedule: "0 */6 * * *"
-  concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1
-  backoffLimit: 1
-  activeDeadlineSeconds: 600
-  startingDeadlineSeconds: 300
+# CronJob schedule — defaults to every 3 hours
+schedule: "0 */3 * * *"
 
-env:
-  - name: INSTAGRAM_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: instagram-monitor-secret
-        key: INSTAGRAM_USERNAME
+# Concurrency policy — don't run a new job if the previous one is still running
+concurrencyPolicy: Forbid
 
+# Job history limits
+successfulJobsHistoryLimit: 3
+failedJobsHistoryLimit: 1
+
+# Restart policy for the job pod (Never for single-run CronJobs)
+restartPolicy: Never
+
+# Active deadline seconds — kill the job if it takes longer than this
+activeDeadlineSeconds: 300
+
+# Backoff limit for job retries
+backoffLimit: 0
+
+# Resource limits for the pod
 resources:
+  limits:
+    cpu: 200m
+    memory: 128Mi
   requests:
     cpu: 50m
     memory: 64Mi
-  limits:
-    cpu: 100m
-    memory: 128Mi
+
+# State persistence — PVC for remembering which posts have been seen
+state:
+  enabled: true
+  size: 10Mi
+  storageClass: "synology-csi-iscsi-delete"
+  accessModes:
+    - ReadWriteOnce
+
+# Notification webhook URL (optional — can also set via NOTIFICATION_URL env)
+notificationURL: ""
+
+# HTTP timeout in seconds
+httpTimeout: 30
+
+# Dry run mode
+dryRun: false
+
+# Monitors — list of Instagram accounts to watch
+# Each entry:
+#   username: instagram_username (without @)
+#   displayName: Friendly name for alerts
+#   keywords: list of keywords to match in captions
+#   notifyOnAny: if true, alert on ANY new post (not just keyword matches)
+monitors:
+  - username: "example_artist"
+    displayName: "Example Tattoo Artist"
+    keywords:
+      - "book"
+      - "booking"
+      - "open"
+      - "appointment"
+      - "slots"
+      - "calendar"
+    notifyOnAny: false
