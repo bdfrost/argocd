@@ -23,7 +23,7 @@ resources:
 
 state:
   enabled: true
-  size: 1Gi
+  size: 10Mi
   storageClass: "synology-csi-iscsi-delete"
   accessModes:
     - ReadWriteOnce
