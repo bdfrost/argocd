@@ -1,0 +1,6 @@
+apiVersion: v2
+name: poterie
+description: FST Flower Planner - modern minimalist web app for gardeners
+type: application
+version: 0.3.1
+appVersion: "0.3.1"

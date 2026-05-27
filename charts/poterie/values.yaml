@@ -1,0 +1,16 @@
+replicaCount: 1
+name: poterie
+image:
+  repository: ghcr.io/bdfrost/poterie
+  tag: "0.3.1"
+  pullPolicy: Always
+port: 8080
+puid: 1000
+pgid: 1000
+ingress:
+  enabled: true
+  host: poterie.frost.haus
+  className: nginx
+pvc:
+  storageClassName: synology-csi-iscsi-delete
+  size: 1Gi
