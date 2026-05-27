@@ -20,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
       - name: {{ .Values.name }}
-        image: {{ .Values.image }}
+        image: "{{ .Values.image }}"
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.targetPort }}
