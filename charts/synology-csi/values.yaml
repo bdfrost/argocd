@@ -17,7 +17,7 @@ synology-csi:
     iscsi-retain:
       reclaimPolicy: Retain
       disabled: false
-      isDefault: true
+      isDefault: false
       parameters:
        csi.storage.k8s.io/fstype: btrfs  
        location: /volume4 

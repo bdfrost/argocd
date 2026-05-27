@@ -17,25 +17,53 @@ spec:
         app: {{ .Values.name }}
     spec:
       securityContext:
-        fsGroup: {{ .Values.pgid }}
+        fsGroup: 1000
       containers:
       - name: {{ .Values.name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
         ports:
-        - containerPort: {{ .Values.port }}
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        - name: DB_PATH
+          value: /data/poterie.db
+        - name: PORT
+          value: "8080"
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: {{ .Values.targetPort }}
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: {{ .Values.targetPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
         volumeMounts:
-        - name: data
+        - name: {{ .Values.name }}-data
           mountPath: /data
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+      volumes:
+        - name: {{ .Values.name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-data-pvc-synology
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Values.name }}-data-pvc
+  name: {{ .Values.name }}-data-pvc-synology
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.pvc.storageClassName }}
+  storageClassName: synology-csi-iscsi-delete
   resources:
     requests:
-      storage: {{ .Values.pvc.size }}
+      storage: 1Gi
