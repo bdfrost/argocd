@@ -16,6 +16,8 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
