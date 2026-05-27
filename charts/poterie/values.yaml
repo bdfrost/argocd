@@ -1,4 +1,4 @@
 replicaCount: 1
 name: poterie
 targetPort: 8080
-image: ghcr.io/bdfrost/poterie:0.5.5
+image: ghcr.io/bdfrost/poterie:0.5.6
