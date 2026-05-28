@@ -9,10 +9,21 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
+    - poterie.app
     - {{ .Values.name }}.frost.haus
     secretName: {{ .Values.name }}-cert
   rules:
   - host: {{ .Values.name }}.frost.haus
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: {{ .Values.name }}
+            port:
+              name: http
+  - host: poterie.app
     http:
       paths:
       - pathType: ImplementationSpecific
