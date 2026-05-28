@@ -29,6 +29,9 @@ spec:
           value: /data/poterie.db
         - name: PORT
           value: "8080"
+        envFrom:
+        - secretRef:
+          name: poterie-admin
         readinessProbe:
           httpGet:
             path: /api/health
