@@ -5,9 +5,9 @@ external-dns:
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
   provider: pihole
   env:
-    - name: PiholeServer
+    - name: EXTERNAL_DNS_PIHOLE_SERVER
       value: http://192.168.100.21/admin/api
-    - name: PiholePassword
+    - name: EXTERNAL_DNS_PIHOLE_PASSWORD
       valueFrom:
         secretKeyRef:
           name: pihole-password
