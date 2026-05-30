@@ -3,19 +3,12 @@ external-dns:
     repository: registry.k8s.io/external-dns/external-dns
     tag:  ""
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
-  provider: cloudflare
-  env:
-    - name: CF_API_TOKEN
-      valueFrom:
-        secretKeyRef:
-          name: cloudflare-credentials
-          key: cloudflare_api_token
+  domainFilters:
+    - frost.haus
   policy: upsert-only
   sources:
     - ingress
     - service
-  domainFilters:
-    - "frost.haus"
   resources:
     limits:
       memory: 50Mi
