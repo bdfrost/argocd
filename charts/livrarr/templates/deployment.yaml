@@ -26,13 +26,7 @@ spec:
         volumeMounts:
         - name: {{ .Values.name }}-config
           mountPath: /config
-        - name: livrarr-media
-          mountPath: /books
       volumes:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
-        - name: livrarr-media
-          nfs:
-            server: 192.168.100.250
-            path: /volume1/books
