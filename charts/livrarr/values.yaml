@@ -1,0 +1,4 @@
+name: livrarr
+targetPort: 8789
+image: ghcr.io/kkodecs/livrarr:0.1.0-alpha5
+imagePullPolicy: Always
