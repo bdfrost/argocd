@@ -4,8 +4,12 @@ external-dns:
     tag:  ""
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
   provider: cloudflare
-  cloudflare:
-    secretName: cloudflare-credentials
+  env:
+    - name: CF_API_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: cloudflare-credentials
+          key: cloudflare_api_token
   policy: upsert-only
   sources:
     - ingress
