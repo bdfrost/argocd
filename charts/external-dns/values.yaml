@@ -3,20 +3,15 @@ external-dns:
     repository: registry.k8s.io/external-dns/external-dns
     tag:  ""
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
-  # TODO: uncomment and configure cloudflare provider
   provider: cloudflare
-  # cloudflare:
-  #   secretKey: api-key
-  #   email: your@email.com
-  # policy: sync
+  cloudflare:
+    secretName: cloudflare-credentials
   policy: upsert-only
   sources:
     - ingress
     - service
-  # registry: "txt"
-  # txtOwnerId: frost-haus
   domainFilters:
-    # - ".k8s.brainboy.local.lan"
+    - "frost.haus"
   resources:
     limits:
       memory: 50Mi
@@ -28,4 +23,3 @@ external-dns:
     create: true
     apiVersion: v1
   logLevel: debug
-  # logLevel: info
