@@ -3,6 +3,15 @@ external-dns:
     repository: registry.k8s.io/external-dns/external-dns
     tag:  ""
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
+  provider: pihole
+  env:
+    - name: PiholeServer
+      value: http://192.168.100.21/admin/api
+    - name: PiholePassword
+      valueFrom:
+        secretKeyRef:
+          name: pihole-password
+          key: EXTERNAL_DNS_PIHOLE_PASSWORD
   domainFilters:
     - frost.haus
   policy: upsert-only
