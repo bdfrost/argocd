@@ -4,9 +4,9 @@ description: A Helm chart for Kubernetes
 
 type: application
 
-version: 3.1.0 
+version: 3.6.0 
 
-appVersion: 'v3.0.1'
+appVersion: 'v3.3.0'
 
 dependencies:
 - name: seerr-chart
