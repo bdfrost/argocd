@@ -1,0 +1,105 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: release-notify
+spec:
+  schedule: "0 11 * * *"  # 6:00 AM Central (11:00 UTC)
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: release-notify
+              image: alpine:3.20
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  SONARR_URL="http://sonarr.sonarr.svc.cluster.local:80"
+                  RADARR_URL="http://radarr.radarr.svc.cluster.local:80"
+                  
+                  # Get today's date (UTC)
+                  TODAY=$(date -u +%Y-%m-%d)
+                  
+                  # Query Sonarr calendar for today
+                  SONARR_RESPONSE=$(curl -s -H "X-Api-Key: ${SONARR_API_KEY}" \
+                    "${SONARR_URL}/api/v3/calendar/sonarr?start=${TODAY}&end=${TODAY}")
+                  
+                  # Query Radarr calendar for today  
+                  RADARR_RESPONSE=$(curl -s -H "X-Api-Key: ${RADARR_API_KEY}" \
+                    "${RADARR_URL}/api/v3/calendar/radarr?start=${TODAY}&end=${TODAY}")
+                  
+                  # Count monitored episodes airing today
+                  SONARR_COUNT=$(echo "$SONARR_RESPONSE" | jq '[.[] | select(.monitored == true)] | length')
+                  
+                  # Count movies with file today
+                  RADARR_COUNT=$(echo "$RADARR_RESPONSE" | jq '[.[] | select(.monitored == true and .hasFile == true)] | length')
+                  
+                  TOTAL=$((SONARR_COUNT + RADARR_COUNT))
+                  
+                  # Only post to Slack if there are releases
+                  if [ "$TOTAL" -gt 0 ]; then
+                    # Build blocks for rich Slack formatting
+                    SLACK_MSG='{
+                      "blocks": [
+                        {"type": "header", "text": {"type": "plain_text", "text": "New Releases for '"$TODAY"' "}}
+                      ]
+                    }'
+                    
+                    # Add series if any
+                    if [ "$SONARR_COUNT" -gt 0 ]; then
+                      SERIES_LIST=$(echo "$SONARR_RESPONSE" | jq -r '
+                        [.[] | select(.monitored == true)] |
+                        sort_by(.season_number, .episode_number) |
+                        .[] |
+                        "• \(.series.title) S\(.season_number)E\(.episode_number) - \(.title)"
+                      ')
+                      
+                      while IFS= read -r line; do
+                        SLACK_MSG=$(echo "$SLACK_MSG" | jq --arg text "$line" \
+                          '.blocks += [{"type": "section", "text": {"type": "mrkdwn", "text": $text}}]')
+                      done <<< "$SERIES_LIST"
+                    fi
+                    
+                    # Add movies if any
+                    if [ "$RADARR_COUNT" -gt 0 ]; then
+                      MOVIES_LIST=$(echo "$RADARR_RESPONSE" | jq -r '
+                        [.[] | select(.monitored == true and .hasFile == true)] |
+                        sort_by(.year) |
+                        .[] |
+                        "• \(.title) (\(.year)) [\(.quality.quality.name)]"
+                      ')
+                      
+                      while IFS= read -r line; do
+                        SLACK_MSG=$(echo "$SLACK_MSG" | jq --arg text "$line" \
+                          '.blocks += [{"type": "section", "text": {"type": "mrkdwn", "text": $text}}]')
+                      done <<< "$MOVIES_LIST"
+                    fi
+                    
+                    # Post to Slack webhook
+                    curl -s -X POST \
+                      -H 'Content-Type: application/json' \
+                      -d "$SLACK_MSG" \
+                      "$WEBHOOK_URL"
+                  fi
+              env:
+                - name: SONARR_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: configarr
+                      key: SONARR_API_KEY
+                - name: RADARR_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: configarr
+                      key: RADARR_API_KEY
+                - name: WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: release-notify-webhook
+                      key: webhook-url
+              resources: {}
+          restartPolicy: Never
