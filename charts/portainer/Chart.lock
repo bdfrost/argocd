@@ -1,6 +1,6 @@
 dependencies:
 - name: portainer
   repository: https://portainer.github.io/k8s/
-  version: 239.3.0
-digest: sha256:e611a92c344f520a2c27f39edf888631b2a5716ae66a5f061d8df0445f8ae689
-generated: "2026-06-04T03:48:04.316259916Z"
+  version: 239.3.1
+digest: sha256:1dbde05844fc0a1dc08628401d0cbf39355112d211ed0e744967d2d4b165b7ff
+generated: "2026-06-08T08:51:30.823033243Z"
