@@ -4,6 +4,6 @@ dependencies:
   version: 0.9.6
 - name: kagent
   repository: oci://ghcr.io/kagent-dev/kagent/helm
-  version: 0.9.6
-digest: sha256:5faed799448687391f2f39b05850c16524d9d757f89a30418ce35231df5dd0ea
-generated: "2026-06-07T23:49:13.094831957Z"
+  version: 0.9.7
+digest: sha256:4899e8ab0022680247981eb7f81716e6dcb36ddb7de0097c2d7614df6b2b23d0
+generated: "2026-06-11T18:39:37.236266061Z"
