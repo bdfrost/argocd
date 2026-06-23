@@ -75,7 +75,7 @@ spec:
                     key: mdblist_token
               - name: KOMETA_VERBOSE
                 value: "1"
-              image: kometateam/kometa:v2.3.1
+              image: kometateam/kometa:v2.4.3
               imagePullPolicy: IfNotPresent
               args: [ "--run", "--read-only-config" ]
               resources:
