@@ -4,6 +4,12 @@ targetPort: 11434
 puid: 1026
 pgid: 100
 ollama:
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "2"
+    limits:
+      memory: "16Gi"
   runtimeClassName: nvidia
   ollama:
     gpu:
