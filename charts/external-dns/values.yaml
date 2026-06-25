@@ -29,3 +29,5 @@ external-dns:
     create: true
     apiVersion: v1
   logLevel: debug
+  extraArgs:
+    - --pihole-api-version=6
