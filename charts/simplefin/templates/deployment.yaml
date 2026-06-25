@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: ghcr.io/bdfrost/simplefin-dashboard:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        - name: DB_PATH
+          value: /data/simplefin.db
+        - name: SIMPLEFIN_ACCESS_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.name }}-secret
+              key: access-url
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-data-pvc-synology
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-data-pvc-synology
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 1G
