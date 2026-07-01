@@ -14,10 +14,22 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+      - name: setup-home
+        image: docker.io/library/alpine:3.20
+        command: ["sh", "-c", "mkdir -p /home/birdnet/.config && chown -R 1000:1000 /home/birdnet"]
+        volumeMounts:
+        - name: home-birdnet
+          mountPath: /home/birdnet
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
         imagePullPolicy: Always
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
         ports:
         - containerPort: {{ .Values.targetPort }}
           name: http
