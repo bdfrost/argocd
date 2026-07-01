@@ -26,6 +26,8 @@ spec:
           value: "{{ .Values.timezone }}"
         - name: BIRDNET_STARTUP_FAIL_DELAY
           value: "30"
+        - name: SKIP_CHOWN
+          value: "true"
         {{- if .Values.resources }}
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
