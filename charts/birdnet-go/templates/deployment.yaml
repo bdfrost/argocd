@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+          name: http
+        env:
+        - name: TZ
+          value: "{{ .Values.timezone }}"
+        - name: BIRDNET_STARTUP_FAIL_DELAY
+          value: "30"
+        {{- if .Values.resources }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: data
+          mountPath: /data
+        - name: hls
+          mountPath: /config/hls
+        - name: config-secret
+          mountPath: /config/config.yaml
+          subPath: config.yaml
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /api/v2/health
+            port: {{ .Values.targetPort }}
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /api/v2/health
+            port: {{ .Values.targetPort }}
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-config-pvc-synology
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-data-pvc-synology
+      - name: hls
+        emptyDir:
+          medium: Memory
+          sizeLimit: 50Mi
+      - name: config-secret
+        secret:
+          secretName: birdnet-go-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc-synology
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-data-pvc-synology
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 10Gi

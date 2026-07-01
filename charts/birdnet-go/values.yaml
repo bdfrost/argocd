@@ -1,0 +1,5 @@
+replicaCount: 1
+name: birdnet-go
+targetPort: 8080
+image: ghcr.io/tphakala/birdnet-go:nightly
+timezone: America/Chicago
