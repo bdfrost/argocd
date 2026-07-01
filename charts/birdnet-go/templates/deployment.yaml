@@ -45,6 +45,8 @@ spec:
           mountPath: /config/config.yaml
           subPath: config.yaml
           readOnly: true
+        - name: home-birdnet
+          mountPath: /home/birdnet
         livenessProbe:
           httpGet:
             path: /api/v2/health
@@ -73,6 +75,8 @@ spec:
       - name: config-secret
         secret:
           secretName: birdnet-go-config
+      - name: home-birdnet
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
