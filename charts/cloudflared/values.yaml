@@ -15,6 +15,8 @@ cloudflare-tunnel:
         service: http://poterie.poterie:80
       - hostname: poterie.app
         service: http://poterie.poterie:80
+      - hostname: birdnet-go.frost.haus
+        service: http://birdnet-go.birdnet-go:80
       - hostname: "*.frost.haus"
         service: http_status:404
       # ^^^ This rule matches any traffic which didn't match a previous rule, and responds with HTTP 200. Leave it at the end
