@@ -23,6 +23,14 @@ spec:
         volumeMounts:
         - name: home-birdnet
           mountPath: /home/birdnet
+      - name: init-config
+        image: docker.io/library/alpine:3.20
+        command: ["sh", "-c", "if [ ! -f /config/config.yaml ]; then cp /config-secret/config.yaml /config/config.yaml && chown 1000:1000 /config/config.yaml; fi"]
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: config-secret
+          mountPath: /config-secret
       containers:
       - name: {{ .Values.name }}
         image: {{ .Values.image }}
@@ -53,10 +61,6 @@ spec:
           mountPath: /data
         - name: hls
           mountPath: /config/hls
-        - name: config-secret
-          mountPath: /config/config.yaml
-          subPath: config.yaml
-          readOnly: true
         - name: home-birdnet
           mountPath: /home/birdnet
         livenessProbe:
