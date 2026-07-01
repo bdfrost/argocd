@@ -24,6 +24,8 @@ spec:
         env:
         - name: TZ
           value: "{{ .Values.timezone }}"
+        - name: HOME
+          value: "/data"
         - name: BIRDNET_STARTUP_FAIL_DELAY
           value: "30"
         - name: SKIP_CHOWN
