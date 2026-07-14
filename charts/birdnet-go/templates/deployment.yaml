@@ -18,13 +18,13 @@ spec:
         fsGroup: 1000
       initContainers:
       - name: setup-home
-        image: docker.io/library/alpine:3.20
+        image: docker.io/library/alpine:3.24
         command: ["sh", "-c", "mkdir -p /home/birdnet/.config && chown -R 1000:1000 /home/birdnet"]
         volumeMounts:
         - name: home-birdnet
           mountPath: /home/birdnet
       - name: init-config
-        image: docker.io/library/alpine:3.20
+        image: docker.io/library/alpine:3.24
         command: ["sh", "-c", "if [ ! -f /config/config.yaml ]; then cp /config-secret/config.yaml /config/config.yaml && chown 1000:1000 /config/config.yaml; fi"]
         volumeMounts:
         - name: config
