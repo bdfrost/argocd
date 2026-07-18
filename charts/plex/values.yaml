@@ -12,9 +12,8 @@ plex-media-server:
     tag: "1.43.2.10687-563d026ea"
     pullPolicy: IfNotPresent
   service:
-    type: LoadBalancer
+    type: ClusterIP
     port: 32400
-    metallb.io/ip-allocated-from-pool: first-pool
   ingress:
     enabled: true
     url: https://peppers.frost.haus
