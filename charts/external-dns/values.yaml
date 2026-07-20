@@ -3,15 +3,7 @@ external-dns:
     repository: registry.k8s.io/external-dns/external-dns
     tag:  ""
   pullPolicy: IfNotPresent  # @schema enum:[IfNotPresent, Always]
-  provider: pihole
-  env:
-    - name: EXTERNAL_DNS_PIHOLE_SERVER
-      value: http://dns2.brainboy.local.lan:8089
-    - name: EXTERNAL_DNS_PIHOLE_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: pihole-password
-          key: EXTERNAL_DNS_PIHOLE_PASSWORD
+  provider: rfc2136
   domainFilters:
     - frost.haus
   policy: upsert-only
@@ -29,5 +21,17 @@ external-dns:
     create: true
     apiVersion: v1
   logLevel: debug
+  env:
+    - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: external-dns-technitium
+          key: EXTERNAL_DNS_RFC2136_TSIG_SECRET
+    - name: EXTERNAL_DNS_RFC2136_TSIG_KEYNAME
+      value: "external-dns"
   extraArgs:
-    - --pihole-api-version=6
+    - --rfc2136-host=192.168.100.41
+    - --rfc2136-port=53
+    - --rfc2136-zone=frost.haus
+    - --rfc2136-tsig-secret-alg=hmac-sha256
+    - --rfc2136-tsig-axfr

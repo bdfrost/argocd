@@ -1,0 +1,13 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: external-dns-technitium
+  namespace: external-dns
+spec:
+  encryptedData:
+    EXTERNAL_DNS_RFC2136_TSIG_SECRET: AgBOU6yYNfEQhluupBK9EgDm2gtwsmbrII+0jjkL8dSYEzsokCeJDSr5F2bsX/OjVXJXxlG0oq1URp5URSGBSqcj0DKHiDMjv5vlIdPxx1Q/s7cJy8Sxaq0JIHPeRAyQwXZTygKiSVNcIAOJ6v3nBiCLaDgO9smZKeiQNIp9QCT2op95hPt7nzIz8DWgo5Lnncp+/GsvkeNqWkL6m3vVq1PZTjocjWOvfE1XoleSPs888ytK/cvEx0z03U/UlTT2mqpHqkSMAVqiFxgzyQedYNSBSjTLoeNvQbtfaOEGTC0mb5mdwORjfvhGqQmcgcgNOTEj3SR4CUP74AUYYc37jJq2gep/e5xwqd/PE9MUYWsX9jqAuH/QQv1sXgBkMDBTUeAb8He+PbicaJ1hdQygzQiJXI6Jdaoj4B9lIl1FHPRYNBJdSSJY3EOrZ2bqFoayknUIcF+ucZ0unQIUE047ErBC3645558AbIcxshkrtd0UZrCESZxdGNMQe6bO+iLqHA5ljU274LzK5zmjcTvfSX5+5AlX7u4gJ/Jxz61zlEJWvwAthCGhAlyJm4yUqlKJuNzihYdZDJFoDHF3dZadXzIiFdV+Bba0csaMVZTDdIT/PEyR1h8RpSE3aOuZvukzF/4e4M0GcqC/b2YM9tnMRAIigspUXWyc1NIUBGUdAMlIl26/xBv+yYz5WNYFKGeiLiP5Iichht/Jjes0zM+gSADv2ec+nyfrWDnAakdl64SNnkgwmvcz23GuBzUnGw==
+  template:
+    metadata:
+      name: external-dns-technitium
+      namespace: external-dns
