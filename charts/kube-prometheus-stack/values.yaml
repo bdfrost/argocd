@@ -58,9 +58,9 @@ kube-prometheus-stack:
         - job_name: 'pve'
           static_configs:
             - targets:
-              - pve1.brainboy.local.lan
-              - pve2.brainboy.local.lan
-              - pve3.brainboy.local.lan          
+              - pve1.frost.haus
+              - pve2.frost.haus
+              - pve3.frost.haus          
           metrics_path: /pve
           params:
             module: [default]
@@ -72,4 +72,4 @@ kube-prometheus-stack:
             - source_labels: [__param_target]
               target_label: instance
             - target_label: __address__
-              replacement: prometheus-pve-exporter.brainboy.local.lan:9221
+              replacement: prometheus-pve-exporter.frost.haus:9221

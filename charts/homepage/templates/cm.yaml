@@ -76,7 +76,7 @@ data:
           description: Media server
       - Home Assistant:
         - icon: home-assistant.png
-          href: http://homeassistant.brainboy.local.lan:8123
+          href: http://homeassistant.frost.haus:8123
           description: Home automation
     - Documentation:
       - Kubernetes Docs:
@@ -301,9 +301,9 @@ data:
     - Network & Smart Home:
         - Pi-hole DNS 2:
             icon: mdi-pi-hole
-            href: http://dns2.brainboy.local.lan/admin
+            href: http://dns2.frost.haus/admin
             description: Secondary DNS with ad blocking
-            ping: http://dns2.brainboy.local.lan
+            ping: http://dns2.frost.haus
     - Applications:
     - logo:
         icon: https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/homepage.png
@@ -343,7 +343,7 @@ data:
   proxmox.yaml: |
     - HomeAssistant:
       icon: home-assistant.png
-      href: http://homeassistant.brainboy.local.lan:8123/
+      href: http://homeassistant.frost.haus:8123/
       description: Home automation
       proxmoxNode: pve2.frost.haus
       proxmoxVMID: 100
