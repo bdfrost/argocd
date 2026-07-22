@@ -122,7 +122,7 @@ data:
             widgets:
               - type: plex
                 url: https://peppers.frost.haus
-                key: {{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}
+                key: "{{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}"
               - type: tautulli
                 url: https://tautulli.frost.haus
                 key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
