@@ -112,7 +112,7 @@ data:
           href: https://kubernetes.io/docs/
           description: Kubernetes documentation
       - ArgoCD Docs:
-        - icon: argocd.png
+        - icon: argo-cd.png
           href: https://argo-cd.readthedocs.io/
           description: ArgoCD documentation
       - Proxmox Docs:
@@ -249,7 +249,7 @@ data:
             description: Automated Plex library maintenance
     - Infrastructure:
         - Argo CD:
-            icon: argocd.png
+            icon: argo-cd.png
             href: https://argocd.frost.haus
             description: GitOps continuous delivery
             widget:
@@ -304,11 +304,6 @@ data:
               type: uptimekuma
               url: https://uptime-kuma.frost.haus/
               slug: default
-        - Pi-hole DNS 2:
-            icon: mdi-pi-hole
-            href: http://dns2.frost.haus/admin
-            description: Secondary DNS with ad blocking
-            ping: http://dns2.frost.haus
     - Network & Proxmox:
         - Proxmox VE:
             icon: proxmox.png
@@ -333,22 +328,22 @@ data:
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
               fields: ["datastore_usage", "failed_tasks_24h", "cpu_usage", "memory_usage"]
         - K8s-n1:
-            icon: k8s.png
+            icon: kubernetes.png
             href: https://k8s-n1.frost.haus
             description: K8s Node 1
             ping: https://pve1.frost.haus:8006
         - K8s-n2:
-            icon: k8s.png
+            icon: kubernetes.png
             href: https://k8s-n2.frost.haus
             description: K8s Node 2
             ping: https://pve2.frost.haus:8006
         - K8s-n3:
-            icon: k8s.png
+            icon: kubernetes.png
             href: https://k8s-n3.frost.haus
             description: K8s Node 3
             ping: https://pve3.frost.haus:8006
         - K8s-c1:
-            icon: k8s.png
+            icon: kubernetes.png
             href: https://k8s-c1.frost.haus
             description: K8s Controller Node
             ping: https://pve3.frost.haus:8006
@@ -408,22 +403,22 @@ data:
       proxmoxNode: pve2.frost.haus
       proxmoxVMID: 100
     - K8s-n1:
-      icon: k8s.png
+      icon: kubernetes.png
       description: K8s Node 1
       proxmoxNode: pve1.frost.haus
       proxmoxVMID: 107
     - K8s-n2:
-      icon: k8s.png
+      icon: kubernetes.png
       description: K8s Node 2
       proxmoxNode: pve2.frost.haus
       proxmoxVMID: 104
     - K8s-n3:
-      icon: k8s.png
+      icon: kubernetes.png
       description: K8s Node 3
       proxmoxNode: pve3.frost.haus
       proxmoxVMID: 103
     - K8s-c1:
-      icon: k8s.png
+      icon: kubernetes.png
       description: K8s Controller Node
       proxmoxNode: pve3.frost.haus
       proxmoxVMID: 106
