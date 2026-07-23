@@ -268,10 +268,6 @@ data:
               env: 1
               key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
               fields: ["applications", "services", "namespaces"]
-        - Kubernetes Dashboard:
-            icon: kubernetes-dashboard.png
-            href: https://dashboard.frost.haus
-            description: Official Kubernetes dashboard
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.frost.haus
