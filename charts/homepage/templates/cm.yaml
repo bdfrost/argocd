@@ -29,40 +29,68 @@ data:
     layout:
       Media & Entertainment:
         style: row
-        columns: 4
+        columns: 5
         header: true
         icon: mdi-filmstrip
       Media Management:
         style: row
-        columns: 4
+        columns: 5
         header: true
         icon: mdi-cog
       Infrastructure:
         style: row
-        columns: 4
+        columns: 6
         header: true
         icon: mdi-server-network
       Monitoring & Observability:
         style: row
-        columns: 3
+        columns: 4
         header: true
         icon: mdi-chart-line
-      Network & Smart Home:
+      Network & Proxmox:
         style: row
-        columns: 3
+        columns: 6
         header: true
         icon: mdi-network
-      Applications:
-        style: row
-        columns: 3
-        header: true
-        icon: mdi-apps
     quicklaunch:
       searchDescriptions: true
       hideInternetSearch: false
       showSearchSuggestions: true
       hideVisitURL: false
-  custom.css: ""
+  custom.css: |
+    /* Service card hover effect */
+    .card {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    /* Tighter service group headers */
+    .service-group-header {
+      margin-bottom: 0.5rem;
+    }
+    /* Smaller widget cards */
+    .widget {
+      padding: 0.75rem !important;
+    }
+    /* Cleaner datetime */
+    .widget-datetime {
+      font-size: 0.9rem;
+    }
+    /* Better weather widget */
+    .widget-openmeteo {
+      padding: 0.5rem !important;
+    }
+    /* RSS feed items */
+    .widget-rss .feed-item {
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+    /* System info compact */
+    .widget-systeminfo .systeminfo-item {
+      font-size: 0.85rem;
+    }
   custom.js: ""
   bookmarks.yaml: |
     - Quick Access:
@@ -244,7 +272,45 @@ data:
             icon: kubernetes-dashboard.png
             href: https://dashboard.frost.haus
             description: Official Kubernetes dashboard
-        - Proxmox:
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.frost.haus
+            description: Metrics collection & alerting
+            widget:
+              type: prometheus
+              url: https://prometheus.frost.haus
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.frost.haus
+            description: Metrics visualization
+        - Alertmanager:
+            icon: mdi-alert-circle
+            href: https://alertmanager.frost.haus
+            description: Alert management & routing
+    - Monitoring & Observability:
+        - Netdata:
+            icon: netdata.png
+            href: https://netdata.frost.haus
+            description: Real-time performance monitoring
+            widget:
+              type: netdata
+              url: https://netdata.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_NETDATA_APIKEY{{ "}}" }}"
+        - Uptime Kuma:
+            icon: mdi-bell
+            href: https://uptime-kuma.frost.haus
+            description: Uptime monitoring & alerts
+            widget:
+              type: uptimekuma
+              url: https://uptime-kuma.frost.haus/
+              slug: default
+        - Pi-hole DNS 2:
+            icon: mdi-pi-hole
+            href: http://dns2.frost.haus/admin
+            description: Secondary DNS with ad blocking
+            ping: http://dns2.frost.haus
+    - Network & Proxmox:
+        - Proxmox VE:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
             description: Virtualization platform
@@ -266,45 +332,26 @@ data:
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
               fields: ["datastore_usage", "failed_tasks_24h", "cpu_usage", "memory_usage"]
-    - Monitoring & Observability:
-        - Prometheus:
-            icon: prometheus.png
-            href: https://prometheus.frost.haus
-            description: Metrics collection & alerting
-            widget:
-              type: prometheus
-              url: https://prometheus.frost.haus
-        - Grafana:
-            icon: grafana.png
-            href: https://grafana.frost.haus
-            description: Metrics visualization
-        - Alertmanager:
-            icon: mdi-alert-circle
-            href: https://alertmanager.frost.haus
-            description: Alert management & routing
-        - Netdata:
-            icon: netdata.png
-            href: https://netdata.frost.haus
-            description: Real-time performance monitoring
-            widget:
-              type: netdata
-              url: https://netdata.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_NETDATA_APIKEY{{ "}}" }}"
-        - Uptime Kuma:
-            icon: mdi-bell
-            href: https://uptime-kuma.frost.haus
-            description: Uptime monitoring & alerts
-            widget:
-              type: uptimekuma
-              url: https://uptime-kuma.frost.haus/
-              slug: default
-    - Network & Smart Home:
-        - Pi-hole DNS 2:
-            icon: mdi-pi-hole
-            href: http://dns2.frost.haus/admin
-            description: Secondary DNS with ad blocking
-            ping: http://dns2.frost.haus
-    - Applications:
+        - K8s-n1:
+            icon: k8s.png
+            href: https://k8s-n1.frost.haus
+            description: K8s Node 1
+            ping: https://pve1.frost.haus:8006
+        - K8s-n2:
+            icon: k8s.png
+            href: https://k8s-n2.frost.haus
+            description: K8s Node 2
+            ping: https://pve2.frost.haus:8006
+        - K8s-n3:
+            icon: k8s.png
+            href: https://k8s-n3.frost.haus
+            description: K8s Node 3
+            ping: https://pve3.frost.haus:8006
+        - K8s-c1:
+            icon: k8s.png
+            href: https://k8s-c1.frost.haus
+            description: K8s Controller Node
+            ping: https://pve3.frost.haus:8006
   widgets.yaml: |
     - logo:
         icon: https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/homepage.png
@@ -340,6 +387,18 @@ data:
           cpu: true
           memory: true
           showLabel: true
+    - rss:
+        url: https://news.ycombinator.com/rss
+        maxItems: 6
+    - systeminfo:
+        text:
+          - "CPU Usage"
+          - "Memory Usage"
+          - "Network I/O"
+        cpu: true
+        memory: true
+        network: eth0
+        disk: true
   docker.yaml: ""
   proxmox.yaml: |
     - HomeAssistant:
