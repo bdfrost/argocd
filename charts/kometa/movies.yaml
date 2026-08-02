@@ -218,22 +218,30 @@ data:
           - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
           - https://mdblist.com/lists/mdatum/hallmark
         trakt_list:
+          # LIVE — has 2025 movies
           - https://trakt.tv/users/alaxgoaly8/lists/original-hallmark-christmas-movies-2
           - https://trakt.tv/users/ad76/lists/hallmark-christmas
           - https://trakt.tv/users/milly84/lists/hallmark-2025
           - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
-          - https://trakt.tv/users/prada3721/lists/hallmark-premieres-2024-2025
-          - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
-          - https://trakt.tv/users/tex24601/lists/hallmark-christmas-movies
+          # DEAD — empty/trakt page with no content
+          # - https://trakt.tv/users/prada3721/lists/hallmark-premieres-2024-2025
+          # DEAD — last updated 2024, stuck on old content
+          # - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
+          # DEAD — empty/trakt page with no content
+          # - https://trakt.tv/users/tex24601/lists/hallmark-christmas-movies
+          # LIVE — has older movies (2000-2015 range)
           - https://trakt.tv/users/veninjak/lists/hallmark-christmas-movies
-          - https://trakt.tv/users/kylep09/lists/hallmark-holiday
-          - https://trakt.tv/users/yoly76/lists/holiday-tv-movies-present
+          # DEAD — empty/trakt page with no content
+          # - https://trakt.tv/users/kylep09/lists/hallmark-holiday
+          # DEAD — empty/trakt page with no content
+          # - https://trakt.tv/users/yoly76/lists/holiday-tv-movies-present
+          # LIVE — has older movies (2000-2015 range)
           - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
         sort_title: '###Hallmark Christmas'
         collection_order: release.desc
         radarr_tag: Hallmark Christmas
         radarr_monitor: true
-        sync_mode: sync      
+        sync_mode: sync
         radarr_add_missing: true
         radarr_add_existing: true
     #####################################
@@ -241,10 +249,14 @@ data:
     #####################################
       Hallmark Fall:
         trakt_list:
+          # LIVE — has 2024 movies, still maintained
           - https://trakt.tv/users/linsk/lists/hallmark-fall
+          # LIVE — active, still maintained
           - https://trakt.tv/users/laci88/lists/hallmark-fall-movies
+          # LIVE — active, still maintained
           - https://trakt.tv/users/sflix/lists/hallmark-fall-movies
-          - https://trakt.tv/users/stillaggin/lists/hallmark-fall-2023
+          # DEAD — stuck on 2023, not updated
+          # - https://trakt.tv/users/stillaggin/lists/hallmark-fall-2023
         sort_title: '###Hallmark Fall'
         collection_order: release.desc
         radarr_tag: Hallmark Fall
@@ -259,14 +271,22 @@ data:
         mdblist_list:
           - https://mdblist.com/lists/SynAcksHM/hallmark
         trakt_list:
-        - https://trakt.tv/users/alexamaclaud/lists/hallmark-2
-        - https://trakt.tv/users/hollywood-heidi/lists/hallmark-hallmark-mysteries-hallmark-romances-1
-        - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-841fc509-8aca-4c90-995b-ddb198d9e259
-        - https://trakt.tv/users/serralee/lists/hallmark-movies-2024
+        # LIVE — has 2025 movies, still maintained
         - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        # LIVE — current, has 2025 movies
         - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-        - https://trakt.tv/users/goonerdom/lists/hallmark-2024
-        - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
+        # DEAD — empty/trakt page with no content
+        # - https://trakt.tv/users/alexamaclaud/lists/hallmark-2
+        # DEAD — empty/trakt page with no content
+        # - https://trakt.tv/users/hollywood-heidi/lists/hallmark-hallmark-mysteries-hallmark-romances-1
+        # DEAD — empty/trakt page with no content
+        # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-841fc509-8aca-4c90-995b-ddb198d9e259
+        # DEAD — empty/trakt page with no content
+        # - https://trakt.tv/users/serralee/lists/hallmark-movies-2024
+        # DEAD — last updated 2024, stuck on old content
+        # - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
+        # DEAD — stuck on 2024 only, no 2025 content
+        # - https://trakt.tv/users/goonerdom/lists/hallmark-2024
         sort_title: '###Hallmark'
         collection_order: release.desc
         radarr_tag: Hallmark
@@ -315,6 +335,54 @@ data:
           - https://www.imdb.com/list/ls027886673/
           - https://www.imdb.com/list/ls097998599/
         summary: Christmas film is a genre that revolves around the plot involving Christmas.
+    #####################################
+    #      Hallmark Summer              #
+    #####################################
+      Hallmark Summer:
+        trakt_list:
+          # LIVE — current, has 2025/2026 Summer Nights movies
+          - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        sort_title: '###Hallmark Summer'
+        collection_order: release.desc
+        radarr_tag: Hallmark Summer
+        radarr_add_missing: true
+        radarr_add_existing: true
+        sync_mode: sync
+        radarr_monitor: true
+        summary: Hallmark's Summer Nights event with new movies every Saturday June–August
+    #####################################
+    #      Hallmark Mysteries           #
+    #####################################
+      Hallmark Movies & Mysteries:
+        trakt_list:
+          # LIVE — current, has 2025 movies
+          - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        sort_title: '###Hallmark Mysteries'
+        collection_order: release.desc
+        radarr_tag: Hallmark Movies & Mysteries
+        radarr_add_missing: true
+        radarr_add_existing: true
+        sync_mode: sync
+        radarr_monitor: true
+        summary: Hallmark Movies & Mysteries — whodunits including Hannah Swensen, Mystery Island, Tipline Mysteries
+    #####################################
+    #      Hallmark Drama               #
+    #####################################
+      Hallmark Drama:
+        trakt_list:
+          # LIVE — current, has 2025 movies
+          - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        sort_title: '###Hallmark Drama'
+        collection_order: release.desc
+        radarr_tag: Hallmark Drama
+        radarr_add_missing: true
+        radarr_add_existing: true
+        sync_mode: sync
+        radarr_monitor: true
+        summary: Hallmark Drama — more mature-themed original content
 kind: ConfigMap
 metadata:
   name: movie-config
