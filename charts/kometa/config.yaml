@@ -166,18 +166,14 @@ data:
       ignore_cache: false
       sonarr_path:
       plex_path:
+    # Public Trakt lists do not require OAuth. Do not provide the expired
+    # OAuth credentials here; they caused Trakt 403/400 errors and blocked
+    # every trakt_list collection.
     trakt:
-      client_id: <<TRAKTCLIENTID>>
-      client_secret: <<TRAKTCLIENTSECRET>>
-      pin: <<TRAKTPIN>>
-      authorization:
-        # everything below is autofilled by the script
-        access_token: <<TRAKTACCESS>>
-        token_type: Bearer
-        expires_in: 86399
-        refresh_token: <<TRAKTREFRESHTOKEN>>
-        scope: public
-        created_at: 1785705531
+      client_id:
+      client_secret:
+      pin:
+      force_refresh: false
     mdblist:
       apikey: <<MDBLISTTOKEN>>
       cache_expiration: 60
