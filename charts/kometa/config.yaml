@@ -166,12 +166,11 @@ data:
       ignore_cache: false
       sonarr_path:
       plex_path:
-    # Public Trakt lists do not require OAuth. Do not provide the expired
-    # OAuth credentials here; they caused Trakt 403/400 errors and blocked
-    # every trakt_list collection.
     trakt:
-      client_id:
-      client_secret:
+      # Public lists still require a Trakt application client ID in Kometa
+      # 2.4.5. OAuth authorization is intentionally omitted until renewed.
+      client_id: <<TRAKTCLIENTID>>
+      client_secret: <<TRAKTCLIENTSECRET>>
       pin:
       force_refresh: false
     mdblist:

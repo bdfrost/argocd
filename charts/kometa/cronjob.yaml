@@ -47,7 +47,16 @@ spec:
                   secretKeyRef:
                     name: kometa-secret
                     key: sonarr_token
-
+              - name: KOMETA_TRAKTCLIENTID
+                valueFrom:
+                  secretKeyRef:
+                    name: kometa-secret
+                    key: trakt_client_id
+              - name: KOMETA_TRAKTCLIENTSECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: kometa-secret
+                    key: trakt_client_secret
               - name: KOMETA_MDBLISTTOKEN
                 valueFrom:
                   secretKeyRef:
