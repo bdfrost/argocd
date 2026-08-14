@@ -1,0 +1,35 @@
+holmes:
+  replicas: 1
+  imagePullPolicy: IfNotPresent
+  createServiceAccount: true
+  k8sRBAC: false
+  crdPermissions:
+    argo: true
+    flux: true
+    kafka: true
+    keda: true
+    crossplane: true
+    istio: true
+    gatewayApi: true
+    velero: true
+    externalSecrets: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 2Gi
+    limits:
+      memory: 2Gi
+  extraEnvVarsSecrets:
+    - holmesgpt-llm-keys
+  modelList:
+    gpt-4.1:
+      api_key: envRef:OPENAI_API_KEY
+      model: openai/gpt-4.1
+      temperature: 0
+  operator:
+    enabled: false
+
+# The upstream chart does not ship an ingress; this repo owns the public endpoint.
+ingress:
+  host: holmesgpt.frost.haus
+  tlsSecretName: holmesgpt-cert

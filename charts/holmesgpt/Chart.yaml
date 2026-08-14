@@ -1,0 +1,10 @@
+apiVersion: v2
+name: holmesgpt
+description: HolmesGPT CNCF SRE agent
+type: application
+version: 0.1.0
+appVersion: "0.39.0"
+dependencies:
+  - name: holmes
+    version: 0.39.0
+    repository: https://robusta-charts.storage.googleapis.com
