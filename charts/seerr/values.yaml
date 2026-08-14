@@ -7,7 +7,7 @@ seerr-chart:
   image:
     registry: ghcr.io
     repository: seerr-team/seerr
-    tag: v3.4.0
+    tag: v3.4.1
     pullPolicy: IfNotPresent  
   serviceAccount:
     create: true
