@@ -150,6 +150,24 @@ data:
         "accepted_statuscodes": ["200-299", "401"]
       },
       {
+        "name": "DNS1 Resolution",
+        "type": "dns",
+        "hostname": "homeassistant.frost.haus",
+        "dns_resolve_server": "192.168.100.41",
+        "dns_resolve_type": "A",
+        "interval": 60,
+        "max_retries": 2
+      },
+      {
+        "name": "DNS2 Resolution",
+        "type": "dns",
+        "hostname": "homeassistant.frost.haus",
+        "dns_resolve_server": "192.168.100.42",
+        "dns_resolve_type": "A",
+        "interval": 60,
+        "max_retries": 2
+      },
+      {
         "name": "DNS1",
         "type": "http",
         "url": "https://dns1.frost.haus:53443",
