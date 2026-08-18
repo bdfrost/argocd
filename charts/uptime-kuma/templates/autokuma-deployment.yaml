@@ -45,6 +45,8 @@ spec:
               value: "#42C0FB"
             - name: AUTOKUMA__ON_DELETE
               value: delete
+            - name: RUST_LOG
+              value: autokuma=trace,kuma_client=debug
           volumeMounts:
             - name: static-monitors
               mountPath: /static_monitors
