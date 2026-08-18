@@ -11,7 +11,9 @@ data:
         "url": "https://homepage.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Argo CD",
@@ -19,7 +21,9 @@ data:
         "url": "https://argocd.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-399"]
+        "accepted_statuscodes": [
+          "200-399"
+        ]
       },
       {
         "name": "Poterie",
@@ -27,7 +31,9 @@ data:
         "url": "https://poterie.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Plex",
@@ -35,7 +41,10 @@ data:
         "url": "https://peppers.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299", "401"]
+        "accepted_statuscodes": [
+          "200-299",
+          "401"
+        ]
       },
       {
         "name": "Tautulli",
@@ -43,7 +52,9 @@ data:
         "url": "https://tautulli.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Seerr",
@@ -51,7 +62,9 @@ data:
         "url": "https://seerr.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Sonarr",
@@ -59,7 +72,9 @@ data:
         "url": "https://sonarr.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Radarr",
@@ -67,7 +82,9 @@ data:
         "url": "https://radarr.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Prowlarr",
@@ -75,7 +92,9 @@ data:
         "url": "https://prowlarr.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Bazarr",
@@ -83,7 +102,9 @@ data:
         "url": "https://bazarr.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "SABnzbd",
@@ -91,7 +112,9 @@ data:
         "url": "https://sabnzbd.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Grafana",
@@ -99,7 +122,9 @@ data:
         "url": "https://grafana.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Prometheus",
@@ -107,7 +132,9 @@ data:
         "url": "https://prometheus.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Alertmanager",
@@ -115,7 +142,9 @@ data:
         "url": "https://alertmanager.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Portainer",
@@ -123,7 +152,9 @@ data:
         "url": "https://portainer.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "Netdata",
@@ -131,7 +162,9 @@ data:
         "url": "https://netdata.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "BirdNET-Go",
@@ -139,7 +172,9 @@ data:
         "url": "https://birdnet-go.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "SimpleFIN",
@@ -147,7 +182,10 @@ data:
         "url": "https://simplefin.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299", "401"]
+        "accepted_statuscodes": [
+          "200-299",
+          "401"
+        ]
       },
       {
         "name": "DNS1 Resolution",
@@ -173,7 +211,10 @@ data:
         "url": "https://dns1.frost.haus:53443",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-399"]
+        "accepted_statuscodes": [
+          "200-399"
+        ],
+        "ignore_tls": true
       },
       {
         "name": "DNS2",
@@ -181,7 +222,10 @@ data:
         "url": "https://dns2.frost.haus:53443",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-399"]
+        "accepted_statuscodes": [
+          "200-399"
+        ],
+        "ignore_tls": true
       },
       {
         "name": "Home Assistant",
@@ -189,7 +233,9 @@ data:
         "url": "http://homeassistant.frost.haus:8123/",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-399"]
+        "accepted_statuscodes": [
+          "200-399"
+        ]
       },
       {
         "name": "Dozzle",
@@ -197,7 +243,9 @@ data:
         "url": "https://dozzle.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"]
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       },
       {
         "name": "SABnzbd TLS Certificate",
@@ -205,7 +253,9 @@ data:
         "url": "https://sabnzbd.frost.haus",
         "interval": 3600,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-299"],
+        "accepted_statuscodes": [
+          "200-299"
+        ],
         "ignore_tls": false,
         "expiry_notification": true
       },
@@ -215,6 +265,8 @@ data:
         "url": "https://uptime-kuma.frost.haus",
         "interval": 60,
         "max_retries": 2,
-        "accepted_statuscodes": ["200-399"]
+        "accepted_statuscodes": [
+          "200-399"
+        ]
       }
     ]
