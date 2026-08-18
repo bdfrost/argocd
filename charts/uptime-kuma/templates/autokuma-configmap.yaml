@@ -150,6 +150,30 @@ data:
         "accepted_statuscodes": ["200-299", "401"]
       },
       {
+        "name": "DNS1",
+        "type": "http",
+        "url": "https://dns1.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-399"]
+      },
+      {
+        "name": "DNS2",
+        "type": "http",
+        "url": "https://dns2.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-399"]
+      },
+      {
+        "name": "Home Assistant",
+        "type": "http",
+        "url": "http://homeassistant.frost.haus:8123/",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-399"]
+      },
+      {
         "name": "Uptime Kuma",
         "type": "http",
         "url": "https://uptime-kuma.frost.haus",
