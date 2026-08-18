@@ -29,27 +29,27 @@ data:
     layout:
       Media & Entertainment:
         style: row
-        columns: 5
+        columns: 4
         header: true
         icon: mdi-filmstrip
       Media Management:
         style: row
-        columns: 5
+        columns: 4
         header: true
         icon: mdi-cog
       Infrastructure:
         style: row
-        columns: 6
+        columns: 4
         header: true
         icon: mdi-server-network
       Monitoring & Observability:
         style: row
-        columns: 4
+        columns: 3
         header: true
         icon: mdi-chart-line
       Network & Proxmox:
         style: row
-        columns: 6
+        columns: 4
         header: true
         icon: mdi-network
     quicklaunch:
@@ -58,38 +58,13 @@ data:
       showSearchSuggestions: true
       hideVisitURL: false
   custom.css: |
-    /* Service card hover effect */
+    /* Keep service cards readable without overriding Homepage widget layout. */
     .card {
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .card:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-    /* Tighter service group headers */
-    .service-group-header {
-      margin-bottom: 0.5rem;
-    }
-    /* Smaller widget cards */
-    .widget {
-      padding: 0.75rem !important;
-    }
-    /* Cleaner datetime */
-    .widget-datetime {
-      font-size: 0.9rem;
-    }
-    /* Better weather widget */
-    .widget-openmeteo {
-      padding: 0.5rem !important;
-    }
-    /* RSS feed items */
-    .widget-rss .feed-item {
-      font-size: 0.85rem;
-      margin-bottom: 0.25rem;
-    }
-    /* System info compact */
-    .widget-systeminfo .systeminfo-item {
-      font-size: 0.85rem;
     }
   custom.js: ""
   bookmarks.yaml: |
@@ -165,6 +140,7 @@ data:
               type: seerr
               url: https://seerr.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
+              fields: ["pending", "approved", "completed"]
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
@@ -256,7 +232,7 @@ data:
               type: argocd
               url: https://argocd.frost.haus/
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
-              fields: ["apps", "healthy", "progressing", "degraded"]
+              fields: ["apps", "synced", "outOfSync", "healthy"]
         - Portainer:
             icon: portainer.png
             href: https://portainer.frost.haus
@@ -378,18 +354,6 @@ data:
           cpu: true
           memory: true
           showLabel: true
-    - rss:
-        url: https://news.ycombinator.com/rss
-        maxItems: 6
-    - systeminfo:
-        text:
-          - "CPU Usage"
-          - "Memory Usage"
-          - "Network I/O"
-        cpu: true
-        memory: true
-        network: eth0
-        disk: true
   docker.yaml: ""
   proxmox.yaml: |
     - HomeAssistant:
