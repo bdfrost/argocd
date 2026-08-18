@@ -6,10 +6,6 @@ data:
   services.json: |-
     [
       {
-        "name": "Main Services",
-        "type": "group"
-      },
-      {
         "name": "Homepage",
         "type": "http",
         "url": "https://homepage.frost.haus",
