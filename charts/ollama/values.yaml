@@ -9,7 +9,7 @@ ollama:
       memory: "4Gi"
       cpu: "2"
     limits:
-      memory: "16Gi"
+      memory: "8Gi"
   runtimeClassName: nvidia
   ollama:
     gpu:
