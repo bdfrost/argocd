@@ -35,6 +35,9 @@ spec:
               value: /static_monitors
             - name: AUTOKUMA__FILES__ENABLED
               value: "true"
+            # ConfigMap volumes expose files through symlinks into ..data.
+            - name: AUTOKUMA__FILES__FOLLOW_SYMLINKS
+              value: "true"
             - name: AUTOKUMA__KUBERNETES__ENABLED
               value: "false"
             - name: AUTOKUMA__DOCKER__ENABLED
