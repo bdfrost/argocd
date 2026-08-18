@@ -4,6 +4,15 @@ targetPort: 3001
 puid: 1026
 pgid: 100
 uptime-kuma:
+  image:
+    repository: louislam/uptime-kuma
+    tag: "2.5.0"
+    pullPolicy: IfNotPresent
+  # Uptime Kuma v2 performs an in-place migration of the existing SQLite
+  # database. Recreate is intentional: it prevents two pods from competing
+  # for the RWO data volume during the migration.
+  strategy:
+    type: Recreate
   service:
     type: ClusterIP
     port: 443
@@ -13,6 +22,21 @@ uptime-kuma:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       external-dns.alpha.kubernetes.io/host: uptime-kuma.frost.haus
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+      nginx.ingress.kubernetes.io/server-snippets: |
+        location / {
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_http_version 1.1;
+          proxy_set_header X-Forwarded-Host $http_host;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Forwarded-For $remote_addr;
+          proxy_set_header Host $host;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_cache_bypass $http_upgrade;
+        }
     tls:
     - secretName: uptime-kuma-cert
       hosts:
