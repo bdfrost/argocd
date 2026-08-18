@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autokuma
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: autokuma
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: autokuma
+    spec:
+      containers:
+        - name: autokuma
+          image: ghcr.io/bigboot/autokuma:2.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: AUTOKUMA__KUMA__URL
+              value: http://uptime-kuma:443
+            - name: AUTOKUMA__KUMA__USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: uptime-kuma-management
+                  key: username
+            - name: AUTOKUMA__KUMA__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: uptime-kuma-management
+                  key: password
+            - name: AUTOKUMA__STATIC_MONITORS
+              value: /static_monitors
+            - name: AUTOKUMA__FILES__ENABLED
+              value: "true"
+            - name: AUTOKUMA__KUBERNETES__ENABLED
+              value: "false"
+            - name: AUTOKUMA__DOCKER__ENABLED
+              value: "false"
+            - name: AUTOKUMA__TAG_NAME
+              value: AutoKuma
+            - name: AUTOKUMA__TAG_COLOR
+              value: "#42C0FB"
+            - name: AUTOKUMA__ON_DELETE
+              value: keep
+          volumeMounts:
+            - name: static-monitors
+              mountPath: /static_monitors
+              readOnly: true
+      volumes:
+        - name: static-monitors
+          configMap:
+            name: autokuma-static-monitors

@@ -1,0 +1,183 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autokuma-static-monitors
+data:
+  services.json: |-
+    [
+      {
+        "name": "Main Services",
+        "type": "group"
+      },
+      {
+        "name": "Homepage",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://homepage.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Argo CD",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://argocd.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-399"]
+      },
+      {
+        "name": "Poterie",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://poterie.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Plex",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://peppers.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299", "401"]
+      },
+      {
+        "name": "Tautulli",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://tautulli.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Seerr",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://seerr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Sonarr",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://sonarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Radarr",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://radarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Prowlarr",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://prowlarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Bazarr",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://bazarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "SABnzbd",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://sabnzbd.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Grafana",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://grafana.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Prometheus",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://prometheus.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Alertmanager",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://alertmanager.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Portainer",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://portainer.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "Netdata",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://netdata.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "BirdNET-Go",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://birdnet-go.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"]
+      },
+      {
+        "name": "SimpleFIN",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://simplefin.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299", "401"]
+      },
+      {
+        "name": "Uptime Kuma",
+        "type": "http",
+        "parent_name": "services[0]",
+        "url": "https://uptime-kuma.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-399"]
+      }
+    ]
