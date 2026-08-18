@@ -200,6 +200,16 @@ data:
         "accepted_statuscodes": ["200-299"]
       },
       {
+        "name": "SABnzbd TLS Certificate",
+        "type": "http",
+        "url": "https://sabnzbd.frost.haus",
+        "interval": 3600,
+        "max_retries": 2,
+        "accepted_statuscodes": ["200-299"],
+        "ignore_tls": false,
+        "expiry_notification": true
+      },
+      {
         "name": "Uptime Kuma",
         "type": "http",
         "url": "https://uptime-kuma.frost.haus",
