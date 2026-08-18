@@ -152,7 +152,7 @@ data:
       {
         "name": "DNS1",
         "type": "http",
-        "url": "https://dns1.frost.haus",
+        "url": "https://dns1.frost.haus:53443",
         "interval": 60,
         "max_retries": 2,
         "accepted_statuscodes": ["200-399"]
@@ -160,7 +160,7 @@ data:
       {
         "name": "DNS2",
         "type": "http",
-        "url": "https://dns2.frost.haus",
+        "url": "https://dns2.frost.haus:53443",
         "interval": 60,
         "max_retries": 2,
         "accepted_statuscodes": ["200-399"]
