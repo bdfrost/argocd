@@ -4,7 +4,6 @@ targetPort: 80
 
 seerr-chart:
   nameOverride: seerr
-  hostUsers: false
   image:
     registry: ghcr.io
     repository: seerr-team/seerr
