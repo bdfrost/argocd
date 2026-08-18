@@ -44,7 +44,7 @@ spec:
             - name: AUTOKUMA__TAG_COLOR
               value: "#42C0FB"
             - name: AUTOKUMA__ON_DELETE
-              value: keep
+              value: delete
           volumeMounts:
             - name: static-monitors
               mountPath: /static_monitors
