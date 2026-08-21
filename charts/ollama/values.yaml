@@ -6,7 +6,7 @@ pgid: 100
 ollama:
   resources:
     requests:
-      memory: "12Gi"
+      memory: "8Gi"
       cpu: "2"
     limits:
       memory: "12Gi"
