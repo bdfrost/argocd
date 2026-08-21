@@ -8,3 +8,4 @@ resources:
 
 patches:
   - path: overlays/cert-manager-namespace.yaml
+  - path: overlays/cert-manager-dns.yaml
