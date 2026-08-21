@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: cert-manager-controller
-          image: quay.io/jetstack/cert-manager-controller:v1.14.2
+          image: quay.io/jetstack/cert-manager-controller:v1.21.1
           args:
             - --v=2
             - --cluster-resource-namespace=$(POD_NAMESPACE)
