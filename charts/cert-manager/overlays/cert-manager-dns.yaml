@@ -7,7 +7,13 @@ spec:
   template:
     spec:
       containers:
-        - name: cert-manager
+        - name: cert-manager-controller
+          image: quay.io/jetstack/cert-manager-controller:v1.14.2
           args:
+            - --v=2
+            - --cluster-resource-namespace=$(POD_NAMESPACE)
+            - --leader-election-namespace=kube-system
+            - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.2
+            - --max-concurrent-challenges=60
             - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
             - --dns01-recursive-nameservers-only
