@@ -3,7 +3,14 @@ name: plex
 targetPort: 32400
 puid: 1026
 pgid: 100
+
 plex-media-server:
+  # Plex uses NVIDIA transcoding and must remain schedulable on the GPU node.
+  tolerations:
+    - key: nvidia.com/gpu
+      operator: Equal
+      value: "true"
+      effect: NoSchedule
   hostNetwork: true
   runtimeClassName: nvidia
   image:
