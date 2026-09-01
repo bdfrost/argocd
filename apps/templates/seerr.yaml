@@ -12,6 +12,12 @@ spec:
     path: charts/seerr
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision:  {{ .Values.spec.source.targetRevision }}
+  ignoreDifferences:
+  - group: apps
+    kind: StatefulSet
+    name: seerr
+    jsonPointers:
+    - /spec/template/metadata/annotations/kubectl.kubernetes.io~1restartedAt
   syncPolicy:
     automated:
       prune: true
