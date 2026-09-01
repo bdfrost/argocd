@@ -4,5 +4,6 @@ targetPort: 7171
 
 image:
   repository: agregarr/agregarr
-  tag: "2.4.2"
+  # renovate: datasource=docker depName=agregarr/agregarr versioning=loose
+  tag: "v2.4.2"
   pullPolicy: IfNotPresent

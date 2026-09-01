@@ -22,8 +22,8 @@ spec:
             memory: 512Mi
           limits:
             memory: 512Mi
-        # renovate: datasource=github-releases depName=cleanuparr/cleanuparr
-        image: ghcr.io/cleanuparr/cleanuparr:v2.10.5
+        # renovate: datasource=docker depName=ghcr.io/cleanuparr/cleanuparr
+        image: ghcr.io/cleanuparr/cleanuparr:2.10.5
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 11011

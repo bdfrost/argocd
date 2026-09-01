@@ -26,8 +26,8 @@ spec:
           limits:
             cpu: 500m
             memory: 1Gi
-        # renovate: datasource=github-releases depName=jorenn92/maintainerr
-        image: jorenn92/maintainerr:v3.23.0
+        # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
+        image: ghcr.io/maintainerr/maintainerr:3.26.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6246
