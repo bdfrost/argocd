@@ -3,3 +3,9 @@ name: boilerplate
 targetPort: 8989
 puid: 1026
 pgid: 100
+
+image:
+  repository: linuxserver/boilerplate
+  # renovate: datasource=docker depName=linuxserver/boilerplate enabled=false
+  tag: "latest"
+  pullPolicy: Always

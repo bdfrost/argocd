@@ -26,8 +26,9 @@ spec:
           limits:
             cpu: 500m
             memory: 1Gi
-        image: jorenn92/maintainerr:latest
-        imagePullPolicy: Always
+        # renovate: datasource=github-releases depName=jorenn92/maintainerr
+        image: jorenn92/maintainerr:v3.23.0
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6246
         env:

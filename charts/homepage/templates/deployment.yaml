@@ -25,8 +25,8 @@ spec:
       enableServiceLinks: true
       containers:
       - name: {{ .Values.name }}
-        image: "ghcr.io/gethomepage/homepage:latest"
-        imagePullPolicy: Always
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:

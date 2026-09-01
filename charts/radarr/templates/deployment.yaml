@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: {{ .Values.name }}
-        image: linuxserver/radarr
-        imagePullPolicy: Always
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:

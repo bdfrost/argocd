@@ -25,8 +25,8 @@ spec:
                   subPath: configarr-repos
           containers:
             - name: configarr
-              image: ghcr.io/raydak-labs/configarr:latest
-              imagePullPolicy: Always
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
               tty: true # for color support
               env:
               - name: SONARR_API_KEY

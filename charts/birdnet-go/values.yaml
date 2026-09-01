@@ -1,5 +1,14 @@
 replicaCount: 1
 name: birdnet-go
 targetPort: 8080
-image: ghcr.io/tphakala/birdnet-go:nightly
+
+image:
+  repository: ghcr.io/tphakala/birdnet-go
+  # BirdNET-Go publishes stable releases as v-prefixed GitHub/GHCR tags.
+  # Keep nightly separate until a stable release is deliberately selected.
+  # renovate: datasource=github-releases depName=tphakala/birdnet-go enabled=false
+  # Nightly is intentionally a floating channel; stable releases are v-prefixed.
+  tag: "nightly"
+  pullPolicy: Always
+
 timezone: America/Chicago

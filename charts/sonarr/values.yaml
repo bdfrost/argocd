@@ -3,3 +3,9 @@ name: sonarr
 targetPort: 8989
 puid: 1026
 pgid: 100
+
+image:
+  repository: linuxserver/sonarr
+  # renovate: datasource=docker depName=linuxserver/sonarr
+  tag: "4.0.19"
+  pullPolicy: IfNotPresent

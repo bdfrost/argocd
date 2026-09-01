@@ -1,4 +1,8 @@
 name: livrarr
 targetPort: 8789
-image: ghcr.io/kkodecs/livrarr:0.1.0-alpha5
-imagePullPolicy: Always
+
+image:
+  repository: ghcr.io/kkodecs/livrarr
+  # renovate: datasource=docker depName=ghcr.io/kkodecs/livrarr versioning=loose
+  tag: "0.1.0-alpha5"
+  pullPolicy: Always

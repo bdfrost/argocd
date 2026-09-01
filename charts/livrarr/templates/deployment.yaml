@@ -20,8 +20,8 @@ spec:
         fsGroup: 1000
       containers:
       - name: {{ .Values.name }}
-        image: {{ .Values.image }}
-        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:

@@ -1,4 +1,9 @@
 replicaCount: 1
 name: poterie
 targetPort: 8080
-image: ghcr.io/bdfrost/poterie:1.1.3
+
+image:
+  repository: ghcr.io/bdfrost/poterie
+  # renovate: datasource=docker depName=ghcr.io/bdfrost/poterie
+  tag: "1.1.3"
+  pullPolicy: IfNotPresent

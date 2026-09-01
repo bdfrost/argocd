@@ -3,7 +3,13 @@ name: ollama
 targetPort: 11434
 puid: 1026
 pgid: 100
+
 ollama:
+  # This workload requires the GPU node.
+  tolerations:
+    - key: nvidia.com/gpu
+      operator: Exists
+      effect: NoSchedule
   resources:
     requests:
       memory: "8Gi"

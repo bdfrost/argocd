@@ -33,8 +33,8 @@ spec:
           mountPath: /config-secret
       containers:
       - name: {{ .Values.name }}
-        image: {{ .Values.image }}
-        imagePullPolicy: Always
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000

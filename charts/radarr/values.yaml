@@ -3,3 +3,9 @@ name: radarr
 targetPort: 7878
 puid: 1026
 pgid: 100
+
+image:
+  repository: linuxserver/radarr
+  # renovate: datasource=docker depName=linuxserver/radarr
+  tag: "6.3.0"
+  pullPolicy: IfNotPresent

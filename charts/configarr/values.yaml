@@ -1,1 +1,8 @@
 name: configarr
+
+image:
+  repository: ghcr.io/raydak-labs/configarr
+  # The upstream project publishes semver tags without the v prefix.
+  # renovate: datasource=docker depName=ghcr.io/raydak-labs/configarr
+  tag: "1.30.2"
+  pullPolicy: IfNotPresent

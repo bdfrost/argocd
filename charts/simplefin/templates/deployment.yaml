@@ -18,8 +18,8 @@ spec:
       - name: ghcr-pull-secret
       containers:
       - name: {{ .Values.name }}
-        image: ghcr.io/bdfrost/simplefin-dashboard:latest
-        imagePullPolicy: Always
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:

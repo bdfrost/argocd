@@ -1,2 +1,9 @@
 name: simplefin
 targetPort: 8000
+
+image:
+  repository: ghcr.io/bdfrost/simplefin-dashboard
+  # renovate: datasource=docker depName=ghcr.io/bdfrost/simplefin-dashboard enabled=false
+  # No public release/tag source is currently available; update this deliberately.
+  tag: "latest"
+  pullPolicy: Always

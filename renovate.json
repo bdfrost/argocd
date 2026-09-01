@@ -5,8 +5,19 @@
   ],
   "kubernetes": {
     "managerFilePatterns": [
-      "/\\.yml$/",
-      "/\\.yaml$/"
+      "/^apps\\/.*\\.ya?ml$/",
+      "/^charts\\/.*\\.ya?ml$/"
     ]
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Keep Plex image updates separate and reviewable",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["plexinc/pms-docker"],
+      "groupName": "Plex image",
+      "separateMajorMinor": true,
+      "automerge": false,
+      "labels": ["dependencies", "plex"]
+    }
+  ]
 }

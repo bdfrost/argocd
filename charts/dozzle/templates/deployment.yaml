@@ -17,8 +17,8 @@ spec:
       serviceAccountName: pod-viewer
       containers:
       - name: {{ .Values.name }}
-        image: amir20/dozzle:latest
-        imagePullPolicy: Always
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
