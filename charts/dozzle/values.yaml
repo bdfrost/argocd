@@ -5,5 +5,5 @@ targetPort: 8080
 image:
   repository: amir20/dozzle
   # renovate: datasource=docker depName=amir20/dozzle
-  tag: "v10.7.2"
+  tag: "v10.9.0"
   pullPolicy: IfNotPresent
