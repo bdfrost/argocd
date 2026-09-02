@@ -12,6 +12,8 @@ seerr-chart:
   serviceAccount:
     create: true
     automount: true
+  # Let Kubernetes use its default (hostUsers is omitted from the PodSpec).
+  hostUsers: null
   config:
     persistence:
       size: 1Gi
