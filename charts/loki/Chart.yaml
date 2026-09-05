@@ -1,0 +1,14 @@
+apiVersion: v2
+name: loki
+description: Grafana Loki (single binary, filesystem storage) with Grafana Alloy shipping pod logs
+type: application
+version: 0.1.0
+appVersion: "3.6.11"
+
+dependencies:
+  - name: loki
+    version: 7.3.0
+    repository: https://grafana.github.io/helm-charts
+  - name: alloy
+    version: 1.12.1
+    repository: https://grafana.github.io/helm-charts
