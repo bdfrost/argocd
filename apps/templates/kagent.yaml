@@ -20,4 +20,8 @@ spec:
     - CreateNamespace=true
     - PrunePropagationPolicy=foreground
     - PruneLast=true
+    # kagent 0.9.x CRDs exceed the 256KB last-applied-configuration
+    # annotation limit; client-side apply fails (same reason loki/kps
+    # use this option).
+    - ServerSideApply=true
     managedNamespaceMetadata:
