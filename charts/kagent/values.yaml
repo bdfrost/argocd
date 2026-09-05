@@ -24,13 +24,14 @@ kagent:
 
   # New in 0.9.x: controller state (memories/sessions) moved to Postgres.
   # Cluster has no default StorageClass, so pin the Synology iSCSI one.
-  # Chart default is 500Mi but synology-csi hard-rejects requests < 1Gi.
+  # synology-csi refuses small volumes (chart default 500Mi failed with
+  # "required bytes is smaller than 1G"); 2Gi is the working minimum here.
   database:
     postgres:
       bundled:
         enabled: true
         storageClassName: synology-csi-iscsi-delete
-        storage: 1Gi
+        storage: 2Gi
 
   # Embeddings/querydoc container needs the OpenAI key; reuse the existing
   # sealed secret (key name OPENAI_API_KEY matches what the subchart wants).
