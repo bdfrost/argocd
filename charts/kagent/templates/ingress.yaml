@@ -19,7 +19,9 @@ spec:
         path: "/"
         backend:
           service:
-            name: kagent
+            # 0.9.x split the 0.4.0 monolith pod into per-component services;
+            # the UI is now served by kagent-ui (port name: ui).
+            name: {{ .Values.name }}-ui
             port:
               name: ui
 # ---

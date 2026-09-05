@@ -2,24 +2,39 @@ replicaCount: 1
 name: kagent
 
 kagent:
-  cilium-policy-agent.enabled: false
-  cilium-manager-agent.enabled: false
-  cilium-debug-agent.enabled: false
-  argo-rollouts-agent.enabled: false
-  istio-agent.enabled: false
-  tag: ""
-  # tools:
-  #   loglevel: "debug"
-  #   prometheus:
-  #     url: "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090"
-  #     username: ""
-  #     password: ""
-  #   grafana: # kubectl port-forward svc/grafana 3000:3000
-  #     url: "http://kube-prometheus-stack-grafana.kube-prometheus-stack.svc.cluster.local:3000"
-  #     apiKey: ""
+  # Built-in demo/utility agents we don't use (0.9.x renders each as its own
+  # Agent CR + RBAC). Kept parity with the pre-upgrade config.
+  cilium-policy-agent:
+    enabled: false
+  cilium-manager-agent:
+    enabled: false
+  cilium-debug-agent:
+    enabled: false
+  argo-rollouts-agent:
+    enabled: false
+  istio-agent:
+    enabled: false
+  kgateway-agent:
+    enabled: false
+
+  # No Grafana instance/credentials wired up for kagent; the chart's default
+  # URL (grafana.kagent:3000) is a placeholder that would never connect.
+  grafana-mcp:
+    enabled: false
+
+  # New in 0.9.x: controller state (memories/sessions) moved to Postgres.
+  # Cluster has no default StorageClass, so pin the Synology iSCSI one.
+  database:
+    postgres:
+      bundled:
+        enabled: true
+        storageClassName: synology-csi-iscsi-delete
+
+  # Embeddings/querydoc container needs the OpenAI key; reuse the existing
+  # sealed secret (key name OPENAI_API_KEY matches what the subchart wants).
+  querydoc:
+    openai:
+      secretRef: kagent-openai
+
 kagent-crds:
   tag: ""
-
-
-
-
