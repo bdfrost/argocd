@@ -24,5 +24,5 @@ appVersion: "1.43.0"
 
 dependencies:
 - name: plex-media-server
-  version: 1.8.0
+  version: 1.9.0
   repository: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
