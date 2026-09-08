@@ -383,6 +383,34 @@ data:
         sync_mode: sync
         radarr_monitor: true
         summary: Hallmark Drama — more mature-themed original content
+    #####################################
+    #        Hallmark Romance           #
+    #####################################
+      Hallmark Romance:
+        # IMDb: Hallmark Channel originals tagged Romance — auto-updating, no Trakt needed
+        imdb_search:
+          type: movie, tv_movie
+          company: co0939898
+          genre: romance
+          limit: 999
+        mdblist_list:
+          # LIVE — 1725 items, newest 2026 premieres (Much About Love, etc.)
+          - https://mdblist.com/lists/SynAcksHM/hallmark
+        # PARKED — Trakt client-only auth is failing every list with "not found"
+        # (list API needs OAuth renewed). Un-comment once Trakt auth is restored.
+        # trakt_list:
+        #   # LIVE — verified 2026-09-08, includes upcoming premieres
+        #   - https://trakt.tv/users/ad76/lists/hallmark-movies
+        #   # LIVE — verified 2026-09-08, curated Hallmark romance catalog
+        #   - https://trakt.tv/users/elsker/lists/hallmark-romance
+        sort_title: '###Hallmark Romance'
+        collection_order: release.desc
+        radarr_tag: Hallmark Romance
+        radarr_monitor: true
+        sync_mode: sync
+        radarr_add_missing: true
+        radarr_add_existing: true
+        summary: New Hallmark romance premieres — Valentine's, Fall Into Love, and year-round love stories
 kind: ConfigMap
 metadata:
   name: movie-config
