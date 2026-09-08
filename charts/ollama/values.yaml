@@ -9,7 +9,6 @@ ollama:
   tolerations:
     - key: nvidia.com/gpu
       operator: Exists
-      value: "true"
       effect: NoSchedule
   resources:
     requests:
