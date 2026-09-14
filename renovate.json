@@ -11,13 +11,23 @@
   },
   "packageRules": [
     {
-      "description": "Keep Plex image updates separate and reviewable",
+      "description": "Keep Plex image updates in their own grouped, labeled MRs (automerged like other patch/minor since 2026-09-14)",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["plexinc/pms-docker"],
       "groupName": "Plex image",
       "separateMajorMinor": true,
-      "automerge": false,
       "labels": ["dependencies", "plex"]
+    },
+    {
+      "description": "Automerge patch/minor/digest bumps via GitHub native automerge",
+      "matchUpdateTypes": ["patch", "minor", "digest"],
+      "automerge": true,
+      "platformAutomerge": true
+    },
+    {
+      "description": "Majors stay manual for review",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
     }
   ]
 }
