@@ -126,12 +126,17 @@ data:
               - type: plex
                 url: https://peppers.frost.haus
                 key: "{{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}"
-              - type: tautulli
-                url: https://tautulli.frost.haus
-                key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
-                enableUser: true
-                showEpisodeNumber: true
-                expandOneStreamToTwoRows: false
+        - Tracearr:
+            icon: tracearr.png
+            href: https://tracearr.frost.haus
+            description: Plex stream monitoring
+            widget:
+              type: tracearr
+              url: https://tracearr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_TRACEARR_APIKEY{{ "}}" }}"
+              enableUser: true
+              showEpisodeNumber: true
+              expandOneStreamToTwoRows: false
         - Seerr:
             icon: overseerr.png
             href: https://seerr.frost.haus

@@ -100,11 +100,11 @@ spec:
             secretKeyRef:
               name: homepage-secrets
               key:  sonarr_apikey              
-        - name: HOMEPAGE_VAR_TAUTULLI_APIKEY
+        - name: HOMEPAGE_VAR_TRACEARR_APIKEY
           valueFrom:
             secretKeyRef:
               name: homepage-secrets
-              key:  tautulli_apikey              
+              key:  tracearr_apikey              
         - name: HOMEPAGE_VAR_PLEX_APIKEY
           valueFrom:
             secretKeyRef:
