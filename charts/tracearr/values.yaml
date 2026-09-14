@@ -1,0 +1,310 @@
+# Tracearr with TimescaleDB (PG18) and Redis.
+#
+# Vendored from upstream docker/helm/tracearr values @ v2.2.3 with
+# cluster-specific overrides only (storage class/sizes, digest pins, TZ,
+# secrets via SealedSecret, ingress for frost.haus). See README.md.
+
+tracearr:
+  image:
+    repository: ghcr.io/connorgallopo/tracearr
+    # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr versioning=loose
+    # digest (registry-verified 2026-09-14): sha256:d66822b5c5e76c27c12eec4de05c6eb9fbc4005968df5587bf5d2d3718f15dff
+    tag: 2.2.3
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1  # singleton poller — only 1 supported
+
+  service:
+    type: ClusterIP
+    # Repo idiom: front-end service exposes 80 -> container targetPort (the
+    # ingress and any dashboard widgets address :80; container still listens on 3000).
+    port: 80
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "2"
+      memory: 1Gi
+
+  env:
+    NODE_ENV: production
+    HOST: "0.0.0.0"
+    PORT: "3000"  # must match containerPort (3000)
+    LOG_LEVEL: info
+    CORS_ORIGIN: "*"
+    TZ: America/Chicago
+    # DATABASE_POOL_MAX: "50"
+    # POLLER_ENABLED: "true"
+    # POLLER_INTERVAL: "15000"
+    # GZIP_ENABLED: "true"
+    # MOBILE_BETA_MODE: "false"
+
+  # Upstream recommends setting BETTER_AUTH_SECRET explicitly (otherwise it is
+  # derived from JWT_SECRET, so rotating JWT silently logs out mobile devices).
+  # Same key set as the app's own secretKeyRef trio, from the tracearr Secret.
+  extraEnv:
+    - name: BETTER_AUTH_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: tracearr
+          key: BETTER_AUTH_SECRET
+
+  # NOTE: upstream defaults (10Gi/50Gi/5Gi) assumed a docker-host volume; this
+  # cluster's Synology CSI is thin-provisioned + late binding, so these sizes
+  # are headroom on the NAS pool, not allocated. CSI floor is 2Gi for new
+  # volumes and there is no cluster-default StorageClass.
+  backups:
+    enabled: true
+    size: 2Gi
+    storageClass: synology-csi-iscsi-delete
+
+  imageCache:
+    enabled: true
+    size: 2Gi
+    storageClass: synology-csi-iscsi-delete
+
+  # Dockerfile user: 1001:1001 (tracearr:nodejs)
+  podSecurityContext:
+    fsGroup: 1001
+
+  securityContext:
+    runAsUser: 1001
+    runAsGroup: 1001
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: false  # needs /app/data/image-cache + /data/backup
+    capabilities:
+      drop: [ALL]
+    seccompProfile:
+      type: RuntimeDefault
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+  startupProbe:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    failureThreshold: 30
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podLabels: {}
+  topologySpreadConstraints: []
+
+secrets:
+  # autoGenerate/rand is incompatible with Argo CD selfHeal (renders new values
+  # every comparison). Credentials come from the tracearr SealedSecret below.
+  autoGenerate: false
+  jwtSecret: ""      # openssl rand -hex 32
+  cookieSecret: ""   # openssl rand -hex 32
+  dbPassword: ""
+  # Provided by templates/sealedsecret.yaml (sealed -> tracearr Secret)
+  existingSecret: "tracearr"
+
+timescale:
+  enabled: true
+
+  image:
+    repository: timescale/timescaledb-ha
+    # renovate: datasource=docker depName=timescale/timescaledb-ha versioning=loose
+    # digest: sha256:feaf4a1337e8252c9938f26b234318e264104b6049d0bdcd58a6618eff498a79
+    tag: pg18.4-ts2.29.1
+    pullPolicy: IfNotPresent
+
+  service:
+    port: 5432
+
+  postgresArgs:
+    - "-c"
+    - "timescaledb.license=timescale"
+    - "-c"
+    - "timescaledb.max_tuples_decompressed_per_dml_transaction=100000"
+    - "-c"
+    - "max_locks_per_transaction=4096"
+    - "-c"
+    - "timescaledb.telemetry_level=off"
+    # Tuned for 4 GB limit, SSD storage
+    - "-c"
+    - "shared_buffers=512MB"
+    - "-c"
+    - "effective_cache_size=2GB"
+    - "-c"
+    - "work_mem=16MB"
+    - "-c"
+    - "maintenance_work_mem=256MB"
+    - "-c"
+    - "wal_buffers=64MB"
+    - "-c"
+    - "max_wal_size=2GB"
+    - "-c"
+    - "checkpoint_completion_target=0.9"
+    - "-c"
+    - "random_page_cost=1.1"
+    - "-c"
+    - "effective_io_concurrency=200"
+
+  shmSize: 512Mi
+
+  persistence:
+    # 20Gi headroom (was 50Gi upstream default); resize deliberately later.
+    size: 20Gi
+    storageClass: synology-csi-iscsi-delete
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      cpu: "4"
+      memory: 4Gi
+
+  # timescaledb-ha: UID 1000 (postgres)
+  podSecurityContext:
+    fsGroup: 1000
+
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: false  # PG writes temp files + runtime config
+    capabilities:
+      drop: [ALL]
+    seccompProfile:
+      type: RuntimeDefault
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podLabels: {}
+
+# Used when timescale.enabled=false
+externalDatabase:
+  host: ""
+  port: 5432
+  user: tracearr
+  database: tracearr
+
+redis:
+  enabled: true
+
+  image:
+    repository: redis
+    # renovate: datasource=docker depName=redis versioning=loose
+    # digest: sha256:9c3ecc609a8087c0f11c494fefaf37a8f7bf9a967631d4a0da8967a9810be354
+    tag: 8-alpine
+    pullPolicy: IfNotPresent
+
+  service:
+    port: 6379
+
+  args:
+    - redis-server
+    - --appendonly
+    - "yes"
+    - --maxmemory
+    - 384mb
+    - --maxmemory-policy
+    - noeviction  # required by BullMQ
+    - --tcp-keepalive
+    - "300"
+    - --tcp-backlog
+    - "511"
+    - --save
+    - ""  # AOF only, no RDB
+
+  persistence:
+    size: 2Gi
+    storageClass: synology-csi-iscsi-delete
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi
+
+  # redis:8-alpine: UID 999
+  podSecurityContext:
+    fsGroup: 999
+
+  securityContext:
+    runAsUser: 999
+    runAsGroup: 999
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop: [ALL]
+    seccompProfile:
+      type: RuntimeDefault
+
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podLabels: {}
+
+# Used when redis.enabled=false
+externalRedis:
+  url: ""
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: tracearr.frost.haus
+    # WebSocket (Socket.io) and SSE require upgrade support + long timeouts
+    # (same idiom as uptime-kuma).
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+  hosts:
+    - host: tracearr.frost.haus
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: tracearr-cert
+      hosts:
+        - tracearr.frost.haus
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+  automountServiceAccountToken: false
+
+networkPolicy:
+  # Upstream ships a well-scoped policy, but no chart in this repo enables
+  # NetworkPolicies; keep parity until the cluster adopts them fleet-wide.
+  enabled: false
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
