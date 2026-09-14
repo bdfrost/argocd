@@ -32,7 +32,13 @@ tracearr:
     NODE_ENV: production
     HOST: "0.0.0.0"
     PORT: "3000"  # must match containerPort (3000)
-    LOG_LEVEL: info
+    # warn (not info): Fastify emits one pino JSON line per HTTP request at
+    # info level, so the kubelet liveness/readiness probes on /health spam
+    # ~2 lines/10s. Upstream has no per-route silencing (v2.2.3, checked
+    # main too). console.* lifecycle lines ([SSEManager], [LibrarySync],
+    # [LeaderLease]) bypass pino and stay visible at warn. Raise to info or
+    # debug temporarily when request-level tracing is needed.
+    LOG_LEVEL: warn
     CORS_ORIGIN: "*"
     TZ: America/Chicago
     # DATABASE_POOL_MAX: "50"
