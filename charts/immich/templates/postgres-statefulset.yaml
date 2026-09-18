@@ -21,10 +21,10 @@ spec:
         app.kubernetes.io/name: immich
         app.kubernetes.io/component: postgresql
     spec:
-      # official postgres base image: uid/gid 70 = postgres
+      # official postgres images ship no USER directive (root entrypoint gosu-drops
+      # to uid 70), so runAsNonRoot must not be set; fsGroup 70 suffices
       securityContext:
         fsGroup: 70
-        runAsNonRoot: true
       terminationGracePeriodSeconds: 60
       containers:
         - name: postgresql
