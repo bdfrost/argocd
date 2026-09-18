@@ -118,6 +118,10 @@ data:
           description: Social news aggregation
   services.yaml: |
     - Media & Entertainment:
+        - Immich:
+            icon: mdi-image-multiple
+            href: https://immich.frost.haus
+            description: Self-hosted photo & video library
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus

@@ -1,0 +1,151 @@
+# Thin wrapper around the official Immich Helm chart
+# (oci://ghcr.io/immich-app/immich-charts/immich, vendored under charts/).
+#
+# Cluster-specific overrides only. The chart itself bundles neither a
+# Postgres nor the library PVC, so this wrapper provides:
+#   - templates/library-pv.yaml          static NFS PV + PVC for the photo library
+#   - templates/postgres-statefulset.yaml VectorChord Postgres (same pattern as
+#                                         charts/tracearr's Timescale statefulset)
+#   - templates/sealedsecret.yaml        sealed DB password (kubeseal'd, not in git)
+
+# --------------------------------------------------------------------------
+# Upstream chart overrides (key = subchart name: `immich`)
+# --------------------------------------------------------------------------
+immich:
+  immich:
+    persistence:
+      library:
+        # Created by templates/library-pv.yaml — see `library:` below for the
+        # NFS server/path. The chart refuses to render without this.
+        existingClaim: immich-library-pvc
+    metrics:
+      # ServiceMonitors for the kube-prometheus-stack already in the cluster
+      enabled: true
+
+  # Shared defaults across all components (upstream keeps its templated
+  # REDIS_HOSTNAME / IMMICH_MACHINE_LEARNING_URL env here; Helm deep-merges
+  # our additions on top).
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            # server + machine-learning images are published in lockstep.
+            # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
+            tag: v3.2.0
+          env:
+            TZ: "America/Chicago"
+
+  server:
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              DB_HOSTNAME: immich-database
+              DB_PORT: "5432"
+              DB_USERNAME: immich
+              DB_DATABASE_NAME: immich
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres
+                    key: password
+            resources:
+              requests:
+                cpu: 250m
+                memory: 1Gi
+              limits:
+                memory: 2Gi
+    ingress:
+      main:
+        enabled: true
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/host: immich.frost.haus
+          # upstream already defaults proxy-body-size to "0" (unlimited uploads)
+        hosts:
+          - host: immich.frost.haus
+            paths:
+              - path: /
+                service:
+                  identifier: main
+        tls:
+          - secretName: immich-cert
+            hosts:
+              - immich.frost.haus
+
+  machine-learning:
+    controllers:
+      main:
+        containers:
+          main:
+            resources:
+              requests:
+                cpu: 250m
+                memory: 2Gi
+              limits:
+                memory: 4Gi
+    persistence:
+      cache:
+        # Persist the model cache across restarts (~2 GB re-download
+        # otherwise). Cache is disposable, so the delete class is fine.
+        enabled: true
+        type: persistentVolumeClaim
+        size: 10Gi
+        accessMode: ReadWriteOnce
+        storageClass: synology-csi-iscsi-delete
+
+  valkey:
+    # in-chart Valkey; the chart's default REDIS_HOSTNAME resolves to
+    # <release>-valkey = immich-valkey. emptyDir persistence is upstream's
+    # default and fine for the job queue.
+    enabled: true
+
+# --------------------------------------------------------------------------
+# Wrapper-owned resources
+# --------------------------------------------------------------------------
+
+# Photo/video library. Bulk media in this cluster lives on the Synology over
+# NFS (see charts/{sonarr,radarr,bazarr,sabnzbd,plex}) rather than CSI LUNs,
+# which hit mount deadlines above ~20Gi (see loki 2cc2730). Retain policy so
+# the library survives app deletion.
+#
+# >>> DECISION POINT: the NFS export must exist on the NAS before first sync.
+# >>> Either create an "immich" share in DSM or point `path:` at an existing
+# >>> export; binding otherwise fails with MountFailure on the pod.
+library:
+  capacity: 500Gi # informational on NFS (not a quota); immich reads real usage from statfs
+  nfs:
+    server: 192.168.100.250
+    path: /volume1/immich
+
+# Internal Postgres with the VectorChord extension (required by Immich >= v2;
+# the chart dropped its postgres subchart in 0.10.0 and expects BYO). The
+# tensorchord image ships vchord + pgvector but does NOT preload them, hence
+# postgresArgs below. Retain class: catalog can't be re-derived from phones.
+database:
+  enabled: true
+  image:
+    repository: docker.io/tensorchord/vchord-postgres
+    # renovate: datasource=docker depName=tensorchord/vchord-postgres versioning=loose
+    tag: pg18-v1.1.1
+    pullPolicy: IfNotPresent
+  auth:
+    username: immich
+    database: immich
+  # bare name=value args to the postgres binary (same idiom as tracearr's
+  # postgresArgs): loads the VectorChord extension library at startup
+  postgresArgs:
+    - "shared_preload_libraries=vchord.so"
+  persistence:
+    size: 20Gi
+    storageClass: synology-csi-iscsi-retain
+  shmSize: 256Mi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 2Gi

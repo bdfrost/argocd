@@ -1,0 +1,46 @@
+# Static NFS PV + claim for the Immich library.
+# storageClassName: "" opts out of dynamic provisioning (Synology CSI would
+# otherwise grab this claim and spin an iSCSI LUN — the >20Gi mount-deadline
+# pitfall). claimRef pins the PV to our PVC only.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: immich-library-pv
+  labels:
+    app.kubernetes.io/name: immich
+    app.kubernetes.io/component: library
+    app.kubernetes.io/managed-by: argocd
+spec:
+  capacity:
+    storage: {{ .Values.library.capacity }}
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - vers=4.1
+  nfs:
+    server: {{ .Values.library.nfs.server }}
+    path: {{ .Values.library.nfs.path }}
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    namespace: {{ .Release.Namespace }}
+    name: immich-library-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-library-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: immich
+    app.kubernetes.io/component: library
+    app.kubernetes.io/managed-by: argocd
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: {{ .Values.library.capacity }}
