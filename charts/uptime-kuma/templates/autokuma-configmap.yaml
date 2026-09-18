@@ -248,6 +248,16 @@ data:
         ]
       },
       {
+        "name": "Immich",
+        "type": "http",
+        "url": "https://immich.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ]
+      },
+      {
         "name": "SABnzbd TLS Certificate",
         "type": "http",
         "url": "https://sabnzbd.frost.haus",
