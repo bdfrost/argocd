@@ -17,7 +17,7 @@ immich:
       library:
         # Created by templates/library-pv.yaml — see `library:` below for the
         # NFS server/path. The chart refuses to render without this.
-        existingClaim: immich-library-pvc
+        existingClaim: immich-library-pvc-v2
     metrics:
       # ServiceMonitors for the kube-prometheus-stack already in the cluster
       enabled: true
