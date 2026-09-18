@@ -11,7 +11,10 @@ data:
         summary: The 10 most popular shows across the internet
         sonarr_add_missing: false
         sonarr_search: true
-        sonarr_monitor: true
+        # FIXED 2026-09-18: collection-level sonarr_monitor takes a monitor mode string,
+        # not a boolean — `true` made the whole collection fail validation every night.
+        # `all` matches the global sonarr monitor setting.
+        sonarr_monitor: all
       # Tautulli Most Popular:
       #   sync_mode: sync
       #   collection_order: custom

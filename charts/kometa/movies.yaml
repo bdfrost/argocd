@@ -112,8 +112,13 @@ data:
       Disney:
         radarr_tag: Disney
         template: { name: Studio }
+        # FIXED 2026-09-18: /search/ URLs are rejected by imdb_list since IMDb killed
+        # advanced-search scraping; the same query as an imdb_search filter set.
+        imdb_search:
+          type: movie
+          company: co0074039
+          limit: 250
         imdb_list: 
-          - https://www.imdb.com/search/title/?companies=co0074039&count=250
           - https://www.imdb.com/list/ls059383351/
           - https://www.imdb.com/list/ls077114097/
         tmdb_company:
@@ -174,7 +179,13 @@ data:
           - https://www.imdb.com/list/ls023118929/
           - https://www.imdb.com/list/ls000099714/
           - https://www.imdb.com/list/ls000058693/
-          - https://www.imdb.com/search/title/?genres=horror&keywords=haunted-house&sort=moviemeter,asc
+        # FIXED 2026-09-18: was a /search/ URL inside imdb_list (rejected, and would have
+        # failed the whole collection when this seasonal one first ran on Oct 1).
+        imdb_search:
+          type: movie
+          genre: horror
+          keyword: haunted-house
+          limit: 100
         tmdb_collection:
           - 91361    # Halloween Collection
           - 8581     # A Nightmare on Elm Street Collection
@@ -393,9 +404,11 @@ data:
           company: co0939898
           genre: romance
           limit: 999
-        mdblist_list:
-          # LIVE — 1725 items, newest 2026 premieres (Much About Love, etc.)
-          - https://mdblist.com/lists/SynAcksHM/hallmark
+        # DROPPED 2026-09-18: SynAcksHM/hallmark is the FULL Hallmark catalog (1725 items,
+        # no romance filter) — it pulled ~1300 non-romance titles into this collection and
+        # into Radarr add-missing. Re-add a ROMANCE-filtered mdblist only if we find one.
+        # mdblist_list:
+        #   - https://mdblist.com/lists/SynAcksHM/hallmark
         # PARKED — Trakt client-only auth is failing every list with "not found"
         # (list API needs OAuth renewed). Un-comment once Trakt auth is restored.
         # trakt_list:
@@ -405,7 +418,9 @@ data:
         #   - https://trakt.tv/users/elsker/lists/hallmark-romance
         sort_title: '###Hallmark Romance'
         collection_order: release.desc
-        radarr_tag: Hallmark Romance
+        # Radarr now enforces ^[a-z0-9-]+$ on NEW tag labels — "Hallmark Romance" returned
+        # 400 and blocked every add-missing batch. Tag `hallmark-romance` created via API (id 14).
+        radarr_tag: hallmark-romance
         radarr_monitor: true
         sync_mode: sync
         radarr_add_missing: true

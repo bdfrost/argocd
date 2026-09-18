@@ -62,11 +62,11 @@ data:
         libraries: Movies, TV Shows      # list of libraries that you want the Kometa Defaults playlists to look at
       # see the wiki for how to use local files, folders, URLs, or files from git
     settings:
-      # run_order:
-      # - operations
-      # - metadata
-      # - collections
-      # - overlays
+      run_order:                       # was commented out → nightly "settings sub-attribute run_order not found" warning; these are the same values as the default
+      - operations
+      - metadata
+      - collections
+      - overlays
       cache: true
       cache_expiration: 7
       # asset_directory: /config/assets
@@ -151,7 +151,8 @@ data:
       token: <<SONARRTOKEN>>
       add_missing: false
       add_existing: true
-      sonarr_monitor: true
+      # REMOVED 2026-09-18: `sonarr_monitor` is not a config-level attribute (that one is
+      # `monitor:`, set below and already correct). Leftover copy of the collection-level key.
       upgrade_existing: true
       monitor_existing: true
       root_folder_path: /data/library/tv
