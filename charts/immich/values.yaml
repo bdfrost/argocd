@@ -107,19 +107,22 @@ immich:
 # Wrapper-owned resources
 # --------------------------------------------------------------------------
 
-# Photo/video library. Bulk media in this cluster lives on the Synology over
-# NFS (see charts/{sonarr,radarr,bazarr,sabnzbd,plex}) rather than CSI LUNs,
-# which hit mount deadlines above ~20Gi (see loki 2cc2730). Retain policy so
-# the library survives app deletion.
+# Photo/video library. Lives as a `photos` directory alongside the media Plex
+# consumes on the Synology NFS export (same subpath style as bazarr's
+# commented-out /volume1/media/library/* volumes), not on a CSI LUN — avoids
+# the >20Gi mount-deadline pitfall (see loki 2cc2730). Retain policy so the
+# library survives app deletion.
 #
-# >>> DECISION POINT: the NFS export must exist on the NAS before first sync.
-# >>> Either create an "immich" share in DSM or point `path:` at an existing
-# >>> export; binding otherwise fails with MountFailure on the pod.
+# Prereq: /volume1/media/photos must exist on the NAS (File Station →
+# create folder) before first sync, otherwise the NFS mount fails with
+# MountFailure. Immich containers run as root (upstream default); if DSM's
+# export root-squashes, add podSecurityContext runAsUser: 1026 /
+# runAsGroup: 100 under server + machine-learning controllers below.
 library:
   capacity: 500Gi # informational on NFS (not a quota); immich reads real usage from statfs
   nfs:
     server: 192.168.100.250
-    path: /volume1/immich
+    path: /volume1/media/photos
 
 # Internal Postgres with the VectorChord extension (required by Immich >= v2;
 # the chart dropped its postgres subchart in 0.10.0 and expects BYO). The
