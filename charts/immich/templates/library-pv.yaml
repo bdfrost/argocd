@@ -17,8 +17,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
-  mountOptions:
-    - vers=4.1
+  # no explicit vers: mirrors bazarr/plex mounts (kernel negotiates; DSM
+  # rejects some sub-path/version combos clients can't see coming)
   nfs:
     server: {{ .Values.library.nfs.server }}
     path: {{ .Values.library.nfs.path }}

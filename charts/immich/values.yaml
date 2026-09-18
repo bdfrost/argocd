@@ -35,6 +35,10 @@ immich:
             tag: v3.2.0
           env:
             TZ: "America/Chicago"
+            # PVC exposes the whole media export (Synology can't NFS-mount
+            # sub-paths); this keeps all immich storage in library/photos.
+            # Literal (not templated): values files aren't Go-templated.
+            IMMICH_MEDIA_LOCATION: /data/library/photos
 
   server:
     controllers:
@@ -107,20 +111,20 @@ immich:
 # Wrapper-owned resources
 # --------------------------------------------------------------------------
 
-# Photo/video library. Lives as photos under the same library/ tree Plex
-# consumes on the Synology NFS export (alongside bazarr's library/movies and
-# library/tv subpaths), not on a CSI LUN — avoids the >20Gi mount-deadline
-# pitfall (see loki 2cc2730). Retain policy so the library survives app
-# deletion. Folder created on the NAS 2026-09-18.
-#
-# Immich containers run as root (upstream default); if DSM's export
-# root-squashes, add podSecurityContext runAsUser: 1026 /
-# runAsGroup: 100 under server + machine-learning controllers below.
+# Photo/video library. The Synology only exports share *roots* over NFS
+# (sub-path mounts fail "Protocol not supported" — see bazarr's commented-out
+# library/* volumes), so the PV binds the proven /volume1/media export root,
+# exactly as the arrs/plex mount it. Isolation comes from IMMICH_MEDIA_LOCATION
+# (Synology can't mount sub-paths), isolation via IMMICH_MEDIA_LOCATION env
+# in the shared controllers block above: immich's whole storage tree lives in
+# library/photos on the NAS, alongside plex's library/movies and library/tv.
+# Retain + claimRef-pinned so nothing else can grab this PV; the folder
+# survives app deletion.
 library:
   capacity: 500Gi # informational on NFS (not a quota); immich reads real usage from statfs
   nfs:
     server: 192.168.100.250
-    path: /volume1/media/library/photos
+    path: /volume1/media
 
 # Internal Postgres with the VectorChord extension (required by Immich >= v2;
 # the chart dropped its postgres subchart in 0.10.0 and expects BYO). The
