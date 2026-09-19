@@ -140,9 +140,10 @@ database:
   auth:
     username: immich
     database: immich
-  # bare name=value args to the postgres binary (same idiom as tracearr's
-  # postgresArgs): loads the VectorChord extension library at startup
+  # postgres requires explicit -c <arg> pairs (bare key=value rejected:
+  # "invalid argument"), passed as separate args in order
   postgresArgs:
+    - "-c"
     - "shared_preload_libraries=vchord.so"
   persistence:
     size: 20Gi
