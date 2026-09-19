@@ -141,10 +141,14 @@ database:
     username: immich
     database: immich
   # postgres requires explicit -c <arg> pairs (bare key=value rejected:
-  # "invalid argument"), passed as separate args in order
+  # "invalid argument"), passed as separate args in order. hba_file points at
+  # the ConfigMap-mounted pg_hba.conf (image's baked one lacks a Pod-network
+  # entry -> "no pg_hba.conf entry for host 10.244.x")
   postgresArgs:
     - "-c"
     - "shared_preload_libraries=vchord.so"
+    - "-c"
+    - "hba_file=/config/pg_hba.conf"
   persistence:
     size: 20Gi
     storageClass: synology-csi-iscsi-retain

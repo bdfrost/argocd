@@ -76,7 +76,14 @@ spec:
               mountPath: /var/lib/postgresql/data
             - name: dshm
               mountPath: /dev/shm
+            - name: hba
+              mountPath: /config/pg_hba.conf
+              subPath: pg_hba.conf
+              readOnly: true
       volumes:
+        - name: hba
+          configMap:
+            name: immich-pg-hba
         - name: dshm
           emptyDir:
             medium: Memory

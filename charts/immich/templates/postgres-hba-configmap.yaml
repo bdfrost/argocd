@@ -1,0 +1,21 @@
+{{- if .Values.database.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-pg-hba
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: immich
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/managed-by: argocd
+data:
+  pg_hba.conf: |
+    # hba_file override (see values postgresArgs): the tensorchord image's
+    # baked pg_hba.conf has no Pod-network entry ("no pg_hba.conf entry for
+    # host 10.244.x"). Password was encrypted scram at initdb; ClusterIP is
+    # internal-only, no TLS.
+    local   all   all             trust
+    host    all   all   127.0.0.1/32   scram-sha-256
+    host    all   all   ::1/128        scram-sha-256
+    host    all   all   0.0.0.0/0      scram-sha-256
+{{- end }}
