@@ -31,14 +31,17 @@ spec:
         # immich ROLE but before the entrypoint's CREATE DATABASE, and a
         # non-empty PGDATA makes the entrypoint skip that step forever.
         # Single-user mode runs CREATE DATABASE directly against the datadir
-        # before the server starts; "already exists" errors (every restart
-        # since) are swallowed so this stays best-effort/idempotent.
+        # before the server starts. fsGroup lands 0770+setgid on the volume,
+        # which postgres rejects ("invalid permissions"), so normalize
+        # owner/mode first; errors swallowed -> idempotent no-op on restarts.
         - name: ensure-immich-database
           image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
           imagePullPolicy: {{ .Values.database.image.pullPolicy }}
           command: ["sh", "-c"]
           args:
             - |
+              chown postgres:postgres /var/lib/postgresql/data/pgdata 2>/dev/null || true
+              chmod 0750 /var/lib/postgresql/data/pgdata 2>/dev/null || true
               su postgres -c "echo 'CREATE DATABASE {{ .Values.database.auth.database }} OWNER {{ .Values.database.auth.username }};' | postgres --single -D /var/lib/postgresql/data/pgdata template1" 2>&1 || echo "immich db init skipped (normally: already exists)"
           {{- with .Values.database.resources }}
           resources:
