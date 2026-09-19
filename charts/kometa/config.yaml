@@ -12,6 +12,10 @@ data:
         # - default: network
         overlay_files:
         - default: ribbon                # This is a file within Kometa's defaults folder
+          # FIXED 2026-09-19: "Letterboxd Top 500" overlay 403s every run — kometa's fetcher
+          # is bot-blocked on letterboxd.com (list itself is live in browsers). Badge disabled.
+          template_variables:
+            use_letterboxd: false
         - default: commonsense  
         - default: ratings
           template_variables:
@@ -39,6 +43,12 @@ data:
         # - default: network
         overlay_files:
         - default: ribbon                # This is a file within Kometa's defaults folder
+          # FIXED 2026-09-19: "Rotten Tomatoes Verified Hot" for shows sources from
+          # mdblist.com/lists/k0meta/verifiedhotshows which is gone (404; the movies and all
+          # other k0meta variants are live). Badge disabled; Rating2Top in `ratings` hits the
+          # same dead show list but its use_ key is undocumented — leaving the 1 warning/night.
+          template_variables:
+            use_rottenverified: false
         - default: status
         - default: ratings
           template_variables:
@@ -67,6 +77,8 @@ data:
       - metadata
       - collections
       - overlays
+      show_unfiltered: false           # explicit documented default; silences nightly "settings sub-attribute show_unfiltered not found" warning
+      auto_sort_hubs:                  # explicit null = documented default None (no hub sorting); silences the same style warning
       cache: true
       cache_expiration: 7
       # asset_directory: /config/assets
