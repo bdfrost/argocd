@@ -9,7 +9,7 @@ tracearr:
     repository: ghcr.io/connorgallopo/tracearr
     # renovate: datasource=docker depName=ghcr.io/connorgallopo/tracearr versioning=loose
     # digest (registry-verified 2026-09-14): sha256:d66822b5c5e76c27c12eec4de05c6eb9fbc4005968df5587bf5d2d3718f15dff
-    tag: 2.2.3
+    tag: 2.4.0
     pullPolicy: IfNotPresent
 
   replicaCount: 1  # singleton poller — only 1 supported
