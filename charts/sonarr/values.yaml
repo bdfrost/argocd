@@ -7,5 +7,5 @@ pgid: 100
 image:
   repository: linuxserver/sonarr
   # renovate: datasource=docker depName=linuxserver/sonarr
-  tag: "4.0.19"
+  tag: "4.0.20"
   pullPolicy: IfNotPresent
