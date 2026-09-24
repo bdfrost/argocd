@@ -7,5 +7,5 @@ pgid: 100
 image:
   repository: linuxserver/radarr
   # renovate: datasource=docker depName=linuxserver/radarr
-  tag: "6.3.0"
+  tag: "6.4.4"
   pullPolicy: IfNotPresent
