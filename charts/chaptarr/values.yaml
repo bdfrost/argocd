@@ -1,0 +1,12 @@
+replicaCount: 1
+name: chaptarr
+targetPort: 8789
+puid: 1026
+pgid: 100
+timezone: America/Chicago
+
+image:
+  repository: chaptarr/chaptarr
+  # renovate: datasource=docker depName=chaptarr/chaptarr versioning=loose
+  tag: "0.9.958"
+  pullPolicy: IfNotPresent

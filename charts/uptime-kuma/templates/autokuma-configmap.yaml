@@ -107,6 +107,16 @@ data:
         ]
       },
       {
+        "name": "Chaptarr",
+        "type": "http",
+        "url": "https://chaptarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ]
+      },
+      {
         "name": "SABnzbd",
         "type": "http",
         "url": "https://sabnzbd.frost.haus",

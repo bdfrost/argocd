@@ -220,6 +220,10 @@ data:
             icon: agregarr.png
             href: https://agregarr.frost.haus
             description: Bulk add media to Arr apps
+        - Chaptarr:
+            icon: mdi-book-open-page-variant
+            href: https://chaptarr.frost.haus
+            description: eBook and audiobook collection manager
         - Cleanuparr:
             icon: mdi-broom
             href: https://cleanuparr.frost.haus
