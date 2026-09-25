@@ -11,10 +11,10 @@
   },
   "packageRules": [
     {
-      "description": "Plex image: pms-docker tags end in a per-release git hash (e.g. -cb3ebc72d), which the docker versioning scheme treats as an incompatible suffix — it silently drops every update. Regex versioning matches only the plain <ver>-<hash> tags (not -arm64/-amd64/-armhf) and ranks them correctly.",
+      "description": "Plex image: pms-docker tags end in a per-release git hash (e.g. -cb3ebc72d), which the docker versioning scheme treats as an incompatible suffix — it silently drops every update. Regex versioning matches only plain <ver>-<hash> tags (rejects -arm64/-amd64/-armhf and latest). Do NOT name the hash group <prerelease> — that marks every tag unstable and ignoreUnstable drops the upgrades again.",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["plexinc/pms-docker", "index.docker.io/plexinc/pms-docker"],
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)-(?<prerelease>[a-f0-9]{7,40})$",
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)-[a-f0-9]{7,40}$",
       "groupName": "Plex image",
       "separateMajorMinor": true,
       "labels": ["dependencies", "plex"]
