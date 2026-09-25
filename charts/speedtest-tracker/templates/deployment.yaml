@@ -2,17 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.name }}
+    app.kubernetes.io/instance: {{ .Values.name }}
 spec:
   strategy:
     type: Recreate
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.name }}
+      app.kubernetes.io/name: {{ .Values.name }}
+      app.kubernetes.io/instance: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.name }}
+        app.kubernetes.io/name: {{ .Values.name }}
+        app.kubernetes.io/instance: {{ .Values.name }}
     spec:
       containers:
       - name: {{ .Values.name }}
@@ -58,15 +63,3 @@ spec:
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .Values.name }}-config-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: synology-csi-iscsi-delete
-  resources:
-    requests:
-      storage: 2Gi
