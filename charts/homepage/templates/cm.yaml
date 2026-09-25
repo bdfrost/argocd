@@ -289,6 +289,10 @@ data:
               type: uptimekuma
               url: https://uptime-kuma.frost.haus/
               slug: default
+        - Speedtest Tracker:
+            icon: mdi-speedometer
+            href: https://speedtest-tracker.frost.haus
+            description: Internet speed history & trends
     - Network & Proxmox:
         - Proxmox VE:
             icon: proxmox.png

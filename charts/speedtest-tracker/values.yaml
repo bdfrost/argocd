@@ -1,14 +1,14 @@
 replicaCount: 1
 name: speedtest-tracker
+targetPort: 80
 puid: 1026
 pgid: 100
-speedtest-tracker:
-  eula:
-    OOKLA_EULA_GDPR: true
-  ingress:
-    enabled: false
-    persistence:
-      enabled: true
-      storageClassName: synology-csi-iscsi-delete
-      accessMode: ReadWriteOnce
-      size: 2G
+
+image:
+  repository: lscr.io/linuxserver/speedtest-tracker
+  tag: "1.15.0"
+  pullPolicy: IfNotPresent
+
+speedtestSchedule: "6,36 * * * *"
+adminName: Admin
+adminEmail: bfrost@brainboy.com

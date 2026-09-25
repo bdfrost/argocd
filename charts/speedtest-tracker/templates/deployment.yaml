@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        - name: PGID
+          value: "{{ .Values.pgid }}"
+        - name: PUID
+          value: "{{ .Values.puid }}"
+        - name: APP_URL
+          value: "https://{{ .Values.name }}.frost.haus"
+        - name: APP_KEY
+          valueFrom:
+            secretKeyRef:
+              name: speedtest-tracker-secrets
+              key: APP_KEY
+        - name: ADMIN_NAME
+          value: "{{ .Values.adminName }}"
+        - name: ADMIN_EMAIL
+          value: "{{ .Values.adminEmail }}"
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: speedtest-tracker-secrets
+              key: ADMIN_PASSWORD
+        - name: DB_CONNECTION
+          value: "sqlite"
+        - name: APP_TIMEZONE
+          value: "America/Chicago"
+        - name: DISPLAY_TIMEZONE
+          value: "America/Chicago"
+        - name: SPEEDTEST_SCHEDULE
+          value: "{{ .Values.speedtestSchedule }}"
+        volumeMounts:
+        - name: {{ .Values.name }}-config
+          mountPath: /config
+      volumes:
+        - name: {{ .Values.name }}-config
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-config-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 2Gi

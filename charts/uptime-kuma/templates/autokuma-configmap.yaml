@@ -288,5 +288,15 @@ data:
         "accepted_statuscodes": [
           "200-399"
         ]
+      },
+      {
+        "name": "Speedtest Tracker",
+        "type": "http",
+        "url": "https://speedtest-tracker.frost.haus/login",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       }
     ]
