@@ -15,7 +15,9 @@ plex-media-server:
   image:
     registry: index.docker.io
     repository: plexinc/pms-docker
-    # renovate: datasource=docker depName=plexinc/pms-docker versioning=loose
+    # renovate: datasource=docker depName=plexinc/pms-docker
+    # NOTE: versioning is set in renovate.json ("regex:...") — docker's own versioning rejects
+    # tags whose -<git-hash> suffix changes, and helm-values ignores versioning annotations.
     tag: "1.43.3.10896-cb3ebc72d"
     pullPolicy: IfNotPresent
   service:
