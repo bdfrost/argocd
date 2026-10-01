@@ -246,17 +246,6 @@ data:
               url: https://argocd.frost.haus/
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
               fields: ["apps", "synced", "outOfSync", "healthy"]
-        - Portainer:
-            icon: portainer.png
-            href: https://portainer.frost.haus
-            description: Container management
-            widget:
-              type: portainer
-              url: https://portainer.frost.haus
-              kubernetes: true
-              env: 1
-              key: "{{ "{{" }}HOMEPAGE_VAR_PORTAINER_APIKEY{{ "}}" }}"
-              fields: ["applications", "services", "namespaces"]
         - Prometheus:
             icon: prometheus.png
             href: https://prometheus.frost.haus
