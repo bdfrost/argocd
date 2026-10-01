@@ -33,7 +33,7 @@ immich:
             repository: ghcr.io/immich-app/immich-server
             # server + machine-learning images are published in lockstep.
             # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-            tag: v3.2.0
+            tag: v3.2.4
           env:
             TZ: "America/Chicago"
             # PVC exposes the whole media export (Synology can't NFS-mount
