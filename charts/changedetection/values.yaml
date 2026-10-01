@@ -1,0 +1,30 @@
+name: changedetection
+replicaCount: 1
+targetPort: 5000
+baseURL: https://changedetection.frost.haus
+timezone: America/Chicago
+allowIanaRestrictedAddresses: false
+
+image:
+  repository: docker.io/dgtlmoon/changedetection.io
+  # renovate: datasource=docker depName=dgtlmoon/changedetection.io
+  tag: "0.60.8"
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi
+
+persistence:
+  enabled: true
+  storageClass: synology-csi-iscsi-delete
+  size: 2Gi
+  accessMode: ReadWriteOnce
+
+ingress:
+  # Internal nginx ingress; no Cloudflare tunnel is configured for this host.
+  enabled: true
+  hostname: changedetection.frost.haus

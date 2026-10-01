@@ -280,6 +280,16 @@ data:
         "expiry_notification": true
       },
       {
+        "name": "changedetection.io",
+        "type": "http",
+        "url": "https://changedetection.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-399"
+        ]
+      },
+      {
         "name": "Uptime Kuma",
         "type": "http",
         "url": "https://uptime-kuma.frost.haus",

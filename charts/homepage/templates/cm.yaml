@@ -262,6 +262,10 @@ data:
             href: https://alertmanager.frost.haus
             description: Alert management & routing
     - Monitoring & Observability:
+        - changedetection.io:
+            icon: mdi-web
+            href: https://changedetection.frost.haus
+            description: Website change detection and notifications
         - Netdata:
             icon: netdata.png
             href: https://netdata.frost.haus
