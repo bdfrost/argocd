@@ -30,6 +30,7 @@ immich:
       containers:
         main:
           image:
+            repository: ghcr.io/immich-app/immich-server
             # server + machine-learning images are published in lockstep.
             # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
             tag: v3.2.0
