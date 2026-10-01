@@ -266,14 +266,6 @@ data:
             icon: mdi-web
             href: https://changedetection.frost.haus
             description: Website change detection and notifications
-        - Netdata:
-            icon: netdata.png
-            href: https://netdata.frost.haus
-            description: Real-time performance monitoring
-            widget:
-              type: netdata
-              url: https://netdata.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_NETDATA_APIKEY{{ "}}" }}"
         - Uptime Kuma:
             icon: mdi-bell
             href: https://uptime-kuma.frost.haus

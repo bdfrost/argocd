@@ -167,16 +167,6 @@ data:
         ]
       },
       {
-        "name": "Netdata",
-        "type": "http",
-        "url": "https://netdata.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ]
-      },
-      {
         "name": "BirdNET-Go",
         "type": "http",
         "url": "https://birdnet-go.frost.haus",
