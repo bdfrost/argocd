@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: autokuma-static-monitors
 data:
+  # Keep the null tombstone at its array index: AutoKuma keys these monitors by index, so removing it shifts later monitor identities.
   services.json: |-
     [
       {
@@ -156,16 +157,7 @@ data:
           "200-299"
         ]
       },
-      {
-        "name": "Portainer",
-        "type": "http",
-        "url": "https://portainer.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ]
-      },
+      null,
       {
         "name": "BirdNET-Go",
         "type": "http",
