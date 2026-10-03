@@ -27,7 +27,7 @@ spec:
             cpu: 500m
             memory: 1Gi
         # renovate: datasource=docker depName=ghcr.io/maintainerr/maintainerr
-        image: ghcr.io/maintainerr/maintainerr:3.30.0
+        image: ghcr.io/maintainerr/maintainerr:3.30.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6246
