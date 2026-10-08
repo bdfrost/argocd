@@ -280,12 +280,8 @@ data:
       Trending Movies:
         sort_title: +++++++_<<collection_name>>
         template: { name: Chart, num: 1 }
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_chart:
-        #   - chart: trending
-        #     limit: 10
-        #   - chart: popular
-        #     limit: 40
+        mdblist_list:
+          - https://mdblist.com/lists/official/movies/justwatch-streaming-charts
         summary: Movies Trending across the internet
         radarr_monitor: true
         radarr_add_missing: true
@@ -341,16 +337,8 @@ data:
     #        Hallmark Fall              #
     #####################################
       Hallmark Fall:
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # LIVE — has 2024 movies, still maintained
-          # - https://trakt.tv/users/linsk/lists/hallmark-fall
-          # LIVE — active, still maintained
-          # - https://trakt.tv/users/laci88/lists/hallmark-fall-movies
-          # LIVE — active, still maintained
-          # - https://trakt.tv/users/sflix/lists/hallmark-fall-movies
-          # DEAD — stuck on 2023, not updated
-          # - https://trakt.tv/users/stillaggin/lists/hallmark-fall-2023
+        imdb_list:
+          - https://www.imdb.com/list/ls066536776/
         sort_title: '###Hallmark Fall'
         collection_order: release.desc
         radarr_monitor: true
@@ -448,11 +436,11 @@ data:
     #      Hallmark Summer              #
     #####################################
       Hallmark Summer:
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # LIVE — current, has 2025/2026 Summer Nights movies
-          # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        imdb_search:
+          type: movie, tv_movie
+          company: co0939898
+          keyword: summer nights
+          limit: 999
         sort_title: '###Hallmark Summer'
         collection_order: release.desc
         radarr_monitor: true
@@ -467,11 +455,8 @@ data:
     #      Hallmark Mysteries           #
     #####################################
       Hallmark Movies & Mysteries:
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # LIVE — current, has 2025 movies
-          # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        imdb_list:
+          - https://www.imdb.com/list/ls041301255/
         sort_title: '###Hallmark Mysteries'
         collection_order: release.desc
         radarr_monitor: true
@@ -486,11 +471,8 @@ data:
     #      Hallmark Drama               #
     #####################################
       Hallmark Drama:
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # LIVE — current, has 2025 movies
-          # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        imdb_list:
+          - https://www.imdb.com/list/ls510617265/
         sort_title: '###Hallmark Drama'
         collection_order: release.desc
         radarr_monitor: true
