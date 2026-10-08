@@ -86,7 +86,6 @@ data:
           year.gte: 1920
           year.lte: 1959
         sort_title: '###_Classics'
-        collection_order: release
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
