@@ -24,9 +24,9 @@ data:
         optional:
           - collection
           - tmdb_movie
-          - trakt_list
           - tmdb_list
-        trakt_list_details: <<trakt_list>>
+        # REMOVED 2026-10-08: trakt_list no longer supported
+        # trakt_list_details: <<trakt_list>>
         tmdb_collection_details: <<collection>>
         tmdb_movie: <<tmdb_movie>>
         tmdb_list: <<tmdb_list>>
@@ -280,11 +280,12 @@ data:
       Trending Movies:
         sort_title: +++++++_<<collection_name>>
         template: { name: Chart, num: 1 }
-        trakt_chart:
-          - chart: trending
-            limit: 10
-          - chart: popular
-            limit: 40
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_chart:
+        #   - chart: trending
+        #     limit: 10
+        #   - chart: popular
+        #     limit: 40
         summary: Movies Trending across the internet
         radarr_monitor: true
         radarr_add_missing: true
@@ -306,12 +307,13 @@ data:
           - https://mdblist.com/lists/vectrexgamer/hallmark-original-christmas-movies
           - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
           - https://mdblist.com/lists/mdatum/hallmark
-        trakt_list:
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
           # LIVE — has 2025 movies
-          - https://trakt.tv/users/alaxgoaly8/lists/original-hallmark-christmas-movies-2
-          - https://trakt.tv/users/ad76/lists/hallmark-christmas
-          - https://trakt.tv/users/milly84/lists/hallmark-2025
-          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+          # - https://trakt.tv/users/alaxgoaly8/lists/original-hallmark-christmas-movies-2
+          # - https://trakt.tv/users/ad76/lists/hallmark-christmas
+          # - https://trakt.tv/users/milly84/lists/hallmark-2025
+          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
           # DEAD — empty/trakt page with no content
           # - https://trakt.tv/users/prada3721/lists/hallmark-premieres-2024-2025
           # DEAD — last updated 2024, stuck on old content
@@ -319,13 +321,13 @@ data:
           # DEAD — empty/trakt page with no content
           # - https://trakt.tv/users/tex24601/lists/hallmark-christmas-movies
           # LIVE — has older movies (2000-2015 range)
-          - https://trakt.tv/users/veninjak/lists/hallmark-christmas-movies
+          # - https://trakt.tv/users/veninjak/lists/hallmark-christmas-movies
           # DEAD — empty/trakt page with no content
           # - https://trakt.tv/users/kylep09/lists/hallmark-holiday
           # DEAD — empty/trakt page with no content
           # - https://trakt.tv/users/yoly76/lists/holiday-tv-movies-present
           # LIVE — has older movies (2000-2015 range)
-          - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
+          # - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
         sort_title: '###Hallmark Christmas'
         collection_order: release.desc
         radarr_monitor: true
@@ -339,13 +341,14 @@ data:
     #        Hallmark Fall              #
     #####################################
       Hallmark Fall:
-        trakt_list:
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
           # LIVE — has 2024 movies, still maintained
-          - https://trakt.tv/users/linsk/lists/hallmark-fall
+          # - https://trakt.tv/users/linsk/lists/hallmark-fall
           # LIVE — active, still maintained
-          - https://trakt.tv/users/laci88/lists/hallmark-fall-movies
+          # - https://trakt.tv/users/laci88/lists/hallmark-fall-movies
           # LIVE — active, still maintained
-          - https://trakt.tv/users/sflix/lists/hallmark-fall-movies
+          # - https://trakt.tv/users/sflix/lists/hallmark-fall-movies
           # DEAD — stuck on 2023, not updated
           # - https://trakt.tv/users/stillaggin/lists/hallmark-fall-2023
         sort_title: '###Hallmark Fall'
@@ -363,11 +366,12 @@ data:
       Hallmark:
         mdblist_list:
           - https://mdblist.com/lists/SynAcksHM/hallmark
-        trakt_list:
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
         # LIVE — has 2025 movies, still maintained
-        - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+        # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         # LIVE — current, has 2025 movies
-        - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+        # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
         # DEAD — empty/trakt page with no content
         # - https://trakt.tv/users/alexamaclaud/lists/hallmark-2
         # DEAD — empty/trakt page with no content
@@ -397,9 +401,10 @@ data:
     #        GAC                        #
     #####################################
       GAC:
-        trakt_list:
-          - https://trakt.tv/users/loopher/lists/great-american-family-channel-christmas-list
-          - https://trakt.tv/users/kwolfe/lists/great-american-family-movies
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
+          # - https://trakt.tv/users/loopher/lists/great-american-family-channel-christmas-list
+          # - https://trakt.tv/users/kwolfe/lists/great-american-family-movies
         sort_title: '###GAC'
         collection_order: release.desc
         radarr_monitor: true
@@ -425,12 +430,13 @@ data:
         radarr_tag: christmas
         item_radarr_tag: christmas
         template: {name: Holiday, poster: https://theposterdb.com/api/assets/111696}
-        trakt_list:
-          - https://trakt.tv/users/crossoverdeseries/lists/other-christmas-2022
-          - https://trakt.tv/users/movistapp/lists/christmas-movies
-          - https://trakt.tv/users/pualani78/lists/christmas-2020
-          - https://trakt.tv/users/veninjak/lists/complete-christmas-2021-copy
-          - https://trakt.tv/users/veninjak/lists/christmas-2022-copy
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
+          # - https://trakt.tv/users/crossoverdeseries/lists/other-christmas-2022
+          # - https://trakt.tv/users/movistapp/lists/christmas-movies
+          # - https://trakt.tv/users/pualani78/lists/christmas-2020
+          # - https://trakt.tv/users/veninjak/lists/complete-christmas-2021-copy
+          # - https://trakt.tv/users/veninjak/lists/christmas-2022-copy
         imdb_search:
           - https://www.imdb.com/list/ls025976544/
           - https://www.imdb.com/list/ls003863000/
@@ -442,10 +448,11 @@ data:
     #      Hallmark Summer              #
     #####################################
       Hallmark Summer:
-        trakt_list:
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
           # LIVE — current, has 2025/2026 Summer Nights movies
-          - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+          # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         sort_title: '###Hallmark Summer'
         collection_order: release.desc
         radarr_monitor: true
@@ -460,10 +467,11 @@ data:
     #      Hallmark Mysteries           #
     #####################################
       Hallmark Movies & Mysteries:
-        trakt_list:
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
           # LIVE — current, has 2025 movies
-          - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+          # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         sort_title: '###Hallmark Mysteries'
         collection_order: release.desc
         radarr_monitor: true
@@ -478,10 +486,11 @@ data:
     #      Hallmark Drama               #
     #####################################
       Hallmark Drama:
-        trakt_list:
+        # REMOVED 2026-10-08: Trakt no longer supported
+        # trakt_list:
           # LIVE — current, has 2025 movies
-          - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-          - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
+          # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
+          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         sort_title: '###Hallmark Drama'
         collection_order: release.desc
         radarr_monitor: true
