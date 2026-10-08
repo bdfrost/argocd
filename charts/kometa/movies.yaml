@@ -304,7 +304,6 @@ data:
           - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
           - https://mdblist.com/lists/mdatum/hallmark
         sort_title: '###Hallmark Christmas'
-        collection_order: release.desc
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
@@ -319,7 +318,6 @@ data:
         imdb_list:
           - https://www.imdb.com/list/ls066536776/
         sort_title: '###Hallmark Fall'
-        collection_order: release.desc
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
@@ -334,7 +332,6 @@ data:
         mdblist_list:
           - https://mdblist.com/lists/SynAcksHM/hallmark
         sort_title: '###Hallmark'
-        collection_order: release.desc
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
@@ -351,7 +348,6 @@ data:
     #####################################
       GAC:
         sort_title: '###GAC'
-        collection_order: release.desc
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
@@ -389,7 +385,6 @@ data:
         imdb_list:
           - https://www.imdb.com/list/ls041301255/
         sort_title: '###Hallmark Mysteries'
-        collection_order: release.desc
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
@@ -405,7 +400,6 @@ data:
         imdb_list:
           - https://www.imdb.com/list/ls510617265/
         sort_title: '###Hallmark Drama'
-        collection_order: release.desc
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
