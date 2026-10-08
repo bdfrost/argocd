@@ -264,6 +264,10 @@ data:
         template: {name: Holiday, holiday: Christmas}
         imdb_list: 
           - https://www.imdb.com/list/ls000096828/
+          - https://www.imdb.com/list/ls097998599/
+          - https://www.imdb.com/list/ls027886673/
+          - https://www.imdb.com/list/ls003863000/
+          - https://www.imdb.com/list/ls025976544/
           - https://www.imdb.com/list/ls097394442/
           - https://www.imdb.com/list/ls068976997/
           - https://www.imdb.com/list/ls027567380/
@@ -300,11 +304,7 @@ data:
           genre: romance
           limit: 999
         imdb_list:
-          - https://www.imdb.com/list/ls025976544/
-          - https://www.imdb.com/list/ls003863000/
           - https://www.imdb.com/list/ls027454200/
-          - https://www.imdb.com/list/ls027886673/
-          - https://www.imdb.com/list/ls097998599/
           - https://www.imdb.com/list/ls066536776/
           - https://www.imdb.com/list/ls041301255/
           - https://www.imdb.com/list/ls510617265/
@@ -312,7 +312,6 @@ data:
           - https://mdblist.com/lists/marko8426/hallmark-xmas-movies
           - https://mdblist.com/lists/slimshizn/hallmark-countdown-to-christmas
           - https://mdblist.com/lists/briandnj/hallmark-x-mas
-          - https://mdblist.com/lists/kcprophecy/hallmark-christmas-ywa8un60mz
           - https://mdblist.com/lists/setifer/hallmarkchristmasfrom2015
           - https://mdblist.com/lists/vectrexgamer/hallmark-original-christmas-movies
           - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
