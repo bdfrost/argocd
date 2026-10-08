@@ -326,10 +326,14 @@ data:
         sync_mode: sync
         radarr_tag: hallmark
         item_radarr_tag: hallmark
+        # co0939898 = Hallmark Channel; co0814123 = Hallmark Movies Now (added 2026-10-08, was incorrectly used in GAC)
         imdb_search:
-          type: movie
-          company: co0939898
-          limit: 999
+          - type: movie
+            company: co0939898
+            limit: 999
+          - type: movie
+            company: co0814123
+            limit: 999
     #####################################
     #        GAC                        #
     #####################################
@@ -342,9 +346,10 @@ data:
         sync_mode: sync
         radarr_tag: gac
         item_radarr_tag: gac
+        # co0408514 = Hideaway Pictures (production company for Great American Family / GAC movies)
         imdb_search:
           type: movie
-          company: co0814123
+          company: co0408514
           limit: 999
 kind: ConfigMap
 metadata:
