@@ -425,7 +425,6 @@ data:
         radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
-        collection_order: release.desc
         sync_mode: sync
         radarr_tag: hallmark-romance
         item_radarr_tag: hallmark-romance
