@@ -298,25 +298,28 @@ data:
     #        Hallmark                   #
     #####################################
       Hallmark:
+        # FIXED 2026-10-08: removed duplicate imdb_search key (caused YAML parse error);
+        # removed full-catalog mdblists that inflated collection to 2500+ movies:
+        #   SynAcksHM/hallmark (1736 items — full Hallmark catalog)
+        #   mdatum/hallmark (241 items — not Hallmark Channel originals)
+        #   vectrexgamer/hallmark-original-christmas-movies (458 items — overlaps with imdb_search)
+        # Removed dead imdb_list sources (404 in 2026-10-08 audit):
+        #   ls025976544, ls003863000, ls027886673, ls097998599
+        # co0939898 = Hallmark Channel; co0814123 = Hallmark Movies Now
         imdb_search:
-          type: movie, tv_movie
-          company: co0939898
-          genre: romance
-          limit: 999
+          - type: movie
+            company: co0939898
+            limit: 999
+          - type: movie
+            company: co0814123
+            limit: 999
         imdb_list:
           - https://www.imdb.com/list/ls027454200/
           - https://www.imdb.com/list/ls066536776/
-          - https://www.imdb.com/list/ls041301255/
-          - https://www.imdb.com/list/ls510617265/
         mdblist_list:
           - https://mdblist.com/lists/marko8426/hallmark-xmas-movies
           - https://mdblist.com/lists/slimshizn/hallmark-countdown-to-christmas
           - https://mdblist.com/lists/briandnj/hallmark-x-mas
-          - https://mdblist.com/lists/setifer/hallmarkchristmasfrom2015
-          - https://mdblist.com/lists/vectrexgamer/hallmark-original-christmas-movies
-          - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
-          - https://mdblist.com/lists/mdatum/hallmark
-          - https://mdblist.com/lists/SynAcksHM/hallmark
         sort_title: '###Hallmark'
         radarr_monitor: true
         radarr_add_missing: true
@@ -325,14 +328,6 @@ data:
         sync_mode: sync
         radarr_tag: hallmark
         item_radarr_tag: hallmark
-        # co0939898 = Hallmark Channel; co0814123 = Hallmark Movies Now (added 2026-10-08, was incorrectly used in GAC)
-        imdb_search:
-          - type: movie
-            company: co0939898
-            limit: 999
-          - type: movie
-            company: co0814123
-            limit: 999
     #####################################
     #        GAC                        #
     #####################################
