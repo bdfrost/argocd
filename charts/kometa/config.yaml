@@ -180,11 +180,6 @@ data:
       sonarr_path:
       plex_path:
     # REMOVED 2026-10-08: Trakt no longer supported by Kometa
-    # trakt:
-    #   client_id: <<TRAKTCLIENTID>>
-    #   client_secret: <<TRAKTCLIENTSECRET>>
-    #   pin:
-    #   force_refresh: false
     mdblist:
       apikey: <<MDBLISTTOKEN>>
       cache_expiration: 60

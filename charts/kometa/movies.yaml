@@ -192,7 +192,7 @@ data:
       Valentine's Day Movies:
         schedule: range(02/01-02/14)
         template: {name: Holiday, holiday: "Valentine's Day"}
-        imdb_search:
+        imdb_list:
           - https://www.imdb.com/list/ls000094398/
           - https://www.imdb.com/list/ls057783436/
           - https://www.imdb.com/list/ls064427905/
@@ -213,7 +213,7 @@ data:
         radarr_tag: st-patricks-day
         template: {name: Holiday, holiday: "St. Patrick's Day"}
         item_radarr_tag: st-patricks-day
-        imdb_search: https://www.imdb.com/list/ls063934595/
+        imdb_list: https://www.imdb.com/list/ls063934595/
       Thanksgiving Movies:
         schedule: range(11/01-11/31)
         sort_title: '!AA'
@@ -226,7 +226,7 @@ data:
         sync_mode: sync
         summary: A collection of Thanksgiving movies and other movies that may relate to the holiday.
         template: {name: Holiday, holiday: Thanksgiving}
-        imdb_search: 
+        imdb_list: 
           - https://www.imdb.com/list/ls000835734/
           - https://www.imdb.com/list/ls091597850/
       Halloween Movies:
@@ -262,7 +262,7 @@ data:
         schedule: range(12/01-12/31)
         sort_title: '!AB'
         template: {name: Holiday, holiday: Christmas}
-        imdb_search: 
+        imdb_list: 
           - https://www.imdb.com/list/ls000096828/
           - https://www.imdb.com/list/ls097394442/
           - https://www.imdb.com/list/ls068976997/
@@ -303,27 +303,6 @@ data:
           - https://mdblist.com/lists/vectrexgamer/hallmark-original-christmas-movies
           - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
           - https://mdblist.com/lists/mdatum/hallmark
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # LIVE — has 2025 movies
-          # - https://trakt.tv/users/alaxgoaly8/lists/original-hallmark-christmas-movies-2
-          # - https://trakt.tv/users/ad76/lists/hallmark-christmas
-          # - https://trakt.tv/users/milly84/lists/hallmark-2025
-          # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
-          # DEAD — empty/trakt page with no content
-          # - https://trakt.tv/users/prada3721/lists/hallmark-premieres-2024-2025
-          # DEAD — last updated 2024, stuck on old content
-          # - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
-          # DEAD — empty/trakt page with no content
-          # - https://trakt.tv/users/tex24601/lists/hallmark-christmas-movies
-          # LIVE — has older movies (2000-2015 range)
-          # - https://trakt.tv/users/veninjak/lists/hallmark-christmas-movies
-          # DEAD — empty/trakt page with no content
-          # - https://trakt.tv/users/kylep09/lists/hallmark-holiday
-          # DEAD — empty/trakt page with no content
-          # - https://trakt.tv/users/yoly76/lists/holiday-tv-movies-present
-          # LIVE — has older movies (2000-2015 range)
-          # - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
         sort_title: '###Hallmark Christmas'
         collection_order: release.desc
         radarr_monitor: true
@@ -354,24 +333,6 @@ data:
       Hallmark:
         mdblist_list:
           - https://mdblist.com/lists/SynAcksHM/hallmark
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-        # LIVE — has 2025 movies, still maintained
-        # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
-        # LIVE — current, has 2025 movies
-        # - https://trakt.tv/users/crossoverenserie/lists/hallmark-2025-movies-shows
-        # DEAD — empty/trakt page with no content
-        # - https://trakt.tv/users/alexamaclaud/lists/hallmark-2
-        # DEAD — empty/trakt page with no content
-        # - https://trakt.tv/users/hollywood-heidi/lists/hallmark-hallmark-mysteries-hallmark-romances-1
-        # DEAD — empty/trakt page with no content
-        # - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-841fc509-8aca-4c90-995b-ddb198d9e259
-        # DEAD — empty/trakt page with no content
-        # - https://trakt.tv/users/serralee/lists/hallmark-movies-2024
-        # DEAD — last updated 2024, stuck on old content
-        # - https://trakt.tv/users/midnitewolf/lists/hallmark-romance-premieres-2024-2025
-        # DEAD — stuck on 2024 only, no 2025 content
-        # - https://trakt.tv/users/goonerdom/lists/hallmark-2024
         sort_title: '###Hallmark'
         collection_order: release.desc
         radarr_monitor: true
@@ -389,10 +350,6 @@ data:
     #        GAC                        #
     #####################################
       GAC:
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # - https://trakt.tv/users/loopher/lists/great-american-family-channel-christmas-list
-          # - https://trakt.tv/users/kwolfe/lists/great-american-family-movies
         sort_title: '###GAC'
         collection_order: release.desc
         radarr_monitor: true
@@ -418,14 +375,7 @@ data:
         radarr_tag: christmas
         item_radarr_tag: christmas
         template: {name: Holiday, poster: https://theposterdb.com/api/assets/111696}
-        # REMOVED 2026-10-08: Trakt no longer supported
-        # trakt_list:
-          # - https://trakt.tv/users/crossoverdeseries/lists/other-christmas-2022
-          # - https://trakt.tv/users/movistapp/lists/christmas-movies
-          # - https://trakt.tv/users/pualani78/lists/christmas-2020
-          # - https://trakt.tv/users/veninjak/lists/complete-christmas-2021-copy
-          # - https://trakt.tv/users/veninjak/lists/christmas-2022-copy
-        imdb_search:
+        imdb_list:
           - https://www.imdb.com/list/ls025976544/
           - https://www.imdb.com/list/ls003863000/
           - https://www.imdb.com/list/ls027454200/
@@ -493,18 +443,6 @@ data:
           company: co0939898
           genre: romance
           limit: 999
-        # DROPPED 2026-09-18: SynAcksHM/hallmark is the FULL Hallmark catalog (1725 items,
-        # no romance filter) — it pulled ~1300 non-romance titles into this collection and
-        # into Radarr add-missing. Re-add a ROMANCE-filtered mdblist only if we find one.
-        # mdblist_list:
-        #   - https://mdblist.com/lists/SynAcksHM/hallmark
-        # PARKED — Trakt client-only auth is failing every list with "not found"
-        # (list API needs OAuth renewed). Un-comment once Trakt auth is restored.
-        # trakt_list:
-        #   # LIVE — verified 2026-09-08, includes upcoming premieres
-        #   - https://trakt.tv/users/ad76/lists/hallmark-movies
-        #   # LIVE — verified 2026-09-08, curated Hallmark romance catalog
-        #   - https://trakt.tv/users/elsker/lists/hallmark-romance
         sort_title: '###Hallmark Romance'
         collection_order: release.desc
         # Radarr now enforces ^[a-z0-9-]+$ on NEW tag labels — "Hallmark Romance" returned
