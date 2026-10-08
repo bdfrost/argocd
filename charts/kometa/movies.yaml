@@ -291,9 +291,23 @@ data:
         radarr_tag: trending
         item_radarr_tag: trending
     #####################################
-    #        Hallmark Christmas         #
+    #        Hallmark                   #
     #####################################
-      Hallmark Christmas:
+      Hallmark:
+        imdb_search:
+          type: movie, tv_movie
+          company: co0939898
+          genre: romance
+          limit: 999
+        imdb_list:
+          - https://www.imdb.com/list/ls025976544/
+          - https://www.imdb.com/list/ls003863000/
+          - https://www.imdb.com/list/ls027454200/
+          - https://www.imdb.com/list/ls027886673/
+          - https://www.imdb.com/list/ls097998599/
+          - https://www.imdb.com/list/ls066536776/
+          - https://www.imdb.com/list/ls041301255/
+          - https://www.imdb.com/list/ls510617265/
         mdblist_list:
           - https://mdblist.com/lists/marko8426/hallmark-xmas-movies
           - https://mdblist.com/lists/slimshizn/hallmark-countdown-to-christmas
@@ -303,33 +317,6 @@ data:
           - https://mdblist.com/lists/vectrexgamer/hallmark-original-christmas-movies
           - https://mdblist.com/lists/vectrexgamer/hallmark-hall-of-fame-christmas-movies
           - https://mdblist.com/lists/mdatum/hallmark
-        sort_title: '###Hallmark Christmas'
-        radarr_monitor: true
-        radarr_add_missing: true
-        radarr_add_existing: true
-        collection_order: release.desc
-        sync_mode: sync
-        radarr_tag: hallmark-christmas
-        item_radarr_tag: hallmark-christmas
-    #####################################
-    #        Hallmark Fall              #
-    #####################################
-      Hallmark Fall:
-        imdb_list:
-          - https://www.imdb.com/list/ls066536776/
-        sort_title: '###Hallmark Fall'
-        radarr_monitor: true
-        radarr_add_missing: true
-        radarr_add_existing: true
-        collection_order: release.desc
-        sync_mode: sync
-        radarr_tag: hallmark-fall
-        item_radarr_tag: hallmark-fall
-    #####################################
-    #        Hallmark                   #
-    #####################################
-      Hallmark:
-        mdblist_list:
           - https://mdblist.com/lists/SynAcksHM/hallmark
         sort_title: '###Hallmark'
         radarr_monitor: true
@@ -359,76 +346,6 @@ data:
           type: movie
           company: co0814123
           limit: 999
-    #####################################
-    #       Christmas                   #
-    #####################################
-      Christmas:
-        radarr_monitor: true
-        radarr_add_missing: true
-        radarr_add_existing: true
-        collection_order: release.desc
-        sync_mode: sync
-        radarr_tag: christmas
-        item_radarr_tag: christmas
-        template: {name: Holiday, poster: https://theposterdb.com/api/assets/111696}
-        imdb_list:
-          - https://www.imdb.com/list/ls025976544/
-          - https://www.imdb.com/list/ls003863000/
-          - https://www.imdb.com/list/ls027454200/
-          - https://www.imdb.com/list/ls027886673/
-          - https://www.imdb.com/list/ls097998599/
-        summary: Christmas film is a genre that revolves around the plot involving Christmas.
-    #####################################
-    #      Hallmark Mysteries           #
-    #####################################
-      Hallmark Movies & Mysteries:
-        imdb_list:
-          - https://www.imdb.com/list/ls041301255/
-        sort_title: '###Hallmark Mysteries'
-        radarr_monitor: true
-        radarr_add_missing: true
-        radarr_add_existing: true
-        collection_order: release.desc
-        sync_mode: sync
-        radarr_tag: hallmark-mysteries
-        item_radarr_tag: hallmark-mysteries
-        summary: Hallmark Movies & Mysteries — whodunits including Hannah Swensen, Mystery Island, Tipline Mysteries
-    #####################################
-    #      Hallmark Drama               #
-    #####################################
-      Hallmark Drama:
-        imdb_list:
-          - https://www.imdb.com/list/ls510617265/
-        sort_title: '###Hallmark Drama'
-        radarr_monitor: true
-        radarr_add_missing: true
-        radarr_add_existing: true
-        collection_order: release.desc
-        sync_mode: sync
-        radarr_tag: hallmark-drama
-        item_radarr_tag: hallmark-drama
-        summary: Hallmark Drama — more mature-themed original content
-    #####################################
-    #        Hallmark Romance           #
-    #####################################
-      Hallmark Romance:
-        # IMDb: Hallmark Channel originals tagged Romance — auto-updating, no Trakt needed
-        imdb_search:
-          type: movie, tv_movie
-          company: co0939898
-          genre: romance
-          limit: 999
-        sort_title: '###Hallmark Romance'
-        collection_order: release.desc
-        # Radarr now enforces ^[a-z0-9-]+$ on NEW tag labels — "Hallmark Romance" returned
-        # 400 and blocked every add-missing batch. Tag `hallmark-romance` created via API (id 14).
-        radarr_monitor: true
-        radarr_add_missing: true
-        radarr_add_existing: true
-        sync_mode: sync
-        radarr_tag: hallmark-romance
-        item_radarr_tag: hallmark-romance
-        summary: New Hallmark romance premieres — Valentine's, Fall Into Love, and year-round love stories
 kind: ConfigMap
 metadata:
   name: movie-config
