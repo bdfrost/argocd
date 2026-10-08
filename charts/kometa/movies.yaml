@@ -87,30 +87,62 @@ data:
           year.lte: 1959
         sort_title: '###_Classics'
         collection_order: release
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: classics
       Pixar:
-        radarr_tag: Pixar
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: pixar
         imdb_list: https://www.imdb.com/list/ls087911008/
         template: { name: Studio, company: 3 }
         tmdb_company: 3
         summary: A collection of Pixar movies
+        radarr_tag: pixar
       DC:
-        radarr_tag: DC
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: dc
         template: {name: Studio}
         imdb_list: https://www.imdb.com/list/ls077827588/
         summary: "The DC Extended Universe (DCEU) is a media franchise and shared universe centered on superheros from DC Comics."
       Marvel:
-        radarr_tag: Marvel
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: marvel
         template: {name: Studio}
         imdb_list: https://www.imdb.com/list/ls009410711/
         tmdb_company: 420
         summary: "A collection of movies and shows created by Marvel Studios, comprising of the Marvel Cinematic Universe."
       Studio Ghibli:
-        radarr_tag: "Studio Ghibli"
         tmdb_company: 10342
         template: { name: Studio }
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: studio-ghibli
         summary: Studio Ghibli Inc. is a Japanese animation film studio headquartered in Koganei, Tokyo. The studio is best known for its animated feature films, and has also produced several short films, television commercials, and one television film. The studio’s mascot and most recognizable symbol is the character, Totoro, a giant cat-like spirit from the 1988 classic, My Neighbor Totoro.
       Disney:
-        radarr_tag: Disney
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: disney
         template: { name: Studio }
         # FIXED 2026-09-18: /search/ URLs are rejected by imdb_list since IMDb killed
         # advanced-search scraping; the same query as an imdb_search filter set.
@@ -160,13 +192,32 @@ data:
           - https://www.imdb.com/list/ls000094398/
           - https://www.imdb.com/list/ls057783436/
           - https://www.imdb.com/list/ls064427905/
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: valentines-day
       St. Patrick's Day Movies:
         schedule: range(03/01-03/17)
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: st-patricks-day
         template: {name: Holiday, holiday: "St. Patrick's Day"}
         imdb_search: https://www.imdb.com/list/ls063934595/
       Thanksgiving Movies:
         schedule: range(11/01-11/31)
         sort_title: '!AA'
+        radarr_tag: thanksgiving
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        summary: A collection of Thanksgiving movies and other movies that may relate to the holiday.
         template: {name: Holiday, holiday: Thanksgiving}
         imdb_search: 
           - https://www.imdb.com/list/ls000835734/
@@ -175,6 +226,12 @@ data:
         schedule: range(10/01-10/31)
         sort_title: '!AB'
         template: {name: Holiday, holiday: Halloween}
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: halloween
         imdb_list:
           - https://www.imdb.com/list/ls023118929/
           - https://www.imdb.com/list/ls000099714/
@@ -202,6 +259,12 @@ data:
           - https://www.imdb.com/list/ls097394442/
           - https://www.imdb.com/list/ls068976997/
           - https://www.imdb.com/list/ls027567380/
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: christmas
     #####################################
     #        Popular Collections        #
     #####################################
@@ -214,7 +277,12 @@ data:
           - chart: popular
             limit: 40
         summary: Movies Trending across the internet
+        radarr_monitor: true
+        radarr_add_missing: true
+        radarr_add_existing: true
+        collection_order: release.desc
         sync_mode: sync
+        radarr_tag: trending
     #####################################
     #        Hallmark Christmas         #
     #####################################
@@ -250,11 +318,12 @@ data:
           - https://trakt.tv/users/mzdiobolik/lists/hallmark-christmas-movies
         sort_title: '###Hallmark Christmas'
         collection_order: release.desc
-        radarr_tag: Hallmark Christmas
         radarr_monitor: true
-        sync_mode: sync
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: hallmark-christmas
     #####################################
     #        Hallmark Fall              #
     #####################################
@@ -270,11 +339,12 @@ data:
           # - https://trakt.tv/users/stillaggin/lists/hallmark-fall-2023
         sort_title: '###Hallmark Fall'
         collection_order: release.desc
-        radarr_tag: Hallmark Fall
+        radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
         sync_mode: sync
-        radarr_monitor: true
+        radarr_tag: hallmark-fall
     #####################################
     #        Hallmark                   #
     #####################################
@@ -300,11 +370,12 @@ data:
         # - https://trakt.tv/users/goonerdom/lists/hallmark-2024
         sort_title: '###Hallmark'
         collection_order: release.desc
-        radarr_tag: Hallmark
         radarr_monitor: true
-        sync_mode: sync
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: hallmark
         imdb_search:
           type: movie
           company: co0939898
@@ -318,10 +389,12 @@ data:
           - https://trakt.tv/users/kwolfe/lists/great-american-family-movies
         sort_title: '###GAC'
         collection_order: release.desc
-        radarr_tag: GAC
-        sync_mode: sync
+        radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: gac
         imdb_search:
           type: movie
           company: co0814123
@@ -330,8 +403,12 @@ data:
     #       Christmas                   #
     #####################################
       Christmas:
+        radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: christmas
         template: {name: Holiday, poster: https://theposterdb.com/api/assets/111696}
         trakt_list:
           - https://trakt.tv/users/crossoverdeseries/lists/other-christmas-2022
@@ -356,11 +433,12 @@ data:
           - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         sort_title: '###Hallmark Summer'
         collection_order: release.desc
-        radarr_tag: Hallmark Summer
+        radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
         sync_mode: sync
-        radarr_monitor: true
+        radarr_tag: hallmark-summer
         summary: Hallmark's Summer Nights event with new movies every Saturday June–August
     #####################################
     #      Hallmark Mysteries           #
@@ -372,11 +450,12 @@ data:
           - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         sort_title: '###Hallmark Mysteries'
         collection_order: release.desc
-        radarr_tag: Hallmark Movies & Mysteries
+        radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
         sync_mode: sync
-        radarr_monitor: true
+        radarr_tag: hallmark-mysteries
         summary: Hallmark Movies & Mysteries — whodunits including Hannah Swensen, Mystery Island, Tipline Mysteries
     #####################################
     #      Hallmark Drama               #
@@ -388,11 +467,12 @@ data:
           - https://trakt.tv/users/midnitewolf/lists/hallmark-premieres-2024-2025
         sort_title: '###Hallmark Drama'
         collection_order: release.desc
-        radarr_tag: Hallmark Drama
+        radarr_monitor: true
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
         sync_mode: sync
-        radarr_monitor: true
+        radarr_tag: hallmark-drama
         summary: Hallmark Drama — more mature-themed original content
     #####################################
     #        Hallmark Romance           #
@@ -420,11 +500,12 @@ data:
         collection_order: release.desc
         # Radarr now enforces ^[a-z0-9-]+$ on NEW tag labels — "Hallmark Romance" returned
         # 400 and blocked every add-missing batch. Tag `hallmark-romance` created via API (id 14).
-        radarr_tag: hallmark-romance
         radarr_monitor: true
-        sync_mode: sync
         radarr_add_missing: true
         radarr_add_existing: true
+        collection_order: release.desc
+        sync_mode: sync
+        radarr_tag: hallmark-romance
         summary: New Hallmark romance premieres — Valentine's, Fall Into Love, and year-round love stories
 kind: ConfigMap
 metadata:
