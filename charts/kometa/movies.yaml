@@ -99,7 +99,6 @@ data:
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
-        radarr_tag: pixar
         imdb_list: https://www.imdb.com/list/ls087911008/
         template: { name: Studio, company: 3 }
         tmdb_company: 3
