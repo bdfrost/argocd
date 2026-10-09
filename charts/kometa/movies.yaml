@@ -328,13 +328,6 @@ data:
         sync_mode: sync
         radarr_tag: hallmark
         item_radarr_tag: hallmark
-        imdb_search:
-          - type: movie
-            company: co0939898
-            limit: 999
-          - type: movie
-            company: co0814123
-            limit: 999
     #####################################
     #        GAC                        #
     #####################################
