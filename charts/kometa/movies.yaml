@@ -197,7 +197,7 @@ data:
           - https://www.imdb.com/list/ls057783436/
           - https://www.imdb.com/list/ls064427905/
         radarr_monitor: true
-        radarr_add_missing: true
+        radarr_add_missing: false
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
@@ -206,7 +206,7 @@ data:
       St. Patrick's Day Movies:
         schedule: range(03/01-03/17)
         radarr_monitor: true
-        radarr_add_missing: true
+        radarr_add_missing: false
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
@@ -220,7 +220,7 @@ data:
         radarr_tag: thanksgiving
         item_radarr_tag: thanksgiving
         radarr_monitor: true
-        radarr_add_missing: true
+        radarr_add_missing: false
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
@@ -234,7 +234,7 @@ data:
         sort_title: '!AB'
         template: {name: Holiday, holiday: Halloween}
         radarr_monitor: true
-        radarr_add_missing: true
+        radarr_add_missing: false
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
@@ -263,16 +263,14 @@ data:
         sort_title: '!AB'
         template: {name: Holiday, holiday: Christmas}
         imdb_list: 
+          - https://www.imdb.com/list/ls027454200/
           - https://www.imdb.com/list/ls000096828/
           - https://www.imdb.com/list/ls097998599/
           - https://www.imdb.com/list/ls027886673/
           - https://www.imdb.com/list/ls003863000/
           - https://www.imdb.com/list/ls025976544/
-          - https://www.imdb.com/list/ls097394442/
-          - https://www.imdb.com/list/ls068976997/
-          - https://www.imdb.com/list/ls027567380/
         radarr_monitor: true
-        radarr_add_missing: true
+        radarr_add_missing: false
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
@@ -288,7 +286,7 @@ data:
           - https://mdblist.com/lists/official/movies/justwatch-streaming-charts
         summary: Movies Trending across the internet
         radarr_monitor: true
-        radarr_add_missing: true
+        radarr_add_missing: false
         radarr_add_existing: true
         collection_order: release.desc
         sync_mode: sync
@@ -314,7 +312,9 @@ data:
             company: co0814123
             limit: 999
         imdb_list:
-          - https://www.imdb.com/list/ls027454200/
+          - https://www.imdb.com/list/ls068976997/
+          - https://www.imdb.com/list/ls027567380/
+          - https://www.imdb.com/list/ls097394442/
           - https://www.imdb.com/list/ls066536776/
         mdblist_list:
           - https://mdblist.com/lists/marko8426/hallmark-xmas-movies
@@ -328,6 +328,13 @@ data:
         sync_mode: sync
         radarr_tag: hallmark
         item_radarr_tag: hallmark
+        imdb_search:
+          - type: movie
+            company: co0939898
+            limit: 999
+          - type: movie
+            company: co0814123
+            limit: 999
     #####################################
     #        GAC                        #
     #####################################
