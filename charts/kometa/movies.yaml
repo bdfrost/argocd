@@ -332,6 +332,12 @@ data:
     #        GAC                        #
     #####################################
       GAC:
+        # co0408514 = Hideaway Pictures only returns 4 titles — too narrow.
+        # Use curated IMDb lists instead.
+        imdb_list:
+          - https://www.imdb.com/list/ls527101092/   # Great American Family (19 titles)
+          - https://www.imdb.com/list/ls549953229/   # Great American Family (26 titles)
+          - https://www.imdb.com/list/ls523885804/   # Great American Family Christmas movies 2023 (18 titles)
         sort_title: '###GAC'
         radarr_monitor: true
         radarr_add_missing: true
@@ -340,11 +346,6 @@ data:
         sync_mode: sync
         radarr_tag: gac
         item_radarr_tag: gac
-        # co0408514 = Hideaway Pictures (production company for Great American Family / GAC movies)
-        imdb_search:
-          type: movie
-          company: co0408514
-          limit: 999
 kind: ConfigMap
 metadata:
   name: movie-config
