@@ -113,8 +113,19 @@ def main():
     for i, m in enumerate(movies[: args.limit]):
         if i:
             time.sleep(args.sleep)
+        # Re-read the movie: a long run can outlive profile changes made in the
+        # meantime (e.g. a movie moved back to a Remux profile to keep it).
+        try:
+            m = api("GET", f"/movie/{m['id']}")
+        except Exception as e:
+            print(f"  ERROR   {m['title']}: could not re-read movie: {e}")
+            continue
+        f = m.get("movieFile")
+        if (m["qualityProfileId"] not in profiles or not f
+                or "Remux" not in f["quality"]["quality"]["name"]):
+            print(f"  GONE    {m['title']} ({m.get('year')}): profile or file changed since start, skipping")
+            continue
         profile = profiles[m["qualityProfileId"]]
-        f = m["movieFile"]
         label = f"{m['title']} ({m.get('year')}) [{f['quality']['quality']['name']}, {gb(f['size'])}]"
         try:
             releases = api("GET", f"/release?movieId={m['id']}")

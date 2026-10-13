@@ -54,7 +54,8 @@ python3 scripts/radarr-downsize.py --limit 25 --apply
 | `--profile NAME` | both encode profiles | Target profile name; repeat for several |
 | `--apply` | off | Actually grab and delete |
 
-Output lines: `WOULD`/`GRAB` (swap planned/done), `SKIP` (not enough smaller),
+Output lines: `WOULD`/`GRAB` (swap planned/done), `SKIP` (not enough smaller), `GONE` (profile
+or file changed since the run started; skipped),
 `NONE` (no acceptable release), `ERROR` (search failed; retried next run).
 
 ### Cautions
