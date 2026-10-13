@@ -79,6 +79,8 @@ def gb(n):
 
 
 def main():
+    # Show progress immediately when output is redirected to a log file.
+    sys.stdout.reconfigure(line_buffering=True)
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--profile", action="append", help="target profile name (repeatable)")
     ap.add_argument("--limit", type=int, default=10, help="max movies to search this run (default 10)")
