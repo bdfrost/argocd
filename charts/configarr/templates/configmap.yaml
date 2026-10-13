@@ -100,16 +100,19 @@ data:
         quality_definition:
           type: series
         include:
-          - template: 72dae194fc92bf828f32cde7744e51a1 # WEB-1080p
-            source: TRASH
-          - template: 9d142234e45d6143785ac55f5a9e8dc9 # WEB-1080p (Alternative): adds HDTV/Bluray/720p for older shows
+          # TRaSH's WEB-1080p (Alternative), renamed to WEB-1080p below: same CFs as
+          # WEB-1080p, but also falls back to HDTV/Bluray/720p for shows with no WEB
+          # release, then upgrades to WEB 1080p (still the cutoff).
+          - template: 9d142234e45d6143785ac55f5a9e8dc9 # WEB-1080p (Alternative)
             source: TRASH
           - template: d1498e7d189fbe6c7110ceaabb7473e6 # WEB-2160p
             source: TRASH
           - template: 20e0fc959f1f1704bed501f23bdae76f # [Anime] Remux-1080p
             source: TRASH
-        # Keep the profile name existing anime series are already assigned to.
+        # Keep the profile names existing series (and Kometa) are already assigned to.
         renameQualityProfiles:
+          - from: WEB-1080p (Alternative)
+            to: WEB-1080p
           - from: "[Anime] Remux-1080p"
             to: Remux-1080p - Anime
         # Swapped for "Language: Not Original or English" below.
@@ -122,7 +125,6 @@ data:
               - id: ddab3095a5d2f436f369263840af34f9 # [Streaming Services] UK
             assign_scores_to:
               - name: WEB-1080p
-              - name: WEB-1080p (Alternative)
               - name: WEB-2160p
         custom_formats:
           # Allow x265 for HD, but not when it lacks HDR/DV.
@@ -131,13 +133,10 @@ data:
             assign_scores_to:
               - name: WEB-1080p
                 score: 0
-              - name: WEB-1080p (Alternative)
-                score: 0
           - trash_ids:
               - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
             assign_scores_to:
               - name: WEB-1080p
-              - name: WEB-1080p (Alternative)
           - trash_ids:
               - 9b27ab6498ec0f31a3353992e19434ca # DV (w/o HDR fallback)
               - 7c3a61a9c6cb04f52f1544be6d44a026 # DV Boost
@@ -149,20 +148,17 @@ data:
               - frost-lang-foreign-dub-no-english
             assign_scores_to:
               - name: WEB-1080p
-              - name: WEB-1080p (Alternative)
               - name: WEB-2160p
               - name: "[Anime] Remux-1080p"
           - trash_ids:
               - frost-lang-original-plus-english
             assign_scores_to:
               - name: WEB-1080p
-              - name: WEB-1080p (Alternative)
               - name: WEB-2160p
           - trash_ids:
               - frost-lang-english
             assign_scores_to:
               - name: WEB-1080p
-              - name: WEB-1080p (Alternative)
               - name: WEB-2160p
               - name: "[Anime] Remux-1080p"
           # Anime
