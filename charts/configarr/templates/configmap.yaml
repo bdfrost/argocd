@@ -5,99 +5,233 @@ metadata:
   name: configarr
 data:
   config.yml: |
+    # Quality profiles come straight from the TRaSH-Guides JSON (source: TRASH),
+    # which also auto-applies TRaSH's default CF-groups (Unwanted incl. Bad Dual
+    # Groups, Streaming Services General + HD/UHD boost, HDR, Golden Rule, and
+    # Sonarr's "Language: Not Original"). Everything below only adds to or
+    # overrides those defaults.
     trashGuideUrl: https://github.com/TRaSH-Guides/Guides
-    recyclarrConfigUrl: https://github.com/recyclarr/config-templates
+
+    # Local custom formats, shared by Sonarr and Radarr (language ids match in both:
+    # 1 = English, -2 = the series/movie's Original language).
+    customFormatDefinitions:
+      # Replaces TRaSH's "Language: Not Original": a release must have the
+      # original language OR English, so English-dub-only releases of foreign
+      # titles are allowed but a German-only dub is not.
+      - trash_id: frost-lang-not-original-or-english
+        trash_scores:
+          default: -10000
+        name: "Language: Not Original or English"
+        includeCustomFormatWhenRenaming: false
+        specifications:
+          - name: Not Original
+            implementation: LanguageSpecification
+            negate: true
+            required: true
+            fields:
+              value: -2
+          - name: Not English
+            implementation: LanguageSpecification
+            negate: true
+            required: true
+            fields:
+              value: 1
+      # Reject releases that carry a dub but no English track, e.g. Japanese +
+      # German or Japanese + Turkish. Original-language-only releases are left
+      # alone so subbed anime and untagged foreign WEB-DLs still grab.
+      - trash_id: frost-lang-foreign-dub-no-english
+        trash_scores:
+          default: -10000
+        name: "Language: Foreign Dub w/o English"
+        includeCustomFormatWhenRenaming: false
+        specifications:
+          - name: Not English
+            implementation: LanguageSpecification
+            negate: true
+            required: true
+            fields:
+              value: 1
+          - name: Has Non-Original Language
+            implementation: LanguageSpecification
+            negate: false
+            required: true
+            fields:
+              value: -2
+              exceptLanguage: true
+      # Language preference for foreign titles, stacked with the CF below:
+      #   Original + English (dual) 4000 > English dub only 2000 > Original only 0
+      # Each step outweighs TRaSH's release-group tiers (max ~1950). English-
+      # original titles match both on every English release, so they're no-ops there.
+      - trash_id: frost-lang-english
+        trash_scores:
+          default: 2000
+        name: "Language: English"
+        includeCustomFormatWhenRenaming: false
+        specifications:
+          - name: English
+            implementation: LanguageSpecification
+            negate: false
+            required: true
+            fields:
+              value: 1
+      - trash_id: frost-lang-original-plus-english
+        trash_scores:
+          default: 2000
+        name: "Language: Original + English"
+        includeCustomFormatWhenRenaming: false
+        specifications:
+          - name: Original
+            implementation: LanguageSpecification
+            negate: false
+            required: true
+            fields:
+              value: -2
+          - name: English
+            implementation: LanguageSpecification
+            negate: false
+            required: true
+            fields:
+              value: 1
 
     sonarr:
       series:
-        base_url: https://sonarr.frost.haus
+        base_url: http://sonarr.sonarr.svc.cluster.local:80
         api_key: !env SONARR_API_KEY
         quality_definition:
           type: series
         include:
-          # Anime
-          - template: sonarr-quality-definition-anime
-          - template: sonarr-v4-quality-profile-anime
-          - template: sonarr-v4-custom-formats-anime
-          # WEB-1080p
-          - template: sonarr-quality-definition-series
-          - template: sonarr-v4-quality-profile-web-1080p
-          - template: sonarr-v4-custom-formats-web-1080p
-          # WEB-2160p
-          - template: sonarr-v4-quality-profile-web-2160p
-          - template: sonarr-v4-custom-formats-web-2160p
+          - template: 72dae194fc92bf828f32cde7744e51a1 # WEB-1080p
+            source: TRASH
+          - template: 9d142234e45d6143785ac55f5a9e8dc9 # WEB-1080p (Alternative): adds HDTV/Bluray/720p for older shows
+            source: TRASH
+          - template: d1498e7d189fbe6c7110ceaabb7473e6 # WEB-2160p
+            source: TRASH
+          - template: 20e0fc959f1f1704bed501f23bdae76f # [Anime] Remux-1080p
+            source: TRASH
+        # Keep the profile name existing anime series are already assigned to.
+        renameQualityProfiles:
+          - from: "[Anime] Remux-1080p"
+            to: Remux-1080p - Anime
+        # Swapped for "Language: Not Original or English" below.
+        trash_cfgroup_config:
+          exclude_cfs:
+            - id: ae575f95ab639ba5d15f663bf019e3e8 # Language: Not Original
+        custom_format_groups:
+          - trash_guide:
+              - id: 35fb4585dcd9e2a5ac732e4309f5a45a # [Streaming Services] Asian
+              - id: ddab3095a5d2f436f369263840af34f9 # [Streaming Services] UK
+            assign_scores_to:
+              - name: WEB-1080p
+              - name: WEB-1080p (Alternative)
+              - name: WEB-2160p
         custom_formats:
+          # Allow x265 for HD, but not when it lacks HDR/DV.
           - trash_ids:
               - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
             assign_scores_to:
               - name: WEB-1080p
                 score: 0
-          - trash_ids:
-              - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
-            assign_scores_to:
-              - name: WEB-1080p
-          - trash_ids:
-                - 9b27ab6498ec0f31a3353992e19434ca # DV (w/o HDR fallback)
-                - 7c3a61a9c6cb04f52f1544be6d44a026 # DV Boost
-            assign_scores_to:
-              - name: WEB-2160p
-          - trash_ids:
-              - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
-            assign_scores_to:
-              - name: WEB-2160p
+              - name: WEB-1080p (Alternative)
                 score: 0
           - trash_ids:
               - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
             assign_scores_to:
-              - name: WEB-2160p
+              - name: WEB-1080p
+              - name: WEB-1080p (Alternative)
           - trash_ids:
+              - 9b27ab6498ec0f31a3353992e19434ca # DV (w/o HDR fallback)
+              - 7c3a61a9c6cb04f52f1544be6d44a026 # DV Boost
               - 2016d1676f5ee13a5b7257ff86ac9a93 # SDR
             assign_scores_to:
               - name: WEB-2160p
           - trash_ids:
-              - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
+              - frost-lang-not-original-or-english
+              - frost-lang-foreign-dub-no-english
             assign_scores_to:
               - name: WEB-1080p
-                score: 0
+              - name: WEB-1080p (Alternative)
+              - name: WEB-2160p
+              - name: "[Anime] Remux-1080p"
           - trash_ids:
-              - 9b64dff695c2115facf1b6ea59c9bd07 # x265 (no HDR/DV)
+              - frost-lang-original-plus-english
             assign_scores_to:
               - name: WEB-1080p
+              - name: WEB-1080p (Alternative)
+              - name: WEB-2160p
+          - trash_ids:
+              - frost-lang-english
+            assign_scores_to:
+              - name: WEB-1080p
+              - name: WEB-1080p (Alternative)
+              - name: WEB-2160p
+              - name: "[Anime] Remux-1080p"
+          # Anime
           - trash_ids:
               - 026d5aadd1a6b4e550b134cb6c72b3ca # Uncensored
-            assign_scores_to:
-              - name: Remux-1080p - Anime
-                score: 0 # Adjust scoring as desired
-          - trash_ids:
               - b2550eb333d27b75833e25b8c2557b38 # 10bit
             assign_scores_to:
-              - name: Remux-1080p - Anime
-                score: 0 # Adjust scoring as desired
+              - name: "[Anime] Remux-1080p"
+                score: 0
           - trash_ids:
               - 418f50b10f1907201b6cfdf881f467b7 # Anime Dual Audio
             assign_scores_to:
-              - name: Remux-1080p - Anime
-                score: 100 # Adjust scoring as desired
+              - name: "[Anime] Remux-1080p"
+                score: 2000 # strongly prefer dubs; matches on the title even when languages aren't parsed
+
     radarr:
       instance1:
-        # Set the URL/API Key to your actual instance
-        base_url: https://radarr.frost.haus
+        base_url: http://radarr.radarr.svc.cluster.local:80
         api_key: !env RADARR_API_KEY
         quality_definition:
           type: movie
         include:
-        # WEB-1080p
-        - template: radarr-quality-definition-movie
-        - template: radarr-quality-profile-remux-web-1080p
-        - template: radarr-custom-formats-remux-web-1080p
-        # WEB-2160p
-        - template: radarr-quality-definition-movie
-        - template: radarr-quality-profile-remux-web-2160p
-        - template: radarr-custom-formats-remux-web-2160p
-        # Anime
-        - template: radarr-quality-definition-anime
-        - template: radarr-quality-profile-anime
-        - template: radarr-custom-formats-anime
+          - template: 9ca12ea80aa55ef916e3751f4b874151 # Remux + WEB 1080p
+            source: TRASH
+          - template: fd161a61e3ab826d3a22d53f935696dd # Remux + WEB 2160p
+            source: TRASH
+          - template: d1d67249d3890e49bc12e275d989a7e9 # HD Bluray + WEB: 1080p encodes, smaller than remux
+            source: TRASH
+          - template: 64fb5f9858489bdac2af690e27c8f42f # UHD Bluray + WEB: 2160p encodes, smaller than remux
+            source: TRASH
+          - template: 722b624f9af1e492284c4bc842153a38 # [Anime] Remux-1080p
+            source: TRASH
+        # Keep the profile name existing anime movies are already assigned to.
+        renameQualityProfiles:
+          - from: "[Anime] Remux-1080p"
+            to: Remux-1080p - Anime
+        # TRaSH sets these to "Original", which hard-rejects English-dub-only
+        # releases. Language is handled by the custom formats below instead.
+        # until_score is raised from TRaSH's 10000 because the 10000-point
+        # language bonuses below would otherwise stop upgrades (e.g. to better
+        # audio) as soon as a dubbed release is grabbed.
+        quality_profiles:
+          - name: Remux + WEB 1080p
+            language: Any
+            upgrade:
+              until_score: 40000
+          - name: Remux + WEB 2160p
+            language: Any
+            upgrade:
+              until_score: 40000
+          - name: HD Bluray + WEB
+            language: Any
+            upgrade:
+              until_score: 40000
+          - name: UHD Bluray + WEB
+            language: Any
+            upgrade:
+              until_score: 40000
+          - name: Remux-1080p - Anime
+            language: Any
+        custom_format_groups:
+          - trash_guide:
+              - id: b22449f789b16a4163b59f1b70cbc580 # [Streaming Services] Asian
+              - id: f737e18b5824d6ebb2d57b957ae2fd6c # [Streaming Services] UK
+            assign_scores_to:
+              - name: Remux + WEB 1080p
+              - name: Remux + WEB 2160p
+              - name: HD Bluray + WEB
+              - name: UHD Bluray + WEB
         custom_formats:
           - trash_ids:
               - 0f12c086e289cf966fa5948eac571f44 # Hybrid
@@ -111,52 +245,67 @@ data:
               - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
             assign_scores_to:
               - name: Remux + WEB 1080p
+              - name: Remux + WEB 2160p
+              - name: HD Bluray + WEB
+              - name: UHD Bluray + WEB
+          # Allow x265 for HD, but not when it lacks HDR/DV.
           - trash_ids:
               - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
             assign_scores_to:
               - name: Remux + WEB 1080p
                 score: 0
-          - trash_ids:
-              - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
-            assign_scores_to:
-              - name: Remux + WEB 1080p
-          - trash_ids:
-              - 0f12c086e289cf966fa5948eac571f44 # Hybrid
-              - 570bc9ebecd92723d2d21500f4be314c # Remaster
-              - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
-              - e0c07d59beb37348e975a930d5e50319 # Criterion Collection
-              - 9d27d9d2181838f76dee150882bdc58c # Masters of Cinema
-              - db9b4c4b53d312a3ca5f1378f6440fc9 # Vinegar Syndrome
-              - 957d0f44b592285f26449575e8b1167e # Special Edition
-              - eecf3a857724171f968a66cb5719e152 # IMAX
-              - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
-            assign_scores_to:
-              - name: Remux + WEB 2160p
-          - trash_ids:
-              - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
-            assign_scores_to:
-              - name: Remux + WEB 2160p
+              - name: HD Bluray + WEB
                 score: 0
           - trash_ids:
               - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
             assign_scores_to:
-              - name: Remux + WEB 2160p
+              - name: Remux + WEB 1080p
+              - name: HD Bluray + WEB
+          # Same HDR preferences as Sonarr's WEB-2160p.
           - trash_ids:
+              - 923b6abef9b17f937fab56cfcf89e1f1 # DV (w/o HDR fallback)
+              - b337d6812e06c200ec9a2d3cfa9d20a7 # DV Boost
               - 9c38ebb7384dada637be8899efa68e6f # SDR
             assign_scores_to:
               - name: Remux + WEB 2160p
+              - name: UHD Bluray + WEB
+          - trash_ids:
+              - frost-lang-not-original-or-english
+              - frost-lang-foreign-dub-no-english
+            assign_scores_to:
+              - name: Remux + WEB 1080p
+              - name: Remux + WEB 2160p
+              - name: HD Bluray + WEB
+              - name: UHD Bluray + WEB
+              - name: "[Anime] Remux-1080p"
+          # Language bonuses are 10000 here (2000 in Sonarr) because Radarr's audio
+          # scoring (TrueHD Atmos 5000) plus tiers, versions and DV can add up to
+          # ~9500, which would otherwise let a subbed remux beat an English dub.
+          - trash_ids:
+              - frost-lang-original-plus-english
+              - frost-lang-english
+            assign_scores_to:
+              - name: Remux + WEB 1080p
+                score: 10000
+              - name: Remux + WEB 2160p
+                score: 10000
+              - name: HD Bluray + WEB
+                score: 10000
+              - name: UHD Bluray + WEB
+                score: 10000
+          - trash_ids:
+              - frost-lang-english
+            assign_scores_to:
+              - name: "[Anime] Remux-1080p"
+          # Anime
           - trash_ids:
               - 064af5f084a0a24458cc8ecd3220f93f # Uncensored
-            assign_scores_to:
-              - name: Remux-1080p - Anime
-                score: 0 # Adjust scoring as desired
-          - trash_ids:
               - a5d148168c4506b55cf53984107c396e # 10bit
             assign_scores_to:
-              - name: Remux-1080p - Anime
-                score: 0 # Adjust scoring as desired
+              - name: "[Anime] Remux-1080p"
+                score: 0
           - trash_ids:
               - 4a3b087eea2ce012fcc1ce319259a3be # Anime Dual Audio
             assign_scores_to:
-              - name: Remux-1080p - Anime
-                score: 100 # Adjust scoring as desired
+              - name: "[Anime] Remux-1080p"
+                score: 2000 # strongly prefer dubs; matches on the title even when languages aren't parsed

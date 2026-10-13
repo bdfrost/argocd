@@ -4,7 +4,8 @@ kind: CronJob
 metadata:
   name: configarr
 spec:
-  schedule: "0 * * * *"
+  schedule: "0 9 * * *"  # daily, 4:00 AM Central (09:00 UTC)
+  concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
   jobTemplate:
