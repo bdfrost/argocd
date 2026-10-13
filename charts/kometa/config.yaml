@@ -147,7 +147,7 @@ data:
       add_missing: false
       add_existing: true
       radarr_monitor: true
-      upgrade_existing: false            # only new additions get quality_profile; existing movies keep theirs
+      upgrade_existing: true             # also moves existing collection movies onto quality_profile
       monitor_existing: true
       root_folder_path: /data/library/movies
       monitor: true
