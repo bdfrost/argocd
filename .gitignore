@@ -1,4 +1,5 @@
 charts/kube-prometheus-stack/charts/kube-prometheus-stack-69.3.1.tgz
 
-# Script output, e.g. scripts/radarr-downsize.py runs (radarr-downsize.log)
+# Local script/tool output
 *.log
+__pycache__/
