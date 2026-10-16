@@ -58,7 +58,7 @@ plex-media-server:
       failureThreshold: 3
     resources:
       limits:
-        # memory: 6Gi
+        memory: 6Gi
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "1"
       requests:
