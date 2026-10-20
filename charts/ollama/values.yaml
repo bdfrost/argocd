@@ -11,10 +11,10 @@ ollama:
   #     effect: NoSchedule
   resources:
     requests:
-      memory: "8Gi"
+      memory: "4Gi"
       cpu: "2"
     limits:
-      memory: "12Gi"
+      memory: "6Gi"
   runtimeClassName: nvidia
   ollama:
     gpu:
