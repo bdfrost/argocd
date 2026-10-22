@@ -7,7 +7,7 @@ appVersion: "3.6.11"
 
 dependencies:
   - name: loki
-    version: 7.3.0
+    version: 7.5.0
     repository: https://grafana.github.io/helm-charts
   - name: alloy
     version: 1.14.1
