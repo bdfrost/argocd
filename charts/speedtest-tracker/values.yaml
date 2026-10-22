@@ -6,7 +6,7 @@ pgid: 100
 
 image:
   repository: lscr.io/linuxserver/speedtest-tracker
-  tag: "1.15.0"
+  tag: "1.15.1"
   pullPolicy: IfNotPresent
 
 speedtestSchedule: "6,36 * * * *"
