@@ -6,7 +6,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CHART_DIR="${SCRIPT_DIR}/charts/configarr/templates"
+CHART_DIR="${SCRIPT_DIR}/../charts/configarr/templates"
 
 if [ $# -ne 1 ]; then
   echo "Usage: $0 <slack-webhook-url>"
