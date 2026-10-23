@@ -25,4 +25,4 @@ open-webui:
     redis:
       image:
         repository: redis
-        tag: 7.4.7-alpine3.21
+        tag: 7.4.11-alpine3.21
