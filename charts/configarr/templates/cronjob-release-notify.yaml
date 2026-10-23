@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
             - name: release-notify
-              image: alpine:3.24
+              image: badouralix/curl-jq:alpine
               command:
                 - /bin/sh
                 - -c
