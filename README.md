@@ -42,7 +42,6 @@ The repo is public, so no plaintext secrets are committed. All credentials are [
 
 - **Ollama and Open WebUI:** self-hosted LLM inference on the NVIDIA GPU.
 - **kagent:** Kubernetes-native AI agents, with a Postgres backend on Synology storage.
-- **HolmesGPT:** AI-assisted troubleshooting with read access to Argo, cluster CRDs and alerts.
 
 ## Workloads
 
