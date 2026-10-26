@@ -1,9 +1,50 @@
-replicaCount: 1
-name: poterie
-targetPort: 8080
+# frost.haus deployment values for the wrapped OCI poterie chart.
+# Chart source of truth: github.com/bdfrost/poterie (charts/poterie).
+poterie:
+  image:
+    repository: ghcr.io/bdfrost/poterie
+    # renovate: datasource=docker depName=ghcr.io/bdfrost/poterie
+    tag: "1.1.3"
+    pullPolicy: IfNotPresent
 
-image:
-  repository: ghcr.io/bdfrost/poterie
-  # renovate: datasource=docker depName=ghcr.io/bdfrost/poterie
-  tag: "1.1.3"
-  pullPolicy: IfNotPresent
+  # Admin basic-auth credentials — provided by the SealedSecret in
+  # templates/sealedsecret.yaml (keys: ADMIN_USER, ADMIN_PASS).
+  admin:
+    existingSecret: poterie-admin
+
+  persistence:
+    enabled: true
+    # Reuse the live PVC (created by the old bespoke chart) so the seeded
+    # flower database carries over. Name preserved from the legacy chart.
+    existingClaim: poterie-data-pvc-synology
+    storageClass: synology-csi-iscsi-delete
+    size: 2Gi
+
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/host: poterie.frost.haus
+    hosts:
+      - host: poterie.frost.haus
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+      - host: poterie.app
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: poterie-cert
+        hosts:
+          - poterie.frost.haus
+          - poterie.app
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi

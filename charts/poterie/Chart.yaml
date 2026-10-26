@@ -1,9 +1,12 @@
 apiVersion: v2
 name: poterie
-description: A Helm chart for Kubernetes
-
+description: Poterie garden planner — frost.haus deployment. Wraps the official OCI chart published from bdfrost/poterie.
 type: application
+version: 1.2.0
+appVersion: "1.1.3"
 
-version: 0.1.0
-
-appVersion: "0.1.1"
+dependencies:
+  - name: poterie
+    # renovate: datasource=docker depName=ghcr.io/bdfrost/charts/poterie
+    version: 1.2.0
+    repository: oci://ghcr.io/bdfrost/charts
