@@ -49,34 +49,28 @@ spec:
                       ]
                     }'
                     
-                    # Add series if any
+                    # Add series if any (map into section blocks in one jq pass — POSIX-safe, no heredocs)
                     if [ "$SONARR_COUNT" -gt 0 ]; then
-                      SERIES_LIST=$(echo "$SONARR_RESPONSE" | jq -r '
+                      SLACK_MSG=$(echo "$SONARR_RESPONSE" | jq \
+                        --argjson msg "$SLACK_MSG" '
                         [.[] | select(.monitored == true)] |
                         sort_by(.season_number, .episode_number) |
-                        .[] |
-                        "• \(.series.title) S\(.season_number)E\(.episode_number) - \(.title)"
+                        map({type: "section", text: {type: "mrkdwn",
+                              text: ("• \(.series.title) S\(.season_number)E\(.episode_number) - \(.title)")}}) |
+                        . as $sections | $msg | .blocks += $sections
                       ')
-                      
-                      while IFS= read -r line; do
-                        SLACK_MSG=$(echo "$SLACK_MSG" | jq --arg text "$line" \
-                          '.blocks += [{"type": "section", "text": {"type": "mrkdwn", "text": $text}}]')
-                      done <<< "$SERIES_LIST"
                     fi
                     
                     # Add movies if any
                     if [ "$RADARR_COUNT" -gt 0 ]; then
-                      MOVIES_LIST=$(echo "$RADARR_RESPONSE" | jq -r '
+                      SLACK_MSG=$(echo "$RADARR_RESPONSE" | jq \
+                        --argjson msg "$SLACK_MSG" '
                         [.[] | select(.monitored == true and .hasFile == true)] |
                         sort_by(.year) |
-                        .[] |
-                        "• \(.title) (\(.year)) [\(.quality.quality.name)]"
+                        map({type: "section", text: {type: "mrkdwn",
+                              text: ("• \(.title) (\(.year)) [\(.quality.quality.name)]")}}) |
+                        . as $sections | $msg | .blocks += $sections
                       ')
-                      
-                      while IFS= read -r line; do
-                        SLACK_MSG=$(echo "$SLACK_MSG" | jq --arg text "$line" \
-                          '.blocks += [{"type": "section", "text": {"type": "mrkdwn", "text": $text}}]')
-                      done <<< "$MOVIES_LIST"
                     fi
                     
                     # Post to Slack webhook
