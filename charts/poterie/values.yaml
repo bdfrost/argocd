@@ -4,7 +4,7 @@ poterie:
   image:
     repository: ghcr.io/bdfrost/poterie
     # renovate: datasource=docker depName=ghcr.io/bdfrost/poterie
-    tag: "1.1.3"
+    tag: "1.3.0"
     pullPolicy: IfNotPresent
 
   # Admin basic-auth credentials — provided by the SealedSecret in
@@ -14,9 +14,9 @@ poterie:
 
   persistence:
     enabled: true
-    # Reuse the live PVC (created by the old bespoke chart) so the seeded
-    # flower database carries over. Name preserved from the legacy chart.
-    existingClaim: poterie-data-pvc-synology
+    # Fresh chart-managed PVC (poterie-data). The legacy poterie-data-pvc-synology
+    # PVC was pruned by Argo after the OCI wrapper migration; data reset accepted,
+    # the app reseeds the 58-flower catalog on startup.
     storageClass: synology-csi-iscsi-delete
     size: 2Gi
 
