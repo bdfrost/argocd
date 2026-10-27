@@ -4,7 +4,7 @@ poterie:
   image:
     repository: ghcr.io/bdfrost/poterie
     # renovate: datasource=docker depName=ghcr.io/bdfrost/poterie
-    tag: "1.4.0"
+    tag: "1.4.1"
     pullPolicy: IfNotPresent
 
   # Admin basic-auth credentials — provided by the SealedSecret in
