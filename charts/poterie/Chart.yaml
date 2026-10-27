@@ -8,5 +8,5 @@ appVersion: "1.3.0"
 dependencies:
   - name: poterie
     # renovate: datasource=docker depName=ghcr.io/bdfrost/charts/poterie
-    version: 1.4.0
+    version: 1.4.1
     repository: oci://ghcr.io/bdfrost/charts
