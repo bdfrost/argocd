@@ -20,10 +20,10 @@
       "labels": ["dependencies", "plex"]
     },
     {
-      "description": "Automerge patch/minor/digest bumps via GitHub native automerge",
+      "description": "Automerge patch/minor/digest bumps. platformAutomerge is OFF: main has no branch protection, and GitHub native auto-merge requires protected branch rules, so Renovate merges these PRs itself on its runs.",
       "matchUpdateTypes": ["patch", "minor", "digest"],
       "automerge": true,
-      "platformAutomerge": true
+      "platformAutomerge": false
     },
     {
       "description": "Majors stay manual for review",
