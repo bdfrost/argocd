@@ -14,12 +14,6 @@ data:
     title: Frost Homelab
     headerStyle: boxedWidgets
     statusStyle: dot
-    background:
-      image: https://raw.githubusercontent.com/bdfrost/argocd/main/charts/homepage/images/botanical-bg.jpg
-      brightness: 50
-      opacity: 40
-      blur: sm
-      saturate: 85
     cardBlur: md
     hideErrors: false
     logo: https://raw.githubusercontent.com/bdfrost/argocd/main/charts/homepage/images/botanical-logo.jpg
@@ -106,18 +100,6 @@ data:
     /* Softer status dots */
     .status-dot {
       box-shadow: 0 0 6px currentColor;
-    }
-
-    /* Bulletproof full-viewport background (incl. mobile dynamic viewport) */
-    #background {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      height: 100dvh !important;
-      background-size: cover !important;
-      background-position: center !important;
-      background-repeat: no-repeat !important;
     }
   custom.js: ""
   bookmarks.yaml: |
