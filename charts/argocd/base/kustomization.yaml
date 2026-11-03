@@ -9,7 +9,7 @@ resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/master/notifications_catalog/install.yaml
 - argocd-cmd-params-cm.yaml
 - argocd-server-ingress.yaml
-# - argocd-rbac-cm.yaml
+- argocd-rbac-cm.yaml
 # - rollouts-extension.yaml
 # More examples
 # - github.com/argoproj/argo-cd/manifests/
