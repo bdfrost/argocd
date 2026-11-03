@@ -304,7 +304,7 @@ data:
             description: GitOps continuous delivery
             widget:
               type: argocd
-              url: https://argocd.frost.haus/
+              url: https://argocd.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
               fields: ["apps", "synced", "outOfSync", "healthy"]
         - Skooner:
