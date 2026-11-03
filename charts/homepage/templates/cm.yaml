@@ -15,17 +15,17 @@ data:
     headerStyle: boxedWidgets
     statusStyle: dot
     background:
-      image: images/homepage.png
-      brightness: 50
-      opacity: 25
+      image: https://raw.githubusercontent.com/bdfrost/argocd/main/charts/homepage/images/botanical-bg.jpg
+      brightness: 40
+      opacity: 30
       blur: sm
-      saturate: 90
-    cardBlur: sm
+      saturate: 85
+    cardBlur: md
     hideErrors: false
-    logo: logo.png
-    favicon: favicon.png
+    logo: https://raw.githubusercontent.com/bdfrost/argocd/main/charts/homepage/images/botanical-logo.jpg
+    favicon: https://raw.githubusercontent.com/bdfrost/argocd/main/charts/homepage/images/botanical-favicon.jpg
     theme: dark
-    color: slate
+    color: emerald
     showThemeToggle: true
     defaultWidgetView: grid
     layout:
@@ -75,22 +75,32 @@ data:
       showSearchSuggestions: true
       hideVisitURL: false
   custom.css: |
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap');
+
     /* Service + bookmark cards */
     li.service,
     li.bookmark {
       border-radius: 0.75rem;
+      border: 1px solid transparent;
       transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     }
     li.service:hover,
     li.bookmark:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+      border-color: rgba(110, 231, 183, 0.25); /* soft emerald edge */
     }
 
-    /* Group headers */
+    /* Serif display font for group headers + greeting */
+    h2.service-group-name,
+    h2.bookmark-group-name,
+    .information-widget-greeting {
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      letter-spacing: 0.04em;
+    }
     h2.service-group-name,
     h2.bookmark-group-name {
-      letter-spacing: 0.03em;
+      font-size: 1.45rem;
     }
 
     /* Softer status dots */
@@ -134,6 +144,27 @@ data:
         - icon: docker.png
           href: https://hub.docker.com/
           description: Container images
+    - Network Admin:
+      - DNS 1 (Technitium):
+        - icon: mdi-dns
+          href: http://192.168.100.41:5380
+          description: Primary DNS console
+      - DNS 2 (Technitium):
+        - icon: mdi-dns
+          href: http://192.168.100.42:5380
+          description: Secondary DNS console
+      - Router:
+        - icon: mdi-router-wireless
+          href: http://192.168.100.1
+          description: Gateway admin
+      - Cloudflare:
+        - icon: cloudflare.png
+          href: https://dash.cloudflare.com
+          description: DNS & zone management
+      - GCP Console:
+        - icon: google-cloud.png
+          href: https://console.cloud.google.com/home/dashboard?project=apps-dev-636f
+          description: apps-dev-636f project
     - Entertainment:
       - YouTube:
         - icon: youtube.png
@@ -343,6 +374,10 @@ data:
             icon: mdi-speedometer
             href: https://speedtest-tracker.frost.haus
             description: Internet speed history & trends
+            widget:
+              type: speedtest
+              url: https://speedtest-tracker.frost.haus
+              bitratePrecision: 0
         - Dozzle:
             icon: dozzle.png
             href: https://dozzle.frost.haus
