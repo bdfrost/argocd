@@ -101,6 +101,14 @@ data:
     .status-dot {
       box-shadow: 0 0 6px currentColor;
     }
+
+    /* Much darker page background, keeps the emerald tint */
+    :root {
+      --bg-color: 4 28 21 !important;
+    }
+    body {
+      background-color: rgb(4 28 21) !important;
+    }
   custom.js: ""
   bookmarks.yaml: |
     - Quick Access:
