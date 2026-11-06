@@ -5,3 +5,5 @@ resources:
   - ingress.yaml
   - service.yaml
   - deployment.yaml
+  - cronjob-config.yaml
+  - sealedsecret.yaml

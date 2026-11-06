@@ -1,0 +1,60 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cleanuparr-config
+spec:
+  # Hourly; idempotent GET -> merge -> PUT so hand-tweaks in the UI revert.
+  schedule: "13 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: apply
+              image: badouralix/curl-jq:alpine
+              command:
+                - /bin/sh
+                - -ce
+                - |
+                  BASE="http://cleanuparr.cleanuparr.svc.cluster.local:80"
+
+                  CURRENT=$(curl -sf -H "X-Api-Key: ${CLEANUPARR_API_KEY}" \
+                    "${BASE}/api/configuration/queue_cleaner")
+
+                  # Desired state. PUT is full-replace, so merge over the live
+                  # object: unlisted keys keep their server values.
+                  #
+                  # failedImport Include + upgrade patterns: auto-remove only
+                  # downloads blocked because the grab is NOT a custom-format
+                  # upgrade (re-grabs of the same or worse release). These can
+                  # never be imported, so removal + fresh search is always right.
+                  # "Manual Import required" items (plausibly good grabs) are
+                  # deliberately left for manual triage — forceImport stays off
+                  # because it would also force the not-an-upgrade items.
+                  DESIRED='{
+                    "failedImport": {
+                      "maxStrikes": 3,
+                      "patternMode": "Include",
+                      "patterns": ["not a custom format upgrade", "not an upgrade"],
+                      "forceImport": false
+                    }
+                  }'
+
+                  MERGED=$(echo "$CURRENT" | jq --argjson d "$DESIRED" '. * $d')
+
+                  curl -sf -X PUT -H "X-Api-Key: ${CLEANUPARR_API_KEY}" \
+                    -H 'Content-Type: application/json' \
+                    -d "$MERGED" \
+                    "${BASE}/api/configuration/queue_cleaner" > /dev/null
+              env:
+                - name: CLEANUPARR_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: cleanuparr-api
+                      key: CLEANUPARR_API_KEY
+              resources: {}
+          restartPolicy: Never
