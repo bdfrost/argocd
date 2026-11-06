@@ -23,6 +23,11 @@ spec:
         ports:
         - containerPort: {{ .Values.targetPort }}
         env:
+        # Kubernetes injects ARR_MCP_PORT=tcp://<clusterIP>:80 from the
+        # arr-mcp Service, clobbering the image's ENV default (6060) with
+        # a URL and crashing the server (ERR_SOCKET_BAD_PORT, NaN).
+        - name: ARR_MCP_PORT
+          value: "{{ .Values.targetPort }}"
         - name: TZ
           value: "America/Chicago"
         - name: PGID
