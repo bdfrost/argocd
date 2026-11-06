@@ -16,6 +16,27 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+      # Seeds /config/config.yaml from the SealedSecret-owned Secret on every
+      # start. The entrypoint does `chown -R /config` with `set -e`, so a
+      # read-only config mount would kill it; copying through an initContainer
+      # keeps the PVC writable and makes the repo authoritative for
+      # config.yaml — UI edits persist only until a restart.
+      initContainers:
+      - name: seed-config
+        image: docker.io/library/alpine:3.20
+        command:
+        - sh
+        - -c
+        - |
+          cp /seed/config.yaml /config/config.yaml
+          chown 1000:1000 /config/config.yaml
+          chmod 0600 /config/config.yaml
+        volumeMounts:
+        - name: config-seed
+          mountPath: /seed
+          readOnly: true
+        - name: {{ .Values.name }}-config
+          mountPath: /config
       containers:
       - name: {{ .Values.name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -38,6 +59,9 @@ spec:
         - name: {{ .Values.name }}-config
           mountPath: /config
       volumes:
+        - name: config-seed
+          secret:
+            secretName: {{ .Values.name }}-config
         - name: {{ .Values.name }}-config
           persistentVolumeClaim:
             claimName: {{ .Values.name }}-config-pvc

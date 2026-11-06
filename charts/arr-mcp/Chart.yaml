@@ -2,5 +2,5 @@ apiVersion: v2
 name: arr-mcp
 description: One MCP server for the whole *arr media stack (Radarr, Sonarr, Prowlarr, Bazarr, SABnzbd, Plex, Seerr, Cleanuparr)
 type: application
-version: 0.1.0
+version: 0.2.0
 appVersion: "1.64.0"
