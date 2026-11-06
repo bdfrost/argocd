@@ -1,0 +1,10 @@
+replicaCount: 1
+name: arr-mcp
+targetPort: 6060
+puid: 1000
+pgid: 1000
+
+image:
+  repository: ghcr.io/bardesss/arr-mcp
+  tag: "1.64.0"
+  pullPolicy: IfNotPresent
