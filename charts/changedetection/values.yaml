@@ -8,7 +8,7 @@ allowIanaRestrictedAddresses: true
 image:
   repository: docker.io/dgtlmoon/changedetection.io
   # renovate: datasource=docker depName=dgtlmoon/changedetection.io
-  tag: "0.60.10"
+  tag: "0.70.2"
   pullPolicy: IfNotPresent
 
 resources:
