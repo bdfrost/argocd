@@ -98,6 +98,16 @@ data:
         ]
       },
       {
+        "name": "Arr MCP",
+        "type": "http",
+        "url": "https://arr-mcp.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ]
+      },
+      {
         "name": "Bazarr",
         "type": "http",
         "url": "https://bazarr.frost.haus",

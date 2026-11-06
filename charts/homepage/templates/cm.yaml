@@ -280,6 +280,10 @@ data:
             icon: agregarr.png
             href: https://agregarr.frost.haus
             description: Bulk add media to Arr apps
+        - Arr MCP:
+            icon: mdi-api
+            href: https://arr-mcp.frost.haus
+            description: One MCP endpoint for the whole media stack
         - Chaptarr:
             icon: mdi-book-open-page-variant
             href: https://chaptarr.frost.haus
