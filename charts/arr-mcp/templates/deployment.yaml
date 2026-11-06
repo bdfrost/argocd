@@ -11,6 +11,11 @@ spec:
       app: {{ .Values.name }}
   template:
     metadata:
+      annotations:
+        # Roll the pod when the sealed config changes (initContainer re-seeds
+        # config.yaml from the secret at startup; without this a reseal merges
+        # but the pod keeps running stale config).
+        reloader.stakater.com/auto: "true"
       labels:
         app: {{ .Values.name }}
     spec:
