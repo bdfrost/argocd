@@ -6,5 +6,5 @@ pgid: 1000
 
 image:
   repository: ghcr.io/bardesss/arr-mcp
-  tag: "1.64.0"
+  tag: "1.70.0"
   pullPolicy: IfNotPresent
