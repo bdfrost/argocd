@@ -300,5 +300,15 @@ data:
         "accepted_statuscodes": [
           "200-299"
         ]
+      },
+      {
+        "name": "Dawarich",
+        "type": "http",
+        "url": "https://dawarich.frost.haus/api/v1/health",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       }
     ]

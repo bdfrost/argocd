@@ -1,0 +1,84 @@
+# Dawarich, hand-written from upstream docker/docker-compose.yml @ 1.22.0
+# (upstream publishes no Helm chart). Three workloads:
+#   - app:      Rails + embedded Sidekiq (SIDEKIQ_EMBEDDED, as upstream compose)
+#   - database: postgis/postgis StatefulSet (PostGIS is required)
+#   - redis:    Sidekiq queue + cache
+# Credentials come from templates/sealedsecret.yaml (dawarich Secret).
+
+name: dawarich
+targetPort: 3000
+
+image:
+  repository: freikin/dawarich
+  # renovate: datasource=docker depName=freikin/dawarich
+  tag: 1.22.0
+  pullPolicy: IfNotPresent
+
+hostname: dawarich.frost.haus
+
+env:
+  RAILS_ENV: production
+  TIME_ZONE: America/Chicago
+  TZ: America/Chicago
+  # TLS terminates at ingress-nginx; "https" here turns on Rails force_ssl,
+  # which redirect-loops behind the proxy. Upstream docs say keep http.
+  APPLICATION_PROTOCOL: http
+  RAILS_LOG_TO_STDOUT: "true"
+  SELF_HOSTED: "true"
+  STORE_GEODATA: "true"
+  # One container runs Puma + Sidekiq (upstream compose default)
+  SIDEKIQ_EMBEDDED: "true"
+  WEB_CONCURRENCY: "0"
+  BACKGROUND_PROCESSING_CONCURRENCY: "2"
+  PROMETHEUS_EXPORTER_ENABLED: "false"
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 1Gi
+  limits:
+    memory: 4Gi
+
+# One PVC, mounted via subPath at public/, storage/ and tmp/imports/watched
+# (the three app volumes in upstream compose). public/ is re-synced from the
+# image on every start, storage/ holds uploads/exports.
+persistence:
+  size: 10Gi
+  storageClass: synology-csi-iscsi-delete
+
+database:
+  image:
+    repository: postgis/postgis
+    # Major Postgres bumps (17 -> 18) need a dump/restore, not just a tag
+    # change; Renovate leaves majors for manual review.
+    # renovate: datasource=docker depName=postgis/postgis versioning=loose
+    tag: 17-3.5-alpine
+    pullPolicy: IfNotPresent
+  auth:
+    username: dawarich
+    database: dawarich
+  # Upstream compose uses shm_size 1G
+  shmSize: 1Gi
+  persistence:
+    size: 20Gi
+    # Retain: location history can't be re-derived (same reasoning as immich)
+    storageClass: synology-csi-iscsi-retain
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 2Gi
+
+redis:
+  image:
+    repository: redis
+    # renovate: datasource=docker depName=redis versioning=loose
+    tag: 8-alpine
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      memory: 512Mi

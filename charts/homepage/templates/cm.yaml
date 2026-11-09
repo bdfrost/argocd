@@ -325,6 +325,10 @@ data:
             icon: mdi-cash-multiple
             href: https://simplefin.frost.haus
             description: Personal finance
+        - Dawarich:
+            icon: dawarich.png
+            href: https://dawarich.frost.haus
+            description: Location history
     - Home:
         - Home Assistant:
             icon: home-assistant.png

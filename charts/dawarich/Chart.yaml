@@ -1,0 +1,6 @@
+apiVersion: v2
+name: dawarich
+description: Dawarich - self-hosted location history (Google Timeline alternative), with PostGIS and Redis
+type: application
+version: 0.1.0
+appVersion: "1.22.0"

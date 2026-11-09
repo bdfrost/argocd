@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}-postgres
+  labels:
+    app: {{ .Values.name }}-postgres
+spec:
+  serviceName: {{ .Values.name }}-database
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}-postgres
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-postgres
+    spec:
+      # No securityContext: the official postgres entrypoint starts as root,
+      # chowns/chmods PGDATA itself and gosu-drops to uid 70. fsGroup would
+      # leave group perms postgres rejects (see charts/immich).
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: postgresql
+          image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
+          imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+          ports:
+            - name: postgresql
+              containerPort: 5432
+              protocol: TCP
+          env:
+            # POSTGRES_USER is created as superuser, which Rails migrations
+            # need for CREATE EXTENSION postgis.
+            - name: POSTGRES_USER
+              value: {{ .Values.database.auth.username | quote }}
+            - name: POSTGRES_DB
+              value: {{ .Values.database.auth.database | quote }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.name }}
+                  key: DATABASE_PASSWORD
+            # Subdirectory: the iSCSI volume root has lost+found, which initdb rejects
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: TZ
+              value: "America/Chicago"
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", {{ .Values.database.auth.username | quote }}, "-d", {{ .Values.database.auth.database | quote }}]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", {{ .Values.database.auth.username | quote }}, "-d", {{ .Values.database.auth.database | quote }}]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 10
+          resources:
+            {{- toYaml .Values.database.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: dshm
+              mountPath: /dev/shm
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: {{ .Values.database.shmSize }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: {{ .Values.database.persistence.storageClass }}
+        resources:
+          requests:
+            storage: {{ .Values.database.persistence.size }}

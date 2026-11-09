@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      # Upstream compose stop_grace_period: lets Sidekiq finish in-flight jobs
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # The entrypoint waits for Postgres, runs migrations + seeds, then
+          # execs the command (same as upstream compose).
+          command: ["web-entrypoint.sh"]
+          args: ["bin/rails", "server", "-p", "{{ .Values.targetPort }}", "-b", "0.0.0.0"]
+          ports:
+            - name: http
+              containerPort: {{ .Values.targetPort }}
+              protocol: TCP
+          env:
+            {{- range $k, $v := .Values.env }}
+            - name: {{ $k }}
+              value: {{ $v | quote }}
+            {{- end }}
+            - name: APPLICATION_HOSTS
+              value: "{{ .Values.hostname }},localhost,127.0.0.1"
+            - name: REDIS_URL
+              value: "redis://{{ .Values.name }}-redis:6379"
+            - name: DATABASE_HOST
+              value: "{{ .Values.name }}-database"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USERNAME
+              value: {{ .Values.database.auth.username | quote }}
+            - name: DATABASE_NAME
+              value: {{ .Values.database.auth.database | quote }}
+          envFrom:
+            # DATABASE_PASSWORD, SECRET_KEY_BASE, OTP_ENCRYPTION_* (2FA)
+            - secretRef:
+                name: {{ .Values.name }}
+          # /api/v1/health is exempt from Rails host authorization, so kubelet
+          # probes (Host: <pod IP>) aren't rejected. First boot runs all
+          # migrations, hence the long startup window.
+          startupProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 60
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/app/public
+              subPath: public
+            - name: data
+              mountPath: /var/app/storage
+              subPath: storage
+            - name: data
+              mountPath: /var/app/tmp/imports/watched
+              subPath: watched
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-data-pvc
