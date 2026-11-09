@@ -4,3 +4,6 @@
 # Local script/tool output
 *.log
 __pycache__/
+
+# kubectl cache (contains cluster address/API discovery; never commit)
+.kube/
