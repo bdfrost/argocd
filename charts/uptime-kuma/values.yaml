@@ -13,6 +13,13 @@ uptime-kuma:
   # for the RWO data volume during the migration.
   strategy:
     type: Recreate
+  # Probe timeouts bumped 2s/1s -> 10s: the config volume is iSCSI on the
+  # Synology, and NAS I/O latency spikes (e.g. during storage migrations)
+  # stall responses long enough to trip the upstream defaults and churn the pod.
+  livenessProbe:
+    timeoutSeconds: 10
+  readinessProbe:
+    timeoutSeconds: 10
   service:
     type: ClusterIP
     port: 443

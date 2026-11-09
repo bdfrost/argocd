@@ -69,14 +69,15 @@ spec:
             port: {{ .Values.targetPort }}
           initialDelaySeconds: 120
           periodSeconds: 30
-          timeoutSeconds: 5
+          # 10s: data volume is iSCSI on the Synology; latency spikes trip 5s
+          timeoutSeconds: 10
         readinessProbe:
           httpGet:
             path: /api/v2/health
             port: {{ .Values.targetPort }}
           initialDelaySeconds: 60
           periodSeconds: 10
-          timeoutSeconds: 5
+          timeoutSeconds: 10
       volumes:
       - name: config
         persistentVolumeClaim:
