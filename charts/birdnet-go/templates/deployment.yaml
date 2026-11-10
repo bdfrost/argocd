@@ -104,7 +104,7 @@ spec:
   storageClassName: synology-csi-iscsi-delete
   resources:
     requests:
-      storage: 2Gi
+      storage: 4Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -116,4 +116,4 @@ spec:
   storageClassName: synology-csi-iscsi-delete
   resources:
     requests:
-      storage: 150Gi
+      storage: 200sGi
