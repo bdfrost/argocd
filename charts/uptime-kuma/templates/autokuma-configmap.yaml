@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: autokuma-static-monitors
 data:
+  # Every monitor alerts through the "slack" notification, defined in slack.json from the
+  # autokuma-slack-notification SealedSecret (the webhook URL can't live in this public repo).
   # Keep the null tombstone at its array index: AutoKuma keys these monitors by index, so removing it shifts later monitor identities.
   services.json: |-
     [
@@ -14,6 +16,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -24,6 +29,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-399"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -34,6 +42,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -45,6 +56,9 @@ data:
         "accepted_statuscodes": [
           "200-299",
           "401"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -55,6 +69,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -65,6 +82,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -75,6 +95,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -85,6 +108,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -95,6 +121,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -105,6 +134,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -115,6 +147,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -125,6 +160,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -135,6 +173,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -145,6 +186,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -155,6 +199,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -165,6 +212,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       null,
@@ -176,6 +226,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -187,6 +240,9 @@ data:
         "accepted_statuscodes": [
           "200-299",
           "401"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -196,7 +252,10 @@ data:
         "dns_resolve_server": "192.168.100.41",
         "dns_resolve_type": "A",
         "interval": 60,
-        "max_retries": 2
+        "max_retries": 2,
+        "notification_names": [
+          "slack"
+        ]
       },
       {
         "name": "DNS2 Resolution",
@@ -205,7 +264,10 @@ data:
         "dns_resolve_server": "192.168.100.42",
         "dns_resolve_type": "A",
         "interval": 60,
-        "max_retries": 2
+        "max_retries": 2,
+        "notification_names": [
+          "slack"
+        ]
       },
       {
         "name": "DNS1",
@@ -216,7 +278,10 @@ data:
         "accepted_statuscodes": [
           "200-399"
         ],
-        "ignore_tls": true
+        "ignore_tls": true,
+        "notification_names": [
+          "slack"
+        ]
       },
       {
         "name": "DNS2",
@@ -227,7 +292,10 @@ data:
         "accepted_statuscodes": [
           "200-399"
         ],
-        "ignore_tls": true
+        "ignore_tls": true,
+        "notification_names": [
+          "slack"
+        ]
       },
       {
         "name": "Home Assistant",
@@ -237,6 +305,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-399"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -247,6 +318,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -257,6 +331,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -269,7 +346,10 @@ data:
           "200-299"
         ],
         "ignore_tls": false,
-        "expiry_notification": true
+        "expiry_notification": true,
+        "notification_names": [
+          "slack"
+        ]
       },
       {
         "name": "changedetection.io",
@@ -279,6 +359,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-399"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -289,6 +372,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-399"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -299,6 +385,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -309,6 +398,9 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       },
       {
@@ -319,6 +411,207 @@ data:
         "max_retries": 2,
         "accepted_statuscodes": [
           "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Agregarr",
+        "type": "http",
+        "url": "https://agregarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Cleanuparr",
+        "type": "http",
+        "url": "https://cleanuparr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "kagent",
+        "type": "http",
+        "url": "https://kagent-ui.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Skooner",
+        "type": "http",
+        "url": "https://skooner.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Livrarr",
+        "type": "http",
+        "url": "https://livrarr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Maintainerr",
+        "type": "http",
+        "url": "https://maintainerr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Ollama",
+        "type": "http",
+        "url": "https://ollama.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Open WebUI",
+        "type": "http",
+        "url": "https://open-webui.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Poterie (poterie.app)",
+        "type": "http",
+        "url": "https://poterie.app",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Tracearr",
+        "type": "http",
+        "url": "https://tracearr.frost.haus",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Synology NAS",
+        "type": "http",
+        "url": "http://192.168.100.250:5000",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Proxmox pve1",
+        "type": "http",
+        "url": "https://192.168.100.221:8006",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "ignore_tls": true,
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Proxmox pve2",
+        "type": "http",
+        "url": "https://192.168.100.222:8006",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "ignore_tls": true,
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Proxmox pve3",
+        "type": "http",
+        "url": "https://192.168.100.223:8006",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "ignore_tls": true,
+        "notification_names": [
+          "slack"
+        ]
+      },
+      {
+        "name": "Proxmox Backup Server",
+        "type": "http",
+        "url": "https://pbs.frost.haus:8007",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ],
+        "notification_names": [
+          "slack"
         ]
       }
     ]

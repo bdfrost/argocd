@@ -3,8 +3,7 @@ kind: Deployment
 metadata:
   name: autokuma
 spec:
-  # Paused while the duplicate monitors are cleaned out of Uptime Kuma; set back to 1 afterwards.
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   selector:
@@ -60,9 +59,15 @@ spec:
             - name: data
               mountPath: /data
       volumes:
+        # Monitors come from the ConfigMap; the Slack notification comes from a
+        # SealedSecret because its webhook URL can't be committed in plaintext.
         - name: static-monitors
-          configMap:
-            name: autokuma-static-monitors
+          projected:
+            sources:
+              - configMap:
+                  name: autokuma-static-monitors
+              - secret:
+                  name: autokuma-slack-notification
         - name: data
           persistentVolumeClaim:
             claimName: autokuma-data-pvc
