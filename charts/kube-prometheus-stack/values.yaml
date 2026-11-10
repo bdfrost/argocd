@@ -18,7 +18,24 @@ kube-prometheus-stack:
       resources:
         requests:
           memory: 64Mi
+      # without a PVC the operator uses an emptyDir, so silences vanish on every restart
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: synology-csi-iscsi-retain
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 2Gi
   grafana:
+    # keep UI-created dashboards/users across restarts (default is an emptyDir)
+    persistence:
+      enabled: true
+      storageClassName: synology-csi-iscsi-delete
+      size: 2Gi
+    # RWO volume: a rolling update would leave the new pod waiting on the old pod's mount
+    deploymentStrategy:
+      type: Recreate
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -48,6 +65,19 @@ kube-prometheus-stack:
       resources:
         requests:
           memory: 1Gi
+      # without storageSpec the operator uses an emptyDir and the TSDB is lost on every restart.
+      # ~5k samples/s * 10d is ~7GB; retentionSize trims old blocks before the volume fills.
+      # retain class so deleting the app doesn't take the history with it.
+      retention: 10d
+      retentionSize: 16GB
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: synology-csi-iscsi-retain
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
       additionalScrapeConfigs:
         - job_name: "sonarr-exporter"
           static_configs:
