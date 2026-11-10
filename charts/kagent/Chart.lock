@@ -1,9 +1,9 @@
 dependencies:
 - name: kagent-crds
   repository: oci://ghcr.io/kagent-dev/kagent/helm
-  version: 0.10.6
+  version: 1.0.0
 - name: kagent
   repository: oci://ghcr.io/kagent-dev/kagent/helm
   version: 1.0.0
-digest: sha256:74e652c07b86cd11f5287d51467844ec4cbcc78e68f64d080e3025c90b811cd5
-generated: "2026-11-09T23:51:47.254366286Z"
+digest: sha256:ddcd2fcded11186d3197748da3783a652f63483149b760a952674e6148da9dd2
+generated: "2026-11-10T02:25:18.698357975Z"
