@@ -11,7 +11,9 @@ ollama:
   #     effect: NoSchedule
   resources:
     requests:
-      memory: "4Gi"
+      # Idle ~540Mi; a loaded model peaks ~5.4Gi but that's burst under the limit.
+      # Kept low so k8s-n2 (the GPU node) can shrink and share pve2 with HA.
+      memory: "2Gi"
       cpu: "2"
     limits:
       # 7d peak 5.4Gi with a model loaded

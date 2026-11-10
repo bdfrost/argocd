@@ -65,7 +65,8 @@ plex-media-server:
         cpu: "2"
         # Without an explicit request it defaulted to the 6Gi limit; steady use
         # is <1Gi and the 6Gi peaks are page cache (no OOM kills), so reserve less.
-        memory: 3Gi
+        # 1Gi lets k8s-n2 (the GPU node) shrink and share pve2 with HA.
+        memory: 1Gi
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "1"
       affinity:
