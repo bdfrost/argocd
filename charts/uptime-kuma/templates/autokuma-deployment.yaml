@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: autokuma
 spec:
-  replicas: 1
+  # Paused while the duplicate monitors are cleaned out of Uptime Kuma; set back to 1 afterwards.
+  replicas: 0
   strategy:
     type: Recreate
   selector:
@@ -54,7 +55,14 @@ spec:
             - name: static-monitors
               mountPath: /static_monitors
               readOnly: true
+            # AutoKuma >= 1.0 records which monitors it created in /data. Without
+            # persistence every restart forgot them and created a full duplicate set.
+            - name: data
+              mountPath: /data
       volumes:
         - name: static-monitors
           configMap:
             name: autokuma-static-monitors
+        - name: data
+          persistentVolumeClaim:
+            claimName: autokuma-data-pvc
