@@ -33,9 +33,14 @@ kube-prometheus-stack:
       enabled: true
       storageClassName: synology-csi-iscsi-delete
       size: 2Gi
-    # RWO volume: a rolling update would leave the new pod waiting on the old pod's mount
+    # RWO volume: stop the old pod before starting the new one so it can't wait on the old mount.
+    # Not type: Recreate, because the live Deployment keeps its defaulted rollingUpdate block and
+    # the apiserver rejects that combination on sync.
     deploymentStrategy:
-      type: Recreate
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
     ingress:
       enabled: true
       ingressClassName: nginx
