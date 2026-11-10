@@ -48,8 +48,10 @@ spec:
               value: "#42C0FB"
             - name: AUTOKUMA__ON_DELETE
               value: delete
+            # Keep at info: trace/debug print static monitor files, including the
+            # Slack webhook from slack.json, into the pod log (and on into Loki).
             - name: RUST_LOG
-              value: autokuma=trace,kuma_client=debug
+              value: autokuma=info,kuma_client=info
           volumeMounts:
             - name: static-monitors
               mountPath: /static_monitors

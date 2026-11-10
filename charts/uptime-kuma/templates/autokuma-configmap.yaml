@@ -5,6 +5,8 @@ metadata:
 data:
   # Every monitor alerts through the "slack" notification, defined in slack.json from the
   # autokuma-slack-notification SealedSecret (the webhook URL can't live in this public repo).
+  # AutoKuma 2.0.0 doesn't apply notification_names, so slack.json also sets applyExisting,
+  # which makes Kuma link the notification to every monitor whenever AutoKuma saves it.
   # Keep the null tombstone at its array index: AutoKuma keys these monitors by index, so removing it shifts later monitor identities.
   services.json: |-
     [
