@@ -310,5 +310,15 @@ data:
         "accepted_statuscodes": [
           "200-299"
         ]
+      },
+      {
+        "name": "Photon",
+        "type": "http",
+        "url": "http://photon.photon.svc.cluster.local/status",
+        "interval": 60,
+        "max_retries": 2,
+        "accepted_statuscodes": [
+          "200-299"
+        ]
       }
     ]

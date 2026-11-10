@@ -1,0 +1,40 @@
+# Photon geocoder via rtuszik/photon-docker, which downloads a prebuilt
+# OpenSearch index on first start and refreshes it on a timer. In-cluster
+# only (no ingress, no UI): Dawarich reaches it at
+# photon.photon.svc.cluster.local.
+
+name: photon
+targetPort: 2322
+
+image:
+  repository: rtuszik/photon-docker
+  # renovate: datasource=docker depName=rtuszik/photon-docker
+  tag: 2.5.0
+  pullPolicy: IfNotPresent
+
+env:
+  TZ: America/Chicago
+  # Planet needs ~95GB disk and ~64GB RAM, more than any node has. The US
+  # index is ~10.6GB compressed / ~17GB extracted (Nov 2026).
+  REGION: us
+  # PARALLEL keeps serving the old index while the new one downloads and
+  # extracts. SEQUENTIAL stops Photon for the whole update, and Dawarich
+  # silently skips points it can't geocode in that window.
+  UPDATE_STRATEGY: PARALLEL
+  UPDATE_INTERVAL: 30d
+  JAVA_PARAMS: -Xmx6g
+
+resources:
+  requests:
+    cpu: 500m
+    # 6g heap + OpenSearch off-heap/page cache
+    memory: 8Gi
+  limits:
+    memory: 10Gi
+
+# PARALLEL updates need old index + archive + new index at once
+# (~17 + 10.6 + 17 GB); the image refuses to update if space is short.
+# Delete class: the index is re-downloadable.
+persistence:
+  size: 60Gi
+  storageClass: synology-csi-iscsi-delete
