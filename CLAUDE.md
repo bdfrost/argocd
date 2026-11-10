@@ -55,9 +55,9 @@ In `charts/homepage/templates/cm.yaml`, add an entry to the right group (for exa
 
 ### 6. Uptime monitor
 
-In `charts/uptime-kuma/templates/autokuma-configmap.yaml`, add an `http` monitor: `url: https://<app>.frost.haus`, `interval: 60`, `max_retries: 2`, `accepted_statuscodes: ["200-299"]`.
+In `charts/uptime-kuma/templates/autokuma-configmap.yaml`, add a key `<app>.json` holding an `http` monitor: `name`, `url: https://<app>.frost.haus`, `interval: 60`, `max_retries: 2`, `accepted_statuscodes: ["200-299"]`, `notification_names: ["slack"]`.
 
-**Never delete or reorder entries, and keep the `null` tombstone.** AutoKuma identifies monitors by their position in the array.
+AutoKuma uses the key (minus `.json`) as the monitor's id, so keys can be added, removed or reordered freely. Removing a key deletes that monitor in Kuma. Renaming a key recreates the monitor and loses its history.
 
 ## Conventions
 

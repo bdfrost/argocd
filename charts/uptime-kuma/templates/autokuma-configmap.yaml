@@ -3,617 +3,661 @@ kind: ConfigMap
 metadata:
   name: autokuma-static-monitors
 data:
+  # One key per monitor: AutoKuma uses the file name (without .json) as the monitor's id,
+  # so monitors can be added, removed or reordered freely. Removing a key deletes that
+  # monitor in Kuma (AUTOKUMA__ON_DELETE=delete).
   # Every monitor alerts through the "slack" notification, defined in slack.json from the
   # autokuma-slack-notification SealedSecret (the webhook URL can't live in this public repo).
   # AutoKuma 2.0.0 doesn't apply notification_names, so slack.json also sets applyExisting,
   # which makes Kuma link the notification to every monitor whenever AutoKuma saves it.
-  # Keep the null tombstone at its array index: AutoKuma keys these monitors by index, so removing it shifts later monitor identities.
-  services.json: |-
-    [
-      {
-        "name": "Homepage",
-        "type": "http",
-        "url": "https://homepage.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Argo CD",
-        "type": "http",
-        "url": "https://argocd.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-399"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Poterie",
-        "type": "http",
-        "url": "https://poterie.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Plex",
-        "type": "http",
-        "url": "https://peppers.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299",
-          "401"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Tautulli",
-        "type": "http",
-        "url": "https://tautulli.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Seerr",
-        "type": "http",
-        "url": "https://seerr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Sonarr",
-        "type": "http",
-        "url": "https://sonarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Radarr",
-        "type": "http",
-        "url": "https://radarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Prowlarr",
-        "type": "http",
-        "url": "https://prowlarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Arr MCP",
-        "type": "http",
-        "url": "https://arr-mcp.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Bazarr",
-        "type": "http",
-        "url": "https://bazarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Chaptarr",
-        "type": "http",
-        "url": "https://chaptarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "SABnzbd",
-        "type": "http",
-        "url": "https://sabnzbd.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Grafana",
-        "type": "http",
-        "url": "https://grafana.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Prometheus",
-        "type": "http",
-        "url": "https://prometheus.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Alertmanager",
-        "type": "http",
-        "url": "https://alertmanager.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      null,
-      {
-        "name": "BirdNET-Go",
-        "type": "http",
-        "url": "https://birdnet-go.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "SimpleFIN",
-        "type": "http",
-        "url": "https://simplefin.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299",
-          "401"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "DNS1 Resolution",
-        "type": "dns",
-        "hostname": "homeassistant.frost.haus",
-        "dns_resolve_server": "192.168.100.41",
-        "dns_resolve_type": "A",
-        "interval": 60,
-        "max_retries": 2,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "DNS2 Resolution",
-        "type": "dns",
-        "hostname": "homeassistant.frost.haus",
-        "dns_resolve_server": "192.168.100.42",
-        "dns_resolve_type": "A",
-        "interval": 60,
-        "max_retries": 2,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "DNS1",
-        "type": "http",
-        "url": "https://dns1.frost.haus:53443",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-399"
-        ],
-        "ignore_tls": true,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "DNS2",
-        "type": "http",
-        "url": "https://dns2.frost.haus:53443",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-399"
-        ],
-        "ignore_tls": true,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Home Assistant",
-        "type": "http",
-        "url": "http://homeassistant.frost.haus:8123/",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-399"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Dozzle",
-        "type": "http",
-        "url": "https://dozzle.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Immich",
-        "type": "http",
-        "url": "https://immich.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "SABnzbd TLS Certificate",
-        "type": "http",
-        "url": "https://sabnzbd.frost.haus",
-        "interval": 3600,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "ignore_tls": false,
-        "expiry_notification": true,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "changedetection.io",
-        "type": "http",
-        "url": "https://changedetection.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-399"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Uptime Kuma",
-        "type": "http",
-        "url": "https://uptime-kuma.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-399"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Speedtest Tracker",
-        "type": "http",
-        "url": "https://speedtest-tracker.frost.haus/login",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Dawarich",
-        "type": "http",
-        "url": "https://dawarich.frost.haus/api/v1/health",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Photon",
-        "type": "http",
-        "url": "http://photon.photon.svc.cluster.local/status",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Agregarr",
-        "type": "http",
-        "url": "https://agregarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Cleanuparr",
-        "type": "http",
-        "url": "https://cleanuparr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "kagent",
-        "type": "http",
-        "url": "https://kagent-ui.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Skooner",
-        "type": "http",
-        "url": "https://skooner.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Livrarr",
-        "type": "http",
-        "url": "https://livrarr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Maintainerr",
-        "type": "http",
-        "url": "https://maintainerr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Ollama",
-        "type": "http",
-        "url": "https://ollama.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Open WebUI",
-        "type": "http",
-        "url": "https://open-webui.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Poterie (poterie.app)",
-        "type": "http",
-        "url": "https://poterie.app",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Tracearr",
-        "type": "http",
-        "url": "https://tracearr.frost.haus",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Synology NAS",
-        "type": "http",
-        "url": "http://192.168.100.250:5000",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Proxmox pve1",
-        "type": "http",
-        "url": "https://192.168.100.221:8006",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "ignore_tls": true,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Proxmox pve2",
-        "type": "http",
-        "url": "https://192.168.100.222:8006",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "ignore_tls": true,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Proxmox pve3",
-        "type": "http",
-        "url": "https://192.168.100.223:8006",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "ignore_tls": true,
-        "notification_names": [
-          "slack"
-        ]
-      },
-      {
-        "name": "Proxmox Backup Server",
-        "type": "http",
-        "url": "https://pbs.frost.haus:8007",
-        "interval": 60,
-        "max_retries": 2,
-        "accepted_statuscodes": [
-          "200-299"
-        ],
-        "notification_names": [
-          "slack"
-        ]
-      }
-    ]
+  homepage.json: |-
+    {
+      "name": "Homepage",
+      "type": "http",
+      "url": "https://homepage.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  argo-cd.json: |-
+    {
+      "name": "Argo CD",
+      "type": "http",
+      "url": "https://argocd.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-399"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  poterie.json: |-
+    {
+      "name": "Poterie",
+      "type": "http",
+      "url": "https://poterie.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  plex.json: |-
+    {
+      "name": "Plex",
+      "type": "http",
+      "url": "https://peppers.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299",
+        "401"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  tautulli.json: |-
+    {
+      "name": "Tautulli",
+      "type": "http",
+      "url": "https://tautulli.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  seerr.json: |-
+    {
+      "name": "Seerr",
+      "type": "http",
+      "url": "https://seerr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  sonarr.json: |-
+    {
+      "name": "Sonarr",
+      "type": "http",
+      "url": "https://sonarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  radarr.json: |-
+    {
+      "name": "Radarr",
+      "type": "http",
+      "url": "https://radarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  prowlarr.json: |-
+    {
+      "name": "Prowlarr",
+      "type": "http",
+      "url": "https://prowlarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  arr-mcp.json: |-
+    {
+      "name": "Arr MCP",
+      "type": "http",
+      "url": "https://arr-mcp.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  bazarr.json: |-
+    {
+      "name": "Bazarr",
+      "type": "http",
+      "url": "https://bazarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  chaptarr.json: |-
+    {
+      "name": "Chaptarr",
+      "type": "http",
+      "url": "https://chaptarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  sabnzbd.json: |-
+    {
+      "name": "SABnzbd",
+      "type": "http",
+      "url": "https://sabnzbd.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  grafana.json: |-
+    {
+      "name": "Grafana",
+      "type": "http",
+      "url": "https://grafana.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  prometheus.json: |-
+    {
+      "name": "Prometheus",
+      "type": "http",
+      "url": "https://prometheus.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  alertmanager.json: |-
+    {
+      "name": "Alertmanager",
+      "type": "http",
+      "url": "https://alertmanager.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  birdnet-go.json: |-
+    {
+      "name": "BirdNET-Go",
+      "type": "http",
+      "url": "https://birdnet-go.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  simplefin.json: |-
+    {
+      "name": "SimpleFIN",
+      "type": "http",
+      "url": "https://simplefin.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299",
+        "401"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  dns1-resolution.json: |-
+    {
+      "name": "DNS1 Resolution",
+      "type": "dns",
+      "hostname": "homeassistant.frost.haus",
+      "dns_resolve_server": "192.168.100.41",
+      "dns_resolve_type": "A",
+      "interval": 60,
+      "max_retries": 2,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  dns2-resolution.json: |-
+    {
+      "name": "DNS2 Resolution",
+      "type": "dns",
+      "hostname": "homeassistant.frost.haus",
+      "dns_resolve_server": "192.168.100.42",
+      "dns_resolve_type": "A",
+      "interval": 60,
+      "max_retries": 2,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  dns1.json: |-
+    {
+      "name": "DNS1",
+      "type": "http",
+      "url": "https://dns1.frost.haus:53443",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-399"
+      ],
+      "ignore_tls": true,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  dns2.json: |-
+    {
+      "name": "DNS2",
+      "type": "http",
+      "url": "https://dns2.frost.haus:53443",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-399"
+      ],
+      "ignore_tls": true,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  home-assistant.json: |-
+    {
+      "name": "Home Assistant",
+      "type": "http",
+      "url": "http://homeassistant.frost.haus:8123/",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-399"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  dozzle.json: |-
+    {
+      "name": "Dozzle",
+      "type": "http",
+      "url": "https://dozzle.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  immich.json: |-
+    {
+      "name": "Immich",
+      "type": "http",
+      "url": "https://immich.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  sabnzbd-tls-certificate.json: |-
+    {
+      "name": "SABnzbd TLS Certificate",
+      "type": "http",
+      "url": "https://sabnzbd.frost.haus",
+      "interval": 3600,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "ignore_tls": false,
+      "expiry_notification": true,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  changedetection-io.json: |-
+    {
+      "name": "changedetection.io",
+      "type": "http",
+      "url": "https://changedetection.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-399"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  uptime-kuma.json: |-
+    {
+      "name": "Uptime Kuma",
+      "type": "http",
+      "url": "https://uptime-kuma.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-399"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  speedtest-tracker.json: |-
+    {
+      "name": "Speedtest Tracker",
+      "type": "http",
+      "url": "https://speedtest-tracker.frost.haus/login",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  dawarich.json: |-
+    {
+      "name": "Dawarich",
+      "type": "http",
+      "url": "https://dawarich.frost.haus/api/v1/health",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  photon.json: |-
+    {
+      "name": "Photon",
+      "type": "http",
+      "url": "http://photon.photon.svc.cluster.local/status",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  agregarr.json: |-
+    {
+      "name": "Agregarr",
+      "type": "http",
+      "url": "https://agregarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  cleanuparr.json: |-
+    {
+      "name": "Cleanuparr",
+      "type": "http",
+      "url": "https://cleanuparr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  kagent.json: |-
+    {
+      "name": "kagent",
+      "type": "http",
+      "url": "https://kagent-ui.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  skooner.json: |-
+    {
+      "name": "Skooner",
+      "type": "http",
+      "url": "https://skooner.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  livrarr.json: |-
+    {
+      "name": "Livrarr",
+      "type": "http",
+      "url": "https://livrarr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  maintainerr.json: |-
+    {
+      "name": "Maintainerr",
+      "type": "http",
+      "url": "https://maintainerr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  ollama.json: |-
+    {
+      "name": "Ollama",
+      "type": "http",
+      "url": "https://ollama.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  open-webui.json: |-
+    {
+      "name": "Open WebUI",
+      "type": "http",
+      "url": "https://open-webui.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  poterie-app.json: |-
+    {
+      "name": "Poterie (poterie.app)",
+      "type": "http",
+      "url": "https://poterie.app",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  tracearr.json: |-
+    {
+      "name": "Tracearr",
+      "type": "http",
+      "url": "https://tracearr.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  synology-nas.json: |-
+    {
+      "name": "Synology NAS",
+      "type": "http",
+      "url": "http://192.168.100.250:5000",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
+  proxmox-pve1.json: |-
+    {
+      "name": "Proxmox pve1",
+      "type": "http",
+      "url": "https://192.168.100.221:8006",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "ignore_tls": true,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  proxmox-pve2.json: |-
+    {
+      "name": "Proxmox pve2",
+      "type": "http",
+      "url": "https://192.168.100.222:8006",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "ignore_tls": true,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  proxmox-pve3.json: |-
+    {
+      "name": "Proxmox pve3",
+      "type": "http",
+      "url": "https://192.168.100.223:8006",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "ignore_tls": true,
+      "notification_names": [
+        "slack"
+      ]
+    }
+  proxmox-backup-server.json: |-
+    {
+      "name": "Proxmox Backup Server",
+      "type": "http",
+      "url": "https://pbs.frost.haus:8007",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
