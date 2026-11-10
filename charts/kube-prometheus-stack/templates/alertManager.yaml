@@ -7,8 +7,17 @@ metadata:
     alertmanagerConfig: global
 spec:
   route:
-    receiver: slack-notifications
+    receiver: slack
+    routes:
+    # Watchdog always fires (dead-man's switch) and InfoInhibitor only feeds inhibition;
+    # without this they'd post to Slack every repeat_interval forever
+    - receiver: "null"
+      matchers:
+      - name: alertname
+        matchType: "=~"
+        value: "Watchdog|InfoInhibitor"
   receivers:
+  - name: "null"
   - name: slack
     slackConfigs:
     - channel: '#general'
