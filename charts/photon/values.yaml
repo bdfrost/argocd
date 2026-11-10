@@ -27,8 +27,9 @@ env:
 resources:
   requests:
     cpu: 500m
-    # 6g heap + OpenSearch off-heap/page cache
-    memory: 8Gi
+    # 6g heap + ~1Gi guaranteed off-heap; page cache bursts toward the
+    # limit. 8Gi didn't fit: no worker had 8Gi unrequested (~6.5-7.5Gi).
+    memory: 7Gi
   limits:
     memory: 10Gi
 
