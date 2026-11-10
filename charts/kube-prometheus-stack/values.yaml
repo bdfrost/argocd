@@ -15,6 +15,9 @@ kube-prometheus-stack:
         secretName: alertmanager-cert
     alertmanagerSpec:
       configSecret: alertmanager-secrets
+      resources:
+        requests:
+          memory: 64Mi
   grafana:
     ingress:
       enabled: true
@@ -42,6 +45,9 @@ kube-prometheus-stack:
         - prometheus.frost.haus
         secretName: prometheus-cert
     prometheusSpec:
+      resources:
+        requests:
+          memory: 1Gi
       additionalScrapeConfigs:
         - job_name: "sonarr-exporter"
           static_configs:

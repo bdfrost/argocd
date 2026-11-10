@@ -63,7 +63,9 @@ plex-media-server:
         nvidia.com/gpu: "1"
       requests:
         cpu: "2"
-        # memory: 6Gi
+        # Without an explicit request it defaulted to the 6Gi limit; steady use
+        # is <1Gi and the 6Gi peaks are page cache (no OOM kills), so reserve less.
+        memory: 3Gi
         ephemeral-storage: 64Gi
         nvidia.com/gpu: "1"
       affinity:

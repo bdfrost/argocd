@@ -1,5 +1,8 @@
 metrics-server:
   enabled: true
+  resources:
+    requests:
+      memory: 96Mi
   service:
     type: LoadBalancer
   args:

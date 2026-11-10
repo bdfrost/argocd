@@ -12,7 +12,7 @@ descheduler:
   resources:
     requests:
       cpu: 500m
-      memory: 256Mi
+      memory: 64Mi
     limits:
       memory: 256Mi
   ports:

@@ -12,3 +12,7 @@ image:
   pullPolicy: Always
 
 timezone: America/Chicago
+
+resources:
+  requests:
+    memory: 1Gi

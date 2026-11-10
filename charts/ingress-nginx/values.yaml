@@ -1,0 +1,5 @@
+ingress-nginx:
+  controller:
+    resources:
+      requests:
+        memory: 320Mi

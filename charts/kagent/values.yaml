@@ -32,12 +32,23 @@ kagent:
         enabled: true
         storageClassName: synology-csi-iscsi-delete
         storage: 2Gi
+        resources:
+          requests:
+            memory: 128Mi
 
   # Embeddings/querydoc container needs the OpenAI key; reuse the existing
   # sealed secret (key name OPENAI_API_KEY matches what the subchart wants).
   querydoc:
     openai:
       secretRef: kagent-openai
+    resources:
+      requests:
+        memory: 320Mi
+
+  ui:
+    resources:
+      requests:
+        memory: 128Mi
 
 kagent-crds:
   tag: ""

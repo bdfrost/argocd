@@ -44,7 +44,7 @@ spec:
             ephemeral-storage: 320Gi
           requests:
             cpu: "2"
-            memory: 4Gi
+            memory: 3584Mi
             ephemeral-storage: 320Gi
       volumes:
         - name: {{ .Values.name }}-config

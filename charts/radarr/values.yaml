@@ -9,3 +9,7 @@ image:
   # renovate: datasource=docker depName=linuxserver/radarr
   tag: "6.4.4"
   pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    memory: 640Mi

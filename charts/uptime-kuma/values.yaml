@@ -4,6 +4,9 @@ targetPort: 3001
 puid: 1026
 pgid: 100
 uptime-kuma:
+  resources:
+    requests:
+      memory: 640Mi
   image:
     repository: louislam/uptime-kuma
     tag: "2.5.9"

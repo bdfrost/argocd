@@ -59,7 +59,8 @@ immich:
             resources:
               requests:
                 cpu: 250m
-                memory: 1Gi
+                # 7d peak ~1.5Gi
+                memory: 1536Mi
               limits:
                 memory: 2Gi
     ingress:
@@ -89,7 +90,8 @@ immich:
             resources:
               requests:
                 cpu: 250m
-                memory: 2Gi
+                # 7d peak ~200Mi; limit left at 4Gi for big ML backfills
+                memory: 768Mi
               limits:
                 memory: 4Gi
     persistence:
@@ -157,6 +159,6 @@ database:
   resources:
     requests:
       cpu: 100m
-      memory: 512Mi
+      memory: 320Mi
     limits:
       memory: 2Gi

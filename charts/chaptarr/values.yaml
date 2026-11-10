@@ -10,3 +10,7 @@ image:
   # renovate: datasource=docker depName=chaptarr/chaptarr versioning=loose
   tag: "0.9.999"
   pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    memory: 384Mi
