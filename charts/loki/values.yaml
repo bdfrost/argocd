@@ -73,6 +73,12 @@ loki:
 alloy:
   controller:
     type: daemonset
+    # Also run on k8s-c1 so etcd's logs reach Loki (the Synology dashboard counts
+    # etcd's slow-disk warnings from them).
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
   alloy:
     configMap:
       create: true

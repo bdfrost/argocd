@@ -1,0 +1,68 @@
+# Polls the Synology (super-duke, 192.168.100.250) over SNMP. Prometheus scrapes it
+# through the "synology" job in kube-prometheus-stack's additionalScrapeConfigs.
+# The image's built-in snmp.yml already has the synology and ucd_system_stats modules;
+# only the community string comes from our SealedSecret, loaded as a second config file.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snmp-exporter
+  namespace: synology-monitoring
+  labels:
+    app.kubernetes.io/name: snmp-exporter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: snmp-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: snmp-exporter
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      containers:
+        - name: snmp-exporter
+          image: quay.io/prometheus/snmp-exporter:v0.31.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/snmp_exporter/snmp.yml
+            - --config.file=/etc/snmp-auth/auth.yml
+          ports:
+            - name: http
+              containerPort: 9116
+          volumeMounts:
+            - name: auth
+              mountPath: /etc/snmp-auth
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            requests:
+              cpu: 20m
+              memory: 32Mi
+            limits:
+              memory: 128Mi
+      volumes:
+        - name: auth
+          secret:
+            secretName: snmp-exporter-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: snmp-exporter
+  namespace: synology-monitoring
+  labels:
+    app.kubernetes.io/name: snmp-exporter
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: snmp-exporter
+  ports:
+    - name: http
+      port: 9116
+      targetPort: http

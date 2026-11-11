@@ -1,0 +1,37 @@
+# release label: kube-prometheus-stack's default ruleSelector only picks up rules
+# labelled with its own release name.
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: synology
+  namespace: synology-monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: synology
+      rules:
+        - alert: SynologyHighCPU
+          expr: avg_over_time(cpuUtilization{job="synology"}[5m]) > 90
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Synology super-duke CPU at {{ $value | printf \"%.0f\" }}%"
+            description: "CPU has been over 90% for 10 minutes. The Synology correlation dashboard shows what the NAS and cluster were doing: https://grafana.frost.haus/d/synology-correlation"
+        - alert: SynologyDiskBusy
+          expr: max by (storageIODevice) (storageIOLA{job="synology"}) > 90
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Synology disk {{ $labels.storageIODevice }} over 90% busy"
+            description: "Disk load has been over 90% for 10 minutes. See https://grafana.frost.haus/d/synology-correlation"
+        - alert: SynologyExporterDown
+          expr: up{job="synology"} == 0
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Can't read the Synology over SNMP"
+            description: "The synology scrape has failed for 15 minutes. Check that SNMP is on in DSM and the community in the snmp-exporter-auth secret matches."

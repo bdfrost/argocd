@@ -118,3 +118,21 @@ kube-prometheus-stack:
               target_label: instance
             - target_label: __address__
               replacement: prometheus-pve-exporter.frost.haus:9221
+        # Synology super-duke over SNMP, via the exporter in charts/synology-monitoring.
+        # 60s keeps the SNMP walk light on the NAS's CPU. Community lives in that chart's SealedSecret.
+        - job_name: 'synology'
+          scrape_interval: 60s
+          scrape_timeout: 50s
+          metrics_path: /snmp
+          params:
+            module: [synology, ucd_system_stats]
+            auth: [synology_v2]
+          static_configs:
+            - targets: ['192.168.100.250']
+          relabel_configs:
+            - source_labels: [__address__]
+              target_label: __param_target
+            - target_label: instance
+              replacement: super-duke
+            - target_label: __address__
+              replacement: snmp-exporter.synology-monitoring.svc.cluster.local:9116

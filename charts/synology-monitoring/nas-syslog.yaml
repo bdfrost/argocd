@@ -1,0 +1,129 @@
+# Receives DSM Log Center's "Log Sending" (IETF / RFC5424 format) and ships it to Loki
+# with job="synology". Separate from the Alloy DaemonSet in charts/loki because it needs
+# one stable LoadBalancer address for the NAS to send to.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nas-syslog-config
+  namespace: synology-monitoring
+data:
+  config.alloy: |
+    loki.relabel "syslog" {
+      forward_to = []
+      rule {
+        source_labels = ["__syslog_message_hostname"]
+        target_label  = "host"
+      }
+      rule {
+        source_labels = ["__syslog_message_app_name"]
+        target_label  = "app"
+      }
+      rule {
+        source_labels = ["__syslog_message_severity"]
+        target_label  = "level"
+      }
+    }
+
+    loki.source.syslog "nas" {
+      listener {
+        address  = "0.0.0.0:1514"
+        protocol = "udp"
+        labels   = { job = "synology", protocol = "udp" }
+      }
+      listener {
+        address  = "0.0.0.0:1514"
+        protocol = "tcp"
+        labels   = { job = "synology", protocol = "tcp" }
+      }
+      relabel_rules = loki.relabel.syslog.rules
+      forward_to    = [loki.write.default.receiver]
+    }
+
+    loki.write "default" {
+      endpoint {
+        url = "http://loki-gateway.loki.svc.cluster.local/loki/api/v1/push"
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nas-syslog
+  namespace: synology-monitoring
+  labels:
+    app.kubernetes.io/name: nas-syslog
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nas-syslog
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nas-syslog
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      containers:
+        - name: alloy
+          image: grafana/alloy:v1.21.3
+          imagePullPolicy: IfNotPresent
+          args:
+            - run
+            - /etc/alloy/config.alloy
+            - --server.http.listen-addr=0.0.0.0:12345
+            - --storage.path=/tmp/alloy
+          ports:
+            - name: syslog-udp
+              containerPort: 1514
+              protocol: UDP
+            - name: syslog-tcp
+              containerPort: 1514
+              protocol: TCP
+            - name: http
+              containerPort: 12345
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: http
+          volumeMounts:
+            - name: config
+              mountPath: /etc/alloy
+          resources:
+            requests:
+              cpu: 20m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: nas-syslog-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nas-syslog
+  namespace: synology-monitoring
+  labels:
+    app.kubernetes.io/name: nas-syslog
+  # MetalLB picks an address from its pool and keeps it while this Service exists.
+  # To pin one, uncomment and set an unused pool address:
+  # annotations:
+  #   metallb.universe.tf/loadBalancerIPs: 192.168.100.x
+spec:
+  type: LoadBalancer
+  # Keep the NAS's source IP so syslog's connection address is real.
+  externalTrafficPolicy: Local
+  selector:
+    app.kubernetes.io/name: nas-syslog
+  ports:
+    - name: syslog-udp
+      port: 1514
+      targetPort: syslog-udp
+      protocol: UDP
+    - name: syslog-tcp
+      port: 1514
+      targetPort: syslog-tcp
+      protocol: TCP
