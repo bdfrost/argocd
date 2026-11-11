@@ -49,7 +49,9 @@ descheduler:
         pluginConfig:
           - name: DefaultEvictor
             args:
-              ignorePvcPods: true
+              # PVC pods hold most of the memory requests; ignoring them left
+              # nodes unbalanced after reboots (n2 98% / n3 1% requested).
+              ignorePvcPods: false
               evictLocalStoragePods: true
           - name: RemoveDuplicates
           - name: RemovePodsHavingTooManyRestarts
