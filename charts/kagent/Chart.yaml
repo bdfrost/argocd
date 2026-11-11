@@ -22,10 +22,17 @@ version: 0.4.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: "1.0"
 
+# Held on 0.10.x, the last line that keeps this install's shape. Until now 0.9.12 was running:
+# a 0.9.12 tgz was vendored under charts/, so Renovate's 0.10.x and 1.0.0 bumps never deployed.
+# kagent 1.0 is not a drop-in upgrade: the chart no longer bundles Postgres (it wants
+# owner/readwrite connection-string Secrets for a database you prepare), agents run in
+# Substrate sandboxes (a separate release with gVisor workers and pod certificates), and the
+# 1.0 schema starts fresh, so sessions and memories don't carry over. Plan it as its own
+# migration before taking Renovate's 1.x bump.
 dependencies:
   - name: kagent-crds
-    version: 1.0.0
+    version: 0.10.6
     repository: oci://ghcr.io/kagent-dev/kagent/helm
   - name: kagent
-    version: 1.0.0
+    version: 0.10.6
     repository: oci://ghcr.io/kagent-dev/kagent/helm

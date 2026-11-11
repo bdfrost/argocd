@@ -32,6 +32,12 @@ kube-prometheus-stack:
               requests:
                 storage: 2Gi
   grafana:
+    # Since chart 79 an unset admin password is random on every render, which would rewrite the
+    # Secret and restart Grafana on each ArgoCD re-render (any commit to main). Read it from a
+    # SealedSecret instead (templates/grafana-admin-sealedsecret.yaml). Grafana only uses it to
+    # seed a brand-new database and for the sidecars' reload calls; the login lives in grafana.db.
+    admin:
+      existingSecret: grafana-admin
     # keep UI-created dashboards/users across restarts (default is an emptyDir)
     persistence:
       enabled: true

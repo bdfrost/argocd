@@ -4,7 +4,7 @@ description: Immich - self-hosted photo and video backup (official immich-charts
 
 type: application
 
-version: 0.13.2
+version: 0.13.4
 
 appVersion: "v3.2.0"
 

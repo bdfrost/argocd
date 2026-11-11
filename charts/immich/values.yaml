@@ -1,5 +1,6 @@
 # Thin wrapper around the official Immich Helm chart
-# (oci://ghcr.io/immich-app/immich-charts/immich, vendored under charts/).
+# (oci://ghcr.io/immich-app/immich-charts/immich). ArgoCD fetches the version pinned in
+# Chart.lock; nothing is vendored under charts/, so Renovate bumps actually deploy.
 #
 # Cluster-specific overrides only. The chart itself bundles neither a
 # Postgres nor the library PVC, so this wrapper provides:

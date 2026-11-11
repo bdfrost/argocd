@@ -26,6 +26,12 @@
       "platformAutomerge": false
     },
     {
+      "description": "kagent 1.x needs Substrate, gVisor workers and a prepared Postgres, and starts a fresh schema. Stay on 0.x until that migration is planned (see charts/kagent/Chart.yaml).",
+      "matchFileNames": ["charts/kagent/**"],
+      "matchDepNames": ["kagent", "kagent-crds"],
+      "allowedVersions": "<1.0.0"
+    },
+    {
       "description": "Majors stay manual for review",
       "matchUpdateTypes": ["major"],
       "automerge": false
