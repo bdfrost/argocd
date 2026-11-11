@@ -85,6 +85,14 @@ immich:
   machine-learning:
     controllers:
       main:
+        # The model cache is an RWO iSCSI volume: a default rolling update
+        # schedules the new pod first and deadlocks on Multi-Attach when it
+        # lands on another node (stuck 7h on the v3.4.0 bump). Stop the old
+        # pod first instead (Recreate can't be switched to via Argo).
+        strategy: RollingUpdate
+        rollingUpdate:
+          surge: 0
+          unavailable: 1
         containers:
           main:
             resources:
