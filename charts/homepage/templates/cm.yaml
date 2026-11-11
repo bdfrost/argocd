@@ -270,6 +270,12 @@ data:
             icon: tautulli.png
             href: https://tautulli.frost.haus
             description: Plex history & stats
+            widget:
+              type: tautulli
+              url: https://tautulli.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_TAUTULLI_APIKEY{{ "}}" }}"
+              enableUser: true
+              showEpisodeNumber: true
     - Media Management:
         - Sonarr:
             icon: sonarr.png
@@ -463,6 +469,10 @@ data:
             icon: uptime-kuma.png
             href: https://uptime-kuma.frost.haus
             description: Uptime monitors & alerts
+            widget:
+              type: uptimekuma
+              url: https://uptime-kuma.frost.haus
+              slug: default
         - Speedtest Tracker:
             icon: speedtest-tracker.png
             href: https://speedtest-tracker.frost.haus
