@@ -70,11 +70,15 @@ descheduler:
               thresholds:
                 cpu: 20
                 memory: 20
-                pods: 20
+                # A node is only "underutilized" when every resource is below
+                # its threshold. Small daemonset/control pods put a fresh node
+                # over 20% pods while it is nearly empty, which blocked
+                # rebalancing. Memory is the real constraint here.
+                pods: 50
               targetThresholds:
                 cpu: 50
                 memory: 50
-                pods: 50
+                pods: 80
         plugins:
           balance:
             enabled:
