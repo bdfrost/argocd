@@ -110,7 +110,7 @@ metadata:
     app.kubernetes.io/name: nas-syslog
   annotations:
     # external-dns publishes this name in Technitium for the LoadBalancer IP.
-    external-dns.alpha.kubernetes.io/hostname: nas-syslog.frost.haus
+    external-dns.kubernetes.io/hostname: nas-syslog.frost.haus
     # MetalLB picks an address from its pool and keeps it while this Service exists.
     # To pin one, uncomment and set an unused pool address:
     # metallb.universe.tf/loadBalancerIPs: 192.168.100.x
