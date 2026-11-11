@@ -5,11 +5,13 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Values.name }}
 data:
+  # The cluster has no Traefik or Gateway API CRDs; enabling them only logs
+  # "Error getting httproutes: 404" on every page load.
   kubernetes.yaml: |
     mode: cluster
     ingress: true
-    traefik: true
-    gateway: true
+    traefik: false
+    gateway: false
   settings.yaml: |
     title: Frost Homelab
     headerStyle: boxedWidgets
@@ -33,24 +35,19 @@ data:
         columns: 4
         header: true
         icon: mdi-cog
+      Home & Life:
+        style: row
+        columns: 3
+        header: true
+        icon: mdi-home-heart
       AI:
         style: row
         columns: 3
         header: true
         icon: mdi-robot-outline
-      Apps:
+      Platform & Network:
         style: row
         columns: 3
-        header: true
-        icon: mdi-apps
-      Home:
-        style: row
-        columns: 3
-        header: true
-        icon: mdi-home-automation
-      Infrastructure:
-        style: row
-        columns: 4
         header: true
         icon: mdi-server-network
       Monitoring & Observability:
@@ -60,7 +57,7 @@ data:
         icon: mdi-chart-line
       Proxmox & Cluster:
         style: row
-        columns: 4
+        columns: 3
         header: true
         icon: mdi-server
     quicklaunch:
@@ -69,96 +66,139 @@ data:
       showSearchSuggestions: true
       hideVisitURL: false
   custom.css: |
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@300;400;500;600&display=swap');
 
-    /* Service + bookmark cards */
-    li.service,
-    li.bookmark {
-      border-radius: 0.75rem;
-      border: 1px solid transparent;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    }
-    li.service:hover,
-    li.bookmark:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
-      border-color: rgba(110, 231, 183, 0.25); /* soft emerald edge */
-    }
-
-    /* Serif display font for group headers + greeting */
-    h2.service-group-name,
-    h2.bookmark-group-name,
-    .information-widget-greeting {
-      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-      letter-spacing: 0.04em;
-    }
-    h2.service-group-name,
-    h2.bookmark-group-name {
-      font-size: 1.45rem;
-    }
-
-    /* Softer status dots */
-    .status-dot {
-      box-shadow: 0 0 6px currentColor;
-    }
-
-    /* Much darker page background, keeps the emerald tint */
+    /* Deep forest background: emerald glow top-left, warm amber glow bottom-right */
     :root {
-      --bg-color: 4 28 21 !important;
+      --bg-color: 4 22 17 !important;
+    }
+    body,
+    #page_wrapper {
+      background-color: rgb(4 22 17) !important;
+      background-image:
+        radial-gradient(1100px 650px at 8% -8%, rgba(16, 185, 129, 0.16), transparent 60%),
+        radial-gradient(900px 600px at 105% 108%, rgba(217, 160, 82, 0.10), transparent 60%),
+        radial-gradient(700px 500px at 60% 40%, rgba(6, 78, 59, 0.25), transparent 70%) !important;
+      background-attachment: fixed !important;
     }
     body {
-      background-color: rgb(4 28 21) !important;
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    }
+    .container {
+      max-width: 1640px;
+    }
+
+    /* Header widgets */
+    .information-widget-logo img {
+      border-radius: 0.6rem;
+      box-shadow: 0 0 0 1px rgba(110, 231, 183, 0.25), 0 6px 18px rgba(0, 0, 0, 0.5);
+    }
+    .information-widget-greeting,
+    .information-widget-greeting span {
+      font-family: 'Cormorant Garamond', Georgia, serif !important;
+      font-size: 1.9rem !important;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: rgb(209 250 229);
+    }
+    .information-widget-datetime span {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Group headers: serif title followed by a fading rule */
+    h2.service-group-name,
+    h2.bookmark-group-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgb(209 250 229);
+    }
+    .services-group button[id^="headlessui-disclosure-button"]::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      margin-left: 1rem;
+      align-self: center;
+      background: linear-gradient(90deg, rgba(110, 231, 183, 0.35), transparent);
+    }
+    .service-group-icon {
+      color: rgb(110 231 183);
+      opacity: 0.85;
+    }
+
+    /* Cards: frosted glass, hairline border, lift on hover */
+    .service-card,
+    li.bookmark > a,
+    li.bookmark > div {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025)) !important;
+      border: 1px solid rgba(167, 243, 208, 0.08);
+      border-radius: 0.85rem !important;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
+    }
+    li.service:hover .service-card,
+    li.bookmark:hover > a,
+    li.bookmark:hover > div {
+      transform: translateY(-2px);
+      border-color: rgba(110, 231, 183, 0.35);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)) !important;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.12) !important;
+    }
+    .service-name {
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .service-description {
+      opacity: 0.8;
+    }
+    .service-icon img,
+    .service-icon > div {
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+    }
+
+    /* Widget stat tiles: tinted chips with bold numbers */
+    .service-block {
+      background: rgba(16, 185, 129, 0.07) !important;
+      border: 1px solid rgba(110, 231, 183, 0.08);
+      border-radius: 0.55rem !important;
+    }
+    .service-block-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgb(236 253 245);
+      font-variant-numeric: tabular-nums;
+    }
+    .service-block-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
+    /* Status dots glow */
+    .service-ping div,
+    .status-dot {
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* Bookmarks: quieter than services */
+    h2.bookmark-group-name {
+      font-size: 1.25rem;
+    }
+    li.bookmark .bookmark-description {
+      opacity: 0.6;
+    }
+
+    #version {
+      opacity: 0.35;
     }
   custom.js: ""
   bookmarks.yaml: |
-    - Quick Access:
-      - Plex:
-        - icon: plex.png
-          href: https://peppers.frost.haus
-          description: Media server
-      - Home Assistant:
-        - icon: home-assistant.png
-          href: http://homeassistant.frost.haus:8123
-          description: Home automation
-    - Documentation:
-      - Kubernetes Docs:
-        - icon: kubernetes.png
-          href: https://kubernetes.io/docs/
-          description: Kubernetes documentation
-      - ArgoCD Docs:
-        - icon: argo-cd.png
-          href: https://argo-cd.readthedocs.io/
-          description: ArgoCD documentation
-      - Proxmox Docs:
-        - icon: proxmox.png
-          href: https://pve.proxmox.com/wiki/
-          description: Proxmox wiki & docs
-      - Homepage Docs:
-        - icon: homepage.png
-          href: https://gethomepage.dev/
-          description: Homepage configuration docs
-    - Development:
-      - GitHub:
+    - Cloud & Code:
+      - Homelab Repo:
         - icon: github.png
-          href: https://github.com/
-          description: Code repositories
-      - Docker Hub:
-        - icon: docker.png
-          href: https://hub.docker.com/
-          description: Container images
-    - Network Admin:
-      - DNS 1 (Technitium):
-        - icon: mdi-dns
-          href: http://192.168.100.41:5380
-          description: Primary DNS console
-      - DNS 2 (Technitium):
-        - icon: mdi-dns
-          href: http://192.168.100.42:5380
-          description: Secondary DNS console
-      - Router:
-        - icon: mdi-router-wireless
-          href: http://192.168.100.1
-          description: Gateway admin
+          href: https://github.com/bdfrost/argocd
+          description: bdfrost/argocd GitOps
       - Cloudflare:
         - icon: cloudflare.png
           href: https://dash.cloudflare.com
@@ -167,6 +207,27 @@ data:
         - icon: google-cloud.png
           href: https://console.cloud.google.com/home/dashboard?project=apps-dev-636f
           description: apps-dev-636f project
+      - Docker Hub:
+        - icon: docker.png
+          href: https://hub.docker.com/
+          description: Container images
+    - Documentation:
+      - Kubernetes:
+        - icon: kubernetes.png
+          href: https://kubernetes.io/docs/
+          description: Kubernetes docs
+      - Argo CD:
+        - icon: argo-cd.png
+          href: https://argo-cd.readthedocs.io/
+          description: Argo CD docs
+      - Proxmox:
+        - icon: proxmox.png
+          href: https://pve.proxmox.com/wiki/
+          description: Proxmox wiki
+      - Homepage:
+        - icon: homepage.png
+          href: https://gethomepage.dev/
+          description: Homepage config docs
     - Entertainment:
       - YouTube:
         - icon: youtube.png
@@ -175,21 +236,26 @@ data:
       - Reddit:
         - icon: reddit.png
           href: https://reddit.com/
-          description: Social news aggregation
+          description: Social news
   services.yaml: |
     - Media & Entertainment:
-        - Immich:
-            icon: mdi-image-multiple
-            href: https://immich.frost.haus
-            description: Self-hosted photo & video library
         - Plex:
             icon: plex.png
             href: https://peppers.frost.haus
             description: Media streaming server
-            widgets:
-              - type: plex
-                url: https://peppers.frost.haus
-                key: "{{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}"
+            widget:
+              type: plex
+              url: https://peppers.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_PLEX_APIKEY{{ "}}" }}"
+        - Seerr:
+            icon: overseerr.png
+            href: https://seerr.frost.haus
+            description: Media requests
+            widget:
+              type: seerr
+              url: https://seerr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
+              fields: ["pending", "approved", "completed"]
         - Tracearr:
             icon: tracearr.png
             href: https://tracearr.frost.haus
@@ -201,19 +267,15 @@ data:
               enableUser: true
               showEpisodeNumber: true
               expandOneStreamToTwoRows: false
-        - Seerr:
-            icon: overseerr.png
-            href: https://seerr.frost.haus
-            description: Media request management
-            widget:
-              type: seerr
-              url: https://seerr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_OVERSEERR_APIKEY{{ "}}" }}"
-              fields: ["pending", "approved", "completed"]
+        - Tautulli:
+            icon: tautulli.png
+            href: https://tautulli.frost.haus
+            description: Plex history & stats
+    - Media Management:
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frost.haus
-            description: TV show management
+            description: TV shows
             widget:
               type: sonarr
               url: https://sonarr.frost.haus
@@ -221,7 +283,7 @@ data:
         - Radarr:
             icon: radarr.png
             href: https://radarr.frost.haus
-            description: Movie management
+            description: Movies
             widget:
               type: radarr
               url: https://radarr.frost.haus
@@ -229,20 +291,12 @@ data:
         - Prowlarr:
             icon: prowlarr.png
             href: https://prowlarr.frost.haus
-            description: Indexer management
+            description: Indexers
             widget:
               type: prowlarr
               url: https://prowlarr.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_PROWLARR_APIKEY{{ "}}" }}"
-        - Bazarr:
-            icon: bazarr.png
-            href: https://bazarr.frost.haus
-            description: Subtitle management
-            widget:
-              type: bazarr
-              url: https://bazarr.frost.haus
-              key: "{{ "{{" }}HOMEPAGE_VAR_BAZARR_APIKEY{{ "}}" }}"
-        - Sabnzbd:
+        - SABnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frost.haus
             description: Usenet downloader
@@ -250,73 +304,83 @@ data:
               type: sabnzbd
               url: https://sabnzbd.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_SABNZBD_APIKEY{{ "}}" }}"
-    - Media Management:
+        - Bazarr:
+            icon: bazarr.png
+            href: https://bazarr.frost.haus
+            description: Subtitles
+            widget:
+              type: bazarr
+              url: https://bazarr.frost.haus
+              key: "{{ "{{" }}HOMEPAGE_VAR_BAZARR_APIKEY{{ "}}" }}"
+        - Chaptarr:
+            icon: mdi-book-open-page-variant
+            href: https://chaptarr.frost.haus
+            description: eBooks & audiobooks
+        - Livrarr:
+            icon: mdi-bookshelf
+            href: https://livrarr.frost.haus
+            description: Book & reading management
+        - Agregarr:
+            icon: agregarr.png
+            href: https://agregarr.frost.haus
+            description: Bulk add media to the arrs
+        - Cleanuparr:
+            icon: mdi-broom
+            href: https://cleanuparr.frost.haus
+            description: Queue & download cleanup
+        - Maintainerr:
+            icon: mdi-wrench
+            href: https://maintainerr.frost.haus
+            description: Plex library maintenance
+        - Arr MCP:
+            icon: mdi-api
+            href: https://arr-mcp.frost.haus
+            description: One MCP endpoint for the media stack
+        # Last in the group: the agenda is tall, so it only stretches the final row.
         - Calendar:
             icon: mdi-calendar
-            description: Upcoming media releases
+            description: Upcoming releases
             widget:
               type: calendar
               firstDayInWeek: sunday
               view: agenda
-              maxEvents: 10
+              maxEvents: 8
               showTime: true
               timezone: America/Chicago
               integrations:
                 - type: sonarr
-                  service_group: Media & Entertainment
+                  service_group: Media Management
                   service_name: Sonarr
                   color: teal
                   baseUrl: https://sonarr.frost.haus
                   params:
                     unmonitored: true
                 - type: radarr
-                  service_group: Media & Entertainment
+                  service_group: Media Management
                   service_name: Radarr
                   color: orange
                   baseUrl: https://radarr.frost.haus
                   params:
                     unmonitored: true
-        - Agregarr:
-            icon: agregarr.png
-            href: https://agregarr.frost.haus
-            description: Bulk add media to Arr apps
-        - Arr MCP:
-            icon: mdi-api
-            href: https://arr-mcp.frost.haus
-            description: One MCP endpoint for the whole media stack
-        - Chaptarr:
-            icon: mdi-book-open-page-variant
-            href: https://chaptarr.frost.haus
-            description: eBook and audiobook collection manager
-        - Livrarr:
-            icon: mdi-bookshelf
-            href: https://livrarr.frost.haus
-            description: Book & reading management
-        - Cleanuparr:
-            icon: mdi-broom
-            href: https://cleanuparr.frost.haus
-            description: Cleanup media in Arr apps
-        - Maintainerr:
-            icon: mdi-wrench
-            href: https://maintainerr.frost.haus
-            description: Automated Plex library maintenance
-    - AI:
-        - Open WebUI:
-            icon: open-webui.png
-            href: https://open-webui.frost.haus
-            description: Local LLM interface
-        - Ollama:
-            icon: ollama.png
-            href: https://ollama.frost.haus
-            description: Local model runtime
+    - Home & Life:
+        - Home Assistant:
+            icon: home-assistant.png
+            href: http://homeassistant.frost.haus:8123
+            description: Home automation
+            proxmoxNode: pve2
+            proxmoxVMID: 109
             widget:
-              type: ollama
-              url: https://ollama.frost.haus
-        - kagent:
-            icon: mdi-robot-outline
-            href: https://kagent-ui.frost.haus
-            description: Kubernetes agent framework UI
-    - Apps:
+              type: homeassistant
+              url: http://homeassistant.frost.haus:8123
+              key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
+        - Immich:
+            icon: immich.png
+            href: https://immich.frost.haus
+            description: Photo & video library
+        - BirdNET-Go:
+            icon: mdi-bird
+            href: https://birdnet-go.frost.haus
+            description: Birdsong detection
         - Poterie:
             icon: mdi-flower-outline
             href: https://poterie.frost.haus
@@ -329,118 +393,144 @@ data:
             icon: dawarich.png
             href: https://dawarich.frost.haus
             description: Location history
-    - Home:
-        - Home Assistant:
-            icon: home-assistant.png
-            href: http://homeassistant.frost.haus:8123
-            description: Home automation
-        - BirdNET-Go:
-            icon: mdi-bird
-            href: https://birdnet-go.frost.haus
-            description: Birdsong detection & logging
-    - Infrastructure:
+    - AI:
+        - Open WebUI:
+            icon: open-webui.png
+            href: https://open-webui.frost.haus
+            description: Local LLM chat
+        - Ollama:
+            icon: ollama.png
+            href: https://ollama.frost.haus
+            description: Local model runtime
+        - kagent:
+            icon: mdi-robot-outline
+            href: https://kagent-ui.frost.haus
+            description: Kubernetes agent framework
+    - Platform & Network:
         - Argo CD:
             icon: argo-cd.png
             href: https://argocd.frost.haus
-            description: GitOps continuous delivery
+            description: GitOps delivery
             widget:
               type: argocd
               url: https://argocd.frost.haus
               key: "{{ "{{" }}HOMEPAGE_VAR_ARGOCD_APIKEY{{ "}}" }}"
               fields: ["apps", "synced", "outOfSync", "healthy"]
+        - Synology NAS:
+            icon: synology.png
+            href: http://192.168.100.250:5000
+            description: DS1817+ · iSCSI & NFS storage
+            ping: 192.168.100.250
         - Skooner:
             icon: kubernetes.png
             href: https://skooner.frost.haus
             description: Kubernetes dashboard
-        - Prometheus:
-            icon: prometheus.png
-            href: https://prometheus.frost.haus
-            description: Metrics collection & alerting
-            widget:
-              type: prometheus
-              url: https://prometheus.frost.haus
+        - DNS 1:
+            icon: technitium.png
+            href: http://192.168.100.41:5380
+            description: Technitium · primary
+            proxmoxNode: pve3
+            proxmoxVMID: 105
+            proxmoxType: lxc
+        - DNS 2:
+            icon: technitium.png
+            href: http://192.168.100.42:5380
+            description: Technitium · secondary
+            proxmoxNode: pve3
+            proxmoxVMID: 113
+            proxmoxType: lxc
+        - Router:
+            icon: mdi-router-wireless
+            href: http://192.168.100.1
+            description: Gateway admin
+            ping: 192.168.100.1
+    - Monitoring & Observability:
         - Grafana:
             icon: grafana.png
             href: https://grafana.frost.haus
-            description: Metrics visualization
-        - Alertmanager:
-            icon: mdi-alert-circle
-            href: https://alertmanager.frost.haus
-            description: Alert management & routing
-    - Monitoring & Observability:
-        - Uptime Kuma:
-            icon: mdi-bell
-            href: https://uptime-kuma.frost.haus
-            description: Uptime monitoring & alerts
+            description: Dashboards
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.frost.haus
+            description: Metrics & alert rules
             widget:
-              type: uptimekuma
-              url: https://uptime-kuma.frost.haus/
-              slug: default
-        - changedetection.io:
-            icon: mdi-web
-            href: https://changedetection.frost.haus
-            description: Website change detection and notifications
+              type: prometheus
+              url: https://prometheus.frost.haus
+        - Alertmanager:
+            icon: alertmanager.png
+            href: https://alertmanager.frost.haus
+            description: Alert routing to Slack
+        - Uptime Kuma:
+            icon: uptime-kuma.png
+            href: https://uptime-kuma.frost.haus
+            description: Uptime monitors & alerts
         - Speedtest Tracker:
-            icon: mdi-speedometer
+            icon: speedtest-tracker.png
             href: https://speedtest-tracker.frost.haus
-            description: Internet speed history & trends
+            description: Internet speed history
             widget:
               type: speedtest
               url: https://speedtest-tracker.frost.haus
               bitratePrecision: 0
+        - changedetection.io:
+            icon: changedetection.png
+            href: https://changedetection.frost.haus
+            description: Website change alerts
         - Dozzle:
             icon: dozzle.png
             href: https://dozzle.frost.haus
-            description: Live container log viewer
+            description: Live container logs
     - Proxmox & Cluster:
         - Proxmox VE:
             icon: proxmox.png
             href: https://pve1.frost.haus:8006
-            description: Virtualization platform
-            ping: https://pve1.frost.haus:8006
+            description: pve1 · pve2 · pve3
             widget:
               type: proxmox
               url: https://pve1.frost.haus:8006
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PVE_APIKEY{{ "}}" }}"
-              fields: ["vms", "lxc"]
+              fields: ["vms", "lxc", "resources.cpu", "resources.mem"]
         - Proxmox Backup Server:
             icon: proxmox.png
             href: https://pbs.frost.haus:8007
-            description: Backup solution
-            ping: https://pbs.frost.haus:8007
+            description: Backups
             widget:
               type: proxmoxbackupserver
               url: https://pbs.frost.haus:8007
               username: root@pam!homepage.io
               password: "{{ "{{" }}HOMEPAGE_VAR_PBS_APIKEY{{ "}}" }}"
               fields: ["datastore_usage", "failed_tasks_24h", "cpu_usage", "memory_usage"]
-        - K8s-c1:
+        - k8s-c1:
             icon: kubernetes.png
             description: Control plane · 192.168.100.175
-            ping: https://192.168.100.175:10250
-        - K8s-n1:
+            proxmoxNode: pve1
+            proxmoxVMID: 106
+        - k8s-n1:
             icon: kubernetes.png
-            description: Worker node · 192.168.100.137
-            ping: https://192.168.100.137:10250
-        - K8s-n2:
+            description: Worker · 192.168.100.137
+            proxmoxNode: pve1
+            proxmoxVMID: 100
+        - k8s-n2:
             icon: kubernetes.png
-            description: Worker node · 192.168.100.156
-            ping: https://192.168.100.156:10250
-        - K8s-n3:
+            description: Worker · 192.168.100.156
+            proxmoxNode: pve2
+            proxmoxVMID: 104
+        - k8s-n3:
             icon: kubernetes.png
-            description: Worker node · 192.168.100.145
-            ping: https://192.168.100.145:10250
+            description: Worker · 192.168.100.145
+            proxmoxNode: pve3
+            proxmoxVMID: 103
   widgets.yaml: |
     - logo:
-        icon: https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/homepage.png
+        icon: https://raw.githubusercontent.com/bdfrost/argocd/main/charts/homepage/images/botanical-logo.jpg
     - greeting:
         text_size: xl
-        text: "Welcome to Frost Homelab"
+        text: "Frost Homelab"
     - datetime:
         text_size: xl
         format:
-          dateStyle: long
+          dateStyle: full
           timeStyle: short
           hour12: false
     - search:
@@ -467,30 +557,9 @@ data:
           memory: true
           showLabel: true
   docker.yaml: ""
+  # API credentials for the proxmoxNode/proxmoxVMID stats on service cards.
+  # One cluster endpoint serves every node, so the top-level form is enough.
   proxmox.yaml: |
-    - HomeAssistant:
-      icon: home-assistant.png
-      href: http://homeassistant.frost.haus:8123/
-      description: Home automation
-      proxmoxNode: pve2.frost.haus
-      proxmoxVMID: 100
-    - K8s-n1:
-      icon: kubernetes.png
-      description: K8s Node 1
-      proxmoxNode: pve1.frost.haus
-      proxmoxVMID: 107
-    - K8s-n2:
-      icon: kubernetes.png
-      description: K8s Node 2
-      proxmoxNode: pve2.frost.haus
-      proxmoxVMID: 104
-    - K8s-n3:
-      icon: kubernetes.png
-      description: K8s Node 3
-      proxmoxNode: pve3.frost.haus
-      proxmoxVMID: 103
-    - K8s-c1:
-      icon: kubernetes.png
-      description: K8s Controller Node
-      proxmoxNode: pve3.frost.haus
-      proxmoxVMID: 106
+    url: https://pve1.frost.haus:8006
+    token: root@pam!homepage.io
+    secret: "{{ "{{" }}HOMEPAGE_VAR_PVE_APIKEY{{ "}}" }}"
