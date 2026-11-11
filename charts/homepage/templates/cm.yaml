@@ -176,7 +176,6 @@ data:
     }
 
     /* Status dots glow */
-    .service-ping div,
     .status-dot {
       box-shadow: 0 0 8px currentColor;
     }
