@@ -59,6 +59,8 @@ In `charts/uptime-kuma/templates/autokuma-configmap.yaml`, add a key `<app>.json
 
 AutoKuma uses the key (minus `.json`) as the monitor's id, so keys can be added, removed or reordered freely. Removing a key deletes that monitor in Kuma. Renaming a key recreates the monitor and loses its history.
 
+Then add the monitor's `name` to the right group in `charts/uptime-kuma/templates/status-page-configmap.yaml` (`layout.json`). The hourly `status-page-sync` CronJob applies that layout to the public status page. Unlisted monitors land in an "Other" group, and a listed name with no matching monitor fails the job. The page lives only in kuma.db, so edit it here, not in the Kuma UI.
+
 ## Conventions
 
 - Pin exact image tags; never use `latest`. Use `pullPolicy: IfNotPresent`.

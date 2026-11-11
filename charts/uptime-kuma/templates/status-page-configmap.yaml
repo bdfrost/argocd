@@ -1,0 +1,194 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: uptime-kuma-status-page
+data:
+  # The public status page (/status/default), kept here because Kuma stores status pages
+  # only in kuma.db: the 2026-11-10 DB rebuild silently deleted the old one. AutoKuma
+  # 2.0.0 can't manage status pages (its save is rejected by Kuma 2.5, and groups can
+  # only reference monitors by numeric DB id), so the status-page-sync CronJob applies
+  # this instead. Monitors are listed by display name ("name" in the AutoKuma monitor
+  # JSON) and resolved to ids on every run, so recreated monitors stay on the page.
+  # Monitors not listed here land in a trailing "Other" group. Edits made in the Kuma UI
+  # are overwritten on the next run.
+  layout.json: |-
+    {
+      "slug": "default",
+      "config": {
+        "title": "Frost Haus Homelab",
+        "description": "Live status of homelab services",
+        "icon": "/icon.svg",
+        "theme": "auto",
+        "published": true,
+        "showTags": false,
+        "customCSS": "",
+        "footerText": null,
+        "showPoweredBy": false,
+        "showCertificateExpiry": true,
+        "autoRefreshInterval": 300,
+        "analyticsType": null,
+        "analyticsId": null,
+        "analyticsScriptUrl": null
+      },
+      "groups": [
+        {
+          "name": "Infrastructure",
+          "monitors": [
+            "Proxmox pve1",
+            "Proxmox pve2",
+            "Proxmox pve3",
+            "Proxmox Backup Server",
+            "Synology NAS",
+            "DNS1",
+            "DNS1 Resolution",
+            "DNS2",
+            "DNS2 Resolution"
+          ]
+        },
+        {
+          "name": "Platform & Monitoring",
+          "monitors": [
+            "Argo CD",
+            "Prometheus",
+            "Alertmanager",
+            "Grafana",
+            "Uptime Kuma",
+            "Dozzle",
+            "Skooner",
+            "kagent",
+            "Homepage",
+            "Speedtest Tracker"
+          ]
+        },
+        {
+          "name": "Media",
+          "monitors": [
+            "Plex",
+            "Tautulli",
+            "Seerr",
+            "Radarr",
+            "Sonarr",
+            "Bazarr",
+            "Prowlarr",
+            "SABnzbd",
+            "SABnzbd TLS Certificate",
+            "Agregarr",
+            "Maintainerr",
+            "Cleanuparr",
+            "Chaptarr",
+            "Livrarr",
+            "Tracearr",
+            "Arr MCP"
+          ]
+        },
+        {
+          "name": "Home & Apps",
+          "monitors": [
+            "Home Assistant",
+            "Immich",
+            "Dawarich",
+            "Photon",
+            "BirdNET-Go",
+            "Open WebUI",
+            "Ollama",
+            "SimpleFIN",
+            "changedetection.io",
+            "Poterie",
+            "Poterie (poterie.app)"
+          ]
+        }
+      ]
+    }
+  # Runs in the Uptime Kuma image so the bundled socket.io client always matches the
+  # server. Idempotent: creates the page if missing and only saves when it differs.
+  sync.js: |-
+    const { io } = require("/app/node_modules/socket.io-client");
+    const layout = require("/config/layout.json");
+
+    const url = process.env.KUMA_URL;
+    const slug = layout.slug;
+    let failed = false;
+
+    async function currentPage() {
+      const res = await fetch(`${url}/api/status-page/${slug}`);
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error(`GET status page: HTTP ${res.status}`);
+      return res.json();
+    }
+
+    function desiredGroups(monitors) {
+      const byName = new Map(Object.values(monitors).map((m) => [m.name, m.id]));
+      const placed = new Set();
+      const groups = layout.groups.map((g) => ({
+        name: g.name,
+        monitorList: g.monitors.flatMap((name) => {
+          placed.add(name);
+          if (!byName.has(name)) {
+            console.log(`WARN: monitor "${name}" (group ${g.name}) does not exist in Kuma`);
+            failed = true;
+            return [];
+          }
+          return [{ id: byName.get(name) }];
+        }),
+      }));
+      const other = [...byName].filter(([name]) => !placed.has(name)).sort();
+      if (other.length) {
+        console.log(`INFO: not in layout, adding to "Other": ${other.map(([n]) => n).join(", ")}`);
+        groups.push({ name: "Other", monitorList: other.map(([, id]) => ({ id })) });
+      }
+      return groups;
+    }
+
+    function inSync(page, groups) {
+      if (!page) return false;
+      const configMatches = Object.entries(layout.config).every(([k, v]) => page.config[k] === v);
+      const shape = (gs) => JSON.stringify(gs.map((g) => [g.name, g.monitorList.map((m) => m.id)]));
+      return configMatches && shape(page.publicGroupList) === shape(groups);
+    }
+
+    const socket = io(url, { transports: ["websocket"], reconnection: false });
+    const call = (event, ...args) => new Promise((resolve) => socket.emit(event, ...args, resolve));
+    const monitorList = new Promise((resolve) => socket.once("monitorList", resolve));
+
+    setTimeout(() => {
+      console.log("ERROR: timed out");
+      process.exit(1);
+    }, 60000);
+    socket.on("connect_error", (err) => {
+      console.log(`ERROR: cannot connect to ${url}: ${err.message}`);
+      process.exit(1);
+    });
+
+    socket.on("connect", async () => {
+      try {
+        const login = await call("login", {
+          username: process.env.KUMA_USERNAME,
+          password: process.env.KUMA_PASSWORD,
+          token: "",
+        });
+        if (!login.ok) throw new Error(`login failed: ${login.msg}`);
+
+        const groups = desiredGroups(await monitorList);
+        let page = await currentPage();
+        if (inSync(page, groups)) {
+          console.log(`status page "${slug}" is up to date`);
+        } else {
+          if (!page) {
+            const add = await call("addStatusPage", layout.config.title, slug);
+            if (!add.ok) throw new Error(`addStatusPage: ${add.msg}`);
+            console.log(`created status page "${slug}"`);
+          }
+          // saveStatusPage requires domainNameList; it's absent from the public API, so it
+          // lives here rather than in layout.config (which is compared against that API).
+          const config = { slug, domainNameList: [], ...layout.config };
+          // The logo argument must be a string; "/icon.svg" keeps the default image.
+          const save = await call("saveStatusPage", slug, config, config.icon, groups);
+          if (!save.ok) throw new Error(`saveStatusPage: ${save.msg}`);
+          console.log(`saved status page "${slug}": ${groups.map((g) => `${g.name} (${g.monitorList.length})`).join(", ")}`);
+        }
+        process.exit(failed ? 1 : 0);
+      } catch (err) {
+        console.log(`ERROR: ${err.message}`);
+        process.exit(1);
+      }
+    });

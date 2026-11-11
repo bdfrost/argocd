@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: status-page-sync
+spec:
+  # Hourly, off the hour. Also recreates the page after a kuma.db reset, once Kuma is
+  # set up and AutoKuma has recreated the monitors (earlier runs fail and retry).
+  schedule: "23 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 300
+      template:
+        spec:
+          containers:
+            - name: status-page-sync
+              # Same image as Kuma itself, so the socket.io client matches the server.
+              image: "{{ index .Values "uptime-kuma" "image" "repository" }}:{{ index .Values "uptime-kuma" "image" "tag" }}"
+              imagePullPolicy: IfNotPresent
+              command: ["node", "/config/sync.js"]
+              env:
+                - name: KUMA_URL
+                  value: http://uptime-kuma:443
+                - name: KUMA_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: uptime-kuma-management
+                      key: username
+                - name: KUMA_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: uptime-kuma-management
+                      key: password
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 64Mi
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+                  readOnly: true
+          volumes:
+            - name: config
+              configMap:
+                name: uptime-kuma-status-page
+          restartPolicy: Never
