@@ -1,0 +1,38 @@
+# Homelab alerts the kube-prometheus-stack defaults don't cover. They go to Slack #general
+# through the AlertmanagerConfig in alertManager.yaml. The release label is what the
+# operator's ruleSelector matches on.
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: homelab
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: homelab.storage
+      rules:
+        # KubePersistentVolumeFillingUp only fires on a fast fill (full within 4 days) or
+        # under 3% free; a volume creeping past 90% over weeks never trips it.
+        - alert: PersistentVolumeAlmostFull
+          expr: |
+            max by (namespace, persistentvolumeclaim) (
+              kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes
+            ) > 0.90
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "PVC {{`{{ $labels.namespace }}`}}/{{`{{ $labels.persistentvolumeclaim }}`}} is over 90% full"
+            description: "{{`{{ $labels.namespace }}`}}/{{`{{ $labels.persistentvolumeclaim }}`}} is {{`{{ $value | humanizePercentage }}`}} used. Days-until-full is on https://grafana.frost.haus/d/homelab-storage"
+    - name: homelab.certificates
+      rules:
+        # cert-manager renews 30 days out, so a cert this close to expiry means renewal is failing.
+        - alert: CertificateRenewalFailing
+          expr: (certmanager_certificate_expiration_timestamp_seconds - time()) < 14 * 86400
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "Certificate {{`{{ $labels.namespace }}`}}/{{`{{ $labels.name }}`}} expires in under 14 days"
+            description: "cert-manager should have renewed it at 30 days. Check the Certificate and its Order/Challenge (Cloudflare DNS01). https://grafana.frost.haus/d/homelab-delivery"

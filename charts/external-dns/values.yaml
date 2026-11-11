@@ -20,7 +20,11 @@ external-dns:
   rbac:
     create: true
     apiVersion: v1
-  logLevel: debug
+  # debug logged every record of every sync (~40k lines/hour, the biggest source in Loki).
+  logLevel: info
+  # sync age and Technitium errors for the Homelab / Delivery dashboard
+  serviceMonitor:
+    enabled: true
   env:
     - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
       valueFrom:

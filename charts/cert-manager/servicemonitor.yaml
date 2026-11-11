@@ -1,0 +1,15 @@
+# cert-manager's controller serves metrics on 9402 (certificate expiry and readiness);
+# nothing scraped it. Feeds the certificate panels and the CertificateRenewalFailing alert.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/component: controller
+  endpoints:
+    - port: tcp-prometheus-servicemonitor
+      path: /metrics

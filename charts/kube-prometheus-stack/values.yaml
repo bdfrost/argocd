@@ -45,6 +45,13 @@ kube-prometheus-stack:
       rollingUpdate:
         maxSurge: 0
         maxUnavailable: 1
+    # Lets a dashboard ConfigMap pick its folder with a grafana_folder annotation
+    # (templates/homelab-dashboards.yaml uses "Homelab"). Unannotated ones stay in General.
+    sidecar:
+      dashboards:
+        folderAnnotation: grafana_folder
+        provider:
+          foldersFromFilesStructure: true
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -87,19 +94,16 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 20Gi
+      # By default the operator only reads ServiceMonitors/PodMonitors labelled
+      # release=kube-prometheus-stack, so every other chart's monitor (grafana, loki, immich,
+      # argocd, the arr exporters...) was silently ignored. Read them from every namespace.
+      # PrometheusRules still need the release label (ruleSelector is unchanged).
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      # The sonarr/radarr/prowlarr/sabnzbd exporters used to be static jobs here because their
+      # ServiceMonitors weren't picked up. They are now, so the static jobs are gone (they'd
+      # scrape everything twice).
       additionalScrapeConfigs:
-        - job_name: "sonarr-exporter"
-          static_configs:
-            - targets: ["sonarr-exporter.sonarr-exporter.svc.cluster.local:9707"]
-        - job_name: "radarr-exporter"
-          static_configs:
-            - targets: ["radarr-exporter.radarr-exporter.svc.cluster.local:9707"]
-        - job_name: "prowlarr-exporter"
-          static_configs:
-            - targets: ["prowlarr-exporter.prowlarr-exporter.svc.cluster.local:9707"]
-        - job_name: "sabnzbd-exporter"
-          static_configs:
-            - targets: ["sabnzbd-exporter.sabnzbd-exporter.svc.cluster.local:9707"]
         - job_name: 'pve'
           static_configs:
             - targets:
@@ -136,3 +140,10 @@ kube-prometheus-stack:
               replacement: super-duke
             - target_label: __address__
               replacement: snmp-exporter.synology-monitoring.svc.cluster.local:9116
+  # Every node is Linux; the AIX and macOS node-exporter dashboards were empty clutter.
+  nodeExporter:
+    operatingSystems:
+      aix:
+        enabled: false
+      darwin:
+        enabled: false

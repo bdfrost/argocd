@@ -65,4 +65,6 @@ AutoKuma uses the key (minus `.json`) as the monitor's id, so keys can be added,
 - Add a `# renovate: datasource=docker depName=<image>` comment above the tag when Renovate can't infer the image. Add `versioning=loose` for non-semver tags.
 - Comment any non-obvious workaround inline, saying why it exists. Examples in the repo: `ARR_MCP_PORT` being clobbered by service-link env vars; the initContainer that seeds config from a secret.
 - Nothing is applied by hand with `kubectl apply`. Every change goes through git.
+- Monitoring: Prometheus reads ServiceMonitors and PodMonitors from every namespace, so a chart's own `serviceMonitor.enabled` is enough (no `release` label). PrometheusRules still need `release: kube-prometheus-stack`.
+- Grafana dashboards are JSON files in `charts/kube-prometheus-stack/dashboards/`; each becomes a ConfigMap in the Homelab folder. Build or edit in Grafana, export the JSON (keep the `uid`), and commit it there. UI edits to provisioned dashboards don't persist.
 - Commit messages use conventional commits: `feat(<app>): add …`, `fix(<app>): …`, `chore(<app>): …`. For new apps, the body is a bullet list of each file group and the reasoning behind it.
