@@ -9,16 +9,27 @@ metadata:
     release: kube-prometheus-stack
 spec:
   groups:
+    # This DSM doesn't answer Synology's own cpuUtilization/memUtilization OIDs, so CPU
+    # and memory come from the UCD counters. rate() on a {__name__=~...} selector fails
+    # ("same labelset"), hence one sum per counter.
+    - name: synology-recording
+      rules:
+        - record: synology:cpu_busy:percent
+          expr: 100 * (sum(rate(ssCpuRawUser{job="synology"}[5m])) + sum(rate(ssCpuRawNice{job="synology"}[5m])) + sum(rate(ssCpuRawSystem{job="synology"}[5m]))) / (sum(rate(ssCpuRawUser{job="synology"}[5m])) + sum(rate(ssCpuRawNice{job="synology"}[5m])) + sum(rate(ssCpuRawSystem{job="synology"}[5m])) + sum(rate(ssCpuRawIdle{job="synology"}[5m])) + sum(rate(ssCpuRawWait{job="synology"}[5m])) + sum(rate(ssCpuRawSteal{job="synology"}[5m])))
+        - record: synology:cpu_iowait:percent
+          expr: 100 * sum(rate(ssCpuRawWait{job="synology"}[5m])) / (sum(rate(ssCpuRawUser{job="synology"}[5m])) + sum(rate(ssCpuRawNice{job="synology"}[5m])) + sum(rate(ssCpuRawSystem{job="synology"}[5m])) + sum(rate(ssCpuRawIdle{job="synology"}[5m])) + sum(rate(ssCpuRawWait{job="synology"}[5m])) + sum(rate(ssCpuRawSteal{job="synology"}[5m])))
+        - record: synology:memory_used:percent
+          expr: 100 * (1 - (sum(memAvailReal{job="synology"}) + sum(memBuffer{job="synology"}) + sum(memCached{job="synology"})) / sum(memTotalReal{job="synology"}))
     - name: synology
       rules:
         - alert: SynologyHighCPU
-          expr: avg_over_time(cpuUtilization{job="synology"}[5m]) > 90
+          expr: synology:cpu_busy:percent > 90
           for: 5m
           labels:
             severity: warning
           annotations:
             summary: "Synology super-duke CPU at {{ $value | printf \"%.0f\" }}%"
-            description: "CPU has been over 90% for 10 minutes. The Synology correlation dashboard shows what the NAS and cluster were doing: https://grafana.frost.haus/d/synology-correlation"
+            description: "CPU has been over 90% for about 10 minutes. The Synology correlation dashboard shows what the NAS and cluster were doing: https://grafana.frost.haus/d/synology-correlation"
         - alert: SynologyDiskBusy
           expr: max by (storageIODevice) (storageIOLA{job="synology"}) > 90
           for: 10m

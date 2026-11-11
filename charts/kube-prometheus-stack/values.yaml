@@ -125,7 +125,7 @@ kube-prometheus-stack:
           scrape_timeout: 50s
           metrics_path: /snmp
           params:
-            module: [synology, ucd_system_stats]
+            module: [synology, ucd_system_stats, ucd_memory]
             auth: [synology_v2]
           static_configs:
             - targets: ['192.168.100.250']
