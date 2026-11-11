@@ -8,7 +8,7 @@ timezone: America/Chicago
 image:
   repository: chaptarr/chaptarr
   # renovate: datasource=docker depName=chaptarr/chaptarr versioning=loose
-  tag: "0.9.999"
+  tag: "0.9.1000"
   pullPolicy: IfNotPresent
 
 resources:
