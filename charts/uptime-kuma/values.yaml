@@ -56,8 +56,10 @@ uptime-kuma:
       paths:
         - path: /
           pathType: ImplementationSpecific
+  # Off: Kuma's /metrics needs an API key (Settings > API Keys) and this monitor has none,
+  # so it would only show as a down target. Turn it on with a sealed basicAuth secret.
   serviceMonitor:
-    enabled: true
+    enabled: false
   volume:
     enabled: true
     accessMode: ReadWriteOnce

@@ -5,6 +5,7 @@ namespace: argocd
 
 resources:
   - base/
+  - servicemonitors.yaml
 
 patches:
   - path: patch/argocd-server-deployment.yaml

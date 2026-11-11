@@ -1,5 +1,10 @@
 ingress-nginx:
   controller:
+    # request rate, 5xx and latency per host for the Homelab / Delivery dashboard
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
     resources:
       requests:
         memory: 320Mi
