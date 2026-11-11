@@ -31,7 +31,7 @@ seerr-chart:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       # external-dns.alpha.kubernetes.io/host: seerr.frost.haus
-      external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+      external-dns.kubernetes.io/ingress-hostname-source: defined-hosts-only
     hosts:
       - host: seerr.frost.haus
         paths:
