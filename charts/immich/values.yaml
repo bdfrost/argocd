@@ -19,8 +19,11 @@ immich:
         # NFS server/path. The chart refuses to render without this.
         existingClaim: immich-library-pvc-v2
     metrics:
-      # ServiceMonitors for the kube-prometheus-stack already in the cluster
-      enabled: true
+      # Off until https://github.com/immich-app/immich/issues/33194 is fixed: since v3.4.0 the
+      # metrics servers on 8081/8082 bind localhost (::1) only, with no setting to change it, so
+      # Prometheus can't reach them and TargetDown fires forever. Nothing reads these metrics yet.
+      # Flipping this back on restores the env var, ports and ServiceMonitor together.
+      enabled: false
 
   # Shared defaults across all components (upstream keeps its templated
   # REDIS_HOSTNAME / IMMICH_MACHINE_LEARNING_URL env here; Helm deep-merges
