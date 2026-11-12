@@ -1,0 +1,28 @@
+# Kuma's /metrics needs basic auth. With no API keys created it takes the admin login, which
+# AutoKuma already reads from uptime-kuma-management, so reuse that instead of the upstream
+# chart's ServiceMonitor (it expects a separate uptime-kuma-metrics-basic-auth Secret).
+# If API keys are ever enabled in Kuma, /metrics switches to accepting only a key: swap the
+# password here for one.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: uptime-kuma
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: uptime-kuma
+      app.kubernetes.io/instance: uptime-kuma
+  endpoints:
+    - port: http
+      path: /metrics
+      # Kuma rate-limits authenticated API calls to 60/min; one scrape a minute is plenty.
+      interval: 60s
+      scrapeTimeout: 10s
+      basicAuth:
+        username:
+          name: uptime-kuma-management
+          key: username
+        password:
+          name: uptime-kuma-management
+          key: password
