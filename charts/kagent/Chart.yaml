@@ -27,7 +27,7 @@ appVersion: "0.9"
 # with prune on, merging it deletes the agent database. Migrate deliberately, don't automerge.
 dependencies:
   - name: kagent-crds
-    version: 0.9.12
+    version: 0.10.6
     repository: oci://ghcr.io/kagent-dev/kagent/helm
   - name: kagent
     version: 0.9.12
