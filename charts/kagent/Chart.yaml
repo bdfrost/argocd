@@ -20,12 +20,15 @@ version: 0.4.0
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: "1.0"
+appVersion: "0.9"
 
+# Held at 0.9.12, the version actually running (a committed tarball masked the v1 bumps).
+# v1 moves every CRD to api.kagent.dev and drops the bundled PostgreSQL (PVC included), so
+# with prune on, merging it deletes the agent database. Migrate deliberately, don't automerge.
 dependencies:
   - name: kagent-crds
-    version: 1.0.0
+    version: 0.9.12
     repository: oci://ghcr.io/kagent-dev/kagent/helm
   - name: kagent
-    version: 1.0.0
+    version: 0.9.12
     repository: oci://ghcr.io/kagent-dev/kagent/helm
