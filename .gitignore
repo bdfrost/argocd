@@ -7,3 +7,7 @@ __pycache__/
 
 # kubectl cache (contains cluster address/API discovery; never commit)
 .kube/
+
+# Helm dependency tarballs. Argo CD fetches dependencies from Chart.lock on every render;
+# a committed tarball silently overrides Chart.yaml, so Renovate bumps never deploy.
+charts/*/charts/*.tgz
