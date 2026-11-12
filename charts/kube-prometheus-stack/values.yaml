@@ -36,6 +36,10 @@ kube-prometheus-stack:
     # password on every render, so the Secret (and Grafana) would churn on every commit.
     admin:
       existingSecret: grafana-admin
+    # The sidecars read the admin login from grafana-admin as env vars at startup, so restart
+    # the pod when that Secret is rotated or their reload calls start failing with 401.
+    podAnnotations:
+      reloader.stakater.com/auto: "true"
     # keep UI-created dashboards/users across restarts (default is an emptyDir)
     persistence:
       enabled: true
