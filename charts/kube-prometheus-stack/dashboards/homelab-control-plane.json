@@ -664,7 +664,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "(rate(node_disk_write_time_seconds_total[5m]) / rate(node_disk_writes_completed_total[5m])) * on(instance) group_left(nodename) node_uname_info{nodename=\"k8s-c1\"}",
+          "expr": "(rate(node_disk_write_time_seconds_total[5m]) / rate(node_disk_writes_completed_total[5m])) * on(instance) group_left(nodename) max by (instance, nodename) (node_uname_info{nodename=\"k8s-c1\"})",
           "legendFormat": "avg write latency {{device}}"
         },
         {
@@ -673,7 +673,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(node_disk_io_time_seconds_total[5m]) * on(instance) group_left(nodename) node_uname_info{nodename=\"k8s-c1\"}",
+          "expr": "rate(node_disk_io_time_seconds_total[5m]) * on(instance) group_left(nodename) max by (instance, nodename) (node_uname_info{nodename=\"k8s-c1\"})",
           "legendFormat": "busy {{device}} (0-1)"
         }
       ],
@@ -1171,7 +1171,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "(1 - avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))) * 100 * on(instance) group_left(nodename) node_uname_info{nodename=\"k8s-c1\"}",
+          "expr": "(1 - avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))) * 100 * on(instance) group_left(nodename) max by (instance, nodename) (node_uname_info{nodename=\"k8s-c1\"})",
           "legendFormat": "CPU %"
         },
         {
@@ -1180,7 +1180,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "(1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 * on(instance) group_left(nodename) node_uname_info{nodename=\"k8s-c1\"}",
+          "expr": "(1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 * on(instance) group_left(nodename) max by (instance, nodename) (node_uname_info{nodename=\"k8s-c1\"})",
           "legendFormat": "memory %"
         }
       ],
