@@ -1,7 +1,7 @@
 {
   "uid": "homelab-overview",
   "title": "Homelab / Overview",
-  "description": "One page for 'is anything wrong right now': alerts, nodes, workloads, GPU, logs. Each stat links to the dashboard with the detail.",
+  "description": "One page for 'is anything wrong right now': alerts, nodes, workloads, GPU, logs. Click a stat to open the dashboard or tool with the detail.",
   "tags": [
     "homelab"
   ],
@@ -112,7 +112,14 @@
           "noValue": "0",
           "color": {
             "mode": "thresholds"
-          }
+          },
+          "links": [
+            {
+              "title": "Alertmanager",
+              "url": "https://alertmanager.frost.haus",
+              "targetBlank": true
+            }
+          ]
         },
         "overrides": []
       },
@@ -144,7 +151,7 @@
       "id": 2,
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 3,
         "x": 0,
         "y": 1
       }
@@ -208,8 +215,8 @@
       "id": 3,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 4,
+        "w": 3,
+        "x": 3,
         "y": 1
       }
     },
@@ -272,8 +279,72 @@
       "id": 4,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 6,
+        "y": 1
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Pods pending",
+      "description": "Pods that can't be scheduled or are still pulling. Usually a node out of memory or a PVC that won't attach.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              }
+            ]
+          },
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "count(kube_pod_status_phase{phase=\"Pending\"} == 1) or vector(0)",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 28,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
         "y": 1
       }
     },
@@ -340,8 +411,79 @@
       "id": 5,
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 3,
         "x": 12,
+        "y": 1
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Scrape targets down",
+      "description": "Prometheus targets failing their scrape. A non-zero count is what TargetDown alerts on; see Prometheus > Targets for which.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              }
+            ]
+          },
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Unhealthy targets",
+              "url": "https://prometheus.frost.haus/targets?state=unhealthy",
+              "targetBlank": true
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "count(up == 0) or vector(0)",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 27,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
         "y": 1
       }
     },
@@ -372,7 +514,14 @@
           "noValue": "0",
           "color": {
             "mode": "thresholds"
-          }
+          },
+          "links": [
+            {
+              "title": "Homelab / Delivery",
+              "url": "/d/homelab-delivery?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -404,8 +553,8 @@
       "id": 6,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 16,
+        "w": 3,
+        "x": 18,
         "y": 1
       }
     },
@@ -436,7 +585,14 @@
           "noValue": "0",
           "color": {
             "mode": "thresholds"
-          }
+          },
+          "links": [
+            {
+              "title": "Homelab / Delivery",
+              "url": "/d/homelab-delivery?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -468,9 +624,80 @@
       "id": 7,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 20,
+        "w": 3,
+        "x": 21,
         "y": 1
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Slack alerts failed (24h)",
+      "description": "Alertmanager notifications to Slack that failed in the last day. Non-zero means alerts are firing but nobody hears about them.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Alertmanager",
+              "url": "https://alertmanager.frost.haus",
+              "targetBlank": true
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "round(sum(increase(alertmanager_notifications_failed_total{integration=\"slack\"}[24h]))) or vector(0)",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 29,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 5
       }
     },
     {
@@ -505,7 +732,14 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 0
+          "decimals": 0,
+          "links": [
+            {
+              "title": "Homelab / Delivery",
+              "url": "/d/homelab-delivery?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -537,8 +771,8 @@
       "id": 8,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 0,
+        "w": 3,
+        "x": 3,
         "y": 5
       }
     },
@@ -574,7 +808,14 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 1
+          "decimals": 1,
+          "links": [
+            {
+              "title": "Homelab / Storage",
+              "url": "/d/homelab-storage?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -606,8 +847,84 @@
       "id": 9,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 4,
+        "w": 3,
+        "x": 6,
+        "y": 5
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Fullest Proxmox storage",
+      "description": "Most-used Proxmox storage pool (local-lvm thin pools, PBS, NFS). A full thin pool corrupts guest disks. See Homelab / Proxmox.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "links": [
+            {
+              "title": "Homelab / Proxmox",
+              "url": "/d/homelab-proxmox?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "max(pve_disk_usage_bytes{id=~\"storage/.*\"} / pve_disk_size_bytes{id=~\"storage/.*\"}) * 100",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 30,
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
         "y": 5
       }
     },
@@ -643,7 +960,14 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 3
+          "decimals": 3,
+          "links": [
+            {
+              "title": "Homelab / Control plane",
+              "url": "/d/homelab-control-plane?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -675,8 +999,8 @@
       "id": 10,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 12,
         "y": 5
       }
     },
@@ -712,7 +1036,14 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 0
+          "decimals": 0,
+          "links": [
+            {
+              "title": "Synology correlation",
+              "url": "/d/synology-correlation?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -744,8 +1075,8 @@
       "id": 11,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 12,
+        "w": 3,
+        "x": 15,
         "y": 5
       }
     },
@@ -809,8 +1140,8 @@
       "id": 12,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 16,
+        "w": 3,
+        "x": 18,
         "y": 5
       }
     },
@@ -845,7 +1176,14 @@
           "noValue": "0",
           "color": {
             "mode": "thresholds"
-          }
+          },
+          "links": [
+            {
+              "title": "Homelab / Logs",
+              "url": "/d/homelab-logs?${__url_time_range}",
+              "targetBlank": false
+            }
+          ]
         },
         "overrides": []
       },
@@ -876,8 +1214,8 @@
       "id": 13,
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 20,
+        "w": 3,
+        "x": 21,
         "y": 5
       }
     },
