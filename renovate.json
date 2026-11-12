@@ -26,6 +26,11 @@
       "platformAutomerge": false
     },
     {
+      "description": "kagent v1 moves every CRD to api.kagent.dev and drops the bundled PostgreSQL (PVC included), which Argo's prune would delete. Hold both charts below 1.0 until that migration is planned; see charts/kagent/Chart.yaml.",
+      "matchDepNames": ["kagent", "kagent-crds"],
+      "allowedVersions": "<1.0.0"
+    },
+    {
       "description": "Majors stay manual for review",
       "matchUpdateTypes": ["major"],
       "automerge": false
