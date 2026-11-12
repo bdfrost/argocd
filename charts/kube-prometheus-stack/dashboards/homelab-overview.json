@@ -1,7 +1,7 @@
 {
   "uid": "homelab-overview",
   "title": "Homelab / Overview",
-  "description": "One page for 'is anything wrong right now': alerts, nodes, workloads, GPU, logs. Click a stat to open the dashboard or tool with the detail.",
+  "description": "One page for 'is anything wrong right now': alerts, nodes, workloads, GPU, service checks, logs. Click a stat to open the dashboard or tool with the detail.",
   "tags": [
     "homelab"
   ],
@@ -1890,6 +1890,406 @@
         "w": 8,
         "x": 16,
         "y": 34
+      }
+    },
+    {
+      "type": "row",
+      "title": "Services (Uptime Kuma)",
+      "collapsed": false,
+      "id": 31,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "panels": []
+    },
+    {
+      "type": "stat",
+      "title": "Monitors not up",
+      "description": "Uptime Kuma monitors that are down, pending or in maintenance. Kuma alerts Slack itself; this is the at-a-glance count.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Uptime Kuma",
+              "url": "https://uptime-kuma.frost.haus",
+              "targetBlank": true
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "count(monitor_status != 1) or vector(0)",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 32,
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 42
+      }
+    },
+    {
+      "type": "table",
+      "title": "Monitors not up",
+      "description": "Empty when every monitor is up.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "down",
+                  "color": "red",
+                  "index": 0
+                },
+                "2": {
+                  "text": "pending",
+                  "color": "orange",
+                  "index": 1
+                },
+                "3": {
+                  "text": "maintenance",
+                  "color": "blue",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "noValue": "All monitors up"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text",
+                  "mode": "basic"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "max by (monitor_name, monitor_url) (monitor_status != 1)",
+          "instant": true,
+          "range": false,
+          "format": "table"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "renameByName": {
+              "monitor_name": "Monitor",
+              "monitor_url": "URL",
+              "Value": "Status"
+            },
+            "indexByName": {
+              "monitor_name": 0,
+              "Value": 1,
+              "monitor_url": 2
+            }
+          }
+        }
+      ],
+      "id": 33,
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 4,
+        "y": 42
+      }
+    },
+    {
+      "type": "bargauge",
+      "title": "Lowest uptime, last 24h (bottom 10)",
+      "description": "Kuma's own 1-day uptime ratio per monitor.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 95,
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 99
+              },
+              {
+                "color": "green",
+                "value": 99.9
+              }
+            ]
+          },
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2
+        },
+        "overrides": []
+      },
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "showUnfilled": true,
+        "valueMode": "color",
+        "namePlacement": "left",
+        "sizing": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "bottomk(10, monitor_uptime_ratio{window=\"1d\"}) * 100",
+          "legendFormat": "{{monitor_name}}",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 34,
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 14,
+        "y": 42
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Response time (slowest 8)",
+      "description": "As measured by Kuma from inside the cluster.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineWidth": 1,
+            "showPoints": "never",
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "topk(8, monitor_response_time)",
+          "legendFormat": "{{monitor_name}}"
+        }
+      ],
+      "id": 35,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      }
+    },
+    {
+      "type": "bargauge",
+      "title": "Certificate days left (soonest 10)",
+      "description": "TLS expiry as seen by Kuma, including hosts cert-manager doesn't manage (Proxmox, PBS, the NAS).",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "d",
+          "min": 0,
+          "max": 90,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 7
+              },
+              {
+                "color": "green",
+                "value": 21
+              }
+            ]
+          },
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "showUnfilled": true,
+        "valueMode": "color",
+        "namePlacement": "left",
+        "sizing": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "bottomk(10, min by (monitor_name) (monitor_cert_days_remaining))",
+          "legendFormat": "{{monitor_name}}",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "id": 36,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 50
       }
     }
   ]
