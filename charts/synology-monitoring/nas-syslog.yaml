@@ -1,6 +1,8 @@
 # Receives DSM Log Center's "Log Sending" (IETF / RFC5424 format) and ships it to Loki
 # with job="synology". Separate from the Alloy DaemonSet in charts/loki because it needs
 # one stable LoadBalancer address for the NAS to send to.
+# Also receives the ASUS RT-BE88U router's remote syslog (BSD / RFC3164 format) on UDP 514
+# with job="router".
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -36,6 +38,40 @@ data:
         labels   = { job = "synology", protocol = "tcp" }
       }
       relabel_rules = loki.relabel.syslog.rules
+      forward_to    = [loki.write.default.receiver]
+    }
+
+    // Asuswrt's syslogd sends RFC3164 and may leave out the hostname, so label by
+    // source IP first and let a parsed hostname override it.
+    loki.relabel "router" {
+      forward_to = []
+      rule {
+        source_labels = ["__syslog_connection_ip_address"]
+        target_label  = "host"
+      }
+      rule {
+        source_labels = ["__syslog_message_hostname"]
+        regex         = "(.+)"
+        target_label  = "host"
+      }
+      rule {
+        source_labels = ["__syslog_message_app_name"]
+        target_label  = "app"
+      }
+      rule {
+        source_labels = ["__syslog_message_severity"]
+        target_label  = "level"
+      }
+    }
+
+    loki.source.syslog "router" {
+      listener {
+        address       = "0.0.0.0:1515"
+        protocol      = "udp"
+        syslog_format = "rfc3164"
+        labels        = { job = "router", protocol = "udp" }
+      }
+      relabel_rules = loki.relabel.router.rules
       forward_to    = [loki.write.default.receiver]
     }
 
@@ -81,6 +117,9 @@ spec:
             - name: syslog-tcp
               containerPort: 1514
               protocol: TCP
+            - name: router-udp
+              containerPort: 1515
+              protocol: UDP
             - name: http
               containerPort: 12345
           readinessProbe:
@@ -129,3 +168,8 @@ spec:
       port: 1514
       targetPort: syslog-tcp
       protocol: TCP
+    # Router firmware sends to the standard syslog port; the pod listens unprivileged on 1515.
+    - name: router-udp
+      port: 514
+      targetPort: router-udp
+      protocol: UDP
