@@ -54,6 +54,19 @@ data:
         regex         = "(.+)"
         target_label  = "host"
       }
+      // The AiMesh nodes report generated hostnames; give them their model names.
+      rule {
+        source_labels = ["host"]
+        regex         = "RT-BE90U-.*"
+        target_label  = "host"
+        replacement   = "rt-be90u"
+      }
+      rule {
+        source_labels = ["host"]
+        regex         = "router-E3F2650-.*"
+        target_label  = "host"
+        replacement   = "rt-be88u"
+      }
       rule {
         source_labels = ["__syslog_message_app_name"]
         target_label  = "app"
@@ -72,7 +85,30 @@ data:
         labels        = { job = "router", protocol = "udp" }
       }
       relabel_rules = loki.relabel.router.rules
-      forward_to    = [loki.write.default.receiver]
+      forward_to    = [loki.process.router.receiver]
+    }
+
+    // Asuswrt sends some routine messages at the wrong syslog severity. Correct the
+    // level for those so error and emergency filters only catch real problems.
+    loki.process "router" {
+      forward_to = [loki.write.default.receiver]
+
+      // The BE90U's Qualcomm Wi-Fi driver logs every client event at "error"; its own
+      // level is the letter after the ID, e.g. "wlan: [13291:I:ANY]" is info.
+      stage.match {
+        selector = "{app=\"kernel\", level=\"error\"} |~ \"wlan: .[0-9]+:I:\""
+        stage.static_labels {
+          values = { level = "informational" }
+        }
+      }
+
+      // Band steering (bsd) and web UI logins (HTTPD) arrive as "emergency".
+      stage.match {
+        selector = "{app=~\"bsd|HTTPD\", level=\"emergency\"}"
+        stage.static_labels {
+          values = { level = "notice" }
+        }
+      }
     }
 
     loki.write "default" {
