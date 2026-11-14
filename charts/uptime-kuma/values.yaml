@@ -9,7 +9,7 @@ uptime-kuma:
       memory: 640Mi
   image:
     repository: louislam/uptime-kuma
-    tag: "2.5.9"
+    tag: "2.5.11"
     pullPolicy: IfNotPresent
   # Uptime Kuma v2 performs an in-place migration of the existing SQLite
   # database. Recreate is intentional: it prevents two pods from competing
