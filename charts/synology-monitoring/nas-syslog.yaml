@@ -139,7 +139,7 @@ spec:
     spec:
       containers:
         - name: alloy
-          image: grafana/alloy:v1.21.3
+          image: grafana/alloy:v1.22.0
           imagePullPolicy: IfNotPresent
           args:
             - run
