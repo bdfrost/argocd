@@ -102,9 +102,26 @@ data:
         }
       }
 
-      // Band steering (bsd) and web UI logins (HTTPD) arrive as "emergency".
       stage.match {
-        selector = "{app=~\"bsd|HTTPD\", level=\"emergency\"}"
+        selector = "{app=\"kernel\", level=\"error\"} |~ \"wlan: .[0-9]+:W:\""
+        stage.static_labels {
+          values = { level = "warning" }
+        }
+      }
+
+      // The driver tags radio start-up ("VAP ... is up") as an error after every
+      // channel change.
+      stage.match {
+        selector = "{app=\"kernel\", level=\"error\"} |~ \"mlme_ext_vap_up: VAP .* is up\""
+        stage.static_labels {
+          values = { level = "informational" }
+        }
+      }
+
+      // Band steering (bsd), roaming assistant (roamast), radio mode and channel
+      // changes (WIFI) and web UI logins (HTTPD) arrive as "emergency".
+      stage.match {
+        selector = "{app=~\"bsd|roamast|WIFI|HTTPD\", level=\"emergency\"}"
         stage.static_labels {
           values = { level = "notice" }
         }
