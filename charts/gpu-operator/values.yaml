@@ -63,7 +63,10 @@ gpu-operator:
             matchFeatures:
               - feature: usb.device
                 matchExpressions:
-                  vendor: {op: In, value: ["0dba"]}
+                  # Realtek (0bda) also makes USB NICs, card readers and BT chips,
+                  # so pin the RTL2832U/RTL2838 product ids used by RTL-SDR dongles.
+                  vendor: {op: In, value: ["0bda"]}
+                  device: {op: In, value: ["2832", "2838"]}
           - name: "Bluetooth Adapter"
             labels:
               bluetooth-device: "true"
