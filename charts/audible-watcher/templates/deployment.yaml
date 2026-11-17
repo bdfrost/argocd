@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      # The image runs as uid 1000 and exits on start if it can't write
+      # /data; fsGroup hands the fresh iSCSI volume to that user.
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- with .Values.resources }}
+        resources:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        ports:
+        - containerPort: {{ .Values.targetPort }}
+        env:
+        # The daily check runs at local time.
+        - name: TZ
+          value: "{{ .Values.timezone }}"
+        # Full domain names are refused (DNS-rebinding guard) unless listed.
+        - name: AW_ALLOWED_HOSTS
+          value: "{{ .Values.name }}.frost.haus"
+        # ingress-nginx sits in front, so trust one hop of X-Forwarded-*.
+        - name: AW_PROXY_COUNT
+          value: "1"
+        volumeMounts:
+        - name: {{ .Values.name }}-data
+          mountPath: /data
+        # /healthz skips the host and password checks; kubelet probes by
+        # pod IP, which the host check always allows.
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.targetPort }}
+          periodSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.targetPort }}
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          timeoutSeconds: 10
+      volumes:
+        - name: {{ .Values.name }}-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.name }}-config-pvc

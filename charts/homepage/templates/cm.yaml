@@ -325,6 +325,10 @@ data:
             icon: mdi-bookshelf
             href: https://livrarr.frost.haus
             description: Book & reading management
+        - Audible Watcher:
+            icon: si-audible
+            href: https://audible-watcher.frost.haus
+            description: New audiobook release alerts
         - Agregarr:
             icon: agregarr.png
             href: https://agregarr.frost.haus

@@ -518,6 +518,20 @@ data:
         "slack"
       ]
     }
+  audible-watcher.json: |-
+    {
+      "name": "Audible Watcher",
+      "type": "http",
+      "url": "https://audible-watcher.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
   maintainerr.json: |-
     {
       "name": "Maintainerr",

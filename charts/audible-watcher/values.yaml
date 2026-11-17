@@ -1,0 +1,13 @@
+name: audible-watcher
+targetPort: 5055
+timezone: America/Chicago
+
+image:
+  repository: ghcr.io/andrew911tt/audible-watcher
+  # renovate: datasource=docker depName=ghcr.io/andrew911tt/audible-watcher
+  tag: "1.2.0"
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    memory: 128Mi
