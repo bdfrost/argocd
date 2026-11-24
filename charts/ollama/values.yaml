@@ -16,8 +16,10 @@ ollama:
       memory: "2Gi"
       cpu: "2"
     limits:
-      # 7d peak 5.4Gi with a model loaded
-      memory: "8Gi"
+      # 7d peak 5.4Gi with a model loaded, but Frigate's GenAI review requests
+      # (num_ctx 16384, several recording frames) pushed llama-server to ~7.7Gi
+      # and it was OOM-killed at 8Gi. Request stays low; this is burst headroom.
+      memory: "12Gi"
   runtimeClassName: nvidia
   ollama:
     gpu:
