@@ -20,10 +20,11 @@
       "labels": ["dependencies", "plex"]
     },
     {
-      "description": "Automerge patch/minor/digest bumps. platformAutomerge is OFF: main has no branch protection, and GitHub native auto-merge requires protected branch rules, so Renovate merges these PRs itself on its runs.",
+      "description": "Automerge patch/minor/digest bumps. platformAutomerge is OFF: main has no branch protection, and GitHub native auto-merge requires protected branch rules, so Renovate merges these PRs itself on its runs. ignoreTests is ON because the repo has no CI: with zero status checks GitHub reports the branch as pending, and Renovate never merges a PR that is not green.",
       "matchUpdateTypes": ["patch", "minor", "digest"],
       "automerge": true,
-      "platformAutomerge": false
+      "platformAutomerge": false,
+      "ignoreTests": true
     },
     {
       "description": "kagent v1 moves every CRD to api.kagent.dev and drops the bundled PostgreSQL (PVC included), which Argo's prune would delete. Hold both charts below 1.0 until that migration is planned; see charts/kagent/Chart.yaml. No automerge either: 0.x minors can break, and kagent and kagent-crds must move together, so group them into one PR for review.",
