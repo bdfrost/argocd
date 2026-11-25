@@ -32,42 +32,50 @@ gpu-operator:
                 replicas: 10
   nfd:
     enabled: true
-    nodefeaturediscovery: true
+  # NFD is the operator's subchart, so its settings go under this key (not
+  # under nfd:). The custom rules label whichever node can see each USB device,
+  # so hardware-bound workloads follow the device when it moves between hosts.
+  # Labels land as feature.node.kubernetes.io/<label>=true.
+  # https://medium.com/@reefland/dynamic-kubernetes-node-labeling-via-node-feature-discovery-2c3e9c1879d1
+  node-feature-discovery:
     worker:
-      securityContext:
-        privileged: true
-        allowPrivilegeEscalation: true
-      # https://medium.com/@reefland/dynamic-kubernetes-node-labeling-via-node-feature-discovery-2c3e9c1879d1
       config:
-        core:
-          sources: ["custom"]
+        # Merged with the operator's defaults (sources.pci), which keep the
+        # pci-10de label the GPU operator uses to find the NVIDIA node. Don't
+        # set core.sources here: limiting it to custom drops those labels.
         sources:
           custom:
+          # The Coral enumerates as 1a6e:089a until its firmware loads, then as
+          # 18d1:9302.
           - name: "USB Coral TPU"
             labels:
               google-coral-device: "true"
-            matchFeatures:
-              - feature: usb.device
-                matchExpressions:
-                  vendor: {op: In, value: ["18d1", "1a6e"]}
-          - name: "ZWave Adapter"
+            matchAny:
+              - matchFeatures:
+                  - feature: usb.device
+                    matchExpressions:
+                      vendor: {op: In, value: ["1a6e"]}
+                      device: {op: In, value: ["089a"]}
+              - matchFeatures:
+                  - feature: usb.device
+                    matchExpressions:
+                      vendor: {op: In, value: ["18d1"]}
+                      device: {op: In, value: ["9302"]}
+          # Home Assistant Connect ZWA-2.
+          - name: "Z-Wave Adapter"
             labels:
               zwave-device: "true"
             matchFeatures:
               - feature: usb.device
                 matchExpressions:
-                  vendor: {op: In, value: ["10c4"]}
+                  vendor: {op: In, value: ["303a"]}
+                  device: {op: In, value: ["4001"]}
+          # RTL2832U SDR dongles (Nooelec NESDR SMArt) for rtl_433.
           - name: "SDR Adapter"
             labels:
               sdr-device: "true"
             matchFeatures:
               - feature: usb.device
                 matchExpressions:
-                  vendor: {op: In, value: ["0dba"]}
-          - name: "Bluetooth Adapter"
-            labels:
-              bluetooth-device: "true"
-            matchFeatures:
-              - feature: usb.device
-                matchExpressions:
-                  vendor: {op: In, value: ["0b05"]}
+                  vendor: {op: In, value: ["0bda"]}
+                  device: {op: In, value: ["2838"]}
