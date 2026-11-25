@@ -31,6 +31,15 @@ spec:
           mountPath: /passwd-secret
         - name: passwd
           mountPath: /mosquitto/passwd
+      # Imports retained messages from another broker. Mosquitto rewrites its
+      # database on shutdown, so a file copied in while it runs is lost; drop
+      # it at /mosquitto/data/seed/mosquitto.db instead and restart the pod.
+      - name: seed
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["sh", "-c", "if [ -f /mosquitto/data/seed/mosquitto.db ]; then mv /mosquitto/data/seed/mosquitto.db /mosquitto/data/mosquitto.db && chown 1883:1883 /mosquitto/data/mosquitto.db && echo seeded; fi"]
+        volumeMounts:
+        - name: data
+          mountPath: /mosquitto/data
       containers:
       - name: {{ .Values.name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
