@@ -11,15 +11,24 @@ ollama:
   #     effect: NoSchedule
   resources:
     requests:
-      # Idle ~540Mi; a loaded model peaks ~5.4Gi but that's burst under the limit.
-      # Kept low so k8s-n2 (the GPU node) can shrink and share pve2 with HA.
-      memory: "2Gi"
+      # Reserve what a Frigate GenAI review actually uses (~7.7Gi peak). A 2Gi
+      # request let the scheduler overcommit k8s-n2 (limits at 122% of its
+      # 16Gi), and on 2026-11-25 ollama grew to 8.8Gi alongside plex and the
+      # node ran out of memory and hung instead of OOM-killing anything.
+      memory: "8Gi"
       cpu: "2"
     limits:
-      # 7d peak 5.4Gi with a model loaded, but Frigate's GenAI review requests
-      # (num_ctx 16384, several recording frames) pushed llama-server to ~7.7Gi
-      # and it was OOM-killed at 8Gi. Request stays low; this is burst headroom.
-      memory: "12Gi"
+      # Frigate's GenAI review requests (num_ctx 16384, several recording
+      # frames) peak ~7.7Gi. 10Gi leaves headroom for that while staying low
+      # enough that the cgroup OOM-kills ollama before the node runs out.
+      memory: "10Gi"
+  extraEnv:
+    # One model resident at a time, unloaded soon after use, so two models
+    # (e.g. Frigate's vision model plus a chat model) can't stack in RAM.
+    - name: OLLAMA_MAX_LOADED_MODELS
+      value: "1"
+    - name: OLLAMA_KEEP_ALIVE
+      value: "2m"
   runtimeClassName: nvidia
   ollama:
     gpu:
