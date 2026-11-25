@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        # Restart when the config or password file changes.
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        reloader.stakater.com/auto: "true"
+    spec:
+      securityContext:
+        fsGroup: 1883
+      initContainers:
+      # Mosquitto refuses a world-readable password file, and Secret mounts
+      # can't be owned by the mosquitto user, so copy it into an emptyDir.
+      - name: passwd
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["sh", "-c", "cp /passwd-secret/passwd /mosquitto/passwd/passwd && chown 1883:1883 /mosquitto/passwd/passwd && chmod 0600 /mosquitto/passwd/passwd"]
+        volumeMounts:
+        - name: passwd-secret
+          mountPath: /passwd-secret
+        - name: passwd
+          mountPath: /mosquitto/passwd
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: mqtt
+          containerPort: 1883
+        env:
+        - name: TZ
+          value: America/Chicago
+        readinessProbe:
+          tcpSocket:
+            port: mqtt
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: mqtt
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: 20m
+            memory: 32Mi
+          limits:
+            memory: 256Mi
+        volumeMounts:
+        - name: config
+          mountPath: /mosquitto/config
+        - name: passwd
+          mountPath: /mosquitto/passwd
+        - name: data
+          mountPath: /mosquitto/data
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Values.name }}-config
+      - name: passwd-secret
+        secret:
+          secretName: mosquitto-passwd
+      - name: passwd
+        emptyDir: {}
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 1Gi

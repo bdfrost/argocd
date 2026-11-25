@@ -675,3 +675,16 @@ data:
         "slack"
       ]
     }
+  # MQTT has no HTTP endpoint, so this checks that the broker accepts TCP.
+  mosquitto.json: |-
+    {
+      "name": "Mosquitto",
+      "type": "port",
+      "hostname": "mosquitto.frost.haus",
+      "port": 1883,
+      "interval": 60,
+      "max_retries": 2,
+      "notification_names": [
+        "slack"
+      ]
+    }

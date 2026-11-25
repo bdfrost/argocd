@@ -1,0 +1,11 @@
+name: mosquitto
+
+image:
+  repository: eclipse-mosquitto
+  tag: "2.0.22"
+  pullPolicy: IfNotPresent
+
+# Pinned so clients keep reaching the broker across restarts. Clients use
+# mqtt.frost.haus, a record in Technitium that points here once the broker
+# moves off the Home Assistant add-on.
+loadBalancerIP: 192.168.100.56

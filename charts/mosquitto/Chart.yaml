@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mosquitto
+description: Mosquitto MQTT broker for Home Assistant and its devices
+type: application
+version: 0.1.0
+appVersion: "2.0.22"
