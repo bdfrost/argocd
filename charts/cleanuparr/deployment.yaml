@@ -23,7 +23,7 @@ spec:
           limits:
             memory: 512Mi
         # renovate: datasource=docker depName=ghcr.io/cleanuparr/cleanuparr
-        image: ghcr.io/cleanuparr/cleanuparr:2.11.1
+        image: ghcr.io/cleanuparr/cleanuparr:2.11.2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 11011
