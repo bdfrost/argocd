@@ -382,6 +382,13 @@ data:
               type: homeassistant
               url: http://homeassistant.frost.haus:8123
               key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
+        - Z-Wave JS UI:
+            icon: z-wave-js-ui.png
+            href: http://zwave.frost.haus:8091
+            description: Z-Wave network (ZWA-2)
+            proxmoxNode: pve2
+            proxmoxVMID: 108
+            proxmoxType: lxc
         - Immich:
             icon: immich.png
             href: https://immich.frost.haus
