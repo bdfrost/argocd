@@ -125,4 +125,5 @@ spec:
   storageClassName: synology-csi-iscsi-retain
   resources:
     requests:
-      storage: 300Gi
+      # About twice today's usage. The class allows expansion; it can't shrink.
+      storage: 100Gi
