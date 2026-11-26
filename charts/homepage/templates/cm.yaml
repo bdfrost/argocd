@@ -384,11 +384,8 @@ data:
               key: "{{ "{{" }}HOMEPAGE_VAR_HOMEASSISTANT_APIKEY{{ "}}" }}"
         - Z-Wave JS UI:
             icon: z-wave-js-ui.png
-            href: http://zwave.frost.haus:8091
+            href: https://zwave-js-ui.frost.haus
             description: Z-Wave network (ZWA-2)
-            proxmoxNode: pve2
-            proxmoxVMID: 108
-            proxmoxType: lxc
         - Zigbee2MQTT:
             icon: zigbee2mqtt.png
             href: https://zigbee2mqtt.frost.haus

@@ -3,7 +3,7 @@ name: zwave-js-ui
 targetPort: 8091
 
 # A Z-Wave controller serves one driver at a time.
-replicas: 0
+replicas: 1
 
 image:
   repository: zwavejs/zwave-js-ui
