@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+    kubernetes.io/name: {{ .Values.name }}
+spec:
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  type: ClusterIP
+  selector:
+    app: {{ .Values.name }}
+  ports:
+  - name: http
+    port: 80
+    targetPort: {{ .Values.targetPort }}
+    protocol: TCP
+---
+# Camera streams for Home Assistant and WebRTC for browsers. These can't go
+# through the HTTP ingress.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-streams
+  labels:
+    app: {{ .Values.name }}
+  annotations:
+    # external-dns publishes this name in Technitium for the LoadBalancer IP.
+    external-dns.kubernetes.io/hostname: {{ .Values.name }}-rtsp.frost.haus
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.streamsLoadBalancerIP }}
+spec:
+  type: LoadBalancer
+  # WebRTC needs to see the client's real address.
+  externalTrafficPolicy: Local
+  selector:
+    app: {{ .Values.name }}
+  ports:
+  - name: rtsp
+    port: 8554
+    targetPort: rtsp
+    protocol: TCP
+  - name: webrtc-tcp
+    port: 8555
+    targetPort: webrtc-tcp
+    protocol: TCP
+  - name: webrtc-udp
+    port: 8555
+    targetPort: webrtc-udp
+    protocol: UDP

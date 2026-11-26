@@ -1,0 +1,22 @@
+name: frigate
+# Frigate's authenticated UI/API. It serves HTTPS with a self-signed cert.
+targetPort: 8971
+
+image:
+  repository: ghcr.io/blakeblackshear/frigate
+  # Matches the Home Assistant add-on it replaces, so the migrated database
+  # needs no schema upgrade. Bump separately once it runs here.
+  tag: "0.18.3"
+  pullPolicy: IfNotPresent
+
+# go2rtc's RTSP restream (8554) and WebRTC (8555) for Home Assistant and
+# browsers. Published as frigate-rtsp.frost.haus. Frigate's config.yml lists
+# this address as a WebRTC candidate, so keep the two in step.
+streamsLoadBalancerIP: 192.168.100.57
+
+resources:
+  requests:
+    cpu: "1"
+    memory: 3Gi
+  limits:
+    memory: 6Gi

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: {{ .Values.name }}.frost.haus
+    # Frigate's authenticated port serves HTTPS with its own self-signed cert.
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    # Live view and the event feed hold websockets open; exports can be large.
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - {{ .Values.name }}.frost.haus
+    secretName: {{ .Values.name }}-cert
+  rules:
+  - host: {{ .Values.name }}.frost.haus
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: {{ .Values.name }}
+            port:
+              name: http

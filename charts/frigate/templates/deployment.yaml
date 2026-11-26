@@ -1,0 +1,127 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      # Runs wherever the USB Coral is. NFD labels the node whose VM can see
+      # it (gpu-operator chart), so moving the Coral to another Proxmox host
+      # moves Frigate. With no Coral attached anywhere, the pod stays Pending.
+      nodeSelector:
+        feature.node.kubernetes.io/google-coral-device: "true"
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # Needed to open the Coral under /dev/bus/usb; it also re-enumerates
+        # with a new ID when Frigate loads its firmware.
+        securityContext:
+          privileged: true
+        ports:
+        - name: https
+          containerPort: {{ .Values.targetPort }}
+        - name: api
+          containerPort: 5000
+        - name: rtsp
+          containerPort: 8554
+        - name: webrtc-tcp
+          containerPort: 8555
+          protocol: TCP
+        - name: webrtc-udp
+          containerPort: 8555
+          protocol: UDP
+        env:
+        - name: TZ
+          value: America/Chicago
+        - name: PLUS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: frigate-secrets
+              key: PLUS_API_KEY
+        # Loading the detector and embedding models takes a while.
+        startupProbe:
+          httpGet:
+            path: /api/version
+            port: api
+          periodSeconds: 10
+          failureThreshold: 60
+        livenessProbe:
+          httpGet:
+            path: /api/version
+            port: api
+          periodSeconds: 30
+          failureThreshold: 5
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: media
+          mountPath: /media/frigate
+        - name: usb
+          mountPath: /dev/bus/usb
+        - name: shm
+          mountPath: /dev/shm
+        - name: cache
+          mountPath: /tmp/cache
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-config-pvc
+      - name: media
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-media-pvc
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb
+      # Frames for 4 cameras plus birdseye; Frigate's sizing formula comes to
+      # well under this.
+      - name: shm
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Gi
+      # Recording segments are staged here before moving to media.
+      - name: cache
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Gi
+---
+# config.yml (edited from Frigate's UI), the events database and the model
+# cache. Retain: deleting the app shouldn't take the event history with it.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-retain
+  resources:
+    requests:
+      storage: 15Gi
+---
+# Recordings, clips and exports, on the Synology over NFS. Retention is 14
+# days for recordings and 28 for snapshots, about 41 GB on the add-on.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-media-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: synology-csi-nfs-retain
+  resources:
+    requests:
+      storage: 300Gi
