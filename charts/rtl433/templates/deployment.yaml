@@ -27,6 +27,10 @@ spec:
         # rtl_433 opens the dongles under /dev/bus/usb.
         securityContext:
           privileged: true
+        # A dongle resets on USB when the previous pod's rtl_433 lets go of it.
+        # RTL-HAOS scans the bus once at startup, so give the resets time to
+        # finish, or the scan misses one radio and it never starts.
+        command: ["sh", "-c", "sleep 20; exec /entrypoint.sh"]
         env:
         - name: TZ
           value: America/Chicago
