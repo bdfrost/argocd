@@ -389,6 +389,10 @@ data:
             proxmoxNode: pve2
             proxmoxVMID: 108
             proxmoxType: lxc
+        - Frigate:
+            icon: frigate.png
+            href: https://frigate.frost.haus
+            description: Cameras and NVR (Coral)
         - Immich:
             icon: immich.png
             href: https://immich.frost.haus
