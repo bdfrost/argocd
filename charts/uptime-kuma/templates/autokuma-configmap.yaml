@@ -759,3 +759,17 @@ data:
         "slack"
       ]
     }
+  music-assistant.json: |-
+    {
+      "name": "Music Assistant",
+      "type": "http",
+      "url": "https://music-assistant.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }

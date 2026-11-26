@@ -405,6 +405,10 @@ data:
             icon: esphome.png
             href: https://esphome.frost.haus
             description: ESPHome Device Builder
+        - Music Assistant:
+            icon: music-assistant.png
+            href: https://music-assistant.frost.haus
+            description: Music library and speakers
         - Frigate:
             icon: frigate.png
             href: https://frigate.frost.haus
