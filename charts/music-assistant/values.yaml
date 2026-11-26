@@ -3,7 +3,7 @@ name: music-assistant
 targetPort: 8095
 
 # Only one: players and the library database expect a single server.
-replicas: 1
+replicas: 0
 
 image:
   repository: ghcr.io/music-assistant/server
