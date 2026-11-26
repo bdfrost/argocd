@@ -1,0 +1,11 @@
+name: esphome
+targetPort: 6052
+
+# Only one: two builders on the same configs would race on compiles and OTA.
+replicas: 0
+
+image:
+  repository: esphome/esphome
+  # Matches the Home Assistant add-on it replaces.
+  tag: "2026.11.1"
+  pullPolicy: IfNotPresent

@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      # mDNS shows which devices are online and finds them for OTA uploads,
+      # and it only works on the node's own network.
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      # k8s-n2 already carries Frigate (Coral) and Ollama (GPU), and compiles
+      # are CPU- and memory-heavy, so prefer another node.
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values: [k8s-n2]
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # Without Home Assistant's ingress in front, the dashboard needs its own
+        # login.
+        args: ["dashboard", "--username", "$(ESPHOME_USERNAME)", "--password", "$(ESPHOME_PASSWORD)", "/config"]
+        ports:
+        - name: http
+          containerPort: {{ .Values.targetPort }}
+        env:
+        - name: TZ
+          value: America/Chicago
+        envFrom:
+        - secretRef:
+            name: esphome-secrets
+        readinessProbe:
+          tcpSocket:
+            port: http
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            memory: 3Gi
+        # Device YAMLs, secrets.yaml and the Device Builder's state, plus the
+        # PlatformIO toolchains and build cache under .esphome.
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-config-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-retain
+  resources:
+    requests:
+      storage: 20Gi
