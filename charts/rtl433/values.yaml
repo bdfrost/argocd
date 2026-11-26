@@ -1,7 +1,7 @@
 name: rtl433
 
 # The dongles can only be opened by one rtl_433 at a time.
-replicas: 0
+replicas: 1
 
 image:
   repository: ghcr.io/jaronmcd/rtl-haos
