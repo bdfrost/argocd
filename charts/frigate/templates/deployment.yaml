@@ -112,16 +112,17 @@ spec:
     requests:
       storage: 15Gi
 ---
-# Recordings, clips and exports, on the Synology over NFS. Retention is 14
-# days for recordings and 28 for snapshots, about 41 GB on the add-on.
+# Recordings, clips and exports. Retention is 14 days for recordings and 28
+# for snapshots, about 44 GB on the add-on. iSCSI like the other apps: the
+# Synology only serves NFS up to v4.0, and the CSI NFS classes mount v4.1.
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.name }}-media-pvc
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: synology-csi-nfs-retain
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-retain
   resources:
     requests:
       storage: 300Gi
