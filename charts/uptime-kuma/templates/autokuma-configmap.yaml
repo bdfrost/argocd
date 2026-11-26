@@ -716,3 +716,16 @@ data:
         "slack"
       ]
     }
+  # Wyoming has no HTTP endpoint, so this checks that the port accepts TCP.
+  openwakeword.json: |-
+    {
+      "name": "openWakeWord",
+      "type": "port",
+      "hostname": "openwakeword.frost.haus",
+      "port": 10400,
+      "interval": 60,
+      "max_retries": 2,
+      "notification_names": [
+        "slack"
+      ]
+    }

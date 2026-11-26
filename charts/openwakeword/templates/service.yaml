@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+  annotations:
+    # external-dns publishes this name in Technitium for the LoadBalancer IP.
+    external-dns.kubernetes.io/hostname: {{ .Values.name }}.frost.haus
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{ .Values.name }}
+  ports:
+  - name: wyoming
+    port: 10400
+    targetPort: wyoming
+    protocol: TCP

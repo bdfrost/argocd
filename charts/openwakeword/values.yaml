@@ -1,0 +1,13 @@
+name: openwakeword
+
+image:
+  repository: rhasspy/wyoming-openwakeword
+  tag: "2.1.0"
+  pullPolicy: IfNotPresent
+
+# Home Assistant's Wyoming integration connects to openwakeword.frost.haus:10400.
+loadBalancerIP: 192.168.100.58
+
+# Same as the Home Assistant add-on it replaces.
+threshold: "0.5"
+triggerLevel: "1"

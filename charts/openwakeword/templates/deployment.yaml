@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # The image's entrypoint already listens on tcp://0.0.0.0:10400.
+        args:
+        - --threshold
+        - "{{ .Values.threshold }}"
+        - --trigger-level
+        - "{{ .Values.triggerLevel }}"
+        ports:
+        - name: wyoming
+          containerPort: 10400
+        env:
+        - name: TZ
+          value: America/Chicago
+        readinessProbe:
+          tcpSocket:
+            port: wyoming
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: wyoming
+          initialDelaySeconds: 20
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            memory: 512Mi

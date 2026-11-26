@@ -393,6 +393,10 @@ data:
             icon: zigbee2mqtt.png
             href: https://zigbee2mqtt.frost.haus
             description: Zigbee network (SLZB-06)
+        - openWakeWord:
+            icon: mdi-microphone-message
+            description: Assist wake word (Wyoming, no web UI)
+            ping: openwakeword.frost.haus
         - Frigate:
             icon: frigate.png
             href: https://frigate.frost.haus
