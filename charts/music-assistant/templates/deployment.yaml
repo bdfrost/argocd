@@ -53,7 +53,7 @@ spec:
             cpu: 100m
             memory: 256Mi
           limits:
-            memory: 2Gi
+            memory: 4Gi
         # Library and auth databases, settings (provider logins included),
         # playlists and the artwork cache, migrated from the add-on.
         volumeMounts:
