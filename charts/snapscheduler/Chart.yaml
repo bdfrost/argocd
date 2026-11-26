@@ -1,0 +1,10 @@
+apiVersion: v2
+name: snapscheduler
+description: Backube SnapScheduler, which creates and expires VolumeSnapshots on a cron schedule
+type: application
+version: 1.0.0
+appVersion: "3.5.0"
+dependencies:
+  - name: snapscheduler
+    version: 3.5.0
+    repository: https://backube.github.io/helm-charts/

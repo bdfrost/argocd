@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: volume-snapshots
+  namespace: argocd
+spec:
+  source:
+    path: charts/volume-snapshots
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision:  {{ .Values.spec.source.targetRevision }}
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: volume-snapshots
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    # SnapshotSchedule's CRD comes from the snapscheduler app; skip the dry run
+    # so a fresh sync doesn't fail before that CRD exists.
+    - SkipDryRunOnMissingResource=true
+    managedNamespaceMetadata:

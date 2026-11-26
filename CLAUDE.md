@@ -59,6 +59,10 @@ In `charts/uptime-kuma/templates/autokuma-configmap.yaml`, add a key `<app>.json
 
 AutoKuma uses the key (minus `.json`) as the monitor's id, so keys can be added, removed or reordered freely. Removing a key deletes that monitor in Kuma. Renaming a key recreates the monitor and loses its history.
 
+### 7. Snapshots
+
+If the app has an iSCSI PVC, add its namespace to `charts/volume-snapshots/values.yaml` so it gets nightly snapshots (restore steps are in that chart's README).
+
 ## Conventions
 
 - Pin exact image tags; never use `latest`. Use `pullPolicy: IfNotPresent`.

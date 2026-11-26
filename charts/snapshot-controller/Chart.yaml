@@ -1,0 +1,10 @@
+apiVersion: v2
+name: snapshot-controller
+description: CSI snapshot-controller and VolumeSnapshot CRDs, so the Synology CSI snapshotter sidecar gets work
+type: application
+version: 1.0.0
+appVersion: "v8.7.1"
+dependencies:
+  - name: snapshot-controller
+    version: 5.4.1
+    repository: https://piraeus.io/helm-charts/

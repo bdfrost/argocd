@@ -1,0 +1,5 @@
+apiVersion: v2
+name: volume-snapshots
+description: Nightly SnapScheduler schedules for the Synology iSCSI PVCs
+type: application
+version: 1.0.0

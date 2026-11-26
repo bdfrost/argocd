@@ -1,0 +1,11 @@
+snapshot-controller:
+  # The VolumeSnapshot CRDs were first applied by hand; the chart now owns them.
+  # Keep them if this app is ever removed, or every VolumeSnapshot goes with them.
+  keepCRDs: true
+  controller:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 128Mi

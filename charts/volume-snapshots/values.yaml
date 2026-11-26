@@ -1,0 +1,48 @@
+# Every PVC in each listed namespace is snapshotted (empty claimSelector).
+# When a new app gets an iSCSI PVC, add its namespace here.
+#
+# Left out on purpose, because the data is re-downloadable or churns constantly:
+# ollama (models), photon (geocoding index), loki and kube-prometheus-stack
+# (logs/metrics; dashboards live in git).
+snapshotClassName: synology-csi-delete
+# snapscheduler runs in UTC: 08:30 UTC is 02:30 CST / 03:30 CDT, clear of the
+# 01:00 backup window.
+schedule: "30 8 * * *"
+maxCount: 7
+namespaces:
+  - agregarr
+  - arr-mcp
+  - audible-watcher
+  - bazarr
+  - birdnet-go
+  - changedetection
+  - chaptarr
+  - cleanuparr
+  - configarr
+  - dawarich
+  - dozzle
+  - esphome
+  - frigate
+  - govee2mqtt
+  - immich
+  - kagent
+  - kometa
+  - livrarr
+  - maintainerr
+  - mosquitto
+  - music-assistant
+  - open-webui
+  - plex
+  - poterie
+  - prowlarr
+  - radarr
+  - sabnzbd
+  - seerr
+  - simplefin
+  - sonarr
+  - speedtest-tracker
+  - tautulli
+  - tracearr
+  - uptime-kuma
+  - zigbee2mqtt
+  - zwave-js-ui

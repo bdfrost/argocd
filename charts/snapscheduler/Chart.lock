@@ -1,0 +1,6 @@
+dependencies:
+- name: snapscheduler
+  repository: https://backube.github.io/helm-charts/
+  version: 3.5.0
+digest: sha256:f1a87e8851818aeb72f78aea5fd8b8ec04ed2402c51bc5b40d7f7dfac04e6e9f
+generated: "2026-11-26T05:52:52.671584315Z"
