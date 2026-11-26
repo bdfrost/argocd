@@ -787,3 +787,17 @@ data:
         "slack"
       ]
     }
+  home-assistant-https.json: |-
+    {
+      "name": "Home Assistant (HTTPS)",
+      "type": "http",
+      "url": "https://ha.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }

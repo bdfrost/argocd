@@ -1,9 +1,8 @@
 name: home-assistant
 targetPort: 8123
 
-# Stays 0 until cutover: the HAOS VM still runs, and the config volume gets
-# the VM's restored backup first.
-replicas: 0
+# Only one: a single config volume and recorder database.
+replicas: 1
 
 image:
   repository: ghcr.io/home-assistant/home-assistant
@@ -15,7 +14,5 @@ image:
 # Assistant, Homepage, Uptime Kuma, Cast/Nest speakers fetching TTS, phones and
 # browsers). external-dns points that name at this address.
 loadBalancerIP: 192.168.100.60
-# Off until cutover. The name is still a DHCP-made record for the HAOS VM, and
-# external-dns won't take over a record it doesn't own, so that record goes
-# first.
-announceLoadBalancerIP: false
+# Gates the LoadBalancer service. It was off while the HAOS VM held the name.
+announceLoadBalancerIP: true

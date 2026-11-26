@@ -376,8 +376,6 @@ data:
             icon: home-assistant.png
             href: http://homeassistant.frost.haus:8123
             description: Home automation
-            proxmoxNode: pve2
-            proxmoxVMID: 109
             widget:
               type: homeassistant
               url: http://homeassistant.frost.haus:8123
