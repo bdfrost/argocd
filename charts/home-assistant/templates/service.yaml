@@ -16,8 +16,7 @@ spec:
     protocol: TCP
 {{- if .Values.announceLoadBalancerIP }}
 ---
-# Takes over the HAOS VM's address, so homeassistant.frost.haus:8123 keeps
-# working for every client.
+# homeassistant.frost.haus:8123, the address every client uses.
 apiVersion: v1
 kind: Service
 metadata:
@@ -25,7 +24,8 @@ metadata:
   labels:
     app: {{ .Values.name }}
   annotations:
-    metallb.universe.tf/address-pool: home-assistant
+    # external-dns publishes this name in Technitium for the LoadBalancer IP.
+    external-dns.kubernetes.io/hostname: homeassistant.frost.haus
     metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
 spec:
   type: LoadBalancer
