@@ -8,7 +8,7 @@ replicas: 1
 image:
   repository: zwavejs/zwave-js-ui
   # Matches the pve2 LXC it replaces.
-  tag: "11.26.2"
+  tag: "11.27.0"
   pullPolicy: IfNotPresent
 
 # Home Assistant connects to ws://zwave-js.frost.haus:3000.
