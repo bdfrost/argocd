@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      # Discovery (mDNS/zeroconf, SSDP, DHCP), Cast/DLNA callbacks and HomeKit
+      # all need the LAN directly.
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      # k8s-n2 already carries Frigate, Z-Wave, rtl433 and Ollama.
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values: [k8s-n2]
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # Raw sockets for DHCP discovery and the ping integration.
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"]
+        ports:
+        - name: http
+          containerPort: {{ .Values.targetPort }}
+        env:
+        - name: TZ
+          value: America/Chicago
+        # Restoring a few GB of history and loading ~30 custom integrations
+        # takes a while on first start.
+        startupProbe:
+          tcpSocket:
+            port: http
+          periodSeconds: 10
+          failureThreshold: 60
+        livenessProbe:
+          tcpSocket:
+            port: http
+          periodSeconds: 30
+          failureThreshold: 5
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            memory: 4Gi
+        # The whole HAOS /config, restored from its backup: configuration.yaml
+        # and packages, .storage (integrations, registries, users, dashboards),
+        # the recorder database, custom_components, www, secrets.yaml and .env.
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-config-pvc
+---
+# Retain: this is the house's brain. Built-in backups (local, Home Assistant
+# Cloud, the Synology) cover it as well.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-config-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-retain
+  resources:
+    requests:
+      storage: 20Gi

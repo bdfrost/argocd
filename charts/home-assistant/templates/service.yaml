@@ -1,0 +1,39 @@
+# For the HTTPS ingress (ha.frost.haus).
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.name }}
+  ports:
+  - name: http
+    port: 80
+    targetPort: {{ .Values.targetPort }}
+    protocol: TCP
+{{- if .Values.announceLoadBalancerIP }}
+---
+# Takes over the HAOS VM's address, so homeassistant.frost.haus:8123 keeps
+# working for every client.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-lb
+  labels:
+    app: {{ .Values.name }}
+  annotations:
+    metallb.universe.tf/address-pool: home-assistant
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{ .Values.name }}
+  ports:
+  - name: http
+    port: 8123
+    targetPort: {{ .Values.targetPort }}
+    protocol: TCP
+{{- end }}

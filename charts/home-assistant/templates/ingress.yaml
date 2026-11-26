@@ -1,0 +1,31 @@
+# HTTPS for browsers and the companion apps. Home Assistant has to trust the
+# ingress as a proxy (http.use_x_forwarded_for and trusted_proxies for the pod
+# network) or it rejects these requests.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/host: ha.frost.haus
+    # The frontend and apps hold a websocket open to the API.
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - ha.frost.haus
+    secretName: {{ .Values.name }}-cert
+  rules:
+  - host: ha.frost.haus
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: {{ .Values.name }}
+            port:
+              name: http

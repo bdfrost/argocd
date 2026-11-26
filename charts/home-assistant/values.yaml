@@ -1,0 +1,20 @@
+name: home-assistant
+targetPort: 8123
+
+# Stays 0 until cutover: the HAOS VM still runs, and the config volume gets
+# the VM's restored backup first.
+replicas: 0
+
+image:
+  repository: ghcr.io/home-assistant/home-assistant
+  # Matches the HAOS VM it replaces, so the restored config needs no upgrade.
+  tag: "2026.11.3"
+  pullPolicy: IfNotPresent
+
+# The VM's address. Every client uses homeassistant.frost.haus:8123, so taking
+# it over means nothing needs repointing: Music Assistant, Homepage, Uptime
+# Kuma, Cast/Nest speakers fetching TTS, phones and browsers.
+loadBalancerIP: 192.168.100.173
+# Off until cutover. Turning it on while the VM still holds the address would
+# put two hosts on it.
+announceLoadBalancerIP: false
