@@ -13,5 +13,5 @@ maxSnapshotAgeHours: 36
 image:
   repository: alpine/k8s
   # renovate: datasource=docker depName=alpine/k8s
-  tag: 1.32.13
+  tag: 1.37.2
   pullPolicy: IfNotPresent
