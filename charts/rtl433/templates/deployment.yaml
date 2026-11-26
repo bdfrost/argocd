@@ -31,6 +31,18 @@ spec:
         # RTL-HAOS scans the bus once at startup, so give the resets time to
         # finish, or the scan misses one radio and it never starts.
         command: ["sh", "-c", "sleep 20; exec /entrypoint.sh"]
+        # If the scan still misses a dongle, RTL-HAOS passes rtl_433 a bad -d
+        # and restarts it every 5s forever, so fewer live rtl_433 processes
+        # than configured radios means the pod needs a fresh start.
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - '[ "$(pgrep -f "^rtl_433 -d" | wc -l)" -ge {{ len (fromJsonArray .Values.rtlConfig) }} ]'
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          failureThreshold: 4
         env:
         - name: TZ
           value: America/Chicago
