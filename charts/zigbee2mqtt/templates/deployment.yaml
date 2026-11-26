@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.targetPort }}
+        env:
+        - name: TZ
+          value: America/Chicago
+        # configuration.yaml, the device database and the coordinator backup
+        # live on the data volume, migrated from the add-on. Overrides here
+        # take precedence over that file.
+        - name: ZIGBEE2MQTT_DATA
+          value: /app/data
+        # The add-on ran at debug, which floods the logs.
+        - name: ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_LEVEL
+          value: info
+        # Without Home Assistant's ingress in front, the frontend needs its own
+        # login.
+        - name: ZIGBEE2MQTT_CONFIG_FRONTEND_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: zigbee2mqtt-secrets
+              key: ZIGBEE2MQTT_CONFIG_FRONTEND_AUTH_TOKEN
+        readinessProbe:
+          tcpSocket:
+            port: http
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: http
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            memory: 512Mi
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-retain
+  resources:
+    requests:
+      storage: 2Gi

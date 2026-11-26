@@ -1,0 +1,6 @@
+apiVersion: v2
+name: zigbee2mqtt
+description: Zigbee2MQTT for the network-attached SLZB-06 coordinator, replacing the Home Assistant add-on
+type: application
+version: 0.1.0
+appVersion: "2.14.3"
