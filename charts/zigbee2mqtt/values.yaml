@@ -2,9 +2,8 @@ name: zigbee2mqtt
 # Frontend port, as set in configuration.yaml on the data volume.
 targetPort: 8099
 
-# The SLZB-06 coordinator takes one Zigbee2MQTT connection at a time, so this
-# stays 0 until the Home Assistant add-on is stopped and its data copied in.
-replicas: 0
+# Only one: the SLZB-06 coordinator takes one Zigbee2MQTT connection at a time.
+replicas: 1
 
 image:
   repository: koenkk/zigbee2mqtt

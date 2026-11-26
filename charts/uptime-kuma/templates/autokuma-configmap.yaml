@@ -702,3 +702,17 @@ data:
         "slack"
       ]
     }
+  zigbee2mqtt.json: |-
+    {
+      "name": "Zigbee2MQTT",
+      "type": "http",
+      "url": "https://zigbee2mqtt.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
