@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      # Govee's LAN API finds and controls devices with UDP multicast, which
+      # only works from the node's own network. Any node will do: they share
+      # the LAN.
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.targetPort }}
+        env:
+        - name: TZ
+          value: America/Chicago
+        - name: GOVEE_TEMPERATURE_SCALE
+          value: F
+        - name: GOVEE_MQTT_HOST
+          value: mqtt.frost.haus
+        - name: GOVEE_MQTT_PORT
+          value: "1883"
+        - name: GOVEE_MQTT_USER
+          value: SMASH
+        # Device list and Govee login tokens are cached here.
+        - name: XDG_CACHE_HOME
+          value: /data
+        - name: RUST_LOG_STYLE
+          value: never
+        # GOVEE_EMAIL, GOVEE_PASSWORD, GOVEE_API_KEY, GOVEE_MQTT_PASSWORD
+        envFrom:
+        - secretRef:
+            name: govee2mqtt-secrets
+        readinessProbe:
+          tcpSocket:
+            port: http
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: http
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: 20m
+            memory: 64Mi
+          limits:
+            memory: 256Mi
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-delete
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: govee2mqtt
+description: Govee to MQTT bridge (LAN, IoT and Platform API), replacing the Home Assistant add-on
+type: application
+version: 0.1.0
+appVersion: "2026.03.25-ab9deb66"

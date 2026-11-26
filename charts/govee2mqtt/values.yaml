@@ -1,0 +1,9 @@
+name: govee2mqtt
+# Status page.
+targetPort: 8056
+
+image:
+  repository: ghcr.io/wez/govee2mqtt
+  # Matches the Home Assistant add-on it replaces.
+  tag: "2026.03.25-ab9deb66"
+  pullPolicy: IfNotPresent

@@ -397,6 +397,10 @@ data:
             icon: mdi-microphone-message
             description: Assist wake word (Wyoming, no web UI)
             ping: openwakeword.frost.haus
+        - Govee2MQTT:
+            icon: mdi-lightbulb-group
+            href: https://govee2mqtt.frost.haus
+            description: Govee lights and sensors bridge
         - Frigate:
             icon: frigate.png
             href: https://frigate.frost.haus
