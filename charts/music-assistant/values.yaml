@@ -1,0 +1,12 @@
+name: music-assistant
+# Web UI and API. Audio streams are served on 8097 straight from the node.
+targetPort: 8095
+
+# Only one: players and the library database expect a single server.
+replicas: 0
+
+image:
+  repository: ghcr.io/music-assistant/server
+  # Matches the Home Assistant add-on it replaces.
+  tag: "2.10.13"
+  pullPolicy: IfNotPresent
