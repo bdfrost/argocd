@@ -1,0 +1,91 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: volume-snapshots-sync
+spec:
+  schedule: "17 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      # Failed jobs age out after 2h, so KubeJobFailed keeps firing only while
+      # the hourly run keeps failing, and clears on its own once it passes.
+      ttlSecondsAfterFinished: 7200
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: volume-snapshots-sync
+          annotations:
+            checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        spec:
+          serviceAccountName: volume-snapshots-sync
+          restartPolicy: Never
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+          containers:
+            - name: sync
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              env:
+                - name: PREFIX
+                  value: {{ .Values.storageClassPrefix | quote }}
+                - name: MAX_AGE
+                  value: {{ mul .Values.maxSnapshotAgeHours 3600 | quote }}
+              command:
+                - /bin/bash
+                - -euo
+                - pipefail
+                - -c
+                - |
+                  now=$(date +%s)
+
+                  # namespace, pvc, created (epoch) for every PVC on a matching StorageClass
+                  pvcs=$(kubectl get pvc -A -o json | jq -r --arg p "$PREFIX" '
+                    .items[] | select((.spec.storageClassName // "") | startswith($p))
+                    | [.metadata.namespace, .metadata.name, (.metadata.creationTimestamp | fromdateiso8601)] | @tsv')
+
+                  echo "=== ensuring SnapshotSchedule in each namespace ==="
+                  for ns in $(cut -f1 <<<"$pvcs" | sort -u); do
+                    kubectl -n "$ns" apply -f /config/snapshotschedule.yaml
+                  done
+
+                  echo "=== auditing snapshot freshness ==="
+                  schedules=$(kubectl get snapshotschedule -A -o json | jq -r '
+                    .items[] | select(.metadata.name == "nightly")
+                    | [.metadata.namespace, (.metadata.creationTimestamp | fromdateiso8601)] | @tsv')
+                  snaps=$(kubectl get volumesnapshot -A -o json | jq -r '
+                    .items[] | select(.status.readyToUse == true)
+                    | [.metadata.namespace, .spec.source.persistentVolumeClaimName, (.status.creationTime | fromdateiso8601)] | @tsv')
+
+                  stale=0 checked=0
+                  while IFS=$'\t' read -r ns pvc created; do
+                    sched=$(awk -F'\t' -v n="$ns" '$1==n {print $2}' <<<"$schedules")
+                    # Too new to have had a scheduled run yet
+                    if (( now - created < MAX_AGE )) || (( now - ${sched:-$now} < MAX_AGE )); then
+                      continue
+                    fi
+                    checked=$((checked + 1))
+                    newest=$(awk -F'\t' -v n="$ns" -v p="$pvc" '$1==n && $2==p {print $3}' <<<"$snaps" | sort -n | tail -1)
+                    if [[ -z "$newest" ]] || (( now - newest > MAX_AGE )); then
+                      echo "STALE: $ns/$pvc has no ready snapshot in the last $((MAX_AGE / 3600))h"
+                      stale=1
+                    fi
+                  done <<<"$pvcs"
+                  echo "$(wc -l <<<"$pvcs") PVCs, $checked audited, stale=$stale"
+                  exit $stale
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 64Mi
+                limits:
+                  memory: 256Mi
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+          volumes:
+            - name: config
+              configMap:
+                name: snapshotschedule

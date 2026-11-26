@@ -6,9 +6,18 @@ Nightly CSI snapshots of the Synology iSCSI PVCs.
   VolumeSnapshots to the Synology CSI snapshotter sidecar in `synology-csi`.
 - `snapscheduler` (backube) creates a VolumeSnapshot per PVC on each schedule and
   expires the oldest past `maxCount`.
-- This chart renders one `SnapshotSchedule` named `nightly` per namespace in
-  `values.yaml`. Each snapshot is a LUN snapshot on the NAS (visible in DSM under
-  Snapshot Replication > LUN).
+- This chart runs `volume-snapshots-sync`, an hourly CronJob that:
+  1. finds every PVC on a `synology-csi-iscsi-*` StorageClass, cluster-wide;
+  2. applies the `nightly` SnapshotSchedule (from the `snapshotschedule`
+     ConfigMap) into each of those namespaces, so new apps are covered with no
+     edits and schedule changes in `values.yaml` roll out within the hour;
+  3. audits that each PVC has a ready snapshot younger than
+     `maxSnapshotAgeHours`. If not, the job fails and `KubeJobFailed` fires to
+     Slack; its logs list the stale PVCs.
+
+  The `nightly` schedules are created by the job, not by Argo, so they don't
+  show in the Argo app. Each snapshot is a LUN snapshot on the NAS (visible in
+  DSM under Snapshot Replication > LUN).
 
 Snapshots are crash-consistent and live on the same NAS volume as the data: they
 cover bad upgrades and deletions, not NAS loss.
@@ -18,6 +27,7 @@ cover bad upgrades and deletions, not NAS loss.
 ```sh
 kubectl get snapshotschedule -A
 kubectl get volumesnapshot -A    # READYTOUSE should be true
+kubectl -n volume-snapshots logs job/$(kubectl -n volume-snapshots get job -o name | tail -1 | cut -d/ -f2)
 ```
 
 ## Restore a PVC

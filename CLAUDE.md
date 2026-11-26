@@ -61,7 +61,7 @@ AutoKuma uses the key (minus `.json`) as the monitor's id, so keys can be added,
 
 ### 7. Snapshots
 
-If the app has an iSCSI PVC, add its namespace to `charts/volume-snapshots/values.yaml` so it gets nightly snapshots (restore steps are in that chart's README).
+Nothing to do: any PVC on a `synology-csi-iscsi-*` StorageClass is picked up for nightly snapshots within the hour by `charts/volume-snapshots` (restore steps are in its README). Use those StorageClasses for anything worth keeping.
 
 ## Conventions
 
