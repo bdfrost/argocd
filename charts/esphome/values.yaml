@@ -2,7 +2,7 @@ name: esphome
 targetPort: 6052
 
 # Only one: two builders on the same configs would race on compiles and OTA.
-replicas: 0
+replicas: 1
 
 image:
   repository: esphome/esphome

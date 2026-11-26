@@ -401,6 +401,10 @@ data:
             icon: mdi-lightbulb-group
             href: https://govee2mqtt.frost.haus
             description: Govee lights and sensors bridge
+        - ESPHome:
+            icon: esphome.png
+            href: https://esphome.frost.haus
+            description: ESPHome Device Builder
         - Frigate:
             icon: frigate.png
             href: https://frigate.frost.haus

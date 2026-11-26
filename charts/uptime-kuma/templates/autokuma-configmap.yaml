@@ -743,3 +743,19 @@ data:
         "slack"
       ]
     }
+  # The dashboard asks for a login, so a 401 still means it's up.
+  esphome.json: |-
+    {
+      "name": "ESPHome",
+      "type": "http",
+      "url": "https://esphome.frost.haus",
+      "interval": 60,
+      "max_retries": 2,
+      "accepted_statuscodes": [
+        "200-299",
+        "401"
+      ],
+      "notification_names": [
+        "slack"
+      ]
+    }
