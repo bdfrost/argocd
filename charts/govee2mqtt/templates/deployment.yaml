@@ -21,6 +21,10 @@ spec:
       # the LAN.
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      # The image runs as govee (uid/gid 1000) and keeps its cache database
+      # in /data, so the volume must be group-writable for it.
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: {{ .Values.name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
