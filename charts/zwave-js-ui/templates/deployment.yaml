@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      # Runs wherever the ZWA-2 is. NFD labels the node whose VM can see it
+      # (gpu-operator chart).
+      nodeSelector:
+        feature.node.kubernetes.io/zwave-device: "true"
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # Needed to open the serial device mounted from the host.
+        securityContext:
+          privileged: true
+        ports:
+        - name: http
+          containerPort: {{ .Values.targetPort }}
+        - name: ws
+          containerPort: 3000
+        env:
+        - name: TZ
+          value: America/Chicago
+        readinessProbe:
+          tcpSocket:
+            port: ws
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: http
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: 50m
+            memory: 192Mi
+          limits:
+            memory: 768Mi
+        # settings.json (network security keys included), node names and the
+        # network cache, migrated from the LXC.
+        volumeMounts:
+        - name: store
+          mountPath: /usr/src/app/store
+        - name: zwave
+          mountPath: {{ .Values.device }}
+      volumes:
+      - name: store
+        persistentVolumeClaim:
+          claimName: {{ .Values.name }}-store-pvc
+      - name: zwave
+        hostPath:
+          path: {{ .Values.device }}
+          type: CharDevice
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.name }}-store-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: synology-csi-iscsi-retain
+  resources:
+    requests:
+      storage: 2Gi

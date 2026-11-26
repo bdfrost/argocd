@@ -1,0 +1,6 @@
+apiVersion: v2
+name: zwave-js-ui
+description: Z-Wave JS UI on the Nabu Casa ZWA-2, replacing the pve2 LXC
+type: application
+version: 0.1.0
+appVersion: "11.26.2"

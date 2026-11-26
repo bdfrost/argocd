@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  strategy:
+    type: Recreate
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+      annotations:
+        reloader.stakater.com/auto: "true"
+    spec:
+      # Runs wherever the RTL-SDR dongles are. NFD labels the node whose VM
+      # can see them (gpu-operator chart).
+      nodeSelector:
+        feature.node.kubernetes.io/sdr-device: "true"
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        # rtl_433 opens the dongles under /dev/bus/usb.
+        securityContext:
+          privileged: true
+        env:
+        - name: TZ
+          value: America/Chicago
+        - name: MQTT_HOST
+          value: mqtt.frost.haus
+        - name: MQTT_PORT
+          value: "1883"
+        - name: MQTT_USER
+          value: SMASH
+        - name: MQTT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rtl433-secrets
+              key: MQTT_PASS
+        # Sensor unique IDs come from the rtl_433 device ID and field, not the
+        # host, so Home Assistant entities carry over from the LXC unchanged.
+        - name: BRIDGE_ID
+          value: "42"
+        - name: BRIDGE_NAME
+          value: rtl-haos-bridge
+        - name: RTL_CONFIG
+          value: {{ .Values.rtlConfig | quote }}
+        - name: RTL_AUTO_BAND_PLAN
+          value: us
+        - name: RTL_EXPIRE_AFTER
+          value: "86400"
+        - name: RTL_THROTTLE_INTERVAL
+          value: "30"
+        - name: RTL_SHOW_TIMESTAMPS
+          value: "true"
+        - name: VERBOSE_TRANSMISSIONS
+          value: "true"
+        - name: DEBUG_RAW_JSON
+          value: "false"
+        - name: GAS_UNIT
+          value: ft3
+        - name: BATTERY_OK_CLEAR_AFTER
+          value: "300"
+        - name: DEVICE_BLACKLIST
+          value: '["Sharp-SPC775", "Opus-XT300"]'
+        - name: DEVICE_WHITELIST
+          value: "[]"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            memory: 256Mi
+        volumeMounts:
+        - name: usb
+          mountPath: /dev/bus/usb
+      volumes:
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb

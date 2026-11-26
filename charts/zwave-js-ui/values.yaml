@@ -1,0 +1,19 @@
+name: zwave-js-ui
+# Web UI. Home Assistant's Z-Wave integration uses the websocket server on 3000.
+targetPort: 8091
+
+# A Z-Wave controller serves one driver at a time.
+replicas: 0
+
+image:
+  repository: zwavejs/zwave-js-ui
+  # Matches the pve2 LXC it replaces.
+  tag: "11.26.2"
+  pullPolicy: IfNotPresent
+
+# Home Assistant connects to ws://zwave-js.frost.haus:3000.
+loadBalancerIP: 192.168.100.59
+
+# The serial port settings.json points at. The by-id name follows the stick
+# through replugs and USB port changes.
+device: /dev/serial/by-id/usb-Nabu_Casa_ZWA-2_80B54EE63184-if00

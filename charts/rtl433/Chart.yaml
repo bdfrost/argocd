@@ -1,0 +1,6 @@
+apiVersion: v2
+name: rtl433
+description: RTL-HAOS (rtl_433 to Home Assistant MQTT bridge) on the RTL-SDR dongles, replacing the pve2 LXC
+type: application
+version: 0.1.0
+appVersion: "sha-f073120"

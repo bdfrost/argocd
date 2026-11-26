@@ -1,0 +1,15 @@
+name: rtl433
+
+# The dongles can only be opened by one rtl_433 at a time.
+replicas: 0
+
+image:
+  repository: ghcr.io/jaronmcd/rtl-haos
+  # The commit the pve2 LXC ran (RTL-HAOS 1.2.0-rc.2).
+  tag: "sha-f073120"
+  pullPolicy: IfNotPresent
+
+# Radios are matched by USB serial, so they work in any port or order.
+# 915 MHz is the ThermoPro TP829B smoker thermometer and utility meters; its
+# fixed gain and the TP828b decoder being off (-267) keep the TP829B readable.
+rtlConfig: '[{"name": "433", "freq": "433.92M", "id": "57453410"}, {"name": "915", "freq": "915M", "id": "RTL_A", "rate": "1024k", "hop_interval": 0, "protocols": "-267", "args": "-g 30"}]'
