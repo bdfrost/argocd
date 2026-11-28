@@ -8,5 +8,5 @@ replicas: 1
 image:
   repository: ghcr.io/music-assistant/server
   # Matches the Home Assistant add-on it replaces.
-  tag: "2.10.13"
+  tag: "2.10.14"
   pullPolicy: IfNotPresent
